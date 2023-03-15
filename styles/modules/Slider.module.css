@@ -1,0 +1,70 @@
+.emphasis-card,
+.emphasis {
+    transition: all 0.1s ease-in-out;
+}
+.emphasis:hover .emphasis-card {
+    box-shadow: 0px 2px 5px #00000066;
+    transform: scale(1.15);
+}
+.dots-button {
+    cursor: pointer;
+}
+.dots-button:hover .dots-dots {
+    transform: scale(1.2);
+    border-radius: 100%;
+    transition: all 0.1s ease-in-out;
+    box-shadow: 0px 2px 5px #00000066;
+    background: #ffffff;
+}
+.dots-dots {
+    cursor: pointer;
+    text-shadow: 1px 1px 1px red;
+    display: block;
+    transform: rotate(0deg);
+}
+.nav-dot-button:hover .nav-dot {
+    box-shadow: 0px 1px 3px 1px #00000033;
+    transform: scale(1.6);
+}
+
+
+@media (max-width:600px) {
+    .carousel-width { min-width: 320px; }
+    .carousel-height {height: 231px;}
+    .carousel-container {
+        width: 320px;
+        height: 231px;
+    }
+}
+@media (min-width: 601px) , (max-width: 900px) {
+    .carousel-width { min-width: 420px; }
+    .carousel-height {height: 280px;}
+    .carousel-container {
+        width: 420px;
+        height: 280px;
+    }
+}
+@media (min-width: 901px) , (max-width: 1200px) {
+    .carousel-width { min-width: 600px; }
+    .carousel-height {height: 400px;}
+    .carousel-container {
+        width: 600px;
+        height: 400px;
+    }
+}
+@media (min-width: 1201px) , (max-width: 1436px) {
+    .carousel-width { min-width: 480px; }
+    .carousel-height {height: 280px;}
+    .carousel-container {
+        width: 480px;
+        height: 280px;
+    }
+}
+@media (min-width: 1437px) {
+    .carousel-width { min-width: 600px; }
+    .carousel-height {height: 400px;}
+    .carousel-container {
+        width: 600px;
+        height: 400px;
+    }
+}

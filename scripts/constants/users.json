@@ -1,0 +1,39 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "name": "John Doe",
+        "label": "John Doe",
+        "email": "johndoe@example.com",
+        "age": 28
+      },
+      {
+        "id": 2,
+        "name": "Jane Smith",
+        "label": "Jane Smith",
+        "email": "janesmith@example.com",
+        "age": 35
+      },
+      {
+        "id": 3,
+        "name": "Bob Johnson",
+        "label": "Bob Johnson",
+        "email": "bobjohnson@example.com",
+        "age": 42
+      },
+      {
+        "id": 4,
+        "name": "Samantha Brown",
+        "label": "Samantha Brown",
+        "email": "samanthabrown@example.com",
+        "age": 22
+      },
+      {
+        "id": 5,
+        "name": "David Lee",
+        "label": "David Lee",
+        "email": "davidlee@example.com",
+        "age": 31
+      }
+    ]
+  }

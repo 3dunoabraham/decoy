@@ -1,0 +1,18 @@
+@media (max-width: 1200px) {
+    .unit-mainform_inputs {
+        width: 100%;
+    }
+    .unit-mainform_gallery {
+        width: 100%;
+    }
+}
+@media (min-width: 1201px) , (max-width: 1436px) {
+    .unit-mainform_inputs {
+        width: 80%;
+    }
+}
+@media (min-width: 1437px) {
+    .unit-mainform_inputs {
+        width: 50%;
+    }
+}

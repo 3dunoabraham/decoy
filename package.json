@@ -1,0 +1,42 @@
+{
+    "name": "create-tnt-app",
+    "version": "1.0.1",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "test": "npx playwright test"
+    },
+    "author": "Abraham Duno",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/3dunoabraham/tnt"
+    },
+    "dependencies": {
+        "@react-three/drei": "^9.56.28",
+        "@react-three/fiber": "^8.11.5",
+        "@tanstack/react-query": "^4.24.4",
+        "@types/three": "^0.149.0",
+        "csscss": "^1.0.7",
+        "next": "^13.1.6",
+        "next-auth": "^4.19.2",
+        "react": "^18.2.0",
+        "react-csv": "^2.2.2",
+        "react-dom": "^18.2.0",
+        "react-icons": "^4.6.0",
+        "three": "^0.138.3"
+    },
+    "devDependencies": {
+        "@playwright/test": "^1.29.1",
+        "@types/node": "^18.13.0",
+        "@types/react": "^18.0.27",
+        "@types/react-dom": "^18.0.10",
+        "eslint": "^8.33.0",
+        "eslint-config-next": "^13.1.6",
+        "playwright": "^1.29.1",
+        "typescript": "^4.9.5",
+        "usehooks-ts": "^2.9.1"
+    }
+}

@@ -1,0 +1,128 @@
+:root {
+    --secondary: #7C3AED;
+    --tertiary: #ED7C3A;
+  
+    --primary-sat: #027A48;
+    --primary: #3E5F58;
+    --primary-desat: #B5CFC9;
+    --primary-light: #ECFDF3;
+    
+    --bg-faded: #F5F7F6;
+    --bg-lightest: #F9FAFB;
+    
+    --tx-error: #B91C1C;
+    --tx-link: #026AA2;
+    --tx-faded: #667085;
+    --tx-dark: #101828;
+    --tx-lightdark: #344054;
+  
+    --border-faded: #D0D5DD;
+  }
+
+  
+  
+  body {font-family: "Inter";}
+  .ims-body {width: 100%;font-family: "Inter";}
+  .ims-body-inner {display: block;padding: 0 1rem;}
+  .ims-body-home {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  
+  .ims-bg-lightest {background: var(--bg-lightest); }
+  .ims-bg-faded {background: var(--bg-faded); }
+  .ims-bg-primary {background: var(--primary); }
+  .ims-bg-primary-desat {background: var(--primary-desat); }
+  .ims-bg-faded-odd:nth-child(2n) {background: var(--bg-faded); }
+  .ims-bg-faded-even:nth-child(2n+1) {background: var(--bg-faded); }
+  .ims-bg-hov-faded:hover {background: var(--bg-faded); }
+  
+  
+  .ims-border-faded {border:  1px solid var(--border-faded)}
+  .ims-border-error {border:  1px solid var(--tx-error)}
+  .ims-border-faded-shadow {box-shadow: 0 0 0 1px var(--bg-faded), 0 2px 6px rgba(0, 0, 0, 0.4); }
+  .ims-border-faded {box-shadow: 0 0 0 1px var(--bg-faded); }
+  .ims-border-primary {box-shadow: 0 0 0 1px var(--primary); }
+  .ims-border-primary-light {box-shadow: 0 0 0 1px var(--primary-light); }
+  .ims-border-b-faded {border-bottom:  1px solid var(--border-faded); }
+  .ims-border-t-faded {border-top:  1px solid var(--border-faded); }
+  
+  
+  .ims-tx-primary {color: var(--primary); }
+  .ims-tx-error {color: var(--tx-error); }
+  .ims-tx-dark {color: var(--tx-dark); }
+  .ims-tx-lightdark {color: var(--tx-lightdark); }
+  .ims-tx-link {color: var(--tx-link); }
+  .ims-tx-faded {color: var(--tx-faded); }
+  .ims-hov-primary:hover {background: var(--primary); }
+  .ims-hov-tx-primary:hover {color: var(--primary); }
+  .ims-underline-primary {text-decoration-color: var(--primary);}
+  .ims-underline-link {text-decoration-color: var(--tx-link);}
+  
+  
+  .ims-badge-primary,.ims-badge-faded,.ims-badge-secondary,
+  .ims-badge-tertiary,.ims-badge-error,.ims-badge-success {border-radius: 8px;}
+  .ims-badge-faded {background: var(--bg-faded);color:  var(--tx-faded);}
+  .ims-badge-success {background: var(--primary-light);color:  var(--primary-sat);}
+  .ims-badge-secondary {background: var(--secondary);color: white;}
+  .ims-badge-tertiary {background: var(--bg-faded);color: var(--tertiary);}
+  .ims-badge-error {background: var(--bg-faded);color:  var(--tx-error);}
+  
+  
+  .ims-button-primary ,
+.ims-button-faded {
+    cursor: pointer;
+}
+.ims-button-faded:hover,.ims-button-primary:hover {opacity: 0.5;}
+  .ims-button-faded {border:  1px solid var(--border-faded)}
+  .ims-button-primary {
+      padding: 8px 20px;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border:  1px solid var(--primary);
+      border-radius: 8px;
+  }
+  .ims-button-faded {
+          border-radius: 8px;
+          padding: 8px 20px;
+          background: white;
+          display: flex;
+          justify-content: center;
+  }
+  .ims-circ-button-primary-desat {
+      cursor: pointer;
+      background: var(--primary-desat);
+      color: var(--primary);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 100%;
+  }
+  
+  
+  .ims-cardlink {
+      color: inherit;
+      margin: 5px;
+      padding: 15px 30px;
+      border: 1px solid var(--primary);
+      border-radius: 8px;
+      color: var(--primary)
+  }
+  .ims-cardlink:hover,.ims-cardlink:focus,.ims-cardlink:active {
+      color: #0070f3;
+      border-color: #0070f3;
+  }
+  
+  
+  @media only screen and (min-width: 1200px)
+  {
+      .ims-body {padding: 0 2rem;}
+      .ims-body-wide {padding: 0 5rem;}
+  }
