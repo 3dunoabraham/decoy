@@ -3,7 +3,7 @@ import { useMemo } from "react"
 import { ChartDashboard } from "@/components/dashboard/index"
 import Layout from "@/src/items/templates/Layout"
 
-export default () => {
+export default function Page {
     const router = useRouter()
     let zzz = useMemo(() => {
         return !(router.query && router.query.token && router.query.timeframe)
