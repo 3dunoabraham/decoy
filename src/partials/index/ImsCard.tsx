@@ -14,7 +14,7 @@ export default function Component({ companyName, unitsArray, totalValue }) {
             </div>
           </div>
           <div className="pl-4 py-2">
-            <div className="ims-tx-faded py-1">Available Units</div>
+            <div className="ims-tx-faded py-1">Ongoing Tokens</div>
             <div className="tx-lx tx-bold-6">
               {unitsArray.length || "-"}
             </div>
@@ -27,14 +27,20 @@ export default function Component({ companyName, unitsArray, totalValue }) {
             </div>
           </div>
           <div className="pl-4 py-2">
-            <div className="ims-tx-faded py-1">Inventory Value</div>
+            <div className="ims-tx-faded py-1">Bitcoin Price</div>
             <div className="tx-lx tx-bold-6">${totalValue}</div>
           </div>
         </div>
         <hr className="mt-3" />
-        <Link href="/inventory" className="px-6 opaci-chov--50 block">
-          <div className="ims-tx-primary tx-bold-5 py-4 tx-end">Manage</div>
-        </Link>
+        <div className='flex'>
+          <Link href="/inventory" className="px-6 opaci-chov--50 block">
+            <div className="ims-tx-primary tx-bold-5 py-4 tx-end">Token Settings</div>
+          </Link>
+          <div className='flex-1'></div>
+          <Link href="/chart/4h?token=btc" className="px-6 opaci-chov--50 block">
+            <div className="ims-tx-primary tx-bold-5 py-4 tx-end">Chart</div>
+          </Link>
+        </div>
       </div>
     </div>
   );

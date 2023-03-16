@@ -29,7 +29,7 @@ export default function Layout({ children }) {
 	let appValue = useMemo(()=>{
 		return {
             institution: {
-                title: "ServicePad",
+                title: "DCOY",
                 email: "support@servicepad.com",
                 titleSupport: "ServicePad Customer Support:",
                 copyrights: "© 2022 ServicePad, Inc. All rights reserved.",

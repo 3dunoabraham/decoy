@@ -2,7 +2,7 @@ import AppClientDesc from "@/src/items/molecules/auth/AppClientDesc";
 import LoginBtn from "@/src/items/molecules/auth/LoginBtn";
 import Link from "next/link";
 import Image from "next/image";
-import { BsBox, BsFillArchiveFill, BsGear, BsInfoCircle, BsPerson, BsStack } from "react-icons/bs";
+import { BsBox, BsChat, BsFillArchiveFill, BsFillBarChartFill, BsGear, BsInfoCircle, BsPerson, BsStack } from "react-icons/bs";
 import { useRouter } from "next/router";
 import { InventoryContext } from "@/scripts/contexts/InventoryContext";
 import { useContext, useEffect, useMemo } from "react";
@@ -18,7 +18,7 @@ export default function Component({}) {
     const inv = useContext(InventoryContext)
     const ICONS = {
         agreements: <BsStack />,
-        users: <BsPerson />,
+        users: <BsFillBarChartFill />,
         builder3d: <BsBox />,
         inventory: <MdOutlineInventory2 />,
     }
@@ -38,7 +38,8 @@ export default function Component({}) {
                 
                 <Link href="/" className='tx-white  tx-lgx nodeco py-4 flex-center '>
                     <div className='bg-white px-1 pt-1 bord-r-10 scale-90'>
-                        <Image src='/icons/logo.svg' alt='next' width='28' height='28'/>
+                        <Image src='/icons/logo2.png' alt='next' width='28' height='28'/>
+
                     </div>
                     <div className='Q_lg_x pl-1'>
                         <Image src='/icons/Vector.png' alt='next' width='129' height='19'/>
@@ -67,7 +68,7 @@ export default function Component({}) {
             </div>
         </div>
 
-        <div className="h-100vh flex-col pos-fix top-0  left-0 Q_sm_x ">
+        <div className="h-100vh flex-col pos-fix top-0  right-0 Q_sm_x ">
             <div className='flex px-3 px- w-100'>
                 {/* <button onClick={()=>{handleClick("/")}} className='tx-white  tx-lgx nodeco py-4 flex-center '>
                     <div className='bg-white px-1 pt-1 bord-r-10 scale-90'>
@@ -80,10 +81,11 @@ export default function Component({}) {
                 
                 <Link href="/" className='tx-white  tx-lgx nodeco py-4 flex-center '>
                     <div className='bg-white px-1 pt-1 bord-r-10 scale-90'>
-                        <Image src='/icons/logo.svg' alt='next' width='28' height='28'/>
+                        <Image src='/icons/logo2.png' alt='next' width='28' height='28'/>
                     </div>
-                    <div className='Q_lg_x pl-1'>
-                        <Image src='/icons/Vector.png' alt='next' width='129' height='19'/>
+                    <div className='Q_lg_x pl-1 tx-ls-5'>
+                        {/* <Image src='/icons/Vector.png' alt='next' width='129' height='19'/> */}
+                        DCOY
                     </div>
                 </Link>
             </div>

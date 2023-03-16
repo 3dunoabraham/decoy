@@ -9,7 +9,7 @@ const getFixedLengthRandomInt = (len) =>{
 }
 
 
-test('IMS Landing, enter add unit page, save new unit (with manufacturer)', async ({ page })=>{
+test('DCOY Landing, enter add unit page, save new unit (with manufacturer)', async ({ page })=>{
   await page.goto('https://ims-f-e-duno.vercel.app');
   await page.getByRole('link', { name: '+ New Unit Add Unit to Inventory' }).click();
   await page.locator('input').first().click();

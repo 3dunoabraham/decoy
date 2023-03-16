@@ -336,12 +336,12 @@ export function ChartDashboard({query}) {
                 <div className="flex-wrap flex-align-start w-100  my-">
                     <div className="flex-col flex-1 pa-4 ">
                         {!showAllTokens &&
-                            <div className={`pa-2 bord-r-8 bg-b-50 opaci-chov--50`}onClick={()=>{s__showAllTokens(true)}}>
+                            <div className={`pa-2 bord-r-8 bg-b-50 tx-white opaci-chov--50`}onClick={()=>{s__showAllTokens(true)}}>
                                 Show All Tokens
                             </div>
                         }
                         {showAllTokens &&
-                            <div className={`pa-2 bord-r-8 bg-b-50 opaci-chov--50`}onClick={()=>{s__showAllTokens(false)}}>
+                            <div className={`pa-2 bord-r-8 bg-b-50 tx-white opaci-chov--50`}onClick={()=>{s__showAllTokens(false)}}>
                                 Hide Tokens
                             </div>
                         }
