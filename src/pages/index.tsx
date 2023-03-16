@@ -145,7 +145,7 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
             </div>
             {q__unitsArray.isLoading &&
                 <div className=' flex-col mt-150'>
-                    <LoadingPill title={"Fetching units..."} />
+                    <LoadingPill title={"Loading Bitcoin Price..."} />
                 </div> 
             }
             {q__unitsArray.isError &&

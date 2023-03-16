@@ -31,7 +31,7 @@ export default function Component({}) {
                     <div className='bg-white px-1 pt-1 bord-r-10 scale-90'>
                         <Image src='/icons/logo.svg' alt='next' width='28' height='28'/>
                     </div>
-                    <div className='Q_lg_x pl-1'>
+                    <div className='Q_xl_x pl-1'>
                         <Image src='/icons/Vector.png' alt='next' width='129' height='19'/>
                     </div>
                 </button> */}
@@ -41,7 +41,7 @@ export default function Component({}) {
                         <Image src='/icons/logo2.png' alt='next' width='28' height='28'/>
 
                     </div>
-                    <div className='Q_lg_x pl-1'>
+                    <div className='Q_xl_x pl-1'>
                         <Image src='/icons/Vector.png' alt='next' width='129' height='19'/>
                     </div>
                 </Link>
@@ -50,19 +50,19 @@ export default function Component({}) {
                 {!!app && !!app.sidebarPages && app.sidebarPages.map((aLink, index)=>{
                         return (
                             <Link href="/users/" className="flex-center py-3 clickble  px-2 bg-w-hov-10  " key={index}>
-                                <div className=" pr-3  Q_lg_x"></div>
+                                <div className=" pr-3  Q_xl_x"></div>
                                 <div className="px-1 tx-center tx-lg opaci-hov--50">{aLink.icon ? ICONS[aLink.icon]: <BsPerson /> }</div>
-                                {/* <div className="flex-1 pl-3 Q_lg_x w-min-220px">{aLink.url}</div> */}
-                                <div className="flex-1 pl-3 Q_lg_x w-min-220px">{aLink.label}</div>
+                                {/* <div className="flex-1 pl-3 Q_xl_x w-min-220px">{aLink.url}</div> */}
+                                <div className="flex-1 pl-3 Q_xl_x w-min-220px">{aLink.label}</div>
                             </Link>
                         )
                     }) }
                     
                 {!!app && !!app.sidebarLinks && app.sidebarLinks.length == 0 && 
                     <div className="flex-center py-1 clickble  px-2 bg-w-50   " >
-                        <div className=" pr-3  Q_lg_x"></div>
+                        <div className=" pr-3  Q_xl_x"></div>
                         <div className="px-1 tx-center tx-lg opaci-hov--50"><BsFillArchiveFill /></div>
-                        <div className="flex-1 pl-3 Q_lg_x w-min-220px">asd</div>
+                        <div className="flex-1 pl-3 Q_xl_x w-min-220px">asd</div>
                     </div>
                 }
             </div>
@@ -74,7 +74,7 @@ export default function Component({}) {
                     <div className='bg-white px-1 pt-1 bord-r-10 scale-90'>
                         <Image src='/icons/logo.svg' alt='next' width='28' height='28'/>
                     </div>
-                    <div className='Q_lg_x pl-1'>
+                    <div className='Q_xl_x pl-1'>
                         <Image src='/icons/Vector.png' alt='next' width='129' height='19'/>
                     </div>
                 </button> */}
@@ -83,7 +83,7 @@ export default function Component({}) {
                     <div className='bg-white px-1 pt-1 bord-r-10 scale-90'>
                         <Image src='/icons/logo2.png' alt='next' width='28' height='28'/>
                     </div>
-                    <div className='Q_lg_x pl-1 tx-ls-5'>
+                    <div className='Q_xl_x pl-1 tx-ls-5'>
                         {/* <Image src='/icons/Vector.png' alt='next' width='129' height='19'/> */}
                         DCOY
                     </div>
@@ -94,10 +94,10 @@ export default function Component({}) {
                 {!!app && !!app.sidebarPages && app.sidebarPages.map((aLink, index)=>{
                     return (
                         <Link href={aLink.url || "#"} className="flex-center py-3 clickble  px-2 bg-w-hov-10  " key={index}>
-                            <div className=" pr-3  Q_lg_x"></div>
+                            <div className=" pr-3  Q_xl_x"></div>
                             <div className="px-1 tx-center tx-lg opaci-hov--50">{aLink.icon ? ICONS[aLink.icon]: <BsPerson /> }</div>
-                            {/* <div className="flex-1 pl-3 Q_lg_x w-min-220px">{aLink.url}</div> */}
-                            <div className="flex-1 pl-3 Q_lg_x w-min-220px">{aLink.label}</div>
+                            {/* <div className="flex-1 pl-3 Q_xl_x w-min-220px">{aLink.url}</div> */}
+                            <div className="flex-1 pl-3 Q_xl_x w-min-220px">{aLink.label}</div>
                         </Link>
                     )
                 }) }
@@ -106,30 +106,30 @@ export default function Component({}) {
                 {!!app && !!app.sidebarLinks && app.sidebarLinks.map((anUnit, index)=>{
                     if (router.query.key == anUnit.label) { return (
                         <div key={index} className="flex-center py-1 clickble  px-2 bg-w-50   " >
-                            <div className=" pr-3  Q_lg_x"></div>
+                            <div className=" pr-3  Q_xl_x"></div>
                             <div className="px-1 tx-center tx-lg opaci-hov--50"><BsFillArchiveFill /></div>
-                            <div className="flex-1 pl-3 Q_lg_x w-min-220px">{anUnit.label.replace("_"," ").toUpperCase()}</div>
+                            <div className="flex-1 pl-3 Q_xl_x w-min-220px">{anUnit.label.replace("_"," ").toUpperCase()}</div>
                         </div>
                     )}
                     return (
                     <Link key={index}  className="flex-center py-1 clickble  px-2 bg-w-hov-10  " href={`/foreigns/${anUnit.label}`} >
-                        <div className=" pr-3  Q_lg_x"></div>
+                        <div className=" pr-3  Q_xl_x"></div>
                         <div className="px-1 tx-center tx-lg opaci-hov--50"><BsFillArchiveFill /></div>
-                        <div className="flex-1 pl-3 Q_lg_x w-min-220px">{anUnit.label.replace("_"," ").toUpperCase()}</div>
+                        <div className="flex-1 pl-3 Q_xl_x w-min-220px">{anUnit.label.replace("_"," ").toUpperCase()}</div>
                     </Link>
                     )
                 })}
             </div>
             <div className=''>
                 {/* <Link href="/#" className="flex-center py-2 clickble  px-2 bg-w-hov-10  ">
-                    <div className=" pr-3  Q_lg_x"></div>
+                    <div className=" pr-3  Q_xl_x"></div>
                     <div className="px-1 tx-center tx-lg opaci-hov--50"><BsInfoCircle /></div>
-                    <div className="flex-1 pl-1 Q_lg_x w-min-220px">Support</div>
+                    <div className="flex-1 pl-1 Q_xl_x w-min-220px">Support</div>
                 </Link> */}
                 <Link href="/settings/" className="flex-center py-2 clickble  px-2 bg-w-hov-10  ">
-                    <div className=" pr-3  Q_lg_x"></div>
+                    <div className=" pr-3  Q_xl_x"></div>
                     <div className="px-1 tx-center tx-lg opaci-hov--50"><BsGear /></div>
-                    <div className="flex-1 pl-1 Q_lg_x w-min-220px">Settings</div>
+                    <div className="flex-1 pl-1 Q_xl_x w-min-220px">Settings</div>
                 </Link>
             </div>
             <hr className="w-90 opaci-50 mt-3" style={{borderColor: "white"}} />

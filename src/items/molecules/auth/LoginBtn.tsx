@@ -21,8 +21,8 @@ export default function Component({ children }) {
     <button className="w-100 tx-mdl nowrap  bg-w-10 pa-2 tx-white bord-r-8 opaci-chov--50"
         onClick={() => signIn()}
     >
-        <div className="Q_lg_x">Sign in</div>
-        <div className="Q_xs_lg"><BsBoxArrowInRight /></div>
+        <div className="Q_xl_x">Sign in</div>
+        <div className="Q_xs_xl"><BsBoxArrowInRight /></div>
     </button>
     );
 }
