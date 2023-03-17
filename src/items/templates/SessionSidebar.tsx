@@ -88,7 +88,7 @@ export default function Component({}) {
                     </div>
                     <div className='Q_xl_x pl-1 tx-ls-5'>
                         {/* <Image src='/icons/Vector.png' alt='next' width='129' height='19'/> */}
-                        DCOY
+                        {app.institution.title}
                     </div>
                 </Link>
             </div>

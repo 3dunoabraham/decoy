@@ -83,6 +83,8 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
         return _inventoryItems
     },[unitsArray,q__btcPrice])
     useEffect(()=>{
+        s__uid(LS_uid)
+        s__clientIP(LS_uid.split(":")[0])
         // inv.s__unitsArray([])
         // console.log(inv)
         
@@ -119,13 +121,12 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
     <div className='flex-center w-100 h-min-100vh'>
         <div className="h-min-100vh w-100  flex-col flex-justify-start flex-align-stretch">
             <div className="px-8 ">
-                <BreadCrumbs pages={[]} current="Dashboard" />
+                <BreadCrumbs pages={[]} />
                 
-                <div className="flex-center mb-8">
+                <div className="flex my-4">
                     {/* <h1 className="pt-4 tx-bold-5 flex-1 ">
                         Dashboard
                     </h1> */}
-                    
                     {!uid &&
                         <button   className="ims-button-primary clickble nowrap tx-lg"
                             onClick={()=>{ register() }}
@@ -141,6 +142,7 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
                             Leave
                         </button>
                     }
+                    <div className='flex-1'></div>
                 </div>
             </div>
             {q__unitsArray.isLoading &&
