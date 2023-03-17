@@ -3,6 +3,9 @@ import LoginBtn from "@/src/items/molecules/auth/LoginBtn";
 import Link from "next/link";
 import Image from "next/image";
 import { BsBox, BsChat, BsFillArchiveFill, BsFillBarChartFill, BsGear, BsInfoCircle, BsPerson, BsStack } from "react-icons/bs";
+import { FaUncharted } from "react-icons/fa";
+import { RxDashboard } from "react-icons/rx";
+import { MdOutlineHistory } from "react-icons/md";
 import { useRouter } from "next/router";
 import { InventoryContext } from "@/scripts/contexts/InventoryContext";
 import { useContext, useEffect, useMemo } from "react";
@@ -17,9 +20,9 @@ export default function Component({}) {
     const app = useContext(AppContext)
     const inv = useContext(InventoryContext)
     const ICONS = {
-        agreements: <BsStack />,
+        agreements: <MdOutlineHistory />,
         users: <BsFillBarChartFill />,
-        builder3d: <BsBox />,
+        builder3d: <FaUncharted />,
         inventory: <MdOutlineInventory2 />,
     }
     
@@ -80,8 +83,8 @@ export default function Component({}) {
                 </button> */}
                 
                 <Link href="/" className='tx-white  tx-lgx nodeco py-4 flex-center '>
-                    <div className='bg-white px-1 pt-1 ord-r-10 scale-90'>
-                        <Image src='/icons/logo2.png' alt='next' width='28' height='28'/>
+                    <div className='bg-white flex-center ord-r-10 scale-90 bord-r-100p'>
+                        <Image src='/icons/logo2.png' alt='next' width='36' height='36' className="bord-r-100p"/>
                     </div>
                     <div className='Q_xl_x pl-1 tx-ls-5'>
                         {/* <Image src='/icons/Vector.png' alt='next' width='129' height='19'/> */}
@@ -128,7 +131,7 @@ export default function Component({}) {
                 </Link> */}
                 <Link href="/settings/" className="flex-center py-2 clickble  px-2 bg-w-hov-10  ">
                     <div className=" pr-3  Q_xl_x"></div>
-                    <div className="px-1 tx-center tx-lg opaci-hov--50"><BsGear /></div>
+                    <div className="px-1 tx-center tx-lg opaci-hov--50"><RxDashboard /></div>
                     <div className="flex-1 pl-1 Q_xl_x w-min-220px">Settings</div>
                 </Link>
             </div>

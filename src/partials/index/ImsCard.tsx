@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { BsBox, BsCurrencyDollar } from 'react-icons/bs';
+import { TfiDropboxAlt } from 'react-icons/tfi';
 
 
 export default function Component({ companyName, unitsArray, totalValue }) {
@@ -10,7 +11,7 @@ export default function Component({ companyName, unitsArray, totalValue }) {
         <div className="flex-center flex-justify-start px-6">
           <div className="ims-bg-primary pa-2 ord-r-10 px-3 pt-3 opaci-75">
             <div className="tx-white tx-lg">
-              <BsBox />
+              <TfiDropboxAlt />
             </div>
           </div>
           <div className="pl-4 py-2">
