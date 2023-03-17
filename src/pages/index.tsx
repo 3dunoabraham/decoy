@@ -24,7 +24,7 @@ import { useSession } from 'next-auth/react';
 import { parseDecimals } from '@/components/scripts/helpers';
 import { useLocalStorage } from 'usehooks-ts';
 
-const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
+const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
     const router = useRouter()
     const inv = useContext(InventoryContext)
     const app = useContext(AppContext)
@@ -99,6 +99,8 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
     const [LS_uid, s__LS_uid] = useLocalStorage('uid', "")
     const [uid, s__uid] = useState("")
 
+    const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
+
     const getData = async (randomThousand:any) => {
         const res:any = await fetch('https://geolocation-db.com/json/')
         let awaited = await res.json()
@@ -156,19 +158,53 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
                 </div> 
             }
 
-            {/* |{JSON.stringify(asd)}| */}
-
+            {/* |{JSON.stringify(tokens)}| */}
+            {JSON.stringify(tokens)}
             {/*!!session &&*/
-                <div className='flex-wrap flex-justify-start gap-4' >
+            
+                <div className='flex-wrap flex-justify-start gap-4 flex-align-start' >
                     {unitsArray.length > 0 && inventoryItems.map((item, index) => (
                         <ImsCard
                             key={index}
                             companyName={item.companyName}
-                            unitsArray={asd}
+                            unitsArray={tokens}
                             totalValue={item.totalValue}
                             />
                         ))
                     }
+                    
+                    <div className='flex-center  flex-justify-start  gap-4'>
+                        {/* {JSON.stringify(LS_tokensArrayObj)} */}
+                        {tokens.map((aToken,index)=>{
+                            let aSelectedTimeframe = JSON.parse(LS_tokensArrayObj)[aToken][2]
+                            if (!index) return 
+                            return (
+                                <div className='box-shadow-1  pt-2 flex-1 ord-r-8' key={index}>
+                                    <div className='flex-center flex-justify-start px-6'>
+                                        <div className=' py-2 '>
+                                            <div className='ims-tx-faded py-1'>
+                                                {aToken.toUpperCase()}
+                                            </div>
+                                            <div className='tx-lx  tx-bold-6'>
+                                                {0 || "-"}
+                                            </div>
+                                            <div>
+                                                {Object.keys(aSelectedTimeframe).map((aProperty,index)=>{
+                                                    return (
+                                                        <div key={index}>
+                                                            {aProperty}
+                                                            {aSelectedTimeframe[aProperty]}
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr  className='mt-3' />
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
             }
             
@@ -190,7 +226,7 @@ const getEdgeConfig  = async () => {
 }
 type PageProps = {
     online: boolean;
-    asd: any;
+    tokens: any;
 };
 
 Page.getLayout = function getLayout(page: ReactElement) {
@@ -209,13 +245,13 @@ export default Page
 export const getServerSideProps: GetServerSideProps<PageProps, ParsedUrlQuery> = async (context) => {
     const { offline } = context.query;
     const online = typeof offline === 'undefined';
-    // const asd =  process.env.GITHUB_ID
+    // const tokens =  process.env.GITHUB_ID
 
-    let asd = await getEdgeConfig()
+    let tokens = await getEdgeConfig()
   
     return {
       props: {
-        online,asd,
+        online,tokens,
       },
     };
   };
