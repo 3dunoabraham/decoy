@@ -132,7 +132,7 @@ export const BottomSectionInputModule = ({
                 const theFormat = theInputObj.customFormat
                 const theWidget = theInputObj.widget
 
-                return <div key={key+"edit"} className=" px-4 py-3 bord-r-8 ims-bg-hov-faded">
+                return <div key={key+"edit"} className=" px-4 py-3 ord-r-8 ims-bg-hov-faded">
                     {theInputObj.title && theFormat != "radio" &&
                         <div className="pb-2 tx-bold-5 ims-tx-lightdark tx-smd">{theInputObj.title}</div>
                     }

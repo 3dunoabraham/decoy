@@ -35,7 +35,7 @@ export const InputImage = ({
             </>)}
                     
 
-            <div className={`pos-rel flex-center flex-col  bord-r-8 ims-border-faded   `}>
+            <div className={`pos-rel flex-center flex-col  ord-r-8 ims-border-faded   `}>
                 <span className="clickble block w-100">
                     <label htmlFor="theImage" className=" block w-100" onDrop={()=>{}}>
                         <span className=" w-100 py-4 flex-col flex-center">
@@ -65,7 +65,7 @@ export const InputImage = ({
                 </span>
             </div>
             {failedUpload && (<div className='flex-center mt-4'>
-                <div className='tx-red pt-2 pb-1 mr-3 px-2 bord-r-100 tx-lgx bg-red-25'><BsExclamationCircle/></div>
+                <div className='tx-red pt-2 pb-1 mr-3 px-2 ord-r-100 tx-lgx bg-red-25'><BsExclamationCircle/></div>
                 <div>
                     <div className='py-1 tx-red'>Upload failed, please try again</div>
                     <span className='ims-tx-lightdark'>{firstFile?.name}</span>

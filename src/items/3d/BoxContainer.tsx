@@ -103,9 +103,9 @@ const Component = forwardRef(({}:any, ref)=>{
     },[xOut, zOut])
     
     return (
-    <div className='h-min-500px w-100 flex-col g-b-20 bord-r-8 flex-align-stretch flex-justify-stretch pos-rel'>
+    <div className='h-min-500px w-100 flex-col g-b-20 ord-r-8 flex-align-stretch flex-justify-stretch pos-rel'>
         
-        <div className="flex pos-abs bottom-0 right-0  bord-r-8 pa-2 ma-2">
+        <div className="flex pos-abs bottom-0 right-0  ord-r-8 pa-2 ma-2">
             <div className="flex-col flex-align-stretch z-700 gap-1 ">
                 <div className="flex-center gap-1 opaci-50 tx-ls-5">
                     SIZE (ft/in)
@@ -129,18 +129,18 @@ const Component = forwardRef(({}:any, ref)=>{
         </div>
 
 
-        <div className="flex pos-abs top-0 left-0  bord-r-8 pa-2 ma-2">
+        <div className="flex pos-abs top-0 left-0  ord-r-8 pa-2 ma-2">
             <div className="flex-col flex-align-stretch z-700 gap-1 ">
 
                 <div className="flex-center gap-1">
                     <div className="tx-sm opaci-50">Current Size (m)</div>
-                    <div className="flex bg-w- bord-r-8 opaci-chov--50">{parseInt(xOut*2+"")}&#39;</div>
-                    <div className="flex bg-w- bord-r-8 opaci-chov--50">{parseInt(zOut*2+"")}&#39;</div>
+                    <div className="flex bg-w- ord-r-8 opaci-chov--50">{parseInt(xOut*2+"")}&#39;</div>
+                    <div className="flex bg-w- ord-r-8 opaci-chov--50">{parseInt(zOut*2+"")}&#39;</div>
                 </div>
                 <div className="flex-col flex-align-stretch gap-2 rot-180">
-                    <div className="flex tx-center  bord-r-8">
+                    <div className="flex tx-center  ord-r-8">
                         <button onClick={()=>{toggleOption("roof")}}
-                            className={` tx-center w-100 px-1 bord-r-8 px-2 opaci-chov--50  tx-lx pt-2
+                            className={` tx-center w-100 px-1 ord-r-8 px-2 opaci-chov--50  tx-lx pt-2
                                 ${!optsToggler["roof"].bool ? "bg-b-hov-20 opaci-25" : "bg-b-10 tx-green"}
                             `}
                         >
@@ -149,7 +149,7 @@ const Component = forwardRef(({}:any, ref)=>{
                     </div>
                     <div className="flex-center ">
                         <button onClick={()=>{toggleOption("frontwall")}}
-                            className={` tx-center w-100   bord-r-8 px-2 opaci-chov--50 tx-lx
+                            className={` tx-center w-100   ord-r-8 px-2 opaci-chov--50 tx-lx
                                 ${!optsToggler["frontwall"].bool ? "bg-b-hov-20 opaci-25" : "bg-b-10 tx-green"}
                             `}
                         >
@@ -158,14 +158,14 @@ const Component = forwardRef(({}:any, ref)=>{
                     </div>
                     <div className="flex gap-1">
                         <button onClick={()=>{toggleOption("leftwall")}}
-                            className={`flex-1 tx-center pa-1 bord-r-8 px-2 opaci-chov--50 tx-lx
+                            className={`flex-1 tx-center pa-1 ord-r-8 px-2 opaci-chov--50 tx-lx
                                 ${!optsToggler["leftwall"].bool ? "bg-b-hov-20 opaci-25" : "bg-b-10 tx-green"}
                             `}
                         >
                             <TfiLayoutSidebarLeft />
                         </button>
                         <button onClick={()=>{toggleOption("rightwall")}} style={{transform:"rotate(180deg)"}}
-                            className={`flex-1 tx-center pt-2  bord-r-8 px-2 opaci-chov--50 tx-lx
+                            className={`flex-1 tx-center pt-2  ord-r-8 px-2 opaci-chov--50 tx-lx
                                 ${!optsToggler["rightwall"].bool ? "bg-b-hov-20 opaci-25" : "bg-b-10 tx-green"}
                             `}
                         >
@@ -174,7 +174,7 @@ const Component = forwardRef(({}:any, ref)=>{
                     </div>
                     <div className="flex-center">
                         <button onClick={()=>{toggleOption("backwall")}}
-                            className={` tx-center w-100  pt-1 bord-r-8 px-2 opaci-chov--50  tx-lx
+                            className={` tx-center w-100  pt-1 ord-r-8 px-2 opaci-chov--50  tx-lx
                                 ${!optsToggler["backwall"].bool ? "bg-b-hov-20 opaci-25" : "bg-b-10 tx-green"}
                             `}
                         >
@@ -183,7 +183,7 @@ const Component = forwardRef(({}:any, ref)=>{
                     </div>
                     <div className="flex-center">
                         <button onClick={()=>{toggleOption("floor")}}
-                            className={` tx-center w-100  pt-1 bord-r-8 px-2 opaci-chov--50  tx-lx
+                            className={` tx-center w-100  pt-1 ord-r-8 px-2 opaci-chov--50  tx-lx
                                 ${!optsToggler["floor"].bool ? "bg-b-hov-20 opaci-25" : "bg-b-10 tx-green"}
                             `}
                         >

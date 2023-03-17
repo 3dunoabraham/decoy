@@ -26,10 +26,10 @@ export default function Component ({updateQueriedToLocalstorage, updateClientToL
             /> 
             <div className="flex-col flex-justify-end my-2 gap-2">
                 <div className="flex-center flex-align-self-end  gap-2">
-                    <div className="bg-b-10 tx-center opaci-chov--50 pa-2 bord-r-8" onClick={()=>{updateClientToLocalstorage()}}>
+                    <div className="bg-b-10 tx-center opaci-chov--50 pa-2 ord-r-8" onClick={()=>{updateClientToLocalstorage()}}>
                         Save to Local
                     </div>
-                    <div className="ims-bg-primary tx-center opaci-chov--50 pa-2 bord-r-8 "
+                    <div className="ims-bg-primary tx-center opaci-chov--50 pa-2 ord-r-8 "
                         style={{filter:"hue-rotate(240deg) brightness(220%)"}}
                         onClick={()=>{updateQueriedToLocalstorage()}}
                     >

@@ -61,7 +61,7 @@ export const BottomSectionOutputModule = ({
 
                 const theWidget = theInputObj.widget
 
-                return <div key={key} className=" px-4 py-3 bord-r-8 ims-bg-hov-faded w-min-100px">
+                return <div key={key} className=" px-4 py-3 ord-r-8 ims-bg-hov-faded w-min-100px">
                     
                     {theWidget == "select" && theFormat == "radio" && <div>
                         <div className="flex">

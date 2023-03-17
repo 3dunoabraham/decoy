@@ -25,11 +25,11 @@ export default function Component({err=null,preview=null}) {
                 Couldn&apos;t connect to database.
             </div>
             <Image src='/icons/svg/request-error.svg' alt='next' width='200' height='200' className='opaci-25'/>
-            <Link href="#" onClick={()=>{window.location.reload()}} className="pos-abs mb-5  tx-lg bord-r-8  box-shadow-5 tx-lgx ims-button-primary box-shadow-1 ">
+            <Link href="#" onClick={()=>{window.location.reload()}} className="pos-abs mb-5  tx-lg ord-r-8  box-shadow-5 tx-lgx ims-button-primary box-shadow-1 ">
                 <div className="py-1"> Reload </div>
             </Link>
             {!!preview && 
-                <button onClick={()=>{handleClick(preview)}} className="pos-abs translate-y-100 opaci-chov--50   tx-lg bord-r-8    opaci-50 bottom-0">
+                <button onClick={()=>{handleClick(preview)}} className="pos-abs translate-y-100 opaci-chov--50   tx-lg ord-r-8    opaci-50 bottom-0">
                     <div className="tx-sm py-3"> View Preview </div>
                 </button>
             }

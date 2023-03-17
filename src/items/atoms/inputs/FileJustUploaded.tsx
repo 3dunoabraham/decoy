@@ -42,8 +42,8 @@ export const FileJustUploaded = ({
         </div>
         {!(foundFilename != "loading..." || percentComplete == 100) && 
             <div className="flex-center" > 
-                <div className="flex-1  bg-b-20 bord-r-25">
-                    <div className="ims-bg-primary bord-r-25 py-1"
+                <div className="flex-1  bg-b-20 ord-r-25">
+                    <div className="ims-bg-primary ord-r-25 py-1"
                         style={{width:parseInt(`${percentComplete}`)+"%"}}
                     >
                     </div>

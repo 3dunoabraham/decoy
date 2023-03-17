@@ -48,7 +48,7 @@ function getDimension(
     <div className="opaci-50 tx-ls-2  tx-sm">
       {/* {label} {feet}' {inches}" */}
       
-        <div className='flex-col pa-1 ma-1 bord-r-8 bg-b-20'>
+        <div className='flex-col pa-1 ma-1 ord-r-8 bg-b-20'>
             {/* { <div className='opaci-50 tx-ls-2 mb-4 tx-bold-3 tx-sm'>{JSON.stringify(dimensionObj)}</div>} */}
             <div className=' tx-ls-2   tx-sm flex-center'>
                 <div className="flex  tx-xsm">{dimension}:</div>

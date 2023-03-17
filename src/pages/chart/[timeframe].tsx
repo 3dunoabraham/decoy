@@ -13,7 +13,7 @@ export default function Page() {
     if (zzz) return
     return (
         <Layout>
-            <Link className="pos-fix bg-white box-shadow-2 px-3 py-2 bord-r-1 ma-1 bord-r-5 z-1001" href="/">Home</Link>
+            <Link className="pos-fix bg-white box-shadow-2 px-3 py-2 ord-r-1 ma-1 ord-r-5 z-1001" href="/">Home</Link>
             <div className=" h-100 pb-100 pt-8 bg-b-20">
                 <ChartDashboard query={router.query}/>
             </div>

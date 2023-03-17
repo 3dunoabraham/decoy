@@ -43,8 +43,8 @@ const Component = forwardRef(({form, s__form, newItemHandler}:any, ref)=>{
 
     return (<>
         
-        <div className='box-shadow-2 bord-r-8'>
-            <div className="ims-bg-primary tx-center bg-b-50 px-2 py-1 tx-sm  flex-align-self-start  opaci-chov--50 px-1 bord-r-t-8 tx-white flex-center"
+        <div className='box-shadow-2 ord-r-8'>
+            <div className="ims-bg-primary tx-center bg-b-50 px-2 py-1 tx-sm  flex-align-self-start  opaci-chov--50 px-1 ord-r-t-8 tx-white flex-center"
                 onClick={()=>{addItem()}}
             >
                 Add
@@ -56,7 +56,7 @@ const Component = forwardRef(({form, s__form, newItemHandler}:any, ref)=>{
         </div>
         
         {/* <div>
-            <div className="ims-bg-primary tx-center mb-1 bg-b-50 px-2 py-1 tx-sm  flex-align-self-start opaci-50 paci-hov--50 px-1 bord-r-8 tx-white flex-center "
+            <div className="ims-bg-primary tx-center mb-1 bg-b-50 px-2 py-1 tx-sm  flex-align-self-start opaci-50 paci-hov--50 px-1 ord-r-8 tx-white flex-center "
                 onClick={()=>{deleteItem()}}
             >
                 Delete

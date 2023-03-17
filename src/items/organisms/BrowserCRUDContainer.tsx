@@ -40,22 +40,22 @@ export default function Component ({ browserArrayList,  queriedObj, s__crud, cle
             </div>
             {isClient && <>
                 <div className="flex-col Q_xs_flex-row gap-1 flex-align-start">
-                    <div className="bg-b-50 tx-center opaci-chov--50 pa-2 bord-r-8 tx-white" onClick={()=>{updateQueriedToClient()}}>
+                    <div className="bg-b-50 tx-center opaci-chov--50 pa-2 ord-r-8 tx-white" onClick={()=>{updateQueriedToClient()}}>
                         Queried to Browser
                     </div>
-                    <div className="bg-b-50 tx-center opaci-chov--50 pa-2 bord-r-8 tx-white" onClick={()=>{updateJSONToClient()}}>
+                    <div className="bg-b-50 tx-center opaci-chov--50 pa-2 ord-r-8 tx-white" onClick={()=>{updateJSONToClient()}}>
                         JSON to Browser
                     </div>
                 </div>
             </>}
             {isClient && browserArrayList.length > 0 && <>
                 <div className="flex gap-1">
-                    <button className="tx-center bg-b-50 px-2 py-1 opaci-75 opaci-chov--50 px-1 bord-r-8 tx-white"
+                    <button className="tx-center bg-b-50 px-2 py-1 opaci-75 opaci-chov--50 px-1 ord-r-8 tx-white"
                         onClick={()=>{clearClientCrud()}}
                     >
                         Clear <br/> Browser
                     </button>
-                    <button className="tx-center bg-b-50 px-2 py-1 opaci-75 opaci-chov--50 px-1 bord-r-8 tx-white"
+                    <button className="tx-center bg-b-50 px-2 py-1 opaci-75 opaci-chov--50 px-1 ord-r-8 tx-white"
                         onClick={()=>{clearLocalhostCrud()}}
                     >
                         Clear <br/> Local Storage
@@ -72,13 +72,13 @@ export default function Component ({ browserArrayList,  queriedObj, s__crud, cle
             }
             {newBrowserArray.length > 0 && <>
                 <div className="flex-center py-2 gap-2">
-                    <button className="tx-center bg-b-50 px-2 py-1 opaci-75 opaci-chov--50 px-1 bord-r-8 tx-white"
+                    <button className="tx-center bg-b-50 px-2 py-1 opaci-75 opaci-chov--50 px-1 ord-r-8 tx-white"
                         onClick={()=>{clearNewItems()}}
                     >
                         Clear <br/> New Items
                     </button>
                     {keyName in hardCoded1 &&
-                        <div className="bg-b-50 tx-center opaci-chov--50 pa-2 bord-r-8 tx-white" onClick={()=>{saveNewItemsToBrowserClient()}}>
+                        <div className="bg-b-50 tx-center opaci-chov--50 pa-2 ord-r-8 tx-white" onClick={()=>{saveNewItemsToBrowserClient()}}>
                             Add New Items <br/> to Client Browser
                         </div>
                     }

@@ -28,7 +28,7 @@ export default function Component({}) {
             <div className='flex px-3 px- w-100'>
                 
                 {/* <button onClick={()=>{handleClick("/")}} className='tx-white  tx-lgx nodeco py-4 flex-center '>
-                    <div className='bg-white px-1 pt-1 bord-r-10 scale-90'>
+                    <div className='bg-white px-1 pt-1 ord-r-10 scale-90'>
                         <Image src='/icons/logo.svg' alt='next' width='28' height='28'/>
                     </div>
                     <div className='Q_xl_x pl-1'>
@@ -37,7 +37,7 @@ export default function Component({}) {
                 </button> */}
                 
                 <Link href="/" className='tx-white  tx-lgx nodeco py-4 flex-center '>
-                    <div className='bg-white px-1 pt-1 bord-r-10 scale-90'>
+                    <div className='bg-white px-1 pt-1 ord-r-10 scale-90'>
                         <Image src='/icons/logo2.png' alt='next' width='28' height='28'/>
 
                     </div>
@@ -71,7 +71,7 @@ export default function Component({}) {
         <div className="h-100vh flex-col pos-fix top-0  right-0 Q_sm_x ">
             <div className='flex px-3 px- w-100'>
                 {/* <button onClick={()=>{handleClick("/")}} className='tx-white  tx-lgx nodeco py-4 flex-center '>
-                    <div className='bg-white px-1 pt-1 bord-r-10 scale-90'>
+                    <div className='bg-white px-1 pt-1 ord-r-10 scale-90'>
                         <Image src='/icons/logo.svg' alt='next' width='28' height='28'/>
                     </div>
                     <div className='Q_xl_x pl-1'>
@@ -80,7 +80,7 @@ export default function Component({}) {
                 </button> */}
                 
                 <Link href="/" className='tx-white  tx-lgx nodeco py-4 flex-center '>
-                    <div className='bg-white px-1 pt-1 bord-r-10 scale-90'>
+                    <div className='bg-white px-1 pt-1 ord-r-10 scale-90'>
                         <Image src='/icons/logo2.png' alt='next' width='28' height='28'/>
                     </div>
                     <div className='Q_xl_x pl-1 tx-ls-5'>

@@ -15,7 +15,7 @@ export const SidebarFilterButton = ({
         >
             <div className="w-min-50px tx-lgx"></div>
             <div className="flex-1 ">{theOption[filter.optField]}</div>
-            <div className=" px-2 py-1 bg-w-20 box-shadow-2 opaci-chov--50  bord-r-25 tx-sm ">{theOption._COUNT}</div>
+            <div className=" px-2 py-1 bg-w-20 box-shadow-2 opaci-chov--50  ord-r-25 tx-sm ">{theOption._COUNT}</div>
         </div>
     </div>
     )

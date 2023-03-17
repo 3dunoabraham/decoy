@@ -114,7 +114,7 @@ export const DocumentsCRUD = ({fileArrayMap, unit, refetch=(deps=[])=>{}})=>{
             return (
             <div className='flex-col mt-2' key={index}>
                 {((!isCategoryEmpty) || (firstFile && aFileType == firstFileCat)) && 
-                    <div className={"flex-center flex-col bord-r-8 w-100 mt-1 pa-2 "+
+                    <div className={"flex-center flex-col ord-r-8 w-100 mt-1 pa-2 "+
                         `${!failedUpload ? "ims-border-faded" : "border-red-50"}`}
                     >
                         <div className='w-100 pa-2 mb-2'>{aFileType}</div>
@@ -142,7 +142,7 @@ export const DocumentsCRUD = ({fileArrayMap, unit, refetch=(deps=[])=>{}})=>{
                         }
                         {failedUpload && (
                             <div className={`flex-col tx-red ${failedUpload ? "scale-outin-once-1" : ""}`}>
-                                <span className=' pa-2 pb-1 bord-r-100 noverflow tx-lgx bg-red-25'>
+                                <span className=' pa-2 pb-1 ord-r-100 noverflow tx-lgx bg-red-25'>
                                     <BsExclamationCircle/>
                                 </span>
                                 <span>Upload failed, please try again</span>

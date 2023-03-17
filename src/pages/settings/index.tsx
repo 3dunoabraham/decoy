@@ -85,7 +85,7 @@ const Page: NextPageWithLayout = () => {
                 {Object.keys(__localJson).map((aForeign, index) => {
                     return (
                         <div key={index}>
-                            <div className="px-2 py-1 bord-r-8 flex opaci-chov--50 tx-lg bg-b-10"><Link href={`/foreigns/${aForeign}`}>{aForeign}</Link> </div>
+                            <div className="px-2 py-1 ord-r-8 flex opaci-chov--50 tx-lg bg-b-10"><Link href={`/foreigns/${aForeign}`}>{aForeign}</Link> </div>
                         </div>
                     )
                 })}

@@ -18,7 +18,7 @@ const Component = forwardRef(( {buttonTitle, children}:{
             {buttonTitle}
         </button>
         {isOpen && 
-            <div  className="flex pos-abs bg-light pa-2 z-800 right-0 bottom-0 translate-y-100 bord-r-8 box-shadow-2">
+            <div  className="flex pos-abs bg-light pa-2 z-800 right-0 bottom-0 translate-y-100 ord-r-8 box-shadow-2">
                 {children}
             </div>
         }

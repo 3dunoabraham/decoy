@@ -52,7 +52,7 @@ export const InputColor = ({
     <div className="pos-rel w-100 pt-1 pb-2"
         ref={$domContainer} style={{transform: "scale(1.68) translate(10px,2px)"}}
     >
-        <input className="pa-0 bord-r-5  ims-border-faded"
+        <input className="pa-0 ord-r-5  ims-border-faded"
             type="color" value={theColor} onChange={handleChange} onBlur={handleBlur}
         />
     </div>

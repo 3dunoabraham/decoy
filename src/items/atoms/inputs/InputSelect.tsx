@@ -114,7 +114,7 @@ export const InputSelect = ({
     <div className="pos-rel  w-100" ref={$domContainer}>
         <input type="text" defaultValue={theId} hidden />
 
-        <div className={"flex  w-100  ims-tx-dark ims-border-faded bord-r-8"}>
+        <div className={"flex  w-100  ims-tx-dark ims-border-faded ord-r-8"}>
 
             <input ref={$displayInput} value={displayValue}
                 onClick={() => s__isOpen(true)} onChange={handleChange} 

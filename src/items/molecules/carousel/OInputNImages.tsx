@@ -144,15 +144,15 @@ export const OInputNImages = ({
 
     /****** HTML ******/
     return (
-    <div className="flex-col bord-r-8  ims-bg-faded w-100 pos-rel" >
+    <div className="flex-col ord-r-8  ims-bg-faded w-100 pos-rel" >
         <SliderCarousel ref={$childRef} {...{GW,filteredFileList:parsedImagesArray,pageOffset, s__pageOffset}} />
 
         <div className="pos-abs  top-0 right-0" >
-            <div className={` bord-r-100p tx-lg ${CSS["dots-button"]} pa-5`} onClick={()=>(s__isOpen(!isOpen))}>
-                <span className={`pa-2 px-3 pb-2 pt-3 bg-w-50 bord-r-8 ${CSS["dots-dots"]}`}><BsThreeDots /></span>
+            <div className={` ord-r-100p tx-lg ${CSS["dots-button"]} pa-5`} onClick={()=>(s__isOpen(!isOpen))}>
+                <span className={`pa-2 px-3 pb-2 pt-3 bg-w-50 ord-r-8 ${CSS["dots-dots"]}`}><BsThreeDots /></span>
             </div>
             {isOpen && <div className="w-min-200px  pos-abs right-0 top-0 "  ref={$divObj}>
-                <div className='tx-mdl z-100 bg-white ims-border-faded bord-r-8  w-100 autoverflow-y' >
+                <div className='tx-mdl z-100 bg-white ims-border-faded ord-r-8  w-100 autoverflow-y' >
                     <div className="flex-col flex-align-start flex-justify-start  " >
                         {!!parsedImagesArray.length && <>
                             <button className={`flex-center flex-justify-start pa-2 tx-md ims-tx-error w-100 opaci-chov--50`}
@@ -174,7 +174,7 @@ export const OInputNImages = ({
         </div>
         {parsedImagesArray.length == 0 &&
             <div className={`   flex-center pos-abs clickble ${CSS["emphasis"]}`} >
-                <div className={`flex-col bord-r-8 clickble bg-white px-4 py-6 pb-1 mr-4 ma-2 ${CSS["emphasis-card"]}`}
+                <div className={`flex-col ord-r-8 clickble bg-white px-4 py-6 pb-1 mr-4 ma-2 ${CSS["emphasis-card"]}`}
                     onClick={()=>{s__isGalleryModal(!isGalleryModal) }}
                 >
                     <span className="tx-sm">Add Image</span>

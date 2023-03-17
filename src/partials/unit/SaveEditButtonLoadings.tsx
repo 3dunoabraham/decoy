@@ -15,13 +15,13 @@ export const UnitSaveEditButtonLoadings = ({
     return (<>
     <div className="flex-center">
         {isCancelable && editMode &&
-            <div className=" ma-1  bord-r-8 bg-white ">
+            <div className=" ma-1  ord-r-8 bg-white ">
                 <div onClick={cancelEdit} className="clickble ims-button-faded ">
                     Cancel
                 </div>
             </div>
         }
-        <div onClick={handleTopBottomSave} className={`bord-r-8 bg-white  ${blockIfEditing} ma-1 clickble`} >
+        <div onClick={handleTopBottomSave} className={`ord-r-8 bg-white  ${blockIfEditing} ma-1 clickble`} >
             <div className={`ims-button-primary   ${editMode ? 'tx-bold-6':''} `}>
                 {isCancelable && <div className="pr-2  pt-1"><BsPencil/></div>}
                 {editMode ? "Save" : isLoadingEditing ? "Editing" : "Edit"}

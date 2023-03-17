@@ -35,7 +35,7 @@ export const SidebarFilterToolbar = ({
     		// if (!filtersMap || !filtersMap.has(configKey)) return <div key={index}></div>
     		return (
 		        <div className="flex flex-align-center   pa-1 ims-tx-primary  pos-rel" key={index}>
-		        	<span className={`pa-2 flex ims-bg-faded  bord-r-l-8`}>
+		        	<span className={`pa-2 flex ims-bg-faded  ord-r-l-8`}>
 						<div className='tx-bold-3 pr-1'>
 	        				{configObj[configKey].title}:
 						</div>
@@ -44,7 +44,7 @@ export const SidebarFilterToolbar = ({
 							{/* {filtersMap.get(configKey).value} */}
 						</div>
         			</span>	
-	        		<div className="ims-bg-faded opaci-chov--50 bord-r-r-8 flex-center px-1 tx-lgx "
+	        		<div className="ims-bg-faded opaci-chov--50 ord-r-r-8 flex-center px-1 tx-lgx "
 	        			onClick={()=>{toggleAFilter(configKey)}}
         			>
         				<BsX />
@@ -53,11 +53,11 @@ export const SidebarFilterToolbar = ({
     		)
     	})}
     	{false &&
-    		<div className={"flex-center ims-border-faded  bord-r-8 pa-2   opaci-chov--50"}>
-				<div className="  flex-center px-1 tx-lgx bord-r-l-8 ">
+    		<div className={"flex-center ims-border-faded  ord-r-8 pa-2   opaci-chov--50"}>
+				<div className="  flex-center px-1 tx-lgx ord-r-l-8 ">
 					<BsFilter />
 				</div>
-				<span className='bord-r-r-8'> More Filters </span>	
+				<span className='ord-r-r-8'> More Filters </span>	
 			</div>
 		}
     </div>

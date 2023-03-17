@@ -39,7 +39,7 @@ const SliderCarousel = forwardRef(({
         {<div className={`   flex-center left-0 pos-abs clickble ${CSS["emphasis"]}`} >
             <div className={`   ${CSS["emphasis-card"]}
                                 ${isAtFirstImage && " none stopcursor opaci-25 "}
-                                bord-r-100p clickble bg-white  tx-mdl   pa-3 pb-2 mr-4 ma-2 `}
+                                ord-r-100p clickble bg-white  tx-mdl   pa-3 pb-2 mr-4 ma-2 `}
                  onClick={()=>{setPrevPage() }}
             >
                 <div className="noclick"><BsChevronLeft /></div>
@@ -48,7 +48,7 @@ const SliderCarousel = forwardRef(({
         {<div className={`   flex-center right-0 pos-abs clickble ${CSS["emphasis"]}`} >
             <div className={`   ${CSS["emphasis-card"]}
                                 ${isAtLastImage && " none stopcursor opaci-25 "}
-                                bord-r-100p clickble bg-white  tx-mdl   pa-3 pb-2 mr-4 ma-2`}
+                                ord-r-100p clickble bg-white  tx-mdl   pa-3 pb-2 mr-4 ma-2`}
                  onClick={()=>{setNextPage() }}
             >
                 <BsChevronRight />
@@ -56,7 +56,7 @@ const SliderCarousel = forwardRef(({
         </div>} 
         
 
-        <div className={`bg-white mb-3 bord-r-25 flex-center bottom-0 pos-abs clickble `} >
+        <div className={`bg-white mb-3 ord-r-25 flex-center bottom-0 pos-abs clickble `} >
             {filteredFileList.map((item,index)=>{
                 if (index == 4)
                 {
@@ -78,7 +78,7 @@ const SliderCarousel = forwardRef(({
                             }
                              onClick={()=>{s__pageOffset(-GW*index) }}
                         >
-                            <div className={`bord-r-100p ${CSS["nav-dot"]}`}
+                            <div className={`ord-r-100p ${CSS["nav-dot"]}`}
                                 style={{
                                     width:"10px",height:"10px",
                                     background:currentPage == index ? "#101828" : "#2C334B"

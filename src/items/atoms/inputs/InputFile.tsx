@@ -91,7 +91,7 @@ export const InputFile = ({...others })=>{
 
     /****** HTML ******/
     return (
-    <div className="pos-rel flex-center flex-col  bord-r-8 "
+    <div className="pos-rel flex-center flex-col  ord-r-8 "
         style={{border: `2px ${others.border} var(--border-faded)`}}
     > 
         {/* ims-border-faded */}

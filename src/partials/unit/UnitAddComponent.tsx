@@ -157,7 +157,7 @@ export default function UnitAddComponent({
                 
             </div>
             <div className="flex-center mt-8 pt-100 w-100">
-                <div className="flex-wrap pa-8  w-75 ims-bg-faded bord-r-8 box-shadow-2">
+                <div className="flex-wrap pa-8  w-75 ims-bg-faded ord-r-8 box-shadow-2">
                     <div className="ims-button-primary  ">
                         <Link  className=" px-2 py-4 tx-" href="/unit/add">
                             <div className="tx-ls-1 tx-lgx">+ New Unit </div>

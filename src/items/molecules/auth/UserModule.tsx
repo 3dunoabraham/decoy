@@ -37,11 +37,11 @@ export const UserModule = ({/* amIDev, s__amIDev,  */ isVisible})=> {
         <div className='Q_lg_x  py-1 flex-1'>
             {app.user.name}
         </div>
-        <div className=' ims-bg-primary bord-r-8   opaci-chov--50  tx-lgx pt-2 px-2' onClick={()=>{toggleUser()}}>
+        <div className=' ims-bg-primary ord-r-8   opaci-chov--50  tx-lgx pt-2 px-2' onClick={()=>{toggleUser()}}>
             {app.user.name == "ADMIN" && <BsFillShieldLockFill  />}
             {app.user.name != "ADMIN" && <FiLogOut  />}
         </div>
-        {/* {false && <div className="flex-col flex-align-start w-min-100px ims-bg-faded pa-1 bord-r-8">
+        {/* {false && <div className="flex-col flex-align-start w-min-100px ims-bg-faded pa-1 ord-r-8">
             {Object.keys(app.user.grants.unit).map((aGrant,index)=>{
                 return (
                     <div  key={index} className="flex flex-justify-between w-100">

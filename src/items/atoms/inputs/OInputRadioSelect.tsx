@@ -91,7 +91,7 @@ return (<>
                 {("0" == radioValue) &&
                     <div className={`
                         opaci-50  ims-tx-dark flex flex-justify-start ims-border-faded 
-                        bord-r-8 py-2 tx-mdl w-min-300px px-4 mr-4
+                        ord-r-8 py-2 tx-mdl w-min-300px px-4 mr-4
                     `}>
                         <i className="opaci-25">Select Type</i>
                     </div>

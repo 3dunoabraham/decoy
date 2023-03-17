@@ -122,9 +122,9 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
                 <BreadCrumbs pages={[]} current="Dashboard" />
                 
                 <div className="flex-center mb-8">
-                    <h1 className="pt-4 tx-bold-5 flex-1 ">
+                    {/* <h1 className="pt-4 tx-bold-5 flex-1 ">
                         Dashboard
-                    </h1>
+                    </h1> */}
                     
                     {!uid &&
                         <button   className="ims-button-primary clickble nowrap tx-lg"

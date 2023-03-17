@@ -23,7 +23,7 @@ export const BreadCrumbs = ( { pages, current }: BreadCrumbsProps)=>{
         ))}
         {!!current && <>
             <b className="opaci-10 tx-mdl py-2">/</b>
-            <div className="ims-tx-primary ims-bg-faded tx-bold-5 ml-2 pa-2 bord-r-8">
+            <div className="ims-tx-primary ims-bg-faded tx-bold-5 ml-2 pa-2 ord-r-8">
                 {current}
             </div>
         </>}

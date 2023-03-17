@@ -101,22 +101,22 @@ const Page: NextPageWithLayout & any = ({ data, nextauthenv }) => {
             <div className="flex-col flex-align-stretch gap-3 pos-rel">                
             {/* <div className="flex-row flex-align-stretch flex-row Q_xs_lg_flex-col gap-3 pos-rel">                 */}
                 <div className=' pos-abs right-0 top-0 flex-col gap-2'>
-                    <button className='px-2 py-1 opaci-chov--50 bg-b-10 bord-r-8 tx-lg'><BsGear/></button>
-                    <button className='px-2 py-1 opaci-chov--50 bg-b-10 bord-r-8 tx-lg'><BsEye/></button>
-                    <button className='px-2 py-1 opaci-chov--50 bg-b-10 bord-r-8 tx-lg'><BsDownload/></button>
+                    <button className='px-2 py-1 opaci-chov--50 bg-b-10 ord-r-8 tx-lg'><BsGear/></button>
+                    <button className='px-2 py-1 opaci-chov--50 bg-b-10 ord-r-8 tx-lg'><BsEye/></button>
+                    <button className='px-2 py-1 opaci-chov--50 bg-b-10 ord-r-8 tx-lg'><BsDownload/></button>
                 </div>
                 <Suspense>
                     <div className="flex-1 h-max-700px pos-rel  w-95  flex" id="root">
                         <BoxContainer ref={$boxContainer} />
                         {selectedItemIndex >= 0 &&
-                            <div className="pos-abs flex div top-0 right-0 flex pa-1 box-shadow-i-1-bl bord-r-8">
+                            <div className="pos-abs flex div top-0 right-0 flex pa-1 box-shadow-i-1-bl ord-r-8">
                                 <div className="flex-col pa-1 ">
                                     <Link target={"_blank"} href={`/unit/${unitsArray[selectedItemIndex][matchestableConfigObj.key.name]}`}
                                         className="tx-ls-1 opaci-75"
                                     >
                                         #{unitsArray[selectedItemIndex][matchestableConfigObj.key.name]}
                                     </Link>
-                                    <div className="flex-col pa-1 ma-1 bord-r-8 bg-b-10 box-shadow-3 bord-r-8">
+                                    <div className="flex-col pa-1 ma-1 ord-r-8 bg-b-10 box-shadow-3 ord-r-8">
                                         <FeetInchesLabel size={unitsArray[selectedItemIndex].size} />
                                     </div>
                                 </div>

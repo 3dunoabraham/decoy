@@ -22,9 +22,9 @@ export const SidebarFilterSection = ({
         {/* {isOpen && <div className="flex-1 pl-3 Q_xs_lg w-min-100px  ">{filterSection.filter.title}</div>} */}
         <div className=" tx-center   tx-mdl Q_lg_x" >{!isOpen ? BsChevronDown({}) : BsChevronUp({})}</div>
     </div>
-    <div className="bord-r-8 px-1 ">
+    <div className="ord-r-8 px-1 ">
         {isOpen && filterSection.optsArray.map((theOption,index)=>(
-            <div key={index} className="flex-center bg-w-hov-33 clickble   bord-r-8 ">
+            <div key={index} className="flex-center bg-w-hov-33 clickble   ord-r-8 ">
                 <SidebarFilterButton filter={filterSection.filter}
                     theOption={theOption} handleClick={handleTheClick}                    
                 />

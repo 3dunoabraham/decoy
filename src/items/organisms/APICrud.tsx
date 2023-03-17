@@ -47,13 +47,13 @@ export default function Component ({q__queriedObj, queriedObj, q__queriedAPI, qu
             <Link target="_blank" href={hardCoded1[keyName].apiUrl} className=" tx-bold-3 opaci-50 w-max-300px ma-1 tx-xsm"> {hardCoded1[keyName].apiUrl} </Link>
             
             <div className='flex-center gap-2'>
-                <div className='flex-col pa-2 opaci-chov--50 bg-b-10 bord-r-5'
+                <div className='flex-col pa-2 opaci-chov--50 bg-b-10 ord-r-5'
                     onClick={()=>{refreshAPIList()}}
                 >
                     <div className='flex-col tx-xsm'>refresh</div>
                     <div className='flex-col tx-'>API</div>
                 </div>
-                <div className='pa-2 opaci-chov--50 bg-b-10 bord-r-5 flex-center tx- gap-1'
+                <div className='pa-2 opaci-chov--50 bg-b-10 ord-r-5 flex-center tx- gap-1'
                     onClick={()=>{backupAPIToJson()}}
                     style={{filter:"hue-rotate(60deg)",background:app.THEME.primaryColor,color:app.THEME.textColorLight}}
                 >

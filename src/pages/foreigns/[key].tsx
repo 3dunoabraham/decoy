@@ -181,7 +181,7 @@ const Page: NextPageWithLayout & any = ({ data, asd, theK }) => {
                         <div className='tx-center w-100'> <Image src='/icons/svg/404-error.svg' alt='next' width='100' height='100'/> </div>
                         {browserArrayList.length > 0 &&
                             <div className='tx-center w-100 mt-4'>
-                                <div className="bg-b-10 tx-center opaci-chov--50 pa-2 bord-r-8" onClick={()=>{updateClientToLocalstorage()}}>
+                                <div className="bg-b-10 tx-center opaci-chov--50 pa-2 ord-r-8" onClick={()=>{updateClientToLocalstorage()}}>
                                     Save to Local
                                 </div>
                             </div>

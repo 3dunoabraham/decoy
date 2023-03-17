@@ -14,7 +14,7 @@ export const OInputNImagesJustUploaded = ({
             <div className="flex-center "> 
                 <div
                     className={
-                        "ims-bg-primary-desat ims-tx-primary flex-center tx-mdl  bord-r-100p tx-lg h-50px w-50px"
+                        "ims-bg-primary-desat ims-tx-primary flex-center tx-mdl  ord-r-100p tx-lg h-50px w-50px"
                     }
                 > 
                     <ImFilePicture />
@@ -44,8 +44,8 @@ export const OInputNImagesJustUploaded = ({
 
                 <div className="w-50px h-50px"> 
                 </div>
-                <div className="flex-1 ml-2 bg-b-20 bord-r-25">
-                    <div className="ims-bg-primary py-1 bord-r-25"
+                <div className="flex-1 ml-2 bg-b-20 ord-r-25">
+                    <div className="ims-bg-primary py-1 ord-r-25"
                         style={{width:parseInt(`${percentComplete}`)+"%"}}
                     >
                     </div>

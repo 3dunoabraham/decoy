@@ -18,7 +18,7 @@ export default function Component({
 
 
     return(<>
-    <div className={` flex bord-r-t-8 ${!!headerStyle?"":"ims-border-faded ims-bg-lightest"} `} style={headerStyle}>
+    <div className={` flex ord-r-t-8 ${!!headerStyle?"":"ims-border-faded ims-bg-lightest"} `} style={headerStyle}>
         {!displayConfigObj.key.isInvisible && <div className={`w-20 flex  py-3 px-4 tx-sm`}>
             <div className="opaci-50 "> {displayConfigObj.key.title} </div>
             <div className=" opaci-50 px-1"> <BsArrowDown /> </div>
@@ -29,7 +29,7 @@ export default function Component({
             ))}
         </div>        
         { _boolConfig.includes("isActionable") &&
-            <div className="bord-r-8  flex-center px-3 pt-1 pb-3 ma-1 pos-rel ">
+            <div className="ord-r-8  flex-center px-3 pt-1 pb-3 ma-1 pos-rel ">
                 <button className="tx-gray scale-200 invisible"> ...  </button>
             </div>
         }                            
@@ -83,7 +83,7 @@ export default function Component({
                                 </div>
                             </Link>
                             { _boolConfig.includes("isActionable") &&
-                                <div className={`bg-b-hov-10 bord-r-8  flex-center px-3 pt-1 ma-1 pos-rel pb-${_boolConfig.includes("isCompact")?0:3}`}
+                                <div className={`bg-b-hov-10 ord-r-8  flex-center px-3 pt-1 ma-1 pos-rel pb-${_boolConfig.includes("isCompact")?0:3}`}
                                     onClick={()=>{s__isMenu(isMenu == index ? -1 : index );}}
                                 >
                                     <button className={`tx-gray scale-200 pb-${_boolConfig.includes("isCompact")?1:0}`}>
@@ -94,7 +94,7 @@ export default function Component({
                                         <div className="z-100 pos-abs cursor  left-0 translate-x--100 translate-x--100 z-600 nowrap mt-2 px-2" 
                                             ref={$divObj}
                                         >                                    
-                                            <div className='tx-mdl z-100 bg-white box-shadow-3 bord-r-8  w-100 autoverflow-y' >
+                                            <div className='tx-mdl z-100 bg-white box-shadow-3 ord-r-8  w-100 autoverflow-y' >
                                                 <div className="flex-col -min-100px pa-2 ">
                                                     {actionCard(item[displayConfigObj.key.name])}
                                                 </div>

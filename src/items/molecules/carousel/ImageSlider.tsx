@@ -70,9 +70,9 @@ export const ImageSlider = ({
 
 
     return (
-    <div className={` noverflow bord-r-8 ${CSS["carousel-container"]}`}>
+    <div className={` noverflow ord-r-8 ${CSS["carousel-container"]}`}>
         <div ref={$touchPad}
-            className={`${CSS["touch-pad"]} grab w-100 bord-r-10 h-100 noselect pos-abs`}
+            className={`${CSS["touch-pad"]} grab w-100 ord-r-10 h-100 noselect pos-abs`}
         >
         </div>
         <div className="none top-0 right-0 pos-abs"  > off:{swipeOffset} </div>

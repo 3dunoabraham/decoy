@@ -183,7 +183,7 @@ export const OInputNMeasure = ({
             }
             {editMode && Array.from(inputkeyMap.entries()).map(([key, aValue])=>(
                 <div key={key+"edit"}
-                    className=" bord-r-8  flex flex-align-center flex-justify-between w-100 my-1 "
+                    className=" ord-r-8  flex flex-align-center flex-justify-between w-100 my-1 "
                 >
                     {aValue.title && <>
                         <div
@@ -199,7 +199,7 @@ export const OInputNMeasure = ({
 
                                 <div
                                     className={
-                                        " pos-abs left-0 top-50  opaci-bhov-0 bord-r-8 noverflow"
+                                        " pos-abs left-0 top-50  opaci-bhov-0 ord-r-8 noverflow"
                                     }
                                     style={{
                                         transform:"translate(-100%,-15%)",
@@ -207,7 +207,7 @@ export const OInputNMeasure = ({
                                 >
                                     <div
                                         className={
-                                            " w-min-150px px-2 py-1 tx-xsm mr-2 bord-r-8 "+
+                                            " w-min-150px px-2 py-1 tx-xsm mr-2 ord-r-8 "+
                                             " tx-white bg-b-50 "
                                         }
                                         

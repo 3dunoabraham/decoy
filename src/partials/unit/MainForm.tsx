@@ -180,7 +180,7 @@ export const UnitMainForm = ({
         </div>
 
         <div className={`flex-col  flex-align-center ${CSS["unit-mainform_gallery"]} `}>
-            {isAddPage &&  <><div className="ims-bg-faded h-400px bord-r-8 w-400px"></div></>}
+            {isAddPage &&  <><div className="ims-bg-faded h-400px ord-r-8 w-400px"></div></>}
             {!isAddPage && 
                 <div className="flex-col flex-align-center pb-4   ">
                     <OInputNImages uid={unit.uid} filelistString={unit.images} 

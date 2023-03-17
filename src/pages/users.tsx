@@ -37,7 +37,7 @@ const Page: NextPageWithLayout = () => {
                 
                 
                 <div className='flex-center  flex-justify-start px-8 Q_xs_sm_px-2 gap-4'>
-                    <div className='box-shadow-1  pt-2 flex-1 bord-r-8'>
+                    <div className='box-shadow-1  pt-2 flex-1 ord-r-8'>
                         <div className='flex-center flex-justify-start px-6'>
                             <div className=' py-2 '>
                                 <div className='ims-tx-faded py-1'>
@@ -50,7 +50,7 @@ const Page: NextPageWithLayout = () => {
                         </div>
                         <hr  className='mt-3' />
                     </div>
-                    <div className='box-shadow-1  pt-2 flex-1 bord-r-8'>
+                    <div className='box-shadow-1  pt-2 flex-1 ord-r-8'>
                         <div className='flex-center flex-justify-start px-6'>
                             <div className=' py-2 '>
                                 <div className='ims-tx-faded py-1'>
@@ -63,7 +63,7 @@ const Page: NextPageWithLayout = () => {
                         </div>
                         <hr  className='mt-3' />
                     </div>
-                    <div className='box-shadow-1  pt-2 flex-1 bord-r-8'>
+                    <div className='box-shadow-1  pt-2 flex-1 ord-r-8'>
                         <div className='flex-center flex-justify-start px-6'>
                             <div className=' py-2 '>
                                 <div className='ims-tx-faded py-1'>
@@ -79,7 +79,7 @@ const Page: NextPageWithLayout = () => {
                 </div>
                 
                 <div className='flex-center  flex-justify-start px-8 Q_xs_sm_px-2 gap-4'>
-                    <div className='box-shadow-1  pt-2 flex-1 bord-r-8'>
+                    <div className='box-shadow-1  pt-2 flex-1 ord-r-8'>
                         <div className='flex-center flex-justify-start px-6'>
                             <div className=' py-2 '>
                                 <div className='ims-tx-faded py-1'>
@@ -92,7 +92,7 @@ const Page: NextPageWithLayout = () => {
                         </div>
                         <hr  className='mt-3' />
                     </div>
-                    <div className='box-shadow-1  pt-2 flex-1 bord-r-8'>
+                    <div className='box-shadow-1  pt-2 flex-1 ord-r-8'>
                         <div className='flex-center flex-justify-start px-6'>
                             <div className=' py-2 '>
                                 <div className='ims-tx-faded py-1'>
@@ -105,7 +105,7 @@ const Page: NextPageWithLayout = () => {
                         </div>
                         <hr  className='mt-3' />
                     </div>
-                    <div className='box-shadow-1  pt-2 flex-1 bord-r-8'>
+                    <div className='box-shadow-1  pt-2 flex-1 ord-r-8'>
                         <div className='flex-center flex-justify-start px-6'>
                             <div className=' py-2 '>
                                 <div className='ims-tx-faded py-1'>

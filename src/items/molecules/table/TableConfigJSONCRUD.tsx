@@ -123,23 +123,23 @@ export default function Component ({keyName }) {
                     {shouldRenderAddColumnButton && <>
                         <div className=" flex gap-1 r ">
                             <button className="flex opaci-chov--50 ims-button-primary" onClick={(e)=>{ createCol(e) }}>Add Column</button>
-                            <div className="pa-1 bg-b-20 bord-r-8 flex-col ">
+                            <div className="pa-1 bg-b-20 ord-r-8 flex-col ">
                                 <div className="flex-center " >
                                     {form && "title-"+"new" in form && <>
                                         t:
-                                        <input type="text" placeholder="Title" className="pa-1 w-80px tx-xsm noborder bord-r-8 ma-1"
+                                        <input type="text" placeholder="Title" className="pa-1 w-80px tx-xsm noborder ord-r-8 ma-1"
                                             value={form["title-"+"new"]} onChange={(e)=>{handleChange(e,"title-"+"new")}} 
                                         />
                                     </>}
                                     {form && "fieldName-"+"new" in form && <>
                                         f:
-                                        <input type="text" placeholder="Field Name" className="pa-1 w-80px tx-xsm noborder bord-r-8 ma-1"
+                                        <input type="text" placeholder="Field Name" className="pa-1 w-80px tx-xsm noborder ord-r-8 ma-1"
                                             value={form["fieldName-"+"new"]} onChange={(e)=>{handleChange(e,"fieldName-"+"new")}} 
                                         />
                                     </>}
                                     {form && "widget-"+"new" in form && <>
                                         w:
-                                        <input type="text" placeholder="Widget" className="pa-1 w-80px tx-xsm noborder bord-r-8 ma-1"
+                                        <input type="text" placeholder="Widget" className="pa-1 w-80px tx-xsm noborder ord-r-8 ma-1"
                                             value={form["widget-"+"new"]} onChange={(e)=>{handleChange(e,"widget-"+"new")}} 
                                         />
                                     </>}
@@ -148,14 +148,14 @@ export default function Component ({keyName }) {
                         </div>
                     </>}
                     {shouldRenderEditColumnsButton &&
-                        <button className="flex gap-1 ims-button-primary opaci-chov--50 px-2 py-1 bord-r-8 "
+                        <button className="flex gap-1 ims-button-primary opaci-chov--50 px-2 py-1 ord-r-8 "
                             onClick={(id)=>{ updateSelectedArray(2) }}
                         >
                             <span className="flex">Edit Columns</span>
                         </button>
                     }
                     {shouldRenderCancelEditButton &&
-                        <button className="flex gap-1 ims-border-faded opaci-chov--50 px-2 py-1 bord-r-8  "
+                        <button className="flex gap-1 ims-border-faded opaci-chov--50 px-2 py-1 ord-r-8  "
                             onClick={(id)=>{ updateSelectedArray(-1) }}
                         >
                             <span className="flex">Cancel Edit</span>
@@ -170,7 +170,7 @@ export default function Component ({keyName }) {
             <div className="flex-wrap flex-align-start gap-1 r ">
                 {selectedColumns.map((anItem, index) => {
                     return (
-                        <div className="pa-1 bg-b-20 bord-r-8 flex-col " key={index}>
+                        <div className="pa-1 bg-b-20 ord-r-8 flex-col " key={index}>
                             <div className="flex w-100" >
                                 <div className="flex-1 flex flex-align-end gap-1 opaci-chov--50 pa-1" onClick={()=>{updateSelectedColName(anItem)}}>
                                     <div className="tx-sm opaci-50">Col:</div>
@@ -187,13 +187,13 @@ export default function Component ({keyName }) {
                                     <span className="opaci-50">t</span>:
                                     <input type="text" value={form["title-"+index]}
                                         onChange={(e)=>{handleChange(e,"title-"+index)}}
-                                        className="pa-1 w-80px tx-xsm noborder bord-r-8 ma-1"
+                                        className="pa-1 w-80px tx-xsm noborder ord-r-8 ma-1"
                                     />
                                 </>}
                                 {form && "fieldName-"+index in form &&  <>
                                     <span className="opaci-50">f</span>:
                                     <input type="text"  value={form["fieldName-"+index]}
-                                        className="pa-1 w-80px tx-xsm noborder bord-r-8 ma-1"
+                                        className="pa-1 w-80px tx-xsm noborder ord-r-8 ma-1"
                                         onChange={(e)=>{handleChange(e,"fieldName-"+index)}}
                                     />
                                 </>}
@@ -201,7 +201,7 @@ export default function Component ({keyName }) {
                             <div className="flex-center opaci-chov-50 opaci-50 " >
                                 {form && "widget-"+index in form &&  <>
                                     w:
-                                    <input type="text" className="pa-1 w-80px tx-xs noborder bord-r-8 ma-1" 
+                                    <input type="text" className="pa-1 w-80px tx-xs noborder ord-r-8 ma-1" 
                                         onChange={(e)=>{handleChange(e,"widget-"+index)}} value={form["widget-"+index]}
                                     />
                                 </>}                                        
@@ -211,7 +211,7 @@ export default function Component ({keyName }) {
                                     )
                                     ? ""
                                     : (
-                                        <button className="ims-bg-primary tx-white px-2 py-1 bord-r-8"
+                                        <button className="ims-bg-primary tx-white px-2 py-1 ord-r-8"
                                             onClick={async ()=>{ 
                                                 let oldColVal = JSON.parse(localJson[keyName][1].colVal)
                                                 await updateData(2, "rest",

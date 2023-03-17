@@ -5,10 +5,10 @@ import { BsBox, BsCurrencyDollar } from 'react-icons/bs';
 export default function Component({ companyName, unitsArray, totalValue }) {
   return (
     <div className="flex-center flex-justify-start px-3">
-      <div className="box-shadow-2 pt-4 w-min-400px bord-r-8">
+      <div className="box-shadow-2 pt-4 w-min-400px ord-r-8">
         <div className="tx-mdl tx-bold-5 mb-3 px-6">{companyName}</div>
         <div className="flex-center flex-justify-start px-6">
-          <div className="ims-bg-primary pa-2 bord-r-10 px-3 pt-3 opaci-75">
+          <div className="ims-bg-primary pa-2 ord-r-10 px-3 pt-3 opaci-75">
             <div className="tx-white tx-lg">
               <BsBox />
             </div>
@@ -21,7 +21,7 @@ export default function Component({ companyName, unitsArray, totalValue }) {
           </div>
         </div>
         <div className="flex-center flex-justify-start px-6">
-          <div className="ims-bg-primary pa-2 bord-r-10 px-3 pt-3 opaci-75">
+          <div className="ims-bg-primary pa-2 ord-r-10 px-3 pt-3 opaci-75">
             <div className="tx-white tx-lg scale-150">
               <BsCurrencyDollar />
             </div>

@@ -14,7 +14,7 @@ export default function StandardTablePagination ({
 
 
     return(
-    <div className="bloc  pos-rel flex  ims-border-faded flex-justify-start flex-align-center bord-r-b-8">
+    <div className="bloc  pos-rel flex  ims-border-faded flex-justify-start flex-align-center ord-r-b-8">
         <button onClick={prevPage}
             className={`
                 px-3 py-1 ma-3 flex-center clickble opaci-hov-50 ims-button-faded tx-md 
