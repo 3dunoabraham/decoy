@@ -22,14 +22,16 @@ import { InventoryContext, InventoryProvider } from '@/scripts/contexts/Inventor
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { parseDecimals } from '@/components/scripts/helpers';
-import { useLocalStorage } from 'usehooks-ts';
+import { useIsClient, useLocalStorage } from 'usehooks-ts';
 
 const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
+    const bigmul = 100
+    const mul = 11  
     const router = useRouter()
     const inv = useContext(InventoryContext)
     const app = useContext(AppContext)
     const API_PRICE_BASEURL = "https://api.binance.com/api/v3/ticker/price?symbol="
-
+    const isClient = useIsClient()
     const [q__btcPrice, btcPrice] = useQueryPlus({ queryKey: ['btcData'], refetchOnWindowFocus: false, retry: 1,
         queryFn: async () =>{
             const priceRes = await fetch(API_PRICE_BASEURL+"BTCUSDT")
@@ -159,7 +161,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
             }
 
             {/* |{JSON.stringify(tokens)}| */}
-            {JSON.stringify(tokens)}
+            {/* {JSON.stringify(tokens)} */}
             {/*!!session &&*/
             
                 <div className='flex-wrap flex-justify-start gap-4 flex-align-start' >
@@ -173,31 +175,67 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
                         ))
                     }
                     
-                    <div className='flex-center  flex-justify-start  gap-4'>
+                    <div className='flex-center flex-align-start flex-justify-start  gap-4'>
                         {/* {JSON.stringify(LS_tokensArrayObj)} */}
-                        {tokens.map((aToken,index)=>{
-                            let aSelectedTimeframe = JSON.parse(LS_tokensArrayObj)[aToken][2]
-                            if (!index) return 
+                        {isClient && tokens.map((aToken,index)=>{
+                            if (!JSON.parse(LS_tokensArrayObj)[aToken]) return 
+                            let aSelectedTimeframe = JSON.parse(LS_tokensArrayObj)[aToken]
+                            let aCrystal = 0
+                            // let totalValue = aSelectedTimeframe.reduce((prev, curr, i, acc)=>{
+
+                            // },0)
+                            // if (!index) return // hide  btc
                             return (
                                 <div className='box-shadow-1  pt-2 flex-1 ord-r-8' key={index}>
-                                    <div className='flex-center flex-justify-start px-6'>
+                                    <div className='flex   flex-justify-start px-6'>
                                         <div className=' py-2 '>
                                             <div className='ims-tx-faded py-1'>
                                                 {aToken.toUpperCase()}
                                             </div>
-                                            <div className='tx-lx  tx-bold-6'>
-                                                {0 || "-"}
-                                            </div>
-                                            <div>
-                                                {Object.keys(aSelectedTimeframe).map((aProperty,index)=>{
+                                            {/* {!aSelectedTimeframe[2].buy && 
+                                                <div className='tx-lx  tx-bold-6'>
+                                                    -
+                                                </div>
+                                            } */}
+                                            {/* {
+                                                aSelectedTimeframe.map((aTimeframe, i) => {
+                                                    return (
+                                                        <div key={i}>
+                                                            {aSelectedTimeframe[i].buy}
+                                                        </div>
+                                                    )
+                                                })
+                                            } */}
+                                            {!aSelectedTimeframe[2].buy && !aSelectedTimeframe[3].buy && 
+                                                <div className='tx-lx  tx-bold-6'>
+                                                    -
+                                                </div>
+                                            }   
+                                            {!!aSelectedTimeframe[2].buy && !!aSelectedTimeframe[3].buy && 
+                                                <div className='tx-lx  tx-bold-6'>
+                                                    ${(aSelectedTimeframe[2].buy*mul)+(aSelectedTimeframe[3].buy*bigmul)}
+                                                </div>
+                                            }   
+                                            {!!aSelectedTimeframe[2].buy && !aSelectedTimeframe[3].buy && 
+                                                <div className='tx-lx  tx-bold-6'>
+                                                    ${aSelectedTimeframe[2].buy*mul}
+                                                </div>
+                                            }   
+                                            {!aSelectedTimeframe[2].buy && !!aSelectedTimeframe[3].buy && 
+                                                <div className='tx-lx  tx-bold-6'>
+                                                    ${aSelectedTimeframe[3].buy*bigmul}
+                                                </div>
+                                            }   
+                                            {/* <div>
+                                                {Object.keys(aSelectedTimeframe[2]).map((aProperty,index)=>{
                                                     return (
                                                         <div key={index}>
                                                             {aProperty}
-                                                            {aSelectedTimeframe[aProperty]}
+                                                            {aSelectedTimeframe[2][aProperty]}
                                                         </div>
                                                     )
                                                 })}
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
                                     <hr  className='mt-3' />
