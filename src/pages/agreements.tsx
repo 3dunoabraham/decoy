@@ -17,16 +17,17 @@ import ItemsTable from '@/src/items/molecules/table/ItemsTable'
 import { parseDecimals, parseUTCDateString, parseUTCString } from '@/components/scripts/helpers'
 import { parseDateTimeString } from '@/scripts/helpers/type/dateHelper'
 import { useRouter } from 'next/router'
+import { GetServerSideProps } from 'next'
 
-const Page: NextPageWithLayout = ({}) => {
+const Page: NextPageWithLayout = ({pair}:any) => {
     const router = useRouter()
-    const pair = router.query.pair || "BTCUSDT"
+    // const pair = router.query.pair
     const inv = useContext(InventoryContext)
     const [q__unitsArray, unitsArray] = useQueryPlus({ queryKey: ['unitData'], 
         queryFn: async () =>{
             // const theList = await fetchJsonArray(API_UNITS, "Units")
             // inv.s__unitsArray(theList)
-
+            if (!pair) return []
             const theListRes = await fetch(`/api/trade-history/?symbol=${pair}&limit=99`)
             let theList = await theListRes.json()
             console.log("thelist", theList)
@@ -204,3 +205,17 @@ Page.getLayout = function getLayout(page: ReactElement) {
 
 export default Page
 
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const { pair } = context.query;
+    // const online = typeof offline === 'undefined';
+    // const tokens =  process.env.GITHUB_ID
+
+    // let tokens = await getEdgeConfig()
+  
+    return {
+      props: {
+        pair,
+      },
+    };
+  };
