@@ -337,7 +337,7 @@ export function ChartDashboard({query}) {
     <div className="body h-min-100  pos-rel flex-col flex-justify-start noverflow">
         
         {/* {JSON.stringify(asd.balances)} */}
-        <div className="opaci-50 tx-ls-3 tx-lg my-2 tx-white">Current Balance</div>
+        <div className="opaci-50 tx-ls-3 tx-lg mb-2 tx-white">Current Balance</div>
         <div className="flex-wrap gap-2">
 
             {queryUSDT.data && asd.balances && asd.balances.map((anAsset, i)=>{
