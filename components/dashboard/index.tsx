@@ -42,8 +42,8 @@ export function ChartDashboard({query}) {
     useEffect(()=>{
         s__counter(counter+1)
         s__tokensArrayObj(JSON.parse(LS_tokensArrayObj))
-        console.log("LS_tokensArrayObj")
-        console.log(JSON.parse(LS_tokensArrayObj)) 
+        // console.log("LS_tokensArrayObj")
+        // console.log(JSON.parse(LS_tokensArrayObj)) 
         s__uid(LS_uid)
         s__clientIP(LS_uid.split(":")[0])
         {
@@ -143,7 +143,7 @@ export function ChartDashboard({query}) {
     }
     const exportConfig = () => { console.log(JSON.stringify(tokensArrayObj)) }
     const joinToken = (token:string) => {
-        console.log("queryUSDT queryUSDT", queryUSDT.isLoading, queryUSDT.data)
+        // console.log("queryUSDT queryUSDT", queryUSDT.isLoading, queryUSDT.data)
         let thePrice = parseFloat(queryUSDT.data[DEFAULT_TOKENS_ARRAY.indexOf(`${token}`)].price)
         addToken(token,thePrice)
     }
@@ -214,9 +214,9 @@ export function ChartDashboard({query}) {
         s__LS_tokensArrayObj((prevValue) => JSON.stringify(bigTokensObj))
         
         let randomHundred = parseInt(`${(Math.random()*90) + 10}`)
-        let theKey = `${token}USDT${timeframe.toUpperCase()}`
+        let theKey = `${token.toUpperCase()}USDT${DEFAULT_TIMEFRAME_ARRAY[timeframe].toUpperCase()}`
         
-        const response = await updateStrat(theKey, {mode: randomHundred})
+        const response = await updateStrat(theKey, {key: theKey, mode: randomHundred})
     }
     const setNewTimeframe = async(aTimeframe:string) => {
         s__timeframe(aTimeframe)
@@ -312,7 +312,7 @@ export function ChartDashboard({query}) {
         };
         
         placeOrder(orderParams)
-        
+        console.log(_token, DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe), "buy", 1)
         updateTokenState(_token, DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe), "buy", 1)
     }
 
@@ -326,7 +326,7 @@ export function ChartDashboard({query}) {
             </button>
         )
     }
-    console.log("DEFAULT_TOKENS_ARRAY", DEFAULT_TOKENS_ARRAY, tokensArrayObj)
+    // console.log("DEFAULT_TOKENS_ARRAY", DEFAULT_TOKENS_ARRAY, tokensArrayObj)
     return (
     <div className="body h-min-100  pos-rel flex-col flex-justify-start noverflow">
         <div className={"bg-glass-6   bord-r-10 tx-gray mt-4 py-2 z-999 fade-in w-95 noverflow flex flex-between"}

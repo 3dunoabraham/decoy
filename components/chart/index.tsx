@@ -13,12 +13,12 @@ export default function Component({
             style={{ resize:"both", height:"400px", }}
         >
             
-            <div className="pa-1 pos-abs right-0 tx-green bottom-0">{klinesStats.min}</div>
-            <div className="pa-1 pos-abs right-0 tx-orange top-50p">{klinesStats.minMaxAvg}</div>
-            <div className="pa-1 pos-abs right-0 opaci-50 top-0">{klinesStats.max}</div>
+            <div className="pa-1 pos-abs right-0 tx-green tx-shadow-br-4 bottom-0">{klinesStats.min}</div>
+            <div className="pa-1 pos-abs right-0 tx-white tx-shadow-br-4 top-50p">{klinesStats.minMaxAvg}</div>
+            <div className="pa-1 pos-abs right-0 opaci-75 top-0 tx-shadow-br-4">{klinesStats.max}</div>
             
-            <div className="pa-1 pos-abs right-0 tx-green-25 top-75p">{parseDecimals(klinesStats.minMedian)}</div>
-            <div className="pa-1 pos-abs right-0 tx-red top-25p">{parseDecimals(klinesStats.maxMedian)}</div>
+            <div className="pa-1 pos-abs right-0 tx-white tx-shadow-br-4 z-100 top-75p">{parseDecimals(klinesStats.minMedian)}</div>
+            <div className="pa-1 pos-abs right-0 tx-red top-25p tx-shadow-br-4">{parseDecimals(klinesStats.maxMedian)}</div>
 
             <ChartHigherLine klinesArray={p__klinesArray} klinesStats={klinesStats}
                 tokenConfig={tokensArrayObj[cryptoToken][DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe)]}

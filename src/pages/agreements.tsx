@@ -14,6 +14,7 @@ import { API_UNITS } from '@/scripts/constants/api'
 import { useQueryPlus } from '@/scripts/helpers/useHooksHelper'
 import LOCAL_AGREEMENTS from '@/localAgreements.json'
 import ItemsTable from '@/src/items/molecules/table/ItemsTable'
+import { parseDecimals, parseUTCDateString } from '@/components/scripts/helpers'
 
 const Page: NextPageWithLayout = () => {
     const inv = useContext(InventoryContext)
@@ -23,8 +24,16 @@ const Page: NextPageWithLayout = () => {
             // inv.s__unitsArray(theList)
 
             const theListRes = await fetch("/api/trade-history/?symbol=BTCUSDT&limit=10")
-            const theList = await theListRes.json()
+            let theList = await theListRes.json()
             console.log("thelist", theList)
+            theList = theList.map((anItem, index) => {
+                return {...anItem,...{
+                    side: anItem.isBuyer ? "Buy" : "Sell",
+                    price: parseDecimals(anItem.price),
+                    qty: "$"+parseDecimals(parseFloat(anItem.price)*parseFloat(anItem.qty)),
+                    time: parseUTCDateString(new Date(anItem.time/1000)),
+                }}
+            })
 
             // const theList = await fetchJsonArray(API_UNITS, "Units")
 
@@ -35,12 +44,12 @@ const Page: NextPageWithLayout = () => {
     
 
     const tradesTableConfig = {
-        key: {title:"ID",name:"id"},
+        key: {title:"ID",name:"id",isInvisible:true},
         rest: {
-            col1: {title:"side",fieldName:"isBuyer",widget:"number"},
-            col2: {title:"price",fieldName:"price"},
-            col3: {title:"date",fieldName:"time"},
-            col4: {title:"qty",fieldName:"qty"},
+            col1: {title:"Side",fieldName:"side"},
+            col2: {title:"Price",fieldName:"price"},
+            col3: {title:"Amount",fieldName:"qty"},
+            col4: {title:"Date",fieldName:"time"},
             // col1: {title:"asd",fieldName:"status_id"},
             // col2: {title:"Unit Type",fieldName:"structure_type"},
             // col4: {title:"Manufacturer",fieldName:"manufacturer_company"},

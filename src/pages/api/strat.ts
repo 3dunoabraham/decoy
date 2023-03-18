@@ -72,7 +72,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           // if (selectError) {
           //   throw selectError
           // }
-          console.log("selectError")
+          console.log("selectError, key:",key)
           if (existingStrat) {
             const { data: updatedStrat, error: updateError } = await supabase
               .from<Strat>('strats')

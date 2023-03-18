@@ -27,11 +27,11 @@ export const getStrategyResult = (tokenConfig:any, livePrice:number) => {
     let isWith = buy > 0
     let isHalf = buy == 1
     let isfull = buy == 2
-    if (livePrice > maxMedian) {
+    if (livePrice > minMaxAvg) {
         if (isWith) return -2
     }
-    if (livePrice > minMaxAvg) {
-        if (isWith) return -1
+    if (livePrice > minMedian) {
+        if (isfull) return -1
     }
     // console.log(livePrice , minMedian)
     if (livePrice < min) {

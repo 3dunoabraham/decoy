@@ -23,10 +23,11 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { parseDecimals } from '@/components/scripts/helpers';
 import { useIsClient, useLocalStorage } from 'usehooks-ts';
+import AmountCards from '@/components/dashboard/AmountCards';
 
 const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
-    const bigmul = 100
-    const mul = 11  
+    const bigmul = 50
+    const mul = 20  
     const router = useRouter()
     const inv = useContext(InventoryContext)
     const app = useContext(AppContext)
@@ -175,74 +176,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
                         ))
                     }
                     
-                    <div className='flex-center flex-align-start flex-justify-start  gap-4'>
-                        {/* {JSON.stringify(LS_tokensArrayObj)} */}
-                        {isClient && tokens.map((aToken,index)=>{
-                            if (!JSON.parse(LS_tokensArrayObj)[aToken]) return 
-                            let aSelectedTimeframe = JSON.parse(LS_tokensArrayObj)[aToken]
-                            let aCrystal = 0
-                            // let totalValue = aSelectedTimeframe.reduce((prev, curr, i, acc)=>{
-
-                            // },0)
-                            // if (!index) return // hide  btc
-                            return (
-                                <div className='box-shadow-1  pt-2 flex-1 ord-r-8' key={index}>
-                                    <div className='flex   flex-justify-start px-6'>
-                                        <div className=' py-2 '>
-                                            <div className='ims-tx-faded py-1'>
-                                                {aToken.toUpperCase()}
-                                            </div>
-                                            {/* {!aSelectedTimeframe[2].buy && 
-                                                <div className='tx-lx  tx-bold-6'>
-                                                    -
-                                                </div>
-                                            } */}
-                                            {/* {
-                                                aSelectedTimeframe.map((aTimeframe, i) => {
-                                                    return (
-                                                        <div key={i}>
-                                                            {aSelectedTimeframe[i].buy}
-                                                        </div>
-                                                    )
-                                                })
-                                            } */}
-                                            {!aSelectedTimeframe[2].buy && !aSelectedTimeframe[3].buy && 
-                                                <div className='tx-lx  tx-bold-6'>
-                                                    -
-                                                </div>
-                                            }   
-                                            {!!aSelectedTimeframe[2].buy && !!aSelectedTimeframe[3].buy && 
-                                                <div className='tx-lx  tx-bold-6'>
-                                                    ${(aSelectedTimeframe[2].buy*mul)+(aSelectedTimeframe[3].buy*bigmul)}
-                                                </div>
-                                            }   
-                                            {!!aSelectedTimeframe[2].buy && !aSelectedTimeframe[3].buy && 
-                                                <div className='tx-lx  tx-bold-6'>
-                                                    ${aSelectedTimeframe[2].buy*mul}
-                                                </div>
-                                            }   
-                                            {!aSelectedTimeframe[2].buy && !!aSelectedTimeframe[3].buy && 
-                                                <div className='tx-lx  tx-bold-6'>
-                                                    ${aSelectedTimeframe[3].buy*bigmul}
-                                                </div>
-                                            }   
-                                            {/* <div>
-                                                {Object.keys(aSelectedTimeframe[2]).map((aProperty,index)=>{
-                                                    return (
-                                                        <div key={index}>
-                                                            {aProperty}
-                                                            {aSelectedTimeframe[2][aProperty]}
-                                                        </div>
-                                                    )
-                                                })}
-                                            </div> */}
-                                        </div>
-                                    </div>
-                                    <hr  className='mt-3' />
-                                </div>
-                            )
-                        })}
-                    </div>
+                    {isClient && <AmountCards tokens={tokens} {...{mul, bigmul}} /> }
                 </div>
             }
             

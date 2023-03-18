@@ -418,6 +418,11 @@
 .linethrough { text-decoration: line-through } .linethru { text-decoration: line-through }
 .nodeco { text-decoration: none ; } .nowrap {white-space: nowrap; }
 .ellipsis { text-overflow: ellipsis; }
+.tx-shadow-br-1 {text-shadow: 1px 1px 1px #000000;}
+.tx-shadow-br-2 {text-shadow: 2px 2px 2px #000000;}
+.tx-shadow-br-3 {text-shadow: 3px 3px 3px #000000;}
+.tx-shadow-br-4 {text-shadow: 4px 4px 4px #000000;}
+.tx-shadow-br-5 {text-shadow: 5px 5px 5px #000000;}
 
 
 

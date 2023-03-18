@@ -7,7 +7,7 @@ export default function Component({
     buy_all, buy_min, sell_min, sell_all, crystal, timeframe, uid, updateTokenOrder,
     removeToken, joinToken    
 }) {
-    console.log("tokensArrayObj", tokensArrayObj)
+    // console.log("tokensArrayObj", tokensArrayObj)
     let theTokenConfig = tokensArrayObj[aToken] ? tokensArrayObj[aToken][DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe)] : null
     return (
         <div className="      flex-col w-100 " >
@@ -74,7 +74,7 @@ export default function Component({
                                                 {aTokenCristayl.buy == 1 && <div>wait to sell</div>}
                                                 {aTokenCristayl.buy == 2 && <div className="tx-bold">wait to sell</div>}
                                                 {aTokenCristayl.buy == 1 && <div>{theTokenConfig && theTokenConfig.minMaxAvg}</div> }
-                                                {aTokenCristayl.buy == 2 && <div>{theTokenConfig && theTokenConfig.minMaxAvg} or {theTokenConfig.maxMedian}</div> }
+                                                {aTokenCristayl.buy == 2 && <div className="flex gap-1"><div className="tx-white">{theTokenConfig && theTokenConfig.minMedian}</div> or {theTokenConfig.minMaxAvg}</div> }
                                             </div>
                                         </>}
                                         {aTokenCristayl.buy > 0 &&
