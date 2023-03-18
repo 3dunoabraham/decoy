@@ -8,7 +8,7 @@ export const DownloadButton = ({ data, filename }) => {
     const url = URL.createObjectURL(blob)
     const link = document.createElement('a')
     link.href = url
-    link.download = `${filename}.json`
+    link.download = `${filename}_${Date.now()}.json`
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
