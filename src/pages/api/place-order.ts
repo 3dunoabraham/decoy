@@ -58,6 +58,7 @@ function makeLimitOrder({ side, symbol, quantity, price, recvWindow = 5000, time
   });
 
   req.on('error', (err) => {
+    console.log("error place order",err)
     callback(err);
   });
 

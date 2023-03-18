@@ -8,6 +8,9 @@ import { useIsClient } from "usehooks-ts"
 import AmountCards from "@/components/dashboard/AmountCards"
 import { GetServerSideProps } from "next"
 import { getEdgeConfig } from "@/scripts/helpers/fetchHelper"
+import { useQueryPlus } from "@/scripts/helpers/useHooksHelper"
+import { parseDecimals } from "@/components/scripts/helpers"
+import { parseDateTimeString } from "@/scripts/helpers/type/dateHelper"
 
 export default function Page({tokens}) {
     const isClient = useIsClient()
@@ -16,6 +19,8 @@ export default function Page({tokens}) {
     let zzz = useMemo(() => {
         return !(router.query && router.query.token && router.query.timeframe)
     }, [router.query])
+
+    
     
     if (zzz) return
     return (

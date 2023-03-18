@@ -11,10 +11,40 @@ import { Strat } from "@/src/pages/api/strat";
 import { LimitOrderParams, parseQuantity } from "@/components/scripts/utils";
 import { fetchJsonArray, fetchMultipleJsonArray, getComputedLevels, getStrategyResult, parseDecimals, parseUTCDateString, timeDifference, _parseDecimals } from "@/components/scripts/helpers";
 import { DownloadButton } from "./DownloadButton";
+import ToolButtons from "./ToolButtons";
+import { useQueryPlus } from "@/scripts/helpers/useHooksHelper";
 
 
 export function ChartDashboard({query}) {
     /********** CREATE **********/
+
+    
+    const [q__asd, asd] = useQueryPlus({ queryKey: ['asdasd'], 
+        queryFn: async () =>{
+            // const theList = await fetchJsonArray(API_UNITS, "Units")
+            // inv.s__asd(theList)
+
+            const theListRes = await fetch(`/api/account-balance`)
+            let theList = await theListRes.json()
+            console.log("thelist", theList)
+            // theList = theList.map((anItem, index) => {
+            //     return {...anItem,...{
+            //         side: anItem.isBuyer ? "Buy" : "Sell",
+            //         price: parseDecimals(anItem.price),
+            //         qty: "$"+parseDecimals(parseFloat(anItem.price)*parseFloat(anItem.qty)),
+            //         time: parseDateTimeString(new Date(anItem.time/1)),
+            //     }}
+            // }).reverse()
+
+            // const theList = await fetchJsonArray(API_UNITS, "Units")
+
+            return theList
+        }
+    },[])
+
+    
+
+    
     const [timeframe,s__timeframe] = useState<any>(query.timeframe)
     const [counter, s__counter] = useState(0);
     const [loadings, s__loadings] = useState('all');
@@ -252,69 +282,41 @@ export function ChartDashboard({query}) {
     }
     
     
-    const buy_min = (_token, ) => {
-        let theCurrentTokenConfig = tokensArrayObj[_token][DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe)]
-        let theLivePrice = _parseDecimals(queryUSDT.data[DEFAULT_TOKENS_ARRAY.indexOf(_token)].price)*1.01
-        let tokenAmount = dollarAmount/theLivePrice
-        const orderParams = {
-            symbol: _token.toUpperCase()+'USDT',
-            side: 'BUY',
-            type: 'LIMIT',
-            quantity: parseQuantity(_token.toUpperCase(),tokenAmount),
-            price: theLivePrice,
+    const computeOrderParams = (_token, operation, priceAdjustmentFactor) => {
+        const theLivePrice = _parseDecimals(queryUSDT.data[DEFAULT_TOKENS_ARRAY.indexOf(_token)].price) * priceAdjustmentFactor;
+        const tokenAmount = (dollarAmount * (operation === 'buy' ? 1 : 2)) / theLivePrice;
+        return {
+          symbol: _token.toUpperCase() + 'USDT',
+          side: operation.toUpperCase(),
+          type: 'LIMIT',
+          quantity: parseQuantity(_token.toUpperCase(), tokenAmount),
+          price: theLivePrice,
         };
-        
-        placeOrder(orderParams)
-        
-        updateTokenState(_token, DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe), "buy", 1)
-    }
-    const sell_all = (_token) => {
-        let thePair = _token.toUpperCase()+'USDT'
-        let theLivePrice = _parseDecimals(queryUSDT.data[DEFAULT_TOKENS_ARRAY.indexOf(_token)].price)*0.99
-        let tokenAmount = (dollarAmount*2)/theLivePrice
-        const orderParams = {
-            symbol: thePair,
-            side: 'SELL',
-            type: 'LIMIT',
-            quantity: parseQuantity(_token.toUpperCase(),tokenAmount),
-            price: theLivePrice,
-        };
-        placeOrder(orderParams)
-        
-        updateTokenState(_token, DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe), "buy", 0)
-    }
-    
-    const buy_all = (_token) => {
-        let thePair = _token.toUpperCase()+'USDT'
-        let theLivePrice = _parseDecimals(queryUSDT.data[DEFAULT_TOKENS_ARRAY.indexOf(_token)].price)*1.01
-        let tokenAmount = (dollarAmount*2)/theLivePrice
-        const orderParams = {
-            symbol: thePair,
-            side: 'BUY',
-            type: 'LIMIT',
-            quantity: parseQuantity(_token.toUpperCase(),tokenAmount),
-            price: theLivePrice,
-        };
-        placeOrder(orderParams)
-        
-        updateTokenState(_token, DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe), "buy", 2)
-    }
-    
-    const sell_min = (_token, ) => {
-        let theLivePrice = _parseDecimals(queryUSDT.data[DEFAULT_TOKENS_ARRAY.indexOf(_token)].price)*0.99
-        let tokenAmount = dollarAmount/theLivePrice
-        const orderParams = {
-            symbol: _token.toUpperCase()+'USDT',
-            side: 'SELL',
-            type: 'LIMIT',
-            quantity: parseQuantity(_token.toUpperCase(),tokenAmount),
-            price: theLivePrice,
-        };
-        
-        placeOrder(orderParams)
-        console.log(_token, DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe), "buy", 1)
-        updateTokenState(_token, DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe), "buy", 1)
-    }
+      };
+      
+      const buy_min = (_token) => {
+        const orderParams = computeOrderParams(_token, 'buy', 1.01);
+        placeOrder(orderParams);
+        updateTokenState(_token, DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe), 'buy', 1);
+      };
+      
+      const sell_all = (_token) => {
+        const orderParams = computeOrderParams(_token, 'sell', 0.99);
+        placeOrder(orderParams);
+        updateTokenState(_token, DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe), 'buy', 0);
+      };
+      
+      const buy_all = (_token) => {
+        const orderParams = computeOrderParams(_token, 'buy', 1.01);
+        placeOrder(orderParams);
+        updateTokenState(_token, DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe), 'buy', 2);
+      };
+      
+      const sell_min = (_token) => {
+        const orderParams = computeOrderParams(_token, 'sell', 0.99);
+        placeOrder(orderParams);
+        updateTokenState(_token, DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe), 'buy', 1);
+      };
 
     /********** HTML **********/
     if (!uid) {
@@ -329,6 +331,23 @@ export function ChartDashboard({query}) {
     // console.log("DEFAULT_TOKENS_ARRAY", DEFAULT_TOKENS_ARRAY, tokensArrayObj)
     return (
     <div className="body h-min-100  pos-rel flex-col flex-justify-start noverflow">
+        
+        {/* {JSON.stringify(asd.balances)} */}
+        <div className="flex-wrap gap-2">
+            {asd.balances && asd.balances.map((anAsset, i)=>{
+                return (
+                    <div key={i} className="tx-white pa-1 flex-col">
+                        <div className="opaci-50">{asd.balances[i].asset}:</div>
+                        <div>{parseDecimals(asd.balances[i].free)}</div>
+                        <div>{parseDecimals(queryUSDT.data[i].price)}</div>
+                        <div>{parseDecimals(parseFloat(asd.balances[i].free)*parseFloat(queryUSDT.data[i].price))}</div>
+                    </div>
+                )
+            })
+            }
+        </div>
+        {/* <div className="tx-white">BTC: {parseDecimals(asd.balances[3].free)}</div> */}
+
         <div className={"bg-glass-6   bord-r-10 tx-gray mt-4 py-2 z-999 fade-in w-95 noverflow flex flex-between"}
             style={{border:"1px solid #777",boxShadow:"0 10px 50px -20px #00000077"}}
         >
@@ -408,31 +427,7 @@ export function ChartDashboard({query}) {
                                 })}
                             </div>
                         </div>
-                        <div className="flex-center ma- flex-center ">
-                            <a  className="px-2 tx-sm py-1 bg-w-50 ma-1  opaci-chov--50 bord-r-8 tx-gray" target={"_blank"}
-                                href={`https://www.tradingview.com/chart/?symbol=BINANCE%3A
-                                    ${cryptoToken.toUpperCase()}${baseToken.toUpperCase()}
-                                `}
-                            >
-                                <div className="nowrap">Tradigview</div>
-                                <div className="nowrap">{cryptoToken.toUpperCase()}{baseToken.toUpperCase()} @{timeframe}</div>
-                            </a>
-                            <div onClick={()=>{getKlineArray(timeframe,cryptoToken)}}
-                                className="px-2 py-1 bg-b-20 ma-1 opaci-50 opaci-chov-50 bord-r-8 "
-                            >
-                                Refresh
-                            </div>
-                            <div onClick={()=>{exportConfig()}}
-                                className="px-2 py-1 bg-b-20 ma-1 opaci-50 opaci-chov-50 bord-r-8 "
-                            >
-                                export
-                            </div>
-                            <div onClick={()=>{clickImportConfig()}}
-                                className="px-2 py-1 bg-b-20 ma-1 opaci-50 opaci-chov-50 bord-r-8 "
-                            >
-                                import
-                            </div>
-                        </div>
+                        <ToolButtons {...{cryptoToken, baseToken, timeframe, exportConfig, clickImportConfig}} />
                         {klinesArray.length > 0  && <div className="flex-1 w-100 flex-col mt-4 ">
                             <div className=" flex  flex-justify-between w-90">
                                 <div className="flex-1 px-2 opaci-10"><hr/></div>
@@ -442,12 +437,14 @@ export function ChartDashboard({query}) {
                             </div>
                         
                             {loadings == "" &&  tokensArrayObj[cryptoToken] && queryUSDT.data && 
-                                <Chart
-                                    {...{
-                                        klinesStats, klinesArray, p__klinesArray, tokensArrayObj, cryptoToken,
-                                        timeframe, queryUSDT
-                                    }}
-                                />
+                                <div className=" w-100 h-100">
+                                    <Chart
+                                        {...{
+                                            klinesStats, klinesArray, p__klinesArray, tokensArrayObj, cryptoToken,
+                                            timeframe, queryUSDT
+                                        }}
+                                    />
+                                </div>
                             }
                             <div className=" flex  flex-justify-between w-90">
                                 <div className="">{klinesStats.startDate}</div>

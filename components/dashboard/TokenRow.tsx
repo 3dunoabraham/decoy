@@ -75,6 +75,7 @@ export default function Component({
                                                 {aTokenCristayl.buy == 2 && <div className="tx-bold">wait to sell</div>}
                                                 {aTokenCristayl.buy == 1 && <div>{theTokenConfig && theTokenConfig.minMaxAvg}</div> }
                                                 {aTokenCristayl.buy == 2 && <div className="flex gap-1"><div className="tx-white">{theTokenConfig && theTokenConfig.minMedian}</div> or {theTokenConfig.minMaxAvg}</div> }
+                                                {aTokenCristayl.buy == 0 && <div className="flex gap-1"><div className="tx-white">{theTokenConfig && theTokenConfig.minMedian}</div> or {theTokenConfig.min}</div> }
                                             </div>
                                         </>}
                                         {aTokenCristayl.buy > 0 &&
@@ -146,7 +147,7 @@ export default function Component({
                         onClick={()=>{!!uid && joinToken(aToken)}} 
                         // style={{boxShadow:"0px 0px 25px #CF589433"}}
                     >
-                        JOIN
+                        Add {aToken.toUpperCase()}
                     </button>
                 </div>
             }
