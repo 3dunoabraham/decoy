@@ -54,7 +54,11 @@ export default function Component ({ tokens, mul, bigmul, prices= null }) {
                                                             className='opaci-chov--50'
                                                             /* className="px-6 opaci-chov--50 block flex-center gap-1" */
                                                         >
-                                                            <div className='tx-lg'>(4h)</div>
+                                                            <div
+                                                                className={`tx-lg ${aCrystal0 > 0 ? "tx-green" : "tx-red"}`}
+                                                            >
+                                                                (4h)
+                                                            </div>
                                                         </Link>
                                                     }
                                                     {!!aCrystal1 &&
@@ -63,7 +67,11 @@ export default function Component ({ tokens, mul, bigmul, prices= null }) {
                                                             className='opaci-chov--50'
                                                             /* className="px-6 opaci-chov--50 block flex-center gap-1" */
                                                         >
-                                                            <div className='tx-lg'>(1d)</div>
+                                                            <div
+                                                                className={`tx-lg ${aCrystal1 > 0 ? "tx-green" : "tx-red"}`}
+                                                            >
+                                                                (1d)
+                                                            </div>
                                                         </Link>
                                                     }
                                                     {/* {aCrystal0}-{aCrystal1} */}
