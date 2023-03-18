@@ -12,16 +12,18 @@ export default function Component ({ tokens, mul, bigmul }) {
                             if (!JSON.parse(LS_tokensArrayObj)[aToken]) return 
                             let aSelectedTimeframe = JSON.parse(LS_tokensArrayObj)[aToken]
                             let aCrystal = 0
+                            let localMul = index == 0 ? mul*2 : mul
+                            let localBigMul = index == 0 ? bigmul*2 : bigmul
                             // let totalValue = aSelectedTimeframe.reduce((prev, curr, i, acc)=>{
 
                             // },0)
                             // if (!index) return // hide  btc
                             return (
-                                <div className='box-shadow-1  pt-2 flex-1 ord-r-8' key={index}>
-                                    <div className='flex   flex-justify-start px-6'>
+                                <div className='box-shadow-1   flex-1 ord-r-8' key={index}>
+                                    <div className='flex   flex-justify-start px-6' style={index==0?{boxShadow:"0 0 1px green"}:{}}>
                                         <div className=' py-2 '>
-                                            <div className='ims-tx-faded py-1'>
-                                                {aToken.toUpperCase()}
+                                            <div className='ims-tx-faded py-1 flex gap-1'>
+                                                {aToken.toUpperCase()} {index==0 && <div>(X*2)</div>}
                                             </div>
                                             {/* {!aSelectedTimeframe[2].buy && 
                                                 <div className='tx-lx  tx-bold-6'>
@@ -44,19 +46,19 @@ export default function Component ({ tokens, mul, bigmul }) {
                                             </>}   
                                             {!!aSelectedTimeframe[2].buy && !!aSelectedTimeframe[3].buy && <>
                                                 <div className='tx-lx  tx-bold-6'>
-                                                    ${(aSelectedTimeframe[2].buy*mul)+(aSelectedTimeframe[3].buy*bigmul)}
+                                                    ${(aSelectedTimeframe[2].buy*localMul)+(aSelectedTimeframe[3].buy*localBigMul)}
                                                 </div>
                                                 <div className='nowrap'>TF: 4h + 1d</div>
                                             </>}   
                                             {!!aSelectedTimeframe[2].buy && !aSelectedTimeframe[3].buy && <>
                                                 <div className='tx-lx  tx-bold-6'>
-                                                    ${aSelectedTimeframe[2].buy*mul}
+                                                    ${aSelectedTimeframe[2].buy*localMul}
                                                 </div>
                                                 TF: 4h
                                             </>}   
                                             {!aSelectedTimeframe[2].buy && !!aSelectedTimeframe[3].buy && <>
                                                 <div className='tx-lx  tx-bold-6'>
-                                                    ${aSelectedTimeframe[3].buy*bigmul}
+                                                    ${aSelectedTimeframe[3].buy*localBigMul}
                                                 </div>
                                                 TF: 1d
                                             </>}   
@@ -72,7 +74,7 @@ export default function Component ({ tokens, mul, bigmul }) {
                                             </div> */}
                                         </div>
                                     </div>
-                                    <hr  className='mt-3' />
+                                    {/* <hr  className='mt-3' /> */}
                                 </div>
                             )
                         })}

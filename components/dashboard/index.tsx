@@ -298,24 +298,28 @@ export function ChartDashboard({query}) {
         const orderParams = computeOrderParams(_token, 'buy', 1.01);
         placeOrder(orderParams);
         updateTokenState(_token, DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe), 'buy', 1);
+        q__asd.refetch()
       };
       
       const sell_all = (_token) => {
         const orderParams = computeOrderParams(_token, 'sell', 0.99);
         placeOrder(orderParams);
         updateTokenState(_token, DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe), 'buy', 0);
+        q__asd.refetch()
       };
       
       const buy_all = (_token) => {
         const orderParams = computeOrderParams(_token, 'buy', 1.01);
         placeOrder(orderParams);
         updateTokenState(_token, DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe), 'buy', 2);
+        q__asd.refetch()
       };
       
       const sell_min = (_token) => {
         const orderParams = computeOrderParams(_token, 'sell', 0.99);
         placeOrder(orderParams);
         updateTokenState(_token, DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe), 'buy', 1);
+        q__asd.refetch()
       };
 
     /********** HTML **********/
@@ -333,14 +337,17 @@ export function ChartDashboard({query}) {
     <div className="body h-min-100  pos-rel flex-col flex-justify-start noverflow">
         
         {/* {JSON.stringify(asd.balances)} */}
+        <div className="opaci-50 tx-ls-3 tx-lg my-2 tx-white">Current Balance</div>
         <div className="flex-wrap gap-2">
-            {asd.balances && asd.balances.map((anAsset, i)=>{
+
+            {queryUSDT.data && asd.balances && asd.balances.map((anAsset, i)=>{
+                if (!queryUSDT.data[i]) return
                 return (
                     <div key={i} className="tx-white pa-1 flex-col">
                         <div className="opaci-50">{asd.balances[i].asset}:</div>
                         <div>{parseDecimals(asd.balances[i].free)}</div>
-                        <div>{parseDecimals(queryUSDT.data[i].price)}</div>
-                        <div>{parseDecimals(parseFloat(asd.balances[i].free)*parseFloat(queryUSDT.data[i].price))}</div>
+                        {/* <div>{parseDecimals(queryUSDT.data[i].price)}</div> */}
+                        <div>${parseDecimals(parseFloat(asd.balances[i].free)*parseFloat(queryUSDT.data[i].price))}</div>
                     </div>
                 )
             })
@@ -348,6 +355,7 @@ export function ChartDashboard({query}) {
         </div>
         {/* <div className="tx-white">BTC: {parseDecimals(asd.balances[3].free)}</div> */}
 
+            <div className="opaci-50 tx-ls-3 tx-lg mt-100 tx-white">Strategy</div>
         <div className={"bg-glass-6   bord-r-10 tx-gray mt-4 py-2 z-999 fade-in w-95 noverflow flex flex-between"}
             style={{border:"1px solid #777",boxShadow:"0 10px 50px -20px #00000077"}}
         >
