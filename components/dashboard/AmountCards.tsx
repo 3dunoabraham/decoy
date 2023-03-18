@@ -23,7 +23,7 @@ export default function Component ({ tokens, mul, bigmul }) {
                                     <div className='flex   flex-justify-start px-6' style={index<2?{boxShadow:"0 0 1px green"}:{}}>
                                         <div className=' py-2 '>
                                             <div className='ims-tx-faded py-1 flex gap-1'>
-                                                {aToken.toUpperCase()} {index==0 && <div>(X*2)</div>}
+                                                {aToken.toUpperCase()} {index<2 && <div>(X*2)</div>}
                                             </div>
                                             {/* {!aSelectedTimeframe[2].buy && 
                                                 <div className='tx-lx  tx-bold-6'>
