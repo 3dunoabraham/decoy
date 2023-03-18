@@ -26,7 +26,7 @@ import { useIsClient, useLocalStorage } from 'usehooks-ts';
 import AmountCards from '@/components/dashboard/AmountCards';
 
 const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
-    const bigmul = 50
+    const bigmul = 30
     const mul = 20  
     const router = useRouter()
     const inv = useContext(InventoryContext)
