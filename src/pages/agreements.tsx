@@ -19,14 +19,34 @@ const Page: NextPageWithLayout = () => {
     const inv = useContext(InventoryContext)
     const [q__unitsArray, unitsArray] = useQueryPlus({ queryKey: ['unitData'], 
         queryFn: async () =>{
-            const theList = await fetchJsonArray(API_UNITS, "Units")
-            inv.s__unitsArray(theList)
+            // const theList = await fetchJsonArray(API_UNITS, "Units")
+            // inv.s__unitsArray(theList)
+
+            const theListRes = await fetch("/api/trade-history/?symbol=BTCUSDT&limit=10")
+            const theList = await theListRes.json()
+            console.log("thelist", theList)
+
+            // const theList = await fetchJsonArray(API_UNITS, "Units")
+
             return theList
         }
     },[])
 
     
 
+    const tradesTableConfig = {
+        key: {title:"ID",name:"id"},
+        rest: {
+            col1: {title:"side",fieldName:"isBuyer",widget:"number"},
+            col2: {title:"price",fieldName:"price"},
+            col3: {title:"date",fieldName:"time"},
+            col4: {title:"qty",fieldName:"qty"},
+            // col1: {title:"asd",fieldName:"status_id"},
+            // col2: {title:"Unit Type",fieldName:"structure_type"},
+            // col4: {title:"Manufacturer",fieldName:"manufacturer_company"},
+            // col5: {title:"Last Update",fieldName:"updated_at"},
+        }
+    }
     const agreementsTableConfig = {
         key: {title:"RPA ID",name:"rpa_code"},
         rest: {
@@ -40,20 +60,25 @@ const Page: NextPageWithLayout = () => {
         <div className='flex-center w-100 h-min-100vh'>
             <div className="h-min-100vh w-100  flex-col flex-justify-start flex-align-stretch gap-4">
                 <div className="px-8  mb-">
-                    <BreadCrumbs pages={[["/","DCOY"]]} current="Agreements" />
+                    <BreadCrumbs pages={[["/","Trades"]]} current="History" />
                     
                     <div className="flex-center mb-">
-                        <h1 className="pt-4 tx-bold-5 flex-1 "> Agreements</h1>
+                        <h1 className="pt-4 tx-bold-5 flex-1 "> Trade History</h1>
                         {/* <Link  href="/unit/add" className="ims-button-primary clickble">+ New Unit</Link> */}
                     </div>
                     <hr className="my-2 "/>
                 </div>
-
                 <div className='px-8 Q_xs_sm_px-2 w-100'>
-                    <ItemsTable displayConfigObj={agreementsTableConfig} theArray={LOCAL_AGREEMENTS.data.list}
+                    <ItemsTable displayConfigObj={tradesTableConfig} theArray={unitsArray}
                         boolConfig={["isSelectable"]}
                     />
                 </div>
+
+                {/* <div className='px-8 Q_xs_sm_px-2 w-100'>
+                    <ItemsTable displayConfigObj={agreementsTableConfig} theArray={LOCAL_AGREEMENTS.data.list}
+                        boolConfig={["isSelectable"]}
+                    />
+                </div> */}
                 {/* {JSON.stringify(LOCAL_AGREEMENTS.data.list)} */}
                 
                 {/* <div className='flex-center  flex-justify-start px-8 Q_xs_sm_px-2 gap-4'>

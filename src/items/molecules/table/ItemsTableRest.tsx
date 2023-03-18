@@ -21,6 +21,9 @@ export default function Component ({
                     {(theWidget) == "label" &&
                         item[displayConfigObj.rest[aKey].fieldName]
                     }
+                    {(theWidget) == "number" &&
+                        Number(item[displayConfigObj.rest[aKey].fieldName])
+                    }
                     {(theWidget) == "badge" && displayConfigObj.rest[aKey].fieldName && 
                         <SalesStatusBadgePlus
                             value={item[displayConfigObj.rest[aKey].fieldName]}
