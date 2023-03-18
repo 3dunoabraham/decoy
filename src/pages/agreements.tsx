@@ -14,16 +14,20 @@ import { API_UNITS } from '@/scripts/constants/api'
 import { useQueryPlus } from '@/scripts/helpers/useHooksHelper'
 import LOCAL_AGREEMENTS from '@/localAgreements.json'
 import ItemsTable from '@/src/items/molecules/table/ItemsTable'
-import { parseDecimals, parseUTCDateString } from '@/components/scripts/helpers'
+import { parseDecimals, parseUTCDateString, parseUTCString } from '@/components/scripts/helpers'
+import { parseDateTimeString } from '@/scripts/helpers/type/dateHelper'
+import { useRouter } from 'next/router'
 
-const Page: NextPageWithLayout = () => {
+const Page: NextPageWithLayout = ({}) => {
+    const router = useRouter()
+    const pair = router.query.pair || "BTCUSDT"
     const inv = useContext(InventoryContext)
     const [q__unitsArray, unitsArray] = useQueryPlus({ queryKey: ['unitData'], 
         queryFn: async () =>{
             // const theList = await fetchJsonArray(API_UNITS, "Units")
             // inv.s__unitsArray(theList)
 
-            const theListRes = await fetch("/api/trade-history/?symbol=BTCUSDT&limit=10")
+            const theListRes = await fetch(`/api/trade-history/?symbol=${pair}&limit=99`)
             let theList = await theListRes.json()
             console.log("thelist", theList)
             theList = theList.map((anItem, index) => {
@@ -31,9 +35,9 @@ const Page: NextPageWithLayout = () => {
                     side: anItem.isBuyer ? "Buy" : "Sell",
                     price: parseDecimals(anItem.price),
                     qty: "$"+parseDecimals(parseFloat(anItem.price)*parseFloat(anItem.qty)),
-                    time: parseUTCDateString(new Date(anItem.time/1000)),
+                    time: parseDateTimeString(new Date(anItem.time/1)),
                 }}
-            })
+            }).reverse()
 
             // const theList = await fetchJsonArray(API_UNITS, "Units")
 
@@ -72,7 +76,7 @@ const Page: NextPageWithLayout = () => {
                     <BreadCrumbs pages={[["/","Trades"]]} current="History" />
                     
                     <div className="flex-center mb-">
-                        <h1 className="pt-4 tx-bold-5 flex-1 "> Trade History</h1>
+                        <h1 className="pt-4 tx-bold-5 flex-1 "> Trade History ({pair})</h1>
                         {/* <Link  href="/unit/add" className="ims-button-primary clickble">+ New Unit</Link> */}
                     </div>
                     <hr className="my-2 "/>
@@ -199,3 +203,4 @@ Page.getLayout = function getLayout(page: ReactElement) {
 }
 
 export default Page
+

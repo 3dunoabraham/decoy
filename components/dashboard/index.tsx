@@ -254,7 +254,7 @@ export function ChartDashboard({query}) {
     
     const buy_min = (_token, ) => {
         let theCurrentTokenConfig = tokensArrayObj[_token][DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe)]
-        let theLivePrice = _parseDecimals(queryUSDT.data[DEFAULT_TOKENS_ARRAY.indexOf(_token)].price)
+        let theLivePrice = _parseDecimals(queryUSDT.data[DEFAULT_TOKENS_ARRAY.indexOf(_token)].price)*1.01
         let tokenAmount = dollarAmount/theLivePrice
         const orderParams = {
             symbol: _token.toUpperCase()+'USDT',
@@ -270,7 +270,7 @@ export function ChartDashboard({query}) {
     }
     const sell_all = (_token) => {
         let thePair = _token.toUpperCase()+'USDT'
-        let theLivePrice = _parseDecimals(queryUSDT.data[DEFAULT_TOKENS_ARRAY.indexOf(_token)].price)*1.02
+        let theLivePrice = _parseDecimals(queryUSDT.data[DEFAULT_TOKENS_ARRAY.indexOf(_token)].price)*0.99
         let tokenAmount = (dollarAmount*2)/theLivePrice
         const orderParams = {
             symbol: thePair,
@@ -286,7 +286,7 @@ export function ChartDashboard({query}) {
     
     const buy_all = (_token) => {
         let thePair = _token.toUpperCase()+'USDT'
-        let theLivePrice = _parseDecimals(queryUSDT.data[DEFAULT_TOKENS_ARRAY.indexOf(_token)].price)*0.98
+        let theLivePrice = _parseDecimals(queryUSDT.data[DEFAULT_TOKENS_ARRAY.indexOf(_token)].price)*1.01
         let tokenAmount = (dollarAmount*2)/theLivePrice
         const orderParams = {
             symbol: thePair,
@@ -301,7 +301,7 @@ export function ChartDashboard({query}) {
     }
     
     const sell_min = (_token, ) => {
-        let theLivePrice = _parseDecimals(queryUSDT.data[DEFAULT_TOKENS_ARRAY.indexOf(_token)].price)
+        let theLivePrice = _parseDecimals(queryUSDT.data[DEFAULT_TOKENS_ARRAY.indexOf(_token)].price)*0.99
         let tokenAmount = dollarAmount/theLivePrice
         const orderParams = {
             symbol: _token.toUpperCase()+'USDT',

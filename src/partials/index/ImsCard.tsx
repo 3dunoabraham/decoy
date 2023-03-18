@@ -38,7 +38,7 @@ export default function Component({ companyName, unitsArray, totalValue }) {
 
         <hr className="mt-3" />
         <div className='flex'>
-          <Link href="/chart/4h?token=btc" className="px-6 opaci-chov--50 block flex-center gap-1">
+          <Link href="/inventory" className="px-6 opaci-chov--50 block flex-center gap-1">
             <GrConfigure />
             <div className="ims-tx-primary tx-bold-5 py-4 tx-end">Token Settings</div>
           </Link>

@@ -6,15 +6,16 @@ import { get } from '@vercel/edge-config';
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(req: NextRequest) {
+    const { pathname, origin } = req.nextUrl
     const path = req.nextUrl.pathname;
     const session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
     const greeting = await get('greeting');
+    console.log("SESSIONNNNN", session, origin)
     if (!session) {
-        const url = req.nextUrl.clone()
-        url.pathname = "/"
-        url.search = ""
-        return NextResponse.redirect(url)
+          return NextResponse.redirect(`${origin}`)
     }
+
+
 
     // if(path == "/"){
     //     //check if user is admin
@@ -24,6 +25,6 @@ export async function middleware(req: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-    matcher: [],
-    // matcher: ['/settings'],
+    // matcher: [],
+    matcher: ['/inventory','/chart'],
 }

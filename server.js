@@ -2,9 +2,9 @@ const { createServer } = require("https");
 const { parse } = require("url");
 const next = require("next");
 const fs = require("fs");
-const port = 3000;
+const port = process.env.NODE_ENV === "production" ? 8080 : 3000;
 const dev = process.env.NODE_ENV !== "production";
-const app = next({ dev });
+const app = next({ dev, hostname:"localhost", port  });
 const handle = app.getRequestHandler();
 
 const httpsOptions = {

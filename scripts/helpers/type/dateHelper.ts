@@ -11,6 +11,15 @@ export const tenYearsFutureDateString = (
     `-${zeroPad(THE_DATE_NOW.getUTCMonth()+1,2)}-${zeroPad(THE_DATE_NOW.getUTCDate(),2)}`
 )
 
+export const parseDateTimeString = (_theDate)=>{
+    let theDate = new Date(_theDate.toUTCString())
+    return (
+        `${theDate.getFullYear()}-${zeroPad(theDate.getMonth()+1,2)}-`+
+        `${zeroPad(theDate.getDate(),2)}`+
+        `T`+
+        `${zeroPad(theDate.getHours(),2)}:${zeroPad(theDate.getMinutes(),2)}`
+    )
+}
 export const parseUTCString = (_theDate)=>{
     let theDate = new Date(_theDate.toUTCString())
     return (
