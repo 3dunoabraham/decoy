@@ -361,25 +361,9 @@ export function ChartDashboard({query}) {
     <div className="body h-min-100  pos-rel flex-col flex-justify-start noverflow">
         
         {/* {JSON.stringify(asd.balances)} */}
-        <div className="opaci-50 tx-ls-3 tx-lg mb-2 tx-white">Current Balance</div>
-        <div className="flex-wrap gap-2">
-
-            {queryUSDT.data && asd.balances && asd.balances.map((anAsset, i)=>{
-                if (!queryUSDT.data[i]) return
-                return (
-                    <div key={i} className="tx-white pa-1 flex-col">
-                        <div className="opaci-50">{asd.balances[i].asset}:</div>
-                        <div>{parseDecimals(asd.balances[i].free)}</div>
-                        {/* <div>{parseDecimals(queryUSDT.data[i].price)}</div> */}
-                        <div>${parseDecimals(parseFloat(asd.balances[i].free)*parseFloat(queryUSDT.data[i].price))}</div>
-                    </div>
-                )
-            })
-            }
-        </div>
         {/* <div className="tx-white">BTC: {parseDecimals(asd.balances[3].free)}</div> */}
 
-            <div className="opaci-50 tx-ls-3 tx-lg mt-100 tx-white">Strategy</div>
+            <div className="opaci-50 tx-ls-3 tx-lg  tx-white">Strategy</div>
         <div className={"bg-glass-6   bord-r-10 tx-gray mt-4 py-2 z-999 fade-in w-95 noverflow flex flex-between"}
             style={{border:"1px solid #777",boxShadow:"0 10px 50px -20px #00000077"}}
         >
@@ -503,9 +487,26 @@ export function ChartDashboard({query}) {
                                 </div>
                             </summary>
                                 
-                            <div className="  flex flex-justify-end ma-2">
-                                <div className="bg-w-50  bord-r-50 px-2 py-1 tx-sm ">
+                            <div className="  flex-col flex-justify-end ma-2">
+                                <div className="underline  bord-r-50 px-2 py-1 tx-sm mb-8 ">
                                     {uid}
+                                </div>
+                                
+                                <div className="opaci-50 tx-ls- tx-l mb-2 tx-white">Hot Wallet</div>
+                                <div className="flex-col gap-2">
+
+                                    {queryUSDT.data && asd.balances && asd.balances.map((anAsset, i)=>{
+                                        if (!queryUSDT.data[i]) return
+                                        return (
+                                            <div key={i} className="tx-white pa-1 flex-col">
+                                                <div className="opaci-50">{asd.balances[i].asset}:</div>
+                                                <div>{parseDecimals(asd.balances[i].free)}</div>
+                                                {/* <div>{parseDecimals(queryUSDT.data[i].price)}</div> */}
+                                                <div>${parseDecimals(parseFloat(asd.balances[i].free)*parseFloat(queryUSDT.data[i].price))}</div>
+                                            </div>
+                                        )
+                                    })
+                                    }
                                 </div>
                             </div>
                         </details>
