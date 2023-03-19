@@ -1,7 +1,7 @@
 import { fetchMultipleJsonArray } from '@/scripts/helpers/fetchHelper'
 import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { BsBarChart } from 'react-icons/bs'
 import { useLocalStorage } from 'usehooks-ts'
 import { DEFAULT_TOKENS_ARRAY } from '../scripts/constants'
@@ -17,12 +17,38 @@ export default function Component ({ tokens, mul, bigmul, prices= null }) {
     const queryUSDT:any = useQuery({ queryKey: ['usdt'], refetchInterval: 3000,
         queryFn: async () => (await fetchMultipleJsonArray(tokensReqObj))
     })
+    const totals = useMemo(()=>{
+        let total = {
+            2: 0,
+            3: 0,
+            total: 0
+        }
+        tokens.map((aToken,index)=>{
+            let localMul = index < 2 ? mul*2 : mul
+            let localBigMul = index < 2 ? bigmul*2 : bigmul
+
+            let aSelectedTimeframe = JSON.parse(LS_tokensArrayObj)[aToken]
+            total[2] += aSelectedTimeframe[2].buy*localMul
+            total[3] += aSelectedTimeframe[3].buy*localBigMul
+            return 0
+        })
+        total.total = total[2]+total[3]
+        return total
+    },[queryUSDT.data])
 
     if (!queryUSDT.data) return 
     return (
     <div className='flex-center flex-align-start flex-justify-start  gap-4'>
                         {/* {JSON.stringify(Object.keys(queryUSDT.data[0]))} */}
                         {/* {JSON.stringify(LS_tokensArrayObj)} */}
+                        <div className='pos-abs top-0 right-0 flex-col flex-justify-end flex-align-end'>
+                            <div className='px-1 pt-1 opaci-25 tx-ls-3 tx-bold-6'>Hot + Cold = Wallet</div>
+                            <div className='px-1 flex-center gap-1'>
+                                <div className='opaci-50'>Total Balance:</div>
+                                {totals[2]}+{totals[3]} =
+                                <div className='tx-lgx'>{totals["total"]}</div>
+                            </div>
+                        </div>
                         {tokens.map((aToken,index)=>{
                             if (!JSON.parse(LS_tokensArrayObj)[aToken]) return 
                             let aSelectedTimeframe = JSON.parse(LS_tokensArrayObj)[aToken]
@@ -107,10 +133,16 @@ export default function Component ({ tokens, mul, bigmul, prices= null }) {
                                                 </div>
                                             </>}   
                                             {!!aSelectedTimeframe[2].buy && !!aSelectedTimeframe[3].buy && <>
-                                                <div className='tx-lx  tx-bold-6'>
+                                                <div className='tx-lx  tx-bold-6'
+                                                    title={`${(aSelectedTimeframe[2].buy*localMul)}-${(aSelectedTimeframe[3].buy*localBigMul)}`}
+                                                >
                                                     ${(aSelectedTimeframe[2].buy*localMul)+(aSelectedTimeframe[3].buy*localBigMul)}
                                                 </div>
-                                                <div className='nowrap'>TF: 4h + 1d</div>
+                                                <div className='nowrap'>
+                                                    <span>TF: 4h <small className='opaci-50'>(${(aSelectedTimeframe[2].buy*localMul)})</small> </span>
+                                                    +
+                                                    1d
+                                                </div>
                                             </>}   
                                             {!!aSelectedTimeframe[2].buy && !aSelectedTimeframe[3].buy && <>
                                                 <div className='tx-lx  tx-bold-6'>
