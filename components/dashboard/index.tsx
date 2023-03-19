@@ -13,6 +13,7 @@ import { fetchJsonArray, fetchMultipleJsonArray, getComputedLevels, getStrategyR
 import { DownloadButton } from "./DownloadButton";
 import ToolButtons from "./ToolButtons";
 import { useQueryPlus } from "@/scripts/helpers/useHooksHelper";
+import { parseDateTimeString } from "@/scripts/helpers/type/dateHelper";
 
 
 export function ChartDashboard({query}) {
@@ -43,6 +44,28 @@ export function ChartDashboard({query}) {
     },[])
 
     
+    const [q__tradeHistory, tradeHistory] = useQueryPlus({ queryKey: ['tradeHistory'], 
+        queryFn: async () =>{
+            // const theList = await fetchJsonArray(API_UNITS, "Units")
+            // inv.s__tradeHistory(theList)
+            if (!query.token) return []
+            const theListRes = await fetch(`/api/trade-history/?symbol=${query.token.toUpperCase()+"USDT"}&limit=99`)
+            let theList = await theListRes.json()
+            console.log("thelist", theList)
+            // theList = theList.map((anItem, index) => {
+            //     return {...anItem,...{
+            //         side: anItem.isBuyer ? "Buy" : "Sell",
+            //         price: parseDecimals(anItem.price),
+            //         qty: "$"+parseDecimals(parseFloat(anItem.price)*parseFloat(anItem.qty)),
+            //         time: parseDateTimeString(new Date(anItem.time/1)),
+            //     }}
+            // }).reverse()
+
+            // const theList = await fetchJsonArray(API_UNITS, "Units")
+
+            return theList
+        }
+    },[])
 
     
     const [timeframe,s__timeframe] = useState<any>(query.timeframe)
@@ -51,6 +74,7 @@ export function ChartDashboard({query}) {
     const getKlineArray = async(t,token) => {
         s__loadings("klinesArray")
         let urlBase = `https://api.binance.com/api/v3/klines?interval=${t}&symbol=`
+
         const theArray = await fetchJsonArray(urlBase+token.toUpperCase()+"USDT")
         let lastIndex = theArray.length - 1
         while (lastIndex < 499)
@@ -448,6 +472,7 @@ export function ChartDashboard({query}) {
                                 <div className=" w-100 h-100">
                                     <Chart
                                         {...{
+                                            tradeHistory: tradeHistory,
                                             klinesStats, klinesArray, p__klinesArray, tokensArrayObj, cryptoToken,
                                             timeframe, queryUSDT
                                         }}

@@ -1,11 +1,11 @@
 import { DEFAULT_TIMEFRAME_ARRAY, DEFAULT_TOKENS_ARRAY } from "@/components/scripts/constants";
 import { parseDecimals } from "@/components/scripts/helpers";
 import { ChartHigherLastLine, ChartHigherLine, ChartLiveLastLine, ChartLowerLastLine, ChartLowerLine,
-ChartMiddleLine, ChartTopBottomLine } from "./lines";
+ChartMiddleLine, ChartTopBottomLine, ChartTradeHistory } from "./lines";
 
 
 export default function Component({
-    klinesStats, klinesArray, p__klinesArray, tokensArrayObj, cryptoToken, timeframe, queryUSDT
+    klinesStats, klinesArray, p__klinesArray, tokensArrayObj, cryptoToken, timeframe, queryUSDT, tradeHistory
 }) {
     return (<>
         <div
@@ -39,6 +39,9 @@ export default function Component({
             />
 
             <ChartMiddleLine klinesArray={klinesArray} />
+
+            <ChartTradeHistory tradeHistory={tradeHistory} minPrice={klinesStats.min} maxPrice={klinesStats.max} minTime={klinesArray[0][0]} maxTime={klinesArray[499][0]} />
+
             <ChartTopBottomLine klinesArray={klinesArray} />
             {/* <ChartSinLine chopAmount={chopAmount} klinesArray={klinesArray} wavelength={wavelength} /> */}
                     

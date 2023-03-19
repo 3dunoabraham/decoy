@@ -1,5 +1,50 @@
 import { useEffect, useMemo } from "react"
 
+export const ChartTradeHistory = ({ tradeHistory, minPrice, maxPrice, minTime, maxTime }) => {
+    // const maxPrice = Math.max(...tradeHistory.map((trade) => trade.price));
+    // const minPrice = Math.min(...tradeHistory.map((trade) => trade.price));
+    // const minTime = Math.min(...tradeHistory.map((trade) => trade.time));
+    // const maxTime = Math.max(...tradeHistory.map((trade) => trade.time));
+    const priceRange = maxPrice - minPrice;
+    const priceToY = (price) => (((maxPrice - price) / priceRange) * 100) > 99 ? 99 :
+        ((maxPrice - price) / priceRange) * 100;
+  
+    const timeToX = (time) => {
+      const timeRange = maxTime - minTime;
+      const timeElapsed = time - minTime;
+      const containerWidth = 500; // set the container width to whatever value you need
+      const x = (timeElapsed / timeRange) * containerWidth;
+      return x;
+    };
+  
+    return (
+      <div
+       className=""
+        style={{
+          position: 'relative',
+          height: '100%',
+          background: '#ff00ff',
+          display: 'flex',
+          justifyContent: 'flex-start',
+        }}
+      >
+        {tradeHistory.map((trade) => (
+          <div
+            key={trade.id}
+            style={{
+              position: 'absolute',
+              top: `${priceToY(trade.price)}%`,
+              left: `${10+timeToX(trade.time)}px`,
+              width: '4px',
+              height: '4px',
+              borderRadius: '50%',
+              backgroundColor: '#ff00ff',
+            }}
+          />
+        ))}
+      </div>
+    );
+  };
 export const ChartMiddleLine = ({klinesArray}:{klinesArray:any[]})=>{
     return (
     <div>

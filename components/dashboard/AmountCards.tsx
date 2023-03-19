@@ -82,7 +82,7 @@ export default function Component ({ tokens, mul, bigmul, prices= null }) {
                                         {/* <hr className='w-100'/> */}
                                     </>}
 
-                                    <div className='flex   flex-justify-start px-6' style={index<2?{boxShadow:"0 0 1px green"}:{}}>
+                                    <div className='flex   flex-justify-start px-6' style={index<2?{boxShadow:"0 0 1px #2D313E"}:{}}>
                                         <div className=' py-2 '>
                                             <div className='ims-tx-faded py-1 flex gap-1'>
                                                 {aToken.toUpperCase()} {index<2 && <div>(X*2)</div>}

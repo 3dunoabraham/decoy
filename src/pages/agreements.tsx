@@ -23,10 +23,10 @@ const Page: NextPageWithLayout = ({pair}:any) => {
     const router = useRouter()
     // const pair = router.query.pair
     const inv = useContext(InventoryContext)
-    const [q__unitsArray, unitsArray] = useQueryPlus({ queryKey: ['unitData'], 
+    const [q__tradeHistory, tradeHistory] = useQueryPlus({ queryKey: ['tradeHistory'], 
         queryFn: async () =>{
             // const theList = await fetchJsonArray(API_UNITS, "Units")
-            // inv.s__unitsArray(theList)
+            // inv.s__tradeHistory(theList)
             if (!pair) return []
             const theListRes = await fetch(`/api/trade-history/?symbol=${pair}&limit=99`)
             let theList = await theListRes.json()
@@ -83,7 +83,7 @@ const Page: NextPageWithLayout = ({pair}:any) => {
                     <hr className="my-2 "/>
                 </div>
                 <div className='px-8 Q_xs_sm_px-2 w-100'>
-                    <ItemsTable displayConfigObj={tradesTableConfig} theArray={unitsArray}
+                    <ItemsTable displayConfigObj={tradesTableConfig} theArray={tradeHistory}
                         boolConfig={["isSelectable"]}
                     />
                 </div>
@@ -103,7 +103,7 @@ const Page: NextPageWithLayout = ({pair}:any) => {
                                     New Order
                                 </div>
                                 <div className='tx-lx  tx-bold-6'>
-                                    {unitsArray.length || "-"}
+                                    {tradeHistory.length || "-"}
                                 </div>
                             </div>
                         </div>
@@ -116,7 +116,7 @@ const Page: NextPageWithLayout = ({pair}:any) => {
                                     New Order
                                 </div>
                                 <div className='tx-lx  tx-bold-6'>
-                                    {unitsArray.length || "-"}
+                                    {tradeHistory.length || "-"}
                                 </div>
                             </div>
                         </div>
@@ -129,7 +129,7 @@ const Page: NextPageWithLayout = ({pair}:any) => {
                                     New Order
                                 </div>
                                 <div className='tx-lx  tx-bold-6'>
-                                    {unitsArray.length || "-"}
+                                    {tradeHistory.length || "-"}
                                 </div>
                             </div>
                         </div>
@@ -145,7 +145,7 @@ const Page: NextPageWithLayout = ({pair}:any) => {
                                     New Order
                                 </div>
                                 <div className='tx-lx  tx-bold-6'>
-                                    {unitsArray.length || "-"}
+                                    {tradeHistory.length || "-"}
                                 </div>
                             </div>
                         </div>
@@ -158,7 +158,7 @@ const Page: NextPageWithLayout = ({pair}:any) => {
                                     New Order
                                 </div>
                                 <div className='tx-lx  tx-bold-6'>
-                                    {unitsArray.length || "-"}
+                                    {tradeHistory.length || "-"}
                                 </div>
                             </div>
                         </div>
@@ -171,7 +171,7 @@ const Page: NextPageWithLayout = ({pair}:any) => {
                                     New Order
                                 </div>
                                 <div className='tx-lx  tx-bold-6'>
-                                    {unitsArray.length || "-"}
+                                    {tradeHistory.length || "-"}
                                 </div>
                             </div>
                         </div>
