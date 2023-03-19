@@ -113,7 +113,7 @@ export const ChartLowerLine = ({
                     width: "2px",
                     height: aKline[3] < klinesStats.min ? "4px" : "2px",
                     left: `${-2+(index/500*100) }%`,
-                    background: aKline[3] < klinesStats.min ? `#ffaa00` : `#ff000099`,
+                    background: aKline[3] < klinesStats.min ? `#ffaa00` : `#B54A4A66`,
                     bottom:`
                     ${parseInt(`
                         ${aKline[3] < klinesStats.min ? 0 : ((
@@ -146,7 +146,7 @@ export const ChartHigherLastLine = ({
                 style={{
                     width: "10px",
                     height: aKline[2] > klinesStats.max ? "3px" : "2px",
-                    left: `${-2+(3+(Math.floor(index/26)*5)) }%`,
+                    left: `${-2+(Math.floor(index/45)*9) }%`,
                     background:`#00880077`,
                     bottom:`
                     ${parseInt(`
@@ -178,9 +178,11 @@ export const ChartLiveLastLine = ({
             <div key={index}
                 className="  block pos-abs"
                 style={{
-                    width: "20px",
+                    width: "5px",
+                    // width: "20px",
                     height: livePrice > klinesStats.max ? "3px" : "2px",
-                    left: `${-2+(6+(Math.floor(index/100)*22)) }%`,
+                    // left: `${-2+(6+(Math.floor(index/100)*22)) }%`,
+                    left: `${38+(3+(Math.floor(index/26)*3)) }%`,
                     background:`#ffffff`,
                     bottom:`
                     ${parseInt(`
@@ -214,7 +216,7 @@ export const ChartHigherLine = ({
                     width: "2px",
                     height: aKline[2] > klinesStats.max ? "3px" : "2px",
                     left: `${-2+(index/500*100)}%`,
-                    background:aKline[2] > klinesStats.max ? `#77ff00` : `#77ff0066`,
+                    background:aKline[2] > klinesStats.max ? `#7DB54A66` : `#7DB54A66`,
                     bottom:`
                     ${parseInt(`
                         ${aKline[2] > klinesStats.max ? 99 : ((
