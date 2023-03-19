@@ -10,11 +10,14 @@ export const ChartTradeHistory = ({ tradeHistory, minPrice, maxPrice, minTime, m
         ((maxPrice - price) / priceRange) * 100;
   
     const timeToX = (time) => {
+        if (time < minTime) return 0
       const timeRange = maxTime - minTime;
       const timeElapsed = time - minTime;
-      const containerWidth = 500; // set the container width to whatever value you need
-      const x = (timeElapsed / timeRange) * containerWidth;
-      return x;
+      console.log("*",minTime,maxTime, timeRange,timeElapsed,( timeElapsed / timeRange * 100 ))
+      return ( timeElapsed / timeRange * 100 )
+    //   const containerWidth = 500; // set the container width to whatever value you need
+    //   const x = (timeElapsed / timeRange) * containerWidth;
+    //   return x;
     };
   
     return (
@@ -23,7 +26,7 @@ export const ChartTradeHistory = ({ tradeHistory, minPrice, maxPrice, minTime, m
         style={{
           position: 'relative',
           height: '100%',
-          background: '#ff00ff',
+          width: '97%',
           display: 'flex',
           justifyContent: 'flex-start',
         }}
@@ -34,11 +37,10 @@ export const ChartTradeHistory = ({ tradeHistory, minPrice, maxPrice, minTime, m
             style={{
               position: 'absolute',
               top: `${priceToY(trade.price)}%`,
-              left: `${10+timeToX(trade.time)}px`,
+              left: `${timeToX(trade.time)}%`,
               width: '4px',
               height: '4px',
-              borderRadius: '50%',
-              backgroundColor: '#ff00ff',
+              backgroundColor: timeToX(trade.time) == 0 ? "#ff00ff66" : '#ff00ff',
             }}
           />
         ))}

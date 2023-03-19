@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { useLocalStorage } from "usehooks-ts";
+import { useIsClient, useLocalStorage } from "usehooks-ts";
 import { useQuery } from '@tanstack/react-query'
 import { BsFillGearFill } from "react-icons/bs"
 // import { fetchJsonArray, fetchMultipleJsonArray, getComputedLevels, getStrategyResult, parseDecimals,
@@ -19,7 +19,7 @@ import { parseDateTimeString } from "@/scripts/helpers/type/dateHelper";
 export function ChartDashboard({query}) {
     /********** CREATE **********/
 
-    
+    const isClient = useIsClient()
     const [q__asd, asd] = useQueryPlus({ queryKey: ['asdasd'], 
         queryFn: async () =>{
             // const theList = await fetchJsonArray(API_UNITS, "Units")
@@ -468,7 +468,7 @@ export function ChartDashboard({query}) {
                                 <div className="opaci-50"><div className=" left-0 top-0">{klinesStats.dropPercent}%</div></div>
                             </div>
                         
-                            {loadings == "" &&  tokensArrayObj[cryptoToken] && queryUSDT.data && 
+                            {loadings == "" &&  tokensArrayObj[cryptoToken] && queryUSDT.data && isClient &&
                                 <div className=" w-100 h-100">
                                     <Chart
                                         {...{

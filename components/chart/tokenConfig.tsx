@@ -55,14 +55,14 @@ export const TokenConfigStateButtons = ({
                 </div> */}
                 {!theToken.state &&
                     <button onClick={()=>{updateTokenOrder(aToken,DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe) ,"state", "1")}}
-                        className="opaci-chov--50 bg-w-90 tx-green  tx-bold-8 tx-ls-1 tx-black px-3 py-1 bord-r-15 mx-1 mt-1"
+                        className="opaci-chov--50 bg-w-90 tx-green  tx-bold-8 tx-ls-1 tx-black px-3 py-1 bord-r-15 ma-2"
                     >
                         TURN ON
                     </button>
                 }
                 {!!theToken.state &&
                     <button onClick={()=>{updateTokenOrder(aToken,DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe) ,"state", "0")}}
-                        className="opaci-chov--50 bg-w-90 tx-red-50  tx-black px-3 py-1 bord-r-15 mx-1 mt-1"
+                        className="opaci-chov--50 bg-w-90 tx-red-50  tx-black px-3 py-1 bord-r-15 ma-2"
                     >
                         TURN OFF
                     </button>
