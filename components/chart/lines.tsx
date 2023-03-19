@@ -1,10 +1,4 @@
-import { useEffect, useMemo } from "react"
-
 export const ChartTradeHistory = ({ tradeHistory, minPrice, maxPrice, minTime, maxTime }) => {
-    // const maxPrice = Math.max(...tradeHistory.map((trade) => trade.price));
-    // const minPrice = Math.min(...tradeHistory.map((trade) => trade.price));
-    // const minTime = Math.min(...tradeHistory.map((trade) => trade.time));
-    // const maxTime = Math.max(...tradeHistory.map((trade) => trade.time));
     const priceRange = maxPrice - minPrice;
     const priceToY = (price) => (((maxPrice - price) / priceRange) * 100) > 99 ? 99 :
         ((maxPrice - price) / priceRange) * 100;
@@ -15,9 +9,6 @@ export const ChartTradeHistory = ({ tradeHistory, minPrice, maxPrice, minTime, m
       const timeElapsed = time - minTime;
       console.log("*",minTime,maxTime, timeRange,timeElapsed,( timeElapsed / timeRange * 100 ))
       return ( timeElapsed / timeRange * 100 )
-    //   const containerWidth = 500; // set the container width to whatever value you need
-    //   const x = (timeElapsed / timeRange) * containerWidth;
-    //   return x;
     };
   
     return (
@@ -40,7 +31,9 @@ export const ChartTradeHistory = ({ tradeHistory, minPrice, maxPrice, minTime, m
               left: `${timeToX(trade.time)}%`,
               width: '4px',
               height: '4px',
-              backgroundColor: timeToX(trade.time) == 0 ? "#ff00ff66" : '#ff00ff',
+              backgroundColor: timeToX(trade.time) == 0 ?
+                (trade.isBuyer ? "#ffff0055" : "#0000FF55")
+            : trade.isBuyer ? "#ffff00" : "#0000FF",
             }}
           />
         ))}
@@ -70,66 +63,6 @@ export const ChartMiddleLine = ({klinesArray}:{klinesArray:any[]})=>{
     </div>
     )
 }
-export const ChartSinLine = ({
-    klinesArray,wavelength,chopAmount
-}:{klinesArray:any[],wavelength:number,chopAmount:number})=>{
-    return (
-    <div>
-    {klinesArray.map((aKline:any,index:any) => {
-        return (
-        <div key={index}
-            className="  block pos-abs"
-            style={{
-                width: "2px",
-                height: "2px",
-                left: `${-2+(index/500*100)}%`,
-                background: `rgba(${(-200+index)},127,${(100-index)},0.8)`,
-                top:(
-                `
-                    ${50+ (Math.sin((index/wavelength*10) + (Math.sin(((index)/wavelength)*1)) )*33)  }%
-                `
-                ),
-            }}
-            >
-        </div>
-        )
-    })}
-    </div>
-    )
-}
-// ${50+ (Math.sin(index/wavelength + Math.sin((index)/wavelength)*20 )*(50*(index/500)))  }%
-export const ChartSinLine2 = ({
-    klinesArray,wavelength,chopAmount
-}:{klinesArray:any[],wavelength:number,chopAmount:number})=>{
-    return (
-    <div>
-    {klinesArray.map((aKline:any,index:any) => {
-        return (
-        <div key={index}
-            className="  block pos-abs"
-            style={{
-                width: "2px",
-                height: "2px",
-                left: `${-2+(index/500*100)}%`,
-                background: `rgba(${(-200+index)},127,${(100-index)},0.8)`,
-                top:(
-                wavelength < 400 ? 
-                `
-                    ${90-(index/10)+ (Math.sin(index/wavelength + Math.sin((index)/wavelength)*20 )*(50*(index/500)))  }%
-                `
-                :
-                `
-                    ${10+(index/10)+ (Math.sin(index/wavelength + Math.sin((index)/wavelength)*20 )*(40*(index/500)))  }%
-                `
-                ),
-            }}
-            >
-        </div>
-        )
-    })}
-    </div>
-    )
-}
 export const ChartLowerLastLine = ({
     klinesArray,klinesStats,
     tokenConfig
@@ -146,7 +79,6 @@ export const ChartLowerLastLine = ({
                     width: "10px",
                     height: aKline[3] < klinesStats.min ? "4px" : "2px",
                     left: `${-2+(Math.floor(index/45)*9) }%`,
-                    // background: `rgba(${index/2},99,99,0.3)`,
                     background: `#33000077`,
                     bottom:`
                     ${parseInt(`
@@ -206,7 +138,6 @@ export const ChartHigherLastLine = ({
     return (
     <div>
         {klinesArray.map((_aKline:any,index:any) => {
-        // if (parseFloat(aKline[2]) > tokenConfig.ceil) return <div key={index}></div>
         let aKline = klinesArray[499]
         if (aKline[2] < klinesStats.min) return <div key={index}></div>
         return (
@@ -241,7 +172,6 @@ export const ChartLiveLastLine = ({
     return (
     <div>
         {klinesArray.map((_aKline:any,index:any) => {
-        // if (parseFloat(aKline[2]) > tokenConfig.ceil) return <div key={index}></div>
         let aKline = klinesArray[499]
         if (livePrice < klinesStats.min || livePrice > klinesStats.max) return <div key={index}></div>
         return (
@@ -276,7 +206,6 @@ export const ChartHigherLine = ({
     return (
     <div>
         {klinesArray.map((aKline:any,index:any) => {
-        // if (parseFloat(aKline[2]) > tokenConfig.ceil) return <div key={index}></div>
         if (aKline[2] < klinesStats.min) return <div key={index}></div>
         return (
             <div key={index}

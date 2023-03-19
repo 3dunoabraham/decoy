@@ -491,6 +491,8 @@ export function ChartDashboard({query}) {
                     </div>
                 }   
 
+                
+
                 <div className="flex-1 px-2 w-100 mt-3 opaci-10"><hr/></div>
                 <div className="flex-1 w-100    ">
                     {!!uid && 
