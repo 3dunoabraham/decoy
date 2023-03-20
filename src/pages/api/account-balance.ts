@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import https from 'https';
 import crypto from 'crypto';
+import { DEFAULT_TOKENS_ARRAY_UPPER } from '@/components/scripts/constants';
 
 type AccountBalanceParams = {
   recvWindow?: number,
@@ -52,8 +53,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   });
 
   try {
-    const tokenList = ['BTC', 'ETH', 'LINK', 'FTM', "AAVE"];
-
+    // const tokenList = ['BTC', 'ETH', 'LINK', 'FTM', "AAVE"];
+    const tokenList = DEFAULT_TOKENS_ARRAY_UPPER
+    
     const response = await reqPromise;
 
     if (response.balances) {

@@ -1,5 +1,6 @@
 export const DEFAULT_TIMEFRAME_ARRAY = ["3m","15m","4h","1d","1w"]  
 export const DEFAULT_TOKENS_ARRAY = ["btc","eth","link","ftm"/*,"matic"*/,"aave"/*,"rndr","rune",*/]
+export const DEFAULT_TOKENS_ARRAY_UPPER = DEFAULT_TOKENS_ARRAY.filter((x,i)=>(x.toUpperCase()))
     
 export const DEFAULT_PLAN_COLUMNS_ARRAY = {
     "token": [

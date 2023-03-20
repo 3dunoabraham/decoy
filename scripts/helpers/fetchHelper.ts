@@ -2,17 +2,17 @@ import { API_ORGS, API_ORG_TYPES, API_PEOPLE_BASE, API_UNIT_BASE, API_UNIT_OPTS_
 import { DEFAULT_UNIT_OPTS } from '@/scripts/constants/unit';
 import { dd } from '@/scripts/helpers/devHelper';
 import { isStrInteger, jstr2FullName } from '@/scripts/helpers/type/stringHelper';
-import { getAll } from '@vercel/edge-config';
+// import { getAll } from '@vercel/edge-config';
 
 
-export const getEdgeConfig  = async () => {
-    // return null
-    const tokens = await getAll(["tokens"]);
-    // const tokens = await get('tokens');
-    console.log("tokens", tokens)
-    const tokenstokens:any = tokens.tokens
-    return tokenstokens.split(",")
-}
+// export const getEdgeConfig  = async () => {
+//     // return null
+//     const tokens = await getAll(["tokens"]);
+//     // const tokens = await get('tokens');
+//     console.log("tokens", tokens)
+//     const tokenstokens:any = tokens.tokens
+//     return tokenstokens.split(",")
+// }
 export const DEFAULT_UNIT_FOREIGNS:any = { sales_statuses: [], customersArray: [], orgsArray: [], dealers: [] }
 export async function fetchUnitForeigns() {
     try {

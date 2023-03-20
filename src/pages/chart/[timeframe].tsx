@@ -7,10 +7,11 @@ import Head from "next/head"
 import { useIsClient } from "usehooks-ts"
 import AmountCards from "@/components/dashboard/AmountCards"
 import { GetServerSideProps } from "next"
-import { getEdgeConfig } from "@/scripts/helpers/fetchHelper"
+// import { getEdgeConfig } from "@/scripts/helpers/fetchHelper"
 import { useQueryPlus } from "@/scripts/helpers/useHooksHelper"
 import { parseDecimals } from "@/components/scripts/helpers"
 import { parseDateTimeString } from "@/scripts/helpers/type/dateHelper"
+import { DEFAULT_TOKENS_ARRAY } from "@/components/scripts/constants"
 
 export default function Page({tokens}) {
     const isClient = useIsClient()
@@ -48,7 +49,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const online = typeof offline === 'undefined';
     // const tokens =  process.env.GITHUB_ID
 
-    let tokens = await getEdgeConfig()
+    // let tokens = await getEdgeConfig()
+    let tokens = DEFAULT_TOKENS_ARRAY
   
     return {
       props: {

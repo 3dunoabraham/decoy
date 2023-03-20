@@ -2,7 +2,7 @@ import { ReactElement, useContext, useEffect, useMemo, useState } from 'react'
 import Head from 'next/head'
 import { ParsedUrlQuery } from 'querystring';
 import { GetServerSideProps } from 'next';
-import { get, getAll } from '@vercel/edge-config';
+// import { get, getAll } from '@vercel/edge-config';
 
 import type { NextPageWithLayout } from '@/src/pages/_app'
 import Layout from '@/src/items/templates/Layout'
@@ -24,6 +24,7 @@ import { useSession } from 'next-auth/react';
 import { parseDecimals } from '@/components/scripts/helpers';
 import { useIsClient, useLocalStorage } from 'usehooks-ts';
 import AmountCards from '@/components/dashboard/AmountCards';
+import { DEFAULT_TOKENS_ARRAY } from '@/components/scripts/constants';
 
 const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
     const bigmul = 50
@@ -190,14 +191,14 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
     )
 }
 
-const getEdgeConfig  = async () => {
-    // return null
-    const tokens = await getAll(["tokens"]);
-    // const tokens = await get('tokens');
-    console.log("tokens", tokens)
-    const tokenstokens:any = tokens.tokens
-    return tokenstokens.split(",")
-}
+// const getEdgeConfig  = async () => {
+//     // return null
+//     const tokens = await getAll(["tokens"]);
+//     // const tokens = await get('tokens');
+//     console.log("tokens", tokens)
+//     const tokenstokens:any = tokens.tokens
+//     return tokenstokens.split(",")
+// }
 type PageProps = {
     online: boolean;
     tokens: any;
@@ -221,8 +222,9 @@ export const getServerSideProps: GetServerSideProps<PageProps, ParsedUrlQuery> =
     const online = typeof offline === 'undefined';
     // const tokens =  process.env.GITHUB_ID
 
-    let tokens = await getEdgeConfig()
-  
+    // let tokens = await getEdgeConfig()
+    let tokens = DEFAULT_TOKENS_ARRAY
+    
     return {
       props: {
         online,tokens,
