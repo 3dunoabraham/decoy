@@ -28,8 +28,8 @@ export default function Component ({ tokens, mul, bigmul, prices= null }) {
             let localBigMul = index < 2 ? bigmul*2 : bigmul
 
             let aSelectedTimeframe = JSON.parse(LS_tokensArrayObj)[aToken]
-            total[2] += aSelectedTimeframe[2].buy*localMul
-            total[3] += aSelectedTimeframe[3].buy*localBigMul
+            total[2] += !!aSelectedTimeframe ? aSelectedTimeframe[2].buy*localMul : 0
+            total[3] += !!aSelectedTimeframe ? aSelectedTimeframe[3].buy*localBigMul : 0
             return 0
         })
         total.total = total[2]+total[3]
@@ -41,7 +41,8 @@ export default function Component ({ tokens, mul, bigmul, prices= null }) {
     <div className='flex-center flex-align-start flex-justify-start  gap-4'>
                         {/* {JSON.stringify(Object.keys(queryUSDT.data[0]))} */}
                         {/* {JSON.stringify(LS_tokensArrayObj)} */}
-                        <div className='pos-abs top-0 right-0 flex-col flex-justify-end flex-align-end'>
+                        {/* pos-abs top-0 right-0 */}
+                        <div className=' flex-col flex-justify-end flex-align-end'>
                             <div className='px-1 pt-1 opaci-25 tx-ls-3 tx-bold-6'>Hot + Cold = Wallet</div>
                             <div className='px-1 flex-center gap-1'>
                                 <div className='opaci-50'>Total Balance:</div>
