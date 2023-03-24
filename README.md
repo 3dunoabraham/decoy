@@ -1,6 +1,12 @@
 # DCOY
 Portfolio cue prompter about a retail investor that low-risk trades at a market, it analyzes and balances short- and long-term trades and interacts with both centralized and decentralized exchanges.
 
+Demo: https://tresduno.vercel.app/
+
+### Tech-Stack
+* NextJs
+* Three & React-three-fiber
+
 -----
 ## Getting Started
 
@@ -42,6 +48,4 @@ npm run test
 
 -----
 
-Tech-Stack
-* NextJs
-* Three & React-three-fiber
+Docs: https://tresduno.vercel.app/
