@@ -49,3 +49,11 @@ npm run test
 -----
 
 Docs: https://tresduno.vercel.app/
+
+---
+
+## License
+
+MIT
+
+---
