@@ -46,7 +46,7 @@ Finally, you can run the test suite:
 npm run test
 ```
 
------
+---
 
 Docs: https://tresduno.vercel.app/
 
@@ -55,5 +55,3 @@ Docs: https://tresduno.vercel.app/
 ## License
 
 MIT
-
----
