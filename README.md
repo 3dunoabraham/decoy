@@ -1,16 +1,17 @@
-# decoy
+# DCOY
 Portfolio cue prompter about a retail investor that low-risk trades at a market, it analyzes and balances short- and long-term trades and interacts with both centralized and decentralized exchanges.
 
 -----
+## Getting Started
 
 To clone and run this application, you'll need [Node.js](https://nodejs.org/) (which comes with npm) installed on your computer.
 
-First, clone this repository:
+### First, clone this repository:
 ```bash
 git clone https://github.com/amitmerchant1990/electron-markdownify
 ```
 
-Install the required dependencies:
+### Install the required dependencies:
 ```bash
 npm install
 ```
@@ -23,7 +24,7 @@ To get your binance api keys, [click here](https://www.binance.com/en/support/fa
 
 
 
-Then run the development server:
+### Then run the development server:
 ```bash
 npm run dev
 ```
@@ -40,3 +41,7 @@ npm run test
 ```
 
 -----
+
+Tech-Stack
+* NextJs
+* Three & React-three-fiber
