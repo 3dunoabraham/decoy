@@ -493,8 +493,8 @@ export function ChartDashboard({query}) {
                                 </div>
                                 
                                 <div className="opaci-50 tx-ls- tx-l mb-2 tx-white">Hot Wallet</div>
-                                <div className="flex-col gap-2">
-
+                                <div className="flex-col gap-2">    
+                                
                                     {queryUSDT.data && asd.balances && asd.balances.map((anAsset, i)=>{
                                         if (!queryUSDT.data[i]) return
                                         return (

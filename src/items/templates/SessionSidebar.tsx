@@ -11,6 +11,7 @@ import { InventoryContext } from "@/scripts/contexts/InventoryContext";
 import { useContext, useEffect, useMemo } from "react";
 import { AppContext } from "@/scripts/contexts/AppContext";
 import { MdOutlineInventory2 } from "react-icons/md";
+import { isDevEnvironment } from "@/scripts/helpers/devHelper";
 
 export default function Component({}) {
     const router = useRouter();
@@ -135,8 +136,10 @@ export default function Component({}) {
                     <div className="flex-1 pl-1 Q_xl_x w-min-220px">Settings</div>
                 </Link>
             </div>
-            <hr className="w-90 opaci-50 mt-3" style={{borderColor: "white"}} />
-            <div className='pa-3 w-100'><LoginBtn><AppClientDesc /></LoginBtn></div>
+            {!isDevEnvironment && <>
+                <hr className="w-90 opaci-50 mt-3" style={{borderColor: "white"}} />
+                <div className='pa-3 w-100'><LoginBtn><AppClientDesc /></LoginBtn></div>
+            </>}
         </div>
 
 
