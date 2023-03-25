@@ -342,7 +342,7 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
                     <span className='opaci-50'> I have a passion for </span>
                     creating interactive and intuitive digital experiences.
                     <span className='opaci-50'> Throughout my career, I always keep
-                    the user's engagement in mind. </span>
+                    the user&apos;s engagement in mind. </span>
                 </div>
                 <div className="tx-lx opaci- w-min-300px">Key Skills
                     <ul className='tx-lgx opaci-75'>
@@ -371,8 +371,8 @@ including custom plugins and libraries from developed scratch.
                 </div>
                 <div className="tx-lg w-max-600px w-100 px-2">
                     <span className='opaci-50 pl-2'>
-                        I've also developed several fully-equipped scheduling and inventory systems with 2D and 3D components using NextJs
-                        and ThreeJs for data visualization, and utilized problem-solving skills to troubleshoot and resolve issues with product owner's requirements.
+                        I&apos;ve also developed several fully-equipped scheduling and inventory systems with 2D and 3D components using NextJs
+                        and ThreeJs for data visualization, and utilized problem-solving skills to troubleshoot and resolve issues with product owner&apos;s requirements.
                     </span>
                 </div>
             </div>
