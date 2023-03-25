@@ -11,14 +11,19 @@ type BoxProps = {
   wallWidth?: any;
   score?: any;
   s__score?: any;
+  velocityX: any;
+  setVelocityX: any;
+  velocityY: any;
+  setVelocityY: any;
 };
 
 export default function Component({
   wallWidth,
   position,
   boundaries,
-  score,
-  s__score,
+  score,s__score,
+  velocityX, setVelocityX,
+  velocityY, setVelocityY,
 }: BoxProps) {
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
@@ -26,11 +31,17 @@ export default function Component({
   const playerMesh = useRef<Mesh>();
   const depthBuffer = useDepthBuffer({ frames: 1 });
   const [elapsed, setElapsed] = useState<any>(0);
-  const [velocityY, setVelocityY] = useState(0.1);
-  const [velocityX, setVelocityX] = useState(0);
+//   const [velocityY, setVelocityY] = useState(0);
+//   const [velocityX, setVelocityX] = useState(0);
   const viewport = useThree((state) => state.viewport);
 
   useFrame((state: any, delta) => {
+    if (score.score <= 0)
+    {
+        return
+        // setVelocityY(0)
+        // setVelocityX(0)
+    }
     if (meshRef.current && state && state.get) {
       setElapsed(delta + elapsed);
       meshRef.current.position.y += velocityY;
@@ -45,8 +56,8 @@ export default function Component({
         const playerX = playerCenter.x;
         const meshX = meshRef.current.position.x;
         const diffX = meshX - playerX;
-        console.log(`Difference in X position: ${diffX}`);
-        s__score(score+1)
+        // console.log(`Difference in X position: ${diffX}`);
+        s__score({maxScore: score.score,score: score.score+1, velocityX: velocityX > score.velocityX ? velocityX : score.velocityX})
         setVelocityX(diffX/10 + velocityX);
         return setVelocityY(-velocityY);
       }
@@ -55,8 +66,9 @@ export default function Component({
         meshRef.current.position.y > boundaries[1] / 2 ||
         meshRef.current.position.y < -boundaries[1] / 2
       ) {
-        setVelocityY(-velocityY);
-        s__score(score-1)
+        if (meshRef.current.position.y < 0)
+        { s__score({maxScore: score.score ,score: 0, velocityX: velocityX > score.velocityX ? velocityX : score.velocityX}) }
+        setVelocityY(-velocityY);        
       }
       if (
         meshRef.current.position.x > boundaries[0] ||
@@ -70,7 +82,13 @@ export default function Component({
       playerMesh.current.position.x = state.mouse.x * boundaries[0];
     }
   });
-
+  const startGame = () => {
+    if (clicked) return
+    s__score({score:1,maxScore: 0, velocityX:0,velocityY:0})
+    setClicked(!clicked)
+    setVelocityX((0.1+((Math.random()/2)-0.55)) / 5)
+    setVelocityY(0.1)
+  }
   return (
     <group>
       <mesh
@@ -91,8 +109,8 @@ export default function Component({
         receiveShadow
         position={position}
         ref={meshRef}
-        scale={clicked ? 1.68 : 1}
-        onClick={() => setClicked(!clicked)}
+        scale={clicked ? 1.2 : 1}
+        onClick={() => startGame()}
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
       >

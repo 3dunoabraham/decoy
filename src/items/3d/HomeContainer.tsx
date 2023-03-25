@@ -27,6 +27,7 @@ import MovingBox from "./MovingBox";
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
 import BaseballFieldFloorScale from "./BaseballFieldFloorScale";
+import { parseDecimals } from "@/components/scripts/helpers";
 
 const Component = forwardRef(({}:any, ref)=>{
     // const { camera, gl: { domElement }, } = useThree();
@@ -106,18 +107,31 @@ const Component = forwardRef(({}:any, ref)=>{
         // console.log("the new size", theNewSize)
         s__sizeForm(theNewSize)
     }
+  const [velocityX, setVelocityX] = useState(0);
+  const [velocityY, setVelocityY] = useState(0);
     const boundaryBox = useMemo(()=>{
         return [[(xOut), 0, zOut],[-(xOut), 0, -zOut],[-(xOut), 0, zOut],[(xOut), 0, -zOut]]
     },[xOut, zOut])
-    const [score, s__score] = useState(3)
-
+    const [score, s__score] = useState({score:0,maxScore:0,velocityX:0,velocityY:0})
+    const scoreHandle = (data) => {
+        // if (score.score < 0) {
+        //     console.log("data.score < 0")
+        //     setVelocityY(0)
+        // }
+        s__score(data)
+        // if (score.score > 3) {
+        //     console.log("score.score > 3")
+        //     setVelocityY(0)
+        // }
+    }
     return (
     <div className='h-min-500px w-100 flex-col g-b-20 bord-r- flex-align-stretch flex-justify-stretch pos-rel'>
         
         <div className="flex pos-abs bottom-0 right-0  bord-r- pa-2 ma-2">
             <div className="flex-col flex-align-stretch z-700 gap-1 tx-white ">
                 <div className="flex-center gap-1 opaci-50 tx-ls-5 pa-5 bg-w-20 ma-2">
-                    Score: {score}
+                    Score: {score.maxScore} | Speed: {parseDecimals(score.velocityX)}
+                    {/* Y: {score.velocityY} */}
                 </div>
             </div>
             <div className="flex-col flex-align-stretch z-700 gap-1 tx-white ">
@@ -224,7 +238,7 @@ const Component = forwardRef(({}:any, ref)=>{
             <fog attach="fog" args={['#ffffff', 5, zOut*6]} />
 
             {/* <CustomBox  position={[0, (1.68/2) - 0.95, zOut*1.32]} />  */}
-            <MovingBox {...{s__score,score}} wallWidth={wallWidth} boundaries={[xOut, yOut, zOut]}  position={[0, (1.68/2) - 0.95, zOut]} /> 
+            <MovingBox {...{s__score: scoreHandle,score, velocityX, setVelocityX, velocityY, setVelocityY}} wallWidth={wallWidth} boundaries={[xOut, yOut, zOut]}  position={[0, (1.68/2) - 0.95, zOut]} /> 
             <HumanScale roofWidth={roofWidth} width={0.1} wallWidth={wallWidth} length={0.3}  position={[-xOut, (1.68/2) - (yOut/2), zOut*1.3]} /> 
 
             {optsToggler["floor"].bool && <BaseballFieldFloorScale  position={[0,-yOut/2 - 0.05,0]} floorWidth={0.1}/>  }
