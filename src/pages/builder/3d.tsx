@@ -15,7 +15,7 @@ import ItemsTable from '@/src/items/molecules/table/ItemsTable'
 import { AppContext } from '@/scripts/contexts/AppContext'
 import _localJson from '@/localJson.json'
 import InputItemsPPage from '@/src/items/atoms/inputs/InputItemsPP'
-import BoxContainer from '@/src/items/3d/BoxContainer'
+// import BoxContainer from '@/src/items/3d/BoxContainer'
 import { OFFLINE_UNITS_ARRAY } from '@/scripts/constants/inventory'
 import { API_UNITS } from '@/scripts/constants/api'
 import FeetInchesLabel from '@/src/items/templates/FeetInchesLabel'
@@ -107,7 +107,7 @@ const Page: NextPageWithLayout & any = ({ data, nextauthenv }) => {
                 </div>
                 <Suspense>
                     <div className="flex-1 h-max-700px pos-rel  w-95  flex" id="root">
-                        <BoxContainer ref={$boxContainer} />
+                        {/* <BoxContainer ref={$boxContainer} /> */}
                         {selectedItemIndex >= 0 &&
                             <div className="pos-abs flex div top-0 right-0 flex pa-1 box-shadow-i-1-bl ord-r-8">
                                 <div className="flex-col pa-1 ">
