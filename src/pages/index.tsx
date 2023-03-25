@@ -39,7 +39,6 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
             return theJsonResult
         }
     },[])
-
     const inventoryItems = useMemo(()=>{
         let rdm = parseInt(`${Math.random()*1000 * unitsArray.length}`).toLocaleString("en-US")
 
@@ -98,23 +97,30 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
             </div> */}
             <div className='flex flex-justify-center  gap-4 pos-fix w-100 z-800  ' >
                     
-                    <div className="pos-abs top-0 left-0 flex-col flex-align-start gap-2 tx-white  z-800 ">
-                        <Link href="/" className="a tx-xl flex z-400 px-4 h-50px">
-                            <div className="a tx-xl tx-bold-8">B</div>
-                            <div className="a tx-xl tx-bold-3">IT</div>
+                    
+                    <Link href="/" className="pos-abs top-0 left-0 flex-col flex-align-start gap-2 tx-white  z-800 ">
+                        <Link href="/" className="a tx-xl flex z-400 px-4 h-50px gap-2">
+                            <div className="a tx-xxl tx-bold-8">B</div>
+                            <div className="a tx-xxl tx-bold-3 pl-8">T</div>
                         </Link>
-                        <Link href="/" className="a tx-xl flex z-400 px-4 h-50px">
-                            <div className="a tx-xl tx-bold-5">PO</div>
-                            <div className="a tx-xl tx-bold-6">NG</div>
+                        <Link href="/" className="a tx-lx flex z-400 px-4 h-50px">
+                            <div className="a tx-lx tx-bold-5">PO</div>
+                            <div className="a tx-lx tx-bold-3 ">
+                                <div className='invisible'>III</div>
+                                <div className='tx-xxl scale-200 pos-abs bottom-0 pb-2 pl-1 tx-bold-3'>
+                                    I
+                                </div>
+                            </div>
+                            <div className="a tx-lx tx-bold-6">NG</div>
                         </Link>
                         {/* <div className="a tx-xl">Duno</div> */}
-                    </div>
-                    <div className=' tx-blue  tx-xl pa-8 opaci-chov--50 z-800 pos-abs right-0 hover-4'
+                    </Link>
+                    <div className=' tx-blue  tx-xl pa-8 opaci-chov--50 z-800 pos-abs right-0 spin-120'
                         style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
                     >
                         <HiCubeTransparent />
                     </div>
-                    <div className='tx-white blur-4 z-500 pos-abs top-0 right-0 noclick pa-8 hover-3'>
+                    <div className='tx-white blur-4 z-500 pos-abs top-0 right-0 noclick pa-8 spin-60'>
                         <Link href="/config/global/" className=' tx-blue tx-xl  opaci-chov--50 '
                             style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
                         >
@@ -126,13 +132,13 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
             {/* {JSON.stringify(cats)} */}
             <div className='flex-center z-500'>
 
-                <div className="flex-col pt-8 pos-abs bg-b-50 bg-glass-5 pt-200" style={{border:"1px solid #FED034"}}>
-                    <Link target="_blank" href="/dashboard" className="tx-blue px-6 gap-2 tx-lgx flex-center opaci-chov--50 w-100 tx-bold-2 pt-4 pb-4"
+                <div className="flex-center pos-abs bg-b-50 bg-glass-5 " style={{border:"1px solid #FED034"}}>
+                    <Link target="_blank" href="/dashboard" className="tx-blue px-6 gap-2 tx-lgx flex-center opaci-chov--50 w-100 tx-bold-2 pt-100 pb-3"
                         style={{filter: "hue-rotate(-189deg) brightness(666%)"}}
                     >
                         Dashboard
                     </Link>
-                    <Link target="_blank" href="/chart/4h?token=btc" className="tx-blue px-6 gap-2 tx-lgx flex-center opaci-chov--50 w-100 tx-bold-2 pt-2 pb-4"
+                    <Link target="_blank" href="/chart/4h?token=btc" className="tx-blue px-6 gap-2 tx-lgx flex-center opaci-chov--50 w-100 tx-bold-2 pt-100 pb-3"
                         style={{filter: "hue-rotate(-189deg) brightness(666%)"}}
                     >
                         BTCUSDT <br/> 3m Chart
@@ -401,7 +407,7 @@ type PageProps = {
 Page.getLayout = function getLayout(page: ReactElement) {
     return (
     <Layout>
-        <Head><title>Home</title></Head>
+        <Head><title>bitpoing</title></Head>
         {/* <SidebarContainer sidebar={<SessionSidebar/>}> */}
             {page}
         {/* </SidebarContainer> */}

@@ -124,17 +124,18 @@ const Component = forwardRef(({}:any, ref)=>{
         //     setVelocityY(0)
         // }
     }
+    const fffooovvv = 40
     return (
     <div className='h-min-500px w-100 flex-col g-b-20 bord-r- flex-align-stretch flex-justify-stretch pos-rel'>
         
         <div className="flex pos-abs bottom-0 right-0  bord-r- pa-2 ma-2">
-            <div className="flex-col flex-align-stretch z-700 gap-1 tx-white ">
-                <div className="flex-center gap-1 opaci-50 tx-ls-5 pa-5 bg-w-20 ma-2">
+            <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray ">
+                <div className="flex-center gap-1 opaci-50 tx-ls-5 pa-5 bg-b-20 ma-2">
                     Score: {score.maxScore} | Speed: {parseDecimals(score.velocityX)}
                     {/* Y: {score.velocityY} */}
                 </div>
             </div>
-            <div className="flex-col flex-align-stretch z-700 gap-1 tx-white ">
+            <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray tx-shadow-b-1 tx-lg ">
                 <div className="flex-center gap-1 opaci-50 tx-ls-5">
                     SIZE
                     (ft)
@@ -156,20 +157,22 @@ const Component = forwardRef(({}:any, ref)=>{
 
 
         <div className="flex pos-abs top-0 left-0  bord-r- pa-2 ma-2">
-            <div className="flex-col flex-align-stretch z-700 gap-1 tx-white mt-100">
+            <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray mt-100 ">
 
-                <div className="flex-center gap-1">
-                    <div className="tx-sm opaci-50">Current Size (m)</div>
-                    <div className="flex bg-w- bord-r- opaci-chov--50">{parseInt(xOut*2+"")}</div>
+                <div className="flex-center gap-1 tx-shadow-b-1">
+                    <div
+                         
+                    className="tx-  tx-gray tx-shadow-b-1">Current Size (m)</div>
+                    <div className="flex bg-b- bord-r- opaci-chov--50">{parseInt(xOut*2+"")}</div>
                     <div>x</div>
-                    <div className="flex bg-w- bord-r- opaci-chov--50">{parseInt(zOut*2+"")}</div>
+                    <div className="flex bg-b- bord-r- opaci-chov--50">{parseInt(zOut*2+"")}</div>
                 </div>
                 <div className="flex-col flex-align-stretch gap-2 rot-180">
                     <div className="flex tx-center  bord-r-8">
                         <button onClick={()=>{toggleOption("roof")}}
                             style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
                             className={` tx-center w-100 px-1 bord-r- px-2 opaci-chov--50  tx-lx pt-2
-                                ${!optsToggler["roof"].bool ? "bg-b-hov-20 opaci-25 border-white tx-white" : " tx-blue border-blue"}
+                                ${!optsToggler["roof"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
                             `}
                         >
                             <div className=""><TbChartAreaLine /></div>
@@ -179,7 +182,7 @@ const Component = forwardRef(({}:any, ref)=>{
                         <button onClick={()=>{toggleOption("frontwall")}}
                             style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
                             className={` tx-center w-100   bord-r- px-2 opaci-chov--50 tx-lx
-                                ${!optsToggler["frontwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-white" : " tx-blue border-blue"}
+                                ${!optsToggler["frontwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
                             `}
                         >
                             <FiAlertTriangle />
@@ -189,7 +192,7 @@ const Component = forwardRef(({}:any, ref)=>{
                         <button onClick={()=>{toggleOption("leftwall")}}
                             style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
                             className={`flex-1 tx-center pa-1 bord-r- px-2 opaci-chov--50 tx-lx
-                                ${!optsToggler["leftwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-white" : " tx-blue border-blue"}
+                                ${!optsToggler["leftwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
                             `}
                         >
                             <GiPayMoney />
@@ -197,7 +200,7 @@ const Component = forwardRef(({}:any, ref)=>{
                         <button onClick={()=>{toggleOption("rightwall")}} 
                             style={{filter: "hue-rotate(-189deg) brightness(666%)"}}
                             className={`flex-1 tx-center pt-2  bord-r- px-2 opaci-chov--50 tx-lx
-                                ${!optsToggler["rightwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-white" : " tx-blue border-blue"}
+                                ${!optsToggler["rightwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
                             `}
                         >
                             <div className="block" ><GiReceiveMoney /></div>
@@ -207,7 +210,7 @@ const Component = forwardRef(({}:any, ref)=>{
                         <button onClick={()=>{toggleOption("backwall")}}
                             style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
                             className={` tx-center w-100  pt-1 bord-r- px-2 opaci-chov--50  tx-lx
-                                ${!optsToggler["backwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-white" : " tx-blue border-blue"}
+                                ${!optsToggler["backwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
                             `}
                         >
                             <HiOutlineBellAlert />
@@ -217,7 +220,7 @@ const Component = forwardRef(({}:any, ref)=>{
                         <button onClick={()=>{toggleOption("floor")}}
                             style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
                             className={` tx-center w-100  pt-1 bord-r- px-2 opaci-chov--50  tx-lx
-                                ${!optsToggler["floor"].bool ? "bg-b-hov-20 opaci-25 border-white tx-white" : " tx-blue border-blue"}
+                                ${!optsToggler["floor"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
                             `}
                         >
                             <TiChartAreaOutline />
@@ -229,7 +232,7 @@ const Component = forwardRef(({}:any, ref)=>{
         <Canvas shadows  onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onMouseMove={handleMouseMove}
             
             // camera={{ fov: 50, position: [-xOut*2, yOut/4, zOut*2] }} 
-            camera={{ fov: 90, position: [0,0,zOut*2] }} 
+            camera={{ fov: fffooovvv, position: [0,yOut/2,zOut*2] }} 
         >
             <SemiOrbitCameraControl  />
             <ambientLight intensity={0.35} />

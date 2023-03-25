@@ -136,7 +136,7 @@ const Component = forwardRef(({}:any, ref)=>{
 
                 <div className="flex-center gap-1">
                     {/* <div className="flex py-1 px-2 bg-w-10 bord-r-8 opaci-chov--50">{parseInt(""+xOut*2)}</div> */}
-                    <div className="tx-sm opaci-50">Current Size (m)</div>
+                    <div className="tx-sm opaci-75 tx-gray">Current Size (m)</div>
                     <div className="flex bg-w- bord-r-8 opaci-chov--50">{parseInt(xOut*2+"")}&#39;</div>
                     <div className="flex bg-w- bord-r-8 opaci-chov--50">{parseInt(zOut*2+"")}&#39;</div>
                     {/* <div className="flex bg-w- bord-r-8 opaci-chov--50">{parseInt(""+roofHeight)}'</div> */}
