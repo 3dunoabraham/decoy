@@ -215,7 +215,9 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
                                             {catArray.map((aCatItem,index)=>{
                                                 if (!!aCatItem.url) {
                                                     return (
-                                                        <Link href={aCatItem.url} className="flex px-2 opaci-chov--50  py-1 ims-border-faded bord-r-8">
+                                                        <Link href={aCatItem.url} className="flex px-2 opaci-chov--50  py-1 ims-border-faded bord-r-8"
+                                                            key={index}
+                                                        >
                                                             {aCatItem.slug}
                                                             <div className="tx-xs">
                                                                 {!!aCatItem.url ? "+URL" : ""}
