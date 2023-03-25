@@ -226,7 +226,9 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
                                                     )
                                                 }
                                                 return (
-                                                    <div className="flex px-2 py-1 ims-border-faded bord-r-8 opaci-50 tx-bold-2 tx-sm">
+                                                    <div className="flex px-2 py-1 ims-border-faded bord-r-8 opaci-50 tx-bold-2 tx-sm"
+                                                        key={index}
+                                                    >
                                                         {aCatItem.slug}
                                                         <div className="tx-xs">
                                                             {!!aCatItem.url ? "+URL" : ""}
