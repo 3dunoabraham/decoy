@@ -30,7 +30,7 @@ export default function Component ({ position, pillars, diameter=0.1, height= 1 
                     castShadow receiveShadow
                     position={aPillar}
                     ref={meshRef}
-                    scale={clicked ? 1.5 : 1}
+                    // scale={clicked ? 1.5 : 1}
                     onClick={() => setClicked(!clicked)}
                     onPointerOver={() => setHovered(true)}
                     onPointerOut={() => setHovered(false)}

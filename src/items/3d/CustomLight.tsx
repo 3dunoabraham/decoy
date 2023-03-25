@@ -29,7 +29,7 @@ export default function Component ({ position }: BoxProps) {
             castShadow receiveShadow
             position={position}
             ref={meshRef}
-            scale={clicked ? 2 : 1}
+            // scale={clicked ? 2 : 1}
             onClick={() => setClicked(!clicked)}
             onPointerOver={() => setHovered(true)}
             onPointerOut={() => setHovered(false)}

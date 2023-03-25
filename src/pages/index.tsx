@@ -99,11 +99,11 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
                     
                     
                     <Link href="/" className="pos-abs top-0 left-0 flex-col flex-align-start gap-2 tx-white  z-800 ">
-                        <Link href="/" className="a tx-xl flex z-400 px-4 h-50px gap-2">
+                        <div className="a tx-xl flex z-400 px-4 h-50px gap-2">
                             <div className="a tx-xxl tx-bold-8">B</div>
                             <div className="a tx-xxl tx-bold-3 pl-8">T</div>
-                        </Link>
-                        <Link href="/" className="a tx-lx flex z-400 px-4 h-50px">
+                        </div>
+                        <div className="a tx-lx flex z-400 px-4 h-50px">
                             <div className="a tx-lx tx-bold-5">PO</div>
                             <div className="a tx-lx tx-bold-3 ">
                                 <div className='invisible'>III</div>
@@ -112,7 +112,7 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
                                 </div>
                             </div>
                             <div className="a tx-lx tx-bold-6">NG</div>
-                        </Link>
+                        </div>
                         {/* <div className="a tx-xl">Duno</div> */}
                     </Link>
                     <div className=' tx-blue  tx-xl pa-8 opaci-chov--50 z-800 pos-abs right-0 spin-120'

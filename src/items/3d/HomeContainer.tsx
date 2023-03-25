@@ -28,6 +28,7 @@ import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
 import BaseballFieldFloorScale from "./BaseballFieldFloorScale";
 import { parseDecimals } from "@/components/scripts/helpers";
+import ChartBox from "./ChartBox";
 
 const Component = forwardRef(({}:any, ref)=>{
     // const { camera, gl: { domElement }, } = useThree();
@@ -107,6 +108,9 @@ const Component = forwardRef(({}:any, ref)=>{
         // console.log("the new size", theNewSize)
         s__sizeForm(theNewSize)
     }
+    const [c_velocityX, c_setVelocityX] = useState(0);
+    const [c_velocityY, c_setVelocityY] = useState(0);
+    
   const [velocityX, setVelocityX] = useState(0);
   const [velocityY, setVelocityY] = useState(0);
     const boundaryBox = useMemo(()=>{
@@ -241,7 +245,11 @@ const Component = forwardRef(({}:any, ref)=>{
             <fog attach="fog" args={['#ffffff', 5, zOut*6]} />
 
             {/* <CustomBox  position={[0, (1.68/2) - 0.95, zOut*1.32]} />  */}
-            <MovingBox {...{s__score: scoreHandle,score, velocityX, setVelocityX, velocityY, setVelocityY}} wallWidth={wallWidth} boundaries={[xOut, yOut, zOut]}  position={[0, (1.68/2) - 0.95, zOut]} /> 
+            <ChartBox {...{s__score: scoreHandle,score, velocityX:c_velocityX,
+                setVelocityX:c_setVelocityX, velocityY:c_velocityY, setVelocityY:c_setVelocityY}} 
+            wallWidth={wallWidth} boundaries={[xOut, yOut, zOut]}  position={[0, (1.68/2) - 0.95, zOut]} /> 
+            <MovingBox {...{s__score: scoreHandle,score, velocityX, setVelocityX, velocityY, setVelocityY}} 
+            wallWidth={wallWidth} boundaries={[xOut, yOut, zOut]}  position={[0, (1.68/2) - 0.95, zOut]} /> 
             <HumanScale roofWidth={roofWidth} width={0.1} wallWidth={wallWidth} length={0.3}  position={[-xOut, (1.68/2) - (yOut/2), zOut*1.3]} /> 
 
             {optsToggler["floor"].bool && <BaseballFieldFloorScale  position={[0,-yOut/2 - 0.05,0]} floorWidth={0.1}/>  }
