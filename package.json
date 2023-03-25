@@ -28,7 +28,8 @@
         "react-csv": "^2.2.2",
         "react-dom": "^18.2.0",
         "react-icons": "^4.6.0",
-        "three": "^0.138.3"
+        "three": "^0.138.3",
+        "use-cannon": "^0.5.3"
     },
     "devDependencies": {
         "@playwright/test": "^1.29.1",
