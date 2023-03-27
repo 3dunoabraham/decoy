@@ -214,7 +214,7 @@ const Component = forwardRef(({}:any, ref)=>{
             
             camera={{ fov: 50, position: [-xOut*2, yOut/4, zOut*2] }} 
         >
-            <SemiOrbitCameraControl  />
+            <SemiOrbitCameraControl  zPos={0} />
             {/* <PerspectiveCamera  position={[-xOut*1.5, yOut/2, zOut*3]} /> */}
             {/* <SemiOrbitCameraControl width={20} length={10} height={20}  /> */}
             {/* <OrbitControls /> */}
