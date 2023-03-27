@@ -3,7 +3,7 @@ import { BufferGeometry, DoubleSide, Mesh, MeshBasicMaterial, MeshStandardMateri
 import * as THREE from "three";
 import { useThree } from "@react-three/fiber";
 
-export default function Component({ position=[0,0,0], points=null, thickness=0.1, roofHeight=2, width, length }) {
+export default function Component({ color="#966B3D", position=[0,0,0], points=null, thickness=0.1, roofHeight=2, width, length }) {
     const { viewport } = useThree();
 
     const shapePoints = useMemo(() => {
@@ -62,7 +62,7 @@ export default function Component({ position=[0,0,0], points=null, thickness=0.1
         ref={meshRef} // geometry={new THREE.BufferGeometry().setFromPoints(vertices)} material={basic_material}
     >
         <extrudeBufferGeometry attach="geometry" args={[shape, extrudeSettings]} />
-        <meshStandardMaterial color="#966B3D" side={DoubleSide} />
+        <meshStandardMaterial color={color} side={DoubleSide} />
 
     </mesh>    
     )

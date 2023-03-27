@@ -41,7 +41,7 @@ export function Instances({
   }, [positions, xRange, yRange]);
 
   return (
-    <instancedMesh ref={ref} args={[null, null, count]} position={[0,0,boundaries[2]]}>
+    <instancedMesh ref={ref} args={[null, null, count]} position={[0,0,boundaries[2]*0.9]}>
       <boxBufferGeometry />
       <meshStandardMaterial color={"gray"} />
     </instancedMesh>

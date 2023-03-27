@@ -22,7 +22,7 @@ type BoxProps = {
 function getRandomUnixDate() {
   const now = new Date();
   const oneMonthAgo = now.getTime() - 30 * 24 * 60 * 60 * 1000;
-  const oneYearAgo = now.getTime() - 365 * 24 * 60 * 60 * 1000;
+  const oneYearAgo = now.getTime() - 60 * 24 * 60 * 60 * 1000;
   const randomTime = oneMonthAgo + Math.random() * (oneYearAgo - oneMonthAgo);
   return Math.floor(randomTime);
 }
@@ -51,7 +51,7 @@ export default function Component({
   const [q__asd, asd] = useQueryPlus({ queryKey: ['asdasd'], 
       refetchOnWindowFocus: false,
       queryFn: async () =>{
-        let t = "3m"
+        let t = "1m"
         let startUnixDate = getRandomUnixDate()
           let urlBase = `https://api.binance.com/api/v3/klines?interval=${t}&startTime=${startUnixDate}&symbol=`
           urlBase += "BTCUSDT"
@@ -143,7 +143,7 @@ export default function Component({
   // }, []);
   return (
     <group>
-      {/* <mesh
+      <mesh
         castShadow
         receiveShadow
         position={[
@@ -171,16 +171,16 @@ export default function Component({
       >
         <boxGeometry args={[wallWidth*1.5, wallWidth*3, wallWidth*1.5]} />
         <meshStandardMaterial color={hovered ? "hotpink" : "blue"} />
-      </mesh>} */}
+      </mesh>}
 
       
-    {/* <Instances
+    <Instances
         boundaries={boundaries}
       count={prices.length}
       positions={prices.slice(0, liveId || 499).map((price) => price)}
       xRange={[-boundaries[0], boundaries[0]*50]}
       yRange={[-boundaries[2]*5, 1]}
-    /> */}
+    />
 
       {/* <Asdasd /> */}
       
