@@ -210,6 +210,7 @@ const Component = forwardRef(({}:any, ref)=>{
 
                             return (
                                 <button onClick={()=>{setTimeframe(aTimeframe)}}
+                                    key={index}
                                     style={{ color:tokenColors[aTimeframe]}}
                                     className={`flex-1 tx-center pa-1 bord-r- px-2 opaci-chov--50 tx-l
                                         ${form.id.split("USDT")[1] !== aTimeframe.toUpperCase() ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-bold-8 tx-lg tx-red"}
