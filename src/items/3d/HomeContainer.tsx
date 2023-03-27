@@ -230,6 +230,7 @@ const Component = forwardRef(({}:any, ref)=>{
 
                             return (
                                 <button onClick={()=>{setToken(aToken)}}
+                                    key={index}
                                     style={{ color:tokenColors[aToken]}}
                                     className={`flex-1 tx-center pa-1 bord-r- px-2 opaci-chov--50 tx-l
                                         ${form.id !== aToken.toUpperCase()+"USDT"+form.id.split("USDT")[1].toUpperCase() ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-bold-8 tx-lg "}
