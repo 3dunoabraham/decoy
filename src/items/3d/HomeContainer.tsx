@@ -226,7 +226,7 @@ const Component = forwardRef(({}:any, ref)=>{
                     <div className="tx-xsm pr-1">length: {sizeForm.z}</div>
                     <input type="range" min="3" max="77" className="w-100" value={sizeForm.z} onChange={(e)=>{be_size(e.target.value,"z")}} />
                 </div> */}
-                <div className="flex-col gap-1 opaci-50 tx-ls- ">
+                {/* <div className="flex-col gap-1 opaci-50 tx-ls- ">
                     <div className="flex tx-xsm">Height (ft): {sizeForm.y}</div>
                     <input type="range" min="1" max="12"
                         className="z-900 scale-150 w-100 pos-rel"
@@ -234,7 +234,7 @@ const Component = forwardRef(({}:any, ref)=>{
                         value={sizeForm.y} onChange={(e)=>{be_size(e.target.value,"y")}} 
                         
                     />
-                </div>
+                </div> */}
             </div>
             <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray ">
                 <div className="flex-center gap-1 tx-bold-8 tx-ls-5 px-5 py-2 bg-b-20 ma-2 tx-shadow-b-3">
