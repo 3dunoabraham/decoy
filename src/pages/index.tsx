@@ -22,6 +22,7 @@ import FailedRequest from '@/src/items/atoms/holders/FailedRequest';
 import { useIsClient } from 'usehooks-ts';
 // import HomeContainer from '@/src/items/3d/HomeContainer';
 import dynamic from 'next/dynamic'
+import { FaExternalLinkAlt } from 'react-icons/fa';
 const HomeContainer = dynamic(import ("@/src/items/3d/HomeContainer"), { ssr: false })
 const delay = ms => new Promise(res => setTimeout(res, ms));
 const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
@@ -136,13 +137,13 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
                     <Link target="_blank" href="/dashboard" className="tx-blue px-6 gap-2 tx-lgx flex-center opaci-chov--50 w-100 tx-bold-2 pt-100 pb-3"
                         style={{filter: "hue-rotate(-189deg) brightness(666%)"}}
                     >
-                        Dashboard 
+                        <FaExternalLinkAlt /> Dashboard 
                     </Link>
-                    <Link target="_blank" href="/chart/4h?token=btc" className="tx-blue px-6 gap-2 tx-lgx flex-center opaci-chov--50 w-100 tx-bold-2 pt-100 pb-3"
+                    {/* <Link target="_blank" href="/chart/4h?token=btc" className="tx-blue px-6 gap-2 tx-lgx flex-center opaci-chov--50 w-100 tx-bold-2 pt-100 pb-3"
                         style={{filter: "hue-rotate(-189deg) brightness(666%)"}}
                     >
                         BTCUSDT <br/> 3m Chart
-                    </Link>
+                    </Link> */}
                 </div>
             </div>
             <div className='flex-1 noclick'>

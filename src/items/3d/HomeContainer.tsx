@@ -1,13 +1,13 @@
 import { Canvas, useThree } from "@react-three/fiber";
-import { MdRoofing, MdBorderLeft, MdBorderRight } from "react-icons/md";
+import { MdRoofing, MdBorderLeft, MdBorderRight, MdOutlineRoofing } from "react-icons/md";
 import { MdFlipToBack } from "react-icons/md";
 import { FaWarehouse } from "react-icons/fa";
 import { CgBorderLeft } from "react-icons/cg";
 import { TfiLayoutSidebarLeft } from "react-icons/tfi";
-import { AiOutlineCaretUp, AiOutlineVerticalAlignBottom } from "react-icons/ai";
+import { AiFillEyeInvisible, AiOutlineCaretUp, AiOutlineVerticalAlignBottom } from "react-icons/ai";
 import { TbChartAreaLine } from "react-icons/tb";
 import { TiChartAreaOutline } from "react-icons/ti";
-import { GiPayMoney, GiReceiveMoney } from "react-icons/gi";
+import { GiBrickWall, GiPayMoney, GiReceiveMoney } from "react-icons/gi";
 import { FiAlertTriangle } from "react-icons/fi";
 import { HiOutlineBellAlert } from "react-icons/hi2";
 
@@ -33,6 +33,7 @@ import FloorFloorScale from "./FloorFloorScale";
 import TradingOrbitCameraControl from "./TradingOrbitCameraControl";
 import TradingBox from "./TradingBox";
 import { Vector3 } from "three";
+import { BsFillHouseDoorFill } from "react-icons/bs";
 
 const Component = forwardRef(({}:any, ref)=>{
     const tokenColors = {
@@ -216,18 +217,21 @@ const Component = forwardRef(({}:any, ref)=>{
 
 
         <div className="flex pos-abs top-0 left-0  bord-r- pa-2 ma-2">
-            <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray mt-100 ">
+            <div className="flex-col flex-align-start z-700 gap-1 tx-gray mt-100 ">
 
+                <div className="flex-center gap-1 tx-shadow-b-1 ">
+                    <div className="tx-  tx-gray tx-shadow-b-1">ID: {form.id}</div>
+                </div>
                 <div className="flex-center gap-1 tx-shadow-b-1 ">
                     <div className="tx-  tx-gray tx-shadow-b-1">Power: {power}</div>
                 </div>
-                <div className="flex-center gap-1 tx-shadow-b-1 ">
+                {/* <div className="flex-center gap-1 tx-shadow-b-1 ">
                     <div className="tx-  tx-gray tx-shadow-b-1">Size (m)</div>
                     <div className="flex bg-b- bord-r- opaci-chov--50">{parseInt(xOut*2+"")}</div>
                     <div>x</div>
                     <div className="flex bg-b- bord-r- opaci-chov--50">{parseInt(zOut*2+"")}</div>
-                </div>
-                <div className="flex-col flex-align-stretch gap-2 rot-180">
+                </div> */}
+                <div className="flex-col flex-align-start gap-2 rot-180">
                     
                     <div className="flex gap-1">
                         { timeframesArray.map((aTimeframe, index) => {
@@ -236,7 +240,7 @@ const Component = forwardRef(({}:any, ref)=>{
                                 <button onClick={()=>{setTimeframe(aTimeframe)}}
                                     key={index}
                                     style={{ color:tokenColors[aTimeframe]}}
-                                    className={`flex-1 tx-center pa-1 bord-r- px-2 opaci-chov--50 tx-l
+                                    className={`flex-1 tx-center pa-1 bord-r- px-1 opaci-chov--50 tx-l
                                         ${form.id.split("USDT")[1] !== aTimeframe.toUpperCase() ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-bold-8 tx-lg tx-red"}
                                     `}
                                 >
@@ -256,7 +260,7 @@ const Component = forwardRef(({}:any, ref)=>{
                                 <button onClick={()=>{setToken(aToken)}}
                                     key={index}
                                     style={{ color:tokenColors[aToken]}}
-                                    className={`flex-1 tx-center pa-1 bord-r- px-2 opaci-chov--50 tx-l
+                                    className={`flex-1 tx-center pa-1 bord-r- px-1 opaci-chov--50 tx-l
                                         ${form.id !== aToken.toUpperCase()+"USDT"+form.id.split("USDT")[1].toUpperCase() ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-bold-8 tx-lg "}
                                     `}
                                 >
@@ -268,7 +272,7 @@ const Component = forwardRef(({}:any, ref)=>{
                             )
                         })}
                     </div>
-                    <div className="flex tx-center  bord-r-8">
+                    {/* <div className="flex tx-center  bord-r-8">
                         <button onClick={()=>{toggleOption("ceil")}}
                             style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
                             className={` tx-center w-100 px-1 bord-r- px-2 opaci-chov--50  tx-lx pt-2
@@ -281,17 +285,100 @@ const Component = forwardRef(({}:any, ref)=>{
                     <div className="flex-center ">
                         <button onClick={()=>{toggleOption("frontwall")}}
                             style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
-                            className={` tx-center w-100   bord-r- px-2 opaci-chov--50 tx-lx
-                                ${!optsToggler["frontwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
+                            className={` tx-center w-100   bord-r- px-2 opaci-chov--50 tx-lx pt-1
+                                ${!optsToggler["frontwall"].bool
+                                    ? "bg-b-hov-20 opaci-25 border-white tx-gray"
+                                    : " tx-blue border-blue"
+                                }
                             `}
                         >
                             <FiAlertTriangle />
+                        </button>
+                    </div> */}
+                    <div className="flex-center">
+                        <button onClick={()=>{toggleOption("backwall")}}
+                            style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
+                            className={` tx-center w-100  pt-1 bord-r- px-2 opaci-chov--50  tx-lx
+                                ${!optsToggler["backwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
+                            `}
+                        >
+                            <HiOutlineBellAlert />
                         </button>
                     </div>
                     <div className="flex gap-1">
                         <button onClick={()=>{toggleOption("leftwall")}}
                             style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
-                            className={`flex-1 tx-center pa-1 bord-r- px-2 opaci-chov--50 tx-lx
+                            className={`flex-1 tx-center pa-1 pb-0 bord-r- px-2 opaci-chov--50 tx-lx 
+                                ${!optsToggler["leftwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
+                            `}
+                        >
+                            <GiPayMoney />
+                        </button>
+                        <button onClick={()=>{toggleOption("rightwall")}} 
+                            style={{filter: "hue-rotate(-189deg) brightness(666%)"}}
+                            className={`flex-1 tx-center pt-2  bord-r- px-2 opaci-chov--50 tx-lx
+                                ${!optsToggler["rightwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
+                            `}
+                        >
+                            <div className="block" ><GiReceiveMoney /></div>
+                        </button>
+                    </div>
+                    <div className="flex-center">
+                        <button onClick={()=>{toggleOption("floor")}}
+                            style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
+                            className={` tx-center w-100  pt-1 bord-r- px-2 opaci-chov--50  tx-lx
+                                ${!optsToggler["floor"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
+                            `}
+                        >
+                            <TiChartAreaOutline />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div className="flex pos-abs top-0 right-0  bord-r- pa-2 ma-2">
+            <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray mt-100 ">
+
+                {/* <div className="flex-center gap-1 tx-shadow-b-1 ">
+                    <div className="tx-  tx-gray tx-shadow-b-1">Power: {power}</div>
+                </div> */}
+                <div className="flex-center gap-1 tx-shadow-b-1 ">
+                    <div className="tx-  tx-gray tx-shadow-b-1">Size (m)</div>
+                    <div className="flex bg-b- bord-r- opaci-chov--50">{parseInt(xOut*2+"")}</div>
+                    <div>x</div>
+                    <div className="flex bg-b- bord-r- opaci-chov--50">{parseInt(zOut*2+"")}</div>
+                </div>
+                <div className="flex-col flex-align-stretch gap-2 rot-180">
+                    
+                    <div className="flex tx-center  bord-r-8">
+                        <button onClick={()=>{toggleOption("ceil")}}
+                            style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
+                            className={` tx-center w-100 px-1 bord-r- px-2 opaci-chov--50  tx-lx pt-2
+                                ${!optsToggler["ceil"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
+                            `}
+                        >
+                            <div className=""><MdOutlineRoofing /></div>
+                        </button>
+                    </div>
+                    <div className="flex-center ">
+                        <button onClick={()=>{toggleOption("frontwall")}}
+                            style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
+                            className={` tx-center w-100   bord-r- px-2 opaci-chov--50 tx-lx pt-1
+                                ${!optsToggler["frontwall"].bool
+                                    ? "bg-b-hov-20 opaci-25 border-white tx-gray"
+                                    : " tx-blue border-blue"
+                                }
+                            `}
+                        >
+                            <AiFillEyeInvisible />
+                        </button>
+                    </div>
+                    <div className="flex gap-1">
+                        <button onClick={()=>{toggleOption("leftwall")}}
+                            style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
+                            className={`flex-1 tx-center pa-1 pb-0 bord-r- px-2 opaci-chov--50 tx-lx 
                                 ${!optsToggler["leftwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
                             `}
                         >
@@ -313,7 +400,7 @@ const Component = forwardRef(({}:any, ref)=>{
                                 ${!optsToggler["backwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
                             `}
                         >
-                            <HiOutlineBellAlert />
+                            <MdFlipToBack />
                         </button>
                     </div>
                     <div className="flex-center">
@@ -329,6 +416,8 @@ const Component = forwardRef(({}:any, ref)=>{
                 </div>
             </div>
         </div>
+
+
         <Canvas shadows  onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onMouseMove={handleMouseMove}
             
             // camera={{ fov: 50, position: [-xOut*2, yOut/4, zOut*2] }} 
@@ -342,14 +431,14 @@ const Component = forwardRef(({}:any, ref)=>{
             <pointLight castShadow intensity={0.5} position={[xOut*1.1, yOut*1.1, -zOut*1.2]} />
             <fog attach="fog" args={['#000000', 5, 10]} />
 
-            <Cylinder args={[0.9, 0.9, 1.4, 5]}  position={new Vector3(0, 0, -1)} >
+            <Cylinder args={[0.2, 0.4, 1.2, 5]}  position={new Vector3(0, 0, -0.7)} >
                 <meshStandardMaterial attach="material" color="lightgray" />
             </Cylinder>
-            <Cylinder args={[1.1, 1.1, 1, 7]}  position={new Vector3(0, 0, -1)} >
-                <meshStandardMaterial attach="material" color="gray" />
+            <Cylinder args={[1.1, 1.4, 1.3, 7]}  position={new Vector3(0, -0.15, -0.7)} >
+                <meshStandardMaterial attach="material" color="gray" wireframe={true} />
             </Cylinder>
             {!!power &&
-                <Cylinder args={[0.8, 0.8, 1.6, 5]}  position={new Vector3(0, 0, -1)} >
+                <Cylinder args={[0.8, 1, 0.6, 5]}  position={new Vector3(0, 0.7, -0.7)} >
                     <meshStandardMaterial attach="material" color={`#${power*320+50}4444`} />
                 </Cylinder>
             }
