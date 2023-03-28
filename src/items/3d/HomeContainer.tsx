@@ -1,4 +1,4 @@
-import { Canvas, useThree } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { MdRoofing, MdBorderLeft, MdBorderRight, MdOutlineRoofing } from "react-icons/md";
 import { MdFlipToBack } from "react-icons/md";
 import { FaWarehouse } from "react-icons/fa";
@@ -21,10 +21,10 @@ import HumanScale from "@/src/items/3d/HumanScale";
 import FieldFloorScale from "./FieldFloorScale";
 import CustomHorizontalWallDoor from "./CustomHorizontalWallDoor";
 
-import { forwardRef, useContext, useImperativeHandle, useMemo, useState,  } from 'react'
+import { forwardRef, useContext, useEffect, useImperativeHandle, useMemo, useRef, useState,  } from 'react'
 import CustomBox from "./CustomBox";
 import MovingBox2 from "./MovingBox2";
-import { Cylinder, OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import { Torus, Cylinder, OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
 import BaseballFieldFloorScale from "./BaseballFieldFloorScale";
 import { parseDecimals } from "@/components/scripts/helpers";
@@ -35,12 +35,41 @@ import TradingBox from "./TradingBox";
 import { Vector3 } from "three";
 import { BsFillHouseDoorFill } from "react-icons/bs";
 
+
+const RotatingPointLight = ({ color, intensity, distance, position }) => {
+    const lightRef:any = useRef();
+    const angleRef:any = useRef(0);
+    const step = 0.01; // set the step to the desired value
+  
+    useEffect(() => {
+      const intervalId = setInterval(() => {
+        angleRef.current += step;
+        lightRef.current.rotation.y = angleRef.current;
+      }, 10000); // set the interval duration to the desired value
+      
+      return () => clearInterval(intervalId); // clear the interval on unmount
+    }, []);
+  
+    return (
+      <group ref={lightRef}>
+        <mesh>
+          <pointLight
+            castShadow
+            color={color}
+            intensity={intensity}
+            position={position}
+          />
+        </mesh>
+      </group>
+    );
+  };
+  
 const Component = forwardRef(({}:any, ref)=>{
     const tokenColors = {
-      "btc": "orange",
+      "btc": "white",
       "eth": "green",
       "link": "cyan",
-      "ftm": "violet",
+      "ftm": "blue",
     }
     // const { camera, gl: { domElement }, } = useThree();
     const [form, s__form] = useState({
@@ -116,7 +145,7 @@ const Component = forwardRef(({}:any, ref)=>{
     // const wallWidth = 0.5
     const roofWidth = 0.2
     const wallWidth = 0.1
-    const wideFeet = 6
+    const wideFeet = 5
     const lengthFeet = 6
     const heightFeet = 5
     const [sizeForm, s__sizeForm] = useState({x:wideFeet,z:lengthFeet,y:heightFeet})
@@ -208,7 +237,7 @@ const Component = forwardRef(({}:any, ref)=>{
                 </div>
             </div>
             <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray ">
-                <div className="flex-center gap-1 tx-bold-8 tx-ls-5 px-5 py-2 bg-b-20 ma-2 tx-shadow-5">
+                <div className="flex-center gap-1 tx-bold-8 tx-ls-5 px-5 py-2 bg-b-20 ma-2 tx-shadow-b-3">
                     Score: {score.maxScore} | Speed: {parseDecimals(score.velocityX)}
                     {/* Y: {score.velocityY} */}
                 </div>
@@ -240,8 +269,10 @@ const Component = forwardRef(({}:any, ref)=>{
                                 <button onClick={()=>{setTimeframe(aTimeframe)}}
                                     key={index}
                                     style={{ color:tokenColors[aTimeframe]}}
-                                    className={`flex-1 tx-center pa-1 bord-r- px-1 opaci-chov--50 tx-l
-                                        ${form.id.split("USDT")[1] !== aTimeframe.toUpperCase() ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-bold-8 tx-lg tx-red"}
+                                    className={`flex-1  tx-center pa-1 bord-r- px-1 opaci-chov--50 tx-l
+                                        ${form.id.split("USDT")[1] !== aTimeframe.toUpperCase()
+                                            ? "bg-w-50 opaci-50 border-white tx-gray tx-shadow-b-1 "
+                                            : " tx-bold-8 tx-lg tx-red tx-shadow-b-1 "}
                                     `}
                                 >
                                     {aTimeframe.toUpperCase()}
@@ -260,8 +291,11 @@ const Component = forwardRef(({}:any, ref)=>{
                                 <button onClick={()=>{setToken(aToken)}}
                                     key={index}
                                     style={{ color:tokenColors[aToken]}}
-                                    className={`flex-1 tx-center pa-1 bord-r- px-1 opaci-chov--50 tx-l
-                                        ${form.id !== aToken.toUpperCase()+"USDT"+form.id.split("USDT")[1].toUpperCase() ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-bold-8 tx-lg "}
+                                    className={`flex-1  tx-center pa-1 bord-r- px-1 opaci-chov--50 tx-l
+                                        ${form.id !== aToken.toUpperCase()+"USDT"+form.id.split("USDT")[1].toUpperCase()
+                                            ? "bg-b-hov-20 opaci-50 tx-bold-8 tx-shadow-b-1 bg-w-50 tx-ls-2 border-white tx-gray"
+                                            : " tx-bold-8 tx-lgx tx-shadow-b-2 border-red"
+                                        }
                                     `}
                                 >
                                     {aToken.toUpperCase()}
@@ -298,8 +332,8 @@ const Component = forwardRef(({}:any, ref)=>{
                     <div className="flex-center">
                         <button onClick={()=>{toggleOption("backwall")}}
                             style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
-                            className={` tx-center w-100  pt-1 bord-r- px-2 opaci-chov--50  tx-lx
-                                ${!optsToggler["backwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
+                            className={` tx-center w-100 tx-shadow-b-3 pt-1 bord-r- px-2 opaci-chov--50  tx-lx
+                                ${!optsToggler["backwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-" : " tx-blue border-blue"}
                             `}
                         >
                             <HiOutlineBellAlert />
@@ -309,7 +343,7 @@ const Component = forwardRef(({}:any, ref)=>{
                         <button onClick={()=>{toggleOption("leftwall")}}
                             style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
                             className={`flex-1 tx-center pa-1 pb-0 bord-r- px-2 opaci-chov--50 tx-lx 
-                                ${!optsToggler["leftwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
+                                ${!optsToggler["leftwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-" : " tx-blue border-blue"}
                             `}
                         >
                             <GiPayMoney />
@@ -317,7 +351,7 @@ const Component = forwardRef(({}:any, ref)=>{
                         <button onClick={()=>{toggleOption("rightwall")}} 
                             style={{filter: "hue-rotate(-189deg) brightness(666%)"}}
                             className={`flex-1 tx-center pt-2  bord-r- px-2 opaci-chov--50 tx-lx
-                                ${!optsToggler["rightwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
+                                ${!optsToggler["rightwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-" : " tx-blue border-blue"}
                             `}
                         >
                             <div className="block" ><GiReceiveMoney /></div>
@@ -327,7 +361,7 @@ const Component = forwardRef(({}:any, ref)=>{
                         <button onClick={()=>{toggleOption("floor")}}
                             style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
                             className={` tx-center w-100  pt-1 bord-r- px-2 opaci-chov--50  tx-lx
-                                ${!optsToggler["floor"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
+                                ${!optsToggler["floor"].bool ? "bg-b-hov-20 opaci-25 border-white tx-" : " tx-blue border-blue"}
                             `}
                         >
                             <TiChartAreaOutline />
@@ -356,7 +390,7 @@ const Component = forwardRef(({}:any, ref)=>{
                         <button onClick={()=>{toggleOption("ceil")}}
                             style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
                             className={` tx-center w-100 px-1 bord-r- px-2 opaci-chov--50  tx-lx pt-2
-                                ${!optsToggler["ceil"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
+                                ${!optsToggler["ceil"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gra" : " tx-blue border-blue"}
                             `}
                         >
                             <div className=""><MdOutlineRoofing /></div>
@@ -367,7 +401,7 @@ const Component = forwardRef(({}:any, ref)=>{
                             style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
                             className={` tx-center w-100   bord-r- px-2 opaci-chov--50 tx-lx pt-1
                                 ${!optsToggler["frontwall"].bool
-                                    ? "bg-b-hov-20 opaci-25 border-white tx-gray"
+                                    ? "bg-b-hov-20 opaci-25 border-white tx-gra"
                                     : " tx-blue border-blue"
                                 }
                             `}
@@ -379,7 +413,7 @@ const Component = forwardRef(({}:any, ref)=>{
                         <button onClick={()=>{toggleOption("leftwall")}}
                             style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
                             className={`flex-1 tx-center pa-1 pb-0 bord-r- px-2 opaci-chov--50 tx-lx 
-                                ${!optsToggler["leftwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
+                                ${!optsToggler["leftwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gra" : " tx-blue border-blue"}
                             `}
                         >
                             <GiPayMoney />
@@ -387,7 +421,7 @@ const Component = forwardRef(({}:any, ref)=>{
                         <button onClick={()=>{toggleOption("rightwall")}} 
                             style={{filter: "hue-rotate(-189deg) brightness(666%)"}}
                             className={`flex-1 tx-center pt-2  bord-r- px-2 opaci-chov--50 tx-lx
-                                ${!optsToggler["rightwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
+                                ${!optsToggler["rightwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gra" : " tx-blue border-blue"}
                             `}
                         >
                             <div className="block" ><GiReceiveMoney /></div>
@@ -397,7 +431,7 @@ const Component = forwardRef(({}:any, ref)=>{
                         <button onClick={()=>{toggleOption("backwall")}}
                             style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
                             className={` tx-center w-100  pt-1 bord-r- px-2 opaci-chov--50  tx-lx
-                                ${!optsToggler["backwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
+                                ${!optsToggler["backwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gra" : " tx-blue border-blue"}
                             `}
                         >
                             <MdFlipToBack />
@@ -407,7 +441,7 @@ const Component = forwardRef(({}:any, ref)=>{
                         <button onClick={()=>{toggleOption("floor")}}
                             style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
                             className={` tx-center w-100  pt-1 bord-r- px-2 opaci-chov--50  tx-lx
-                                ${!optsToggler["floor"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
+                                ${!optsToggler["floor"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gra" : " tx-blue border-blue"}
                             `}
                         >
                             <TiChartAreaOutline />
@@ -423,37 +457,54 @@ const Component = forwardRef(({}:any, ref)=>{
             // camera={{ fov: 50, position: [-xOut*2, yOut/4, zOut*2] }} 
             camera={{ fov: fffooovvv, position: [xOut/2.5,yOut/2,zOut*1.3] }} 
         >
-            <OrbitControls  enableZoom={false} dampingFactor={0.5}  />
-            {/* <SemiOrbitCameraControl zPos={zOut*2}  /> */}
-            <TradingOrbitCameraControl zPos={zOut}  />
-            <ambientLight intensity={0.35} />
-            <pointLight castShadow intensity={1.2} position={[xOut*2, yOut*2, zOut*1.5]} />
-            <pointLight castShadow intensity={0.5} position={[xOut*1.1, yOut*1.1, -zOut*1.2]} />
+            <OrbitControls  enableZoom={true}
+                 minDistance={1.68}
+                 maxDistance={6}
+                dampingFactor={0.08}  
+                enablePan={false}
+            />
+            <ambientLight intensity={0.2} />
+            {/* <pointLight castShadow color={"#ffddcc"} intensity={1.2} position={[xOut*2, yOut*2, zOut*1.5]} /> */}
+            <RotatingPointLight distance={yOut*2} {...{color:"#ffddcc", intensity:1.2, position:[xOut*2, yOut*2, zOut*1.5]}} />
             <fog attach="fog" args={['#000000', 5, 10]} />
 
-            <Cylinder args={[0.2, 0.4, 1.2, 5]}  position={new Vector3(0, 0, -0.7)} >
-                <meshStandardMaterial attach="material" color="lightgray" />
+
+            <Cylinder args={[0.55, 0.55, 1.68, 6]}  position={new Vector3(0, 0, -0.7)} receiveShadow castShadow >
+                <meshStandardMaterial attach="material" color="#aaaaaa" />
             </Cylinder>
-            <Cylinder args={[1.1, 1.4, 1.3, 7]}  position={new Vector3(0, -0.15, -0.7)} >
-                <meshStandardMaterial attach="material" color="gray" wireframe={true} />
+            <Cylinder args={[0.5, 0.5, 1.7, 9]}  position={new Vector3(0, 0, -0.7)}  receiveShadow castShadow>
+                <meshStandardMaterial attach="material" color="#ffffff"  />
             </Cylinder>
+            <Torus args={[0.6,0.1,4,5]}  position={new Vector3(0, 0.85, -0.7)} receiveShadow castShadow rotation={[Math.PI/2,0,Math.PI/2]}>
+                <meshStandardMaterial  attach="material" color="#777777" />
+            </Torus>
+            
             {!!power &&
-                <Cylinder args={[0.8, 1, 0.6, 5]}  position={new Vector3(0, 0.7, -0.7)} >
-                    <meshStandardMaterial attach="material" color={`#${power*320+50}4444`} />
+                <Cylinder args={[0.5, 0.6, power, 5]}  position={new Vector3(0, 0.85, -0.7)} >
+                    <meshStandardMaterial attach="material" color={`#${power*320+50}${power*100+50}44`} 
+                        emissive={`#${power*320+50}444477`}
+                    />
+                </Cylinder>
+            }
+            {!power &&
+                <Cylinder args={[0.5, 0.6, 0.05, 5]}  position={new Vector3(0, 0.85, -0.7)} >
+                    <meshStandardMaterial attach="material" color={`#000`} 
+                        
+                    />
                 </Cylinder>
             }
 
-{optsToggler["floor"].bool && 
-    <FloorFloorScale  boundaries={[xOut, yOut, zOut]} 
-    position={[0,(-yOut/2 - 0.05)*0.98,0]} floorWidth={0.1}
-    /> 
-}
+            {optsToggler["floor"].bool && 
+                <FloorFloorScale  boundaries={[xOut, yOut, zOut]} color={"#485B19"}
+                position={[0,(-yOut/2 - 0.05)*0.98,0]} floorWidth={0.1}
+                /> 
+            }
 
-{optsToggler["floor"].bool && 
-    <FloorFloorScale  boundaries={[xOut*2, yOut, zOut*.8]} 
-    position={[0,(-yOut/2 - (0.05*2))*0.98,0]} floorWidth={0.1}
-    /> 
-}
+            {optsToggler["floor"].bool && 
+                <FloorFloorScale  boundaries={[xOut*2, yOut, zOut*.8]} color={"#A88658"}
+                position={[0,(-yOut/2 - (0.05*2))*0.98,0]} floorWidth={0.1}
+                /> 
+            }
 
             <ChartBox {...{s__score: scoreHandle,score, velocityX:c_velocityX,
                 setVelocityX:c_setVelocityX, velocityY:c_velocityY, setVelocityY:c_setVelocityY}} 
@@ -461,15 +512,15 @@ const Component = forwardRef(({}:any, ref)=>{
             <CustomPillars position={[0, 0, 0]}  height={yOut*1.05} diameter={0.05} pillars={boundaryBox} /> 
 
             <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" 
-                position={[-xOut/2,-0.35,zOut/2]} 
+                position={[xOut*1.5,-0.35,zOut/2]} 
                 setVelocityY={(data)=>{toggleTrade("btc",data)}}
             /> 
             <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="eth" 
-                position={[xOut/2,-0.35,zOut/2]} 
+                position={[xOut*1.5,-0.35,-zOut/2]} 
                 setVelocityY={(data)=>{toggleTrade("eth",data)}}
             /> 
             <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="link" 
-                position={[xOut*1.5,-0.35,zOut/2]} 
+                position={[-xOut*1.5,-0.35,-zOut/2]} 
                 setVelocityY={(data)=>{toggleTrade("link",data)}}
             /> 
             <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="ftm" 
@@ -506,36 +557,6 @@ const Component = forwardRef(({}:any, ref)=>{
             {optsToggler["ceil"].bool && optsToggler["frontwall"].bool && <ShapeContainer wallThick={wallWidth} width={xOut/2} position={[0, yOut-(yOut/2), (zOut-wallWidth)]}  thickness={wallWidth} />}
 
 
-            {/* <MovingBox {...{s__score: scoreHandle,score, velocityX, setVelocityX, velocityY, setVelocityY}} 
-            wallWidth={wallWidth} boundaries={[xOut, yOut, zOut]}  position={[0, (1.68/2) - 0.95, zOut]} /> 
-            <HumanScale roofWidth={roofWidth} width={0.1} wallWidth={wallWidth} length={0.3}  position={[-xOut, (1.68/2) - (yOut/2), zOut*1.3]} /> 
-
-            {optsToggler["floor"].bool && <BaseballFieldFloorScale  position={[0,-yOut/2 - 0.05,0]} floorWidth={0.1}/>  }
-            
-
-
-            {optsToggler["ceil"].bool && <RoofContainer roofWidth={roofWidth} width={xOut/2} position={[0, yOut-(yOut/2), -(zOut+(wallWidth))]} wallWidth={wallWidth} length={((zOut*2)+(wallWidth*2))} /> }
-            <CustomPillars position={[0, 0, 0]}  height={yOut*1.05} diameter={0.05} pillars={boundaryBox} /> 
-
-
-            {optsToggler["backwall"].bool && <CustomWall length={zOut} width={xOut/2} roofHeight={yOut} position={[0, 0, -(zOut-(wallWidth*(1.5/2)))]}  thickness={wallWidth}  />}
-            {optsToggler["ceil"].bool && optsToggler["backwall"].bool && <ShapeContainer wallThick={wallWidth} width={xOut/2} position={[0, yOut-(yOut/2), -(zOut)]} thickness={wallWidth} />}
-            
-            {optsToggler["frontwall"].bool && <CustomWall length={zOut} width={xOut/2} roofHeight={yOut} position={[0, 0, (zOut-(wallWidth*1.5))]}  thickness={wallWidth}  />}
-            {optsToggler["ceil"].bool && optsToggler["frontwall"].bool && <ShapeContainer wallThick={wallWidth} width={xOut/2} position={[0, yOut-(yOut/2), (zOut-wallWidth)]}  thickness={wallWidth} />}
-
-
-            {optsToggler["leftwall"].bool &&
-                <CustomHorizontalWall position={[0, 0, 0]}  roofHeight={yOut*1.01} diameter={0.05} length={(zOut*2)-wallWidth}
-                    wallThick={wallWidth} pillars={ [[-xOut-(wallWidth/2), 0, 0]] } 
-                /> 
-            }
-            
-            {optsToggler["rightwall"].bool &&
-                <CustomHorizontalWallDoor position={[0, 0, 0]}  roofHeight={yOut*1.01} diameter={0.05} length={(zOut*2)-wallWidth}
-                    wallThick={wallWidth} pillars={ [[xOut+(wallWidth/2), 0, 0]] } 
-                /> 
-            } */}
         </Canvas>
     </div>)
 })

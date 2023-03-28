@@ -9,9 +9,10 @@ type BoxProps = {
     camera?: any;
     floorWidth?: any;
     boundaries?: any;
+    color?: any;
 };
   
-export default function Component ({ boundaries=[0,0,0] ,position=[0,0,0] , floorWidth=0.1}: BoxProps) {
+export default function Component ({ color="#777777",boundaries=[0,0,0] ,position=[0,0,0] , floorWidth=0.1}: BoxProps) {
     const [hovered, setHovered] = useState(false);
     const [clicked, setClicked] = useState(false);
     const meshRef = useRef<Mesh>();
@@ -31,7 +32,7 @@ export default function Component ({ boundaries=[0,0,0] ,position=[0,0,0] , floo
 
             <boxGeometry args={[boundaries[0]*2.1, floorWidth, boundaries[2]*2.1]} />
 
-            <meshStandardMaterial  color={"#ffffff"} />
+            <meshStandardMaterial  color={color} />
         </mesh>
       </group>
     );

@@ -11,7 +11,7 @@ export default function Component ({ /* height, width, length */ zPos }) {
     // camera.position.y = -1
     useFrame((state) => {
     // // //   light.current.target.position.lerp(vec.set((state.mouse.x * viewport.width) / 2, (state.mouse.y * viewport.height) / 2, 0), 0.1)
-    state.camera?.position.set((state.mouse.x * viewport.width) / 10, 1,zPos*1.5)
+    state.camera?.position.set((state.mouse.x * viewport.width) / 10, 1,zPos/2)
     state.camera?.lookAt(new THREE.Vector3((
         state.mouse.x * viewport.width) / 5, (state.mouse.y * viewport.height) / 5 - 0,0
     ))

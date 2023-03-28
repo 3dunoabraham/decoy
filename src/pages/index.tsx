@@ -79,9 +79,10 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
     }
     const isClient = useIsClient()
     return (
-    <div className='flex-col w-100 h-min-100vh pos-rel ' style={{background:"#000"}} >
+    <div className='flex-col w-100 h-min-100vh pos-rel ' style={{background:"linear-gradient(-90deg,#f4efdf,#94D8E9)"}} >
         <div className="h-min-100vh w-100   flex-col flex-justify-start flex-align-stretch" style={{}} >
-            <div className="pos-abs h-min-100vh  w-100 flex z-10 flex-align-stretch top-0 left-0">
+            <div className="pos-abs h-min-100vh  w-100 flex z-10 flex-align-stretch top-0 left-0"
+            >
                 <Suspense>
 
                     {isClient && <HomeContainer ref={$boxContainer} />}

@@ -1,4 +1,4 @@
-import { SpotLight, useDepthBuffer } from "@react-three/drei";
+import { SpotLight, Torus, useDepthBuffer } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useMemo, useRef, useState } from "react";
 import { Mesh, Box3, Vector3 } from "three";
@@ -83,10 +83,10 @@ export default function Component({
   const [elapsed, setElapsed] = useState<any>(0);
   const viewport = useThree((state) => state.viewport);
   const tokenColors = {
-    "btc": "orange",
+    "btc": "white",
     "eth": "green",
     "link": "cyan",
-    "ftm": "violet",
+    "ftm": "blue",
   }
   const tokenColor = useMemo(()=>{
     return tokenColors[token]
@@ -120,28 +120,56 @@ export default function Component({
   return (
     <group>
       {clicked &&
-        <DynaText text={clickedPrice+"" || ""}  color={isSelectedId ? 0x006600 : 0x181818}
-          position={new Vector3(position[0],position[1]-0.29,position[2]-0.25)}
-          isSelected={isSelectedId} 
+        <DynaText text={clickedPrice+"" || ""}  color={0x006600}
+          position={new Vector3(position[0],position[1]-0.32,position[2]-0.25)}
+          isSelected={isSelectedId} font={0.2}
         />
       }
-      <DynaText text={queryUSDT.data+"" || ""} color={isSelectedId ? 0xff0000 : 0x181818}
-        position={new Vector3(position[0],position[1]-0.29,position[2]+0.3)} isSelected={isSelectedId} 
+      <DynaText text={queryUSDT.data+"" || ""} color={isSelectedId ? 0xff0000 : 0xaaaaaa}
+        position={new Vector3(position[0],position[1]-0.32,position[2]+0.3)} isSelected={isSelectedId} 
       />
       {/* <Text3D /> */}
+      {isSelectedId && <>
+        
+        <Torus args={[0.7,0.05,4,4]}  
+        
+        position={[
+          position[0],
+          position[1]-0.45,
+          position[2],
+        ]}
+          rotation={[Math.PI/2,0,Math.PI/4]}>
+                <meshStandardMaterial  attach="material" color="#ff5555" />
+            </Torus>
+      </>}
+      
+      {clicked && <>
+        
+        <Torus args={[0.7,0.02,4,4]}  
+        
+        position={[
+          position[0],
+          position[1]-0.39,
+          position[2],
+        ]}
+         receiveShadow castShadow
+          rotation={[Math.PI/2,0,Math.PI/4]}>
+                <meshStandardMaterial  attach="material" color="#55ff55" />
+            </Torus>
+      </>}
       <mesh
         castShadow
         receiveShadow
         position={[
           position[0],
-          (position[1] - boundaries[1] / 2 + wallWidth) - (isSelectedId ? -0.05 : 0 ),
+          (position[1] - boundaries[1] / 2 + wallWidth) - (isSelectedId ? 0 : +0.05 ),
           position[2],
         ]}
         ref={playerMesh}
       >
         <boxGeometry args={[1, wallWidth, 1]} />
         <meshStandardMaterial
-          color={!isSelectedId ? "gray" : "darkgray"} 
+          color={!isSelectedId ? "#A88658" : "#c8a678"} 
         />
       </mesh>
       <mesh
@@ -158,7 +186,7 @@ export default function Component({
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
       >
-        <boxGeometry args={[0.1, 0.1, 0.1]} />
+        <boxGeometry args={[0.1, 0.1, 0.05]} />
         <meshStandardMaterial
           color={hovered ? "red" : tokenColor} 
         />
