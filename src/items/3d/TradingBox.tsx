@@ -84,7 +84,7 @@ export default function Component({
   const viewport = useThree((state) => state.viewport);
   const tokenColors = {
     "btc": "orange",
-    "eth": "emerald",
+    "eth": "green",
     "link": "cyan",
     "ftm": "violet",
   }

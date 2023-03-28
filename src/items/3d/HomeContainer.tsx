@@ -24,7 +24,7 @@ import CustomHorizontalWallDoor from "./CustomHorizontalWallDoor";
 import { forwardRef, useContext, useImperativeHandle, useMemo, useState,  } from 'react'
 import CustomBox from "./CustomBox";
 import MovingBox2 from "./MovingBox2";
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import { Cylinder, OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
 import BaseballFieldFloorScale from "./BaseballFieldFloorScale";
 import { parseDecimals } from "@/components/scripts/helpers";
@@ -32,11 +32,12 @@ import ChartBox from "./ChartBox";
 import FloorFloorScale from "./FloorFloorScale";
 import TradingOrbitCameraControl from "./TradingOrbitCameraControl";
 import TradingBox from "./TradingBox";
+import { Vector3 } from "three";
 
 const Component = forwardRef(({}:any, ref)=>{
     const tokenColors = {
       "btc": "orange",
-      "eth": "emerald",
+      "eth": "green",
       "link": "cyan",
       "ftm": "violet",
     }
@@ -66,13 +67,26 @@ const Component = forwardRef(({}:any, ref)=>{
             s__sizeForm(oldNewSize)
         },
     }));
+    const [lastpower, s__lastpower] = useState(0)
+    const [power, s__power] = useState(0)
     
     const toggleTrade = (token, velocity) => {
         console.log("token, velocity", token, velocity)
+        s__lastpower(velocity)
+        // if (optsToggler["ceil"].bool)
+        { 
 
-        if (optsToggler["ceil"].bool) { 
-            if (velocity > 0) { alert(`Buy ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`) }
-            else { alert(`Sell ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`) }
+
+            if (velocity > 0) {
+                console.log(`Buy ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`, "new", power+velocity)
+                s__power(parseFloat(""+parseDecimals(power+velocity)))
+                // alert(`Buy ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`)
+            }
+            else {
+                console.log(`Sell ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`,"new", (power-lastpower))
+                s__power(parseFloat(""+parseDecimals(power-0.05)))
+                // alert(`Sell ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`)
+            }
         }
     }
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -147,7 +161,9 @@ const Component = forwardRef(({}:any, ref)=>{
         //     setVelocityY(0)
         // }
     }
-    const fffooovvv = 111
+    const fffooovvv = useMemo(()=>{
+        return yOut * 70
+    },[])
     const tokensArray = ["btc", "eth", "link", "ftm"]
     const timeframesArray = ["3m", "15m", "4h", "1d"]
     const setTimeframe = (timeframe) => {
@@ -203,9 +219,10 @@ const Component = forwardRef(({}:any, ref)=>{
             <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray mt-100 ">
 
                 <div className="flex-center gap-1 tx-shadow-b-1 ">
-                    <div
-                         
-                    className="tx-  tx-gray tx-shadow-b-1">Current Size (m)</div>
+                    <div className="tx-  tx-gray tx-shadow-b-1">Power: {power}</div>
+                </div>
+                <div className="flex-center gap-1 tx-shadow-b-1 ">
+                    <div className="tx-  tx-gray tx-shadow-b-1">Size (m)</div>
                     <div className="flex bg-b- bord-r- opaci-chov--50">{parseInt(xOut*2+"")}</div>
                     <div>x</div>
                     <div className="flex bg-b- bord-r- opaci-chov--50">{parseInt(zOut*2+"")}</div>
@@ -315,9 +332,9 @@ const Component = forwardRef(({}:any, ref)=>{
         <Canvas shadows  onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onMouseMove={handleMouseMove}
             
             // camera={{ fov: 50, position: [-xOut*2, yOut/4, zOut*2] }} 
-            camera={{ fov: fffooovvv, position: [0,0,zOut*1.2] }} 
+            camera={{ fov: fffooovvv, position: [xOut/2.5,yOut/2,zOut*1.3] }} 
         >
-            <OrbitControls  enableZoom={false} dampingFactor={0.5} />
+            <OrbitControls  enableZoom={false} dampingFactor={0.5}  />
             {/* <SemiOrbitCameraControl zPos={zOut*2}  /> */}
             <TradingOrbitCameraControl zPos={zOut}  />
             <ambientLight intensity={0.35} />
@@ -325,11 +342,29 @@ const Component = forwardRef(({}:any, ref)=>{
             <pointLight castShadow intensity={0.5} position={[xOut*1.1, yOut*1.1, -zOut*1.2]} />
             <fog attach="fog" args={['#000000', 5, 10]} />
 
-            {optsToggler["floor"].bool && 
-                <FloorFloorScale  boundaries={[xOut, yOut, zOut]} 
-                position={[0,(-yOut/2 - 0.05)*0.98,0]} floorWidth={0.1}
-                /> 
+            <Cylinder args={[0.9, 0.9, 1.4, 5]}  position={new Vector3(0, 0, -1)} >
+                <meshStandardMaterial attach="material" color="lightgray" />
+            </Cylinder>
+            <Cylinder args={[1.1, 1.1, 1, 7]}  position={new Vector3(0, 0, -1)} >
+                <meshStandardMaterial attach="material" color="gray" />
+            </Cylinder>
+            {!!power &&
+                <Cylinder args={[0.8, 0.8, 1.6, 5]}  position={new Vector3(0, 0, -1)} >
+                    <meshStandardMaterial attach="material" color={`#${power*320+50}4444`} />
+                </Cylinder>
             }
+
+{optsToggler["floor"].bool && 
+    <FloorFloorScale  boundaries={[xOut, yOut, zOut]} 
+    position={[0,(-yOut/2 - 0.05)*0.98,0]} floorWidth={0.1}
+    /> 
+}
+
+{optsToggler["floor"].bool && 
+    <FloorFloorScale  boundaries={[xOut*2, yOut, zOut*.8]} 
+    position={[0,(-yOut/2 - (0.05*2))*0.98,0]} floorWidth={0.1}
+    /> 
+}
 
             <ChartBox {...{s__score: scoreHandle,score, velocityX:c_velocityX,
                 setVelocityX:c_setVelocityX, velocityY:c_velocityY, setVelocityY:c_setVelocityY}} 
@@ -337,19 +372,19 @@ const Component = forwardRef(({}:any, ref)=>{
             <CustomPillars position={[0, 0, 0]}  height={yOut*1.05} diameter={0.05} pillars={boundaryBox} /> 
 
             <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" 
-                position={[xOut/2,-0.35,zOut/2]} 
+                position={[-xOut/2,-0.35,zOut/2]} 
                 setVelocityY={(data)=>{toggleTrade("btc",data)}}
             /> 
             <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="eth" 
-                position={[-xOut/2,-0.35,zOut/2]} 
+                position={[xOut/2,-0.35,zOut/2]} 
                 setVelocityY={(data)=>{toggleTrade("eth",data)}}
             /> 
             <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="link" 
-                position={[-xOut/2,-0.35,-zOut/2]} 
+                position={[xOut*1.5,-0.35,zOut/2]} 
                 setVelocityY={(data)=>{toggleTrade("link",data)}}
             /> 
             <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="ftm" 
-                position={[xOut/2,-0.35,-zOut/2]} 
+                position={[-xOut*1.5,-0.35,zOut/2]} 
                 setVelocityY={(data)=>{toggleTrade("ftm",data)}}
             /> 
 
