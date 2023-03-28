@@ -4,6 +4,11 @@ import { useMemo, useRef, useState } from "react";
 import { Mesh, Box3, Vector3 } from "three";
 import * as THREE from "three";
 import { TextGLB } from '@/src/items/3d/Text'
+import DynaText from "./DynaText";
+import Text3D from "./Text3D";
+import { useLocalStorage } from "usehooks-ts";
+import { useQuery } from "@tanstack/react-query";
+import { fetchMultipleJsonArray, parseDecimals } from "@/components/scripts/helpers";
 type BoxProps = {
   position?: [number, number, number];
   camera?: any;
@@ -31,18 +36,55 @@ export default function Component({
   velocityX=0, setVelocityX=()=>{},
   velocityY=0, setVelocityY=()=>{},
 }: BoxProps) {
+  const API_PRICE_BASEURL = "https://api.binance.com/api/v3/ticker/price?symbol="
+  const baseToken = "USDT"
+  
+  // const tokensReqObj:any = useMemo(()=>{
+  //   return ( [token].reduce((acc, aToken) => (
+  //     { ...acc, [aToken]: [`${API_PRICE_BASEURL}${(aToken+baseToken).toUpperCase()}`] }
+  //     ), {}))
+  // },[token])
+    const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
+    const [LS_uid, s__LS_uid] = useLocalStorage('uid', "")
+    const [clickedPrice, s__clickedPrice] = useState(0)
+    const [uid, s__uid] = useState("")
+    const [showAllTokens,s__showAllTokens] = useState<any>(true)
+    const [chopAmount,s__chopAmount] = useState<any>(0)
+    const [tokensArrayObj,s__tokensArrayObj] = useState<any>({})
+    const [klinesArray,s__klinesArray] = useState<any[]>([])
+    const [clientIP, s__clientIP] = useState('');
+    const DEFAULT_TOKEN_OBJ = {
+        mode:0,state:0,buy:0,sell:0, floor:0,ceil:0,
+        min:0,max:0,minMaxAvg:0,minMedian:0,maxMedian:0,
+    }
+    const p__klinesArray = useMemo(()=>{
+        let slicedArray = [...klinesArray]
+        for (let index = 0; index < chopAmount; index++) { slicedArray.push(klinesArray[499]) }
+        
+        return slicedArray.slice(slicedArray.length-500,slicedArray.length)
+    },[klinesArray,chopAmount])
+    const queryUSDT:any = useQuery({ queryKey: ['usdt'+token], refetchInterval: 3000,
+    queryFn: async () => {
+      let theList = await fetchMultipleJsonArray(( [token].reduce((acc, aToken) => (
+        { ...acc, [aToken]: [`${API_PRICE_BASEURL}${(aToken+baseToken).toUpperCase()}`] }
+        ), {})))
+      // console.log("asd", theList[0])
+      let prr = parseDecimals(theList[0].price)
+      // console.log("prr", token, prr)
+      return prr
+    }
+})
+
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
   const meshRef = useRef<Mesh>();
   const playerMesh = useRef<Mesh>();
   const depthBuffer = useDepthBuffer({ frames: 1 });
   const [elapsed, setElapsed] = useState<any>(0);
-//   const [velocityY, setVelocityY] = useState(0);
-//   const [velocityX, setVelocityX] = useState(0);
   const viewport = useThree((state) => state.viewport);
   const tokenColors = {
     "btc": "orange",
-    "eth": "green",
+    "eth": "emerald",
     "link": "cyan",
     "ftm": "violet",
   }
@@ -53,51 +95,11 @@ export default function Component({
     return form && form.id == token.toUpperCase()+"USDT"+timeframe.toUpperCase()
   },[form])
   useFrame((state: any, delta) => {
-    if (score.score <= 0)
-    {
-        // meshRef.current.position.set (0,0,position[2])
-        // return
-        // setVelocityY(0)
-        // setVelocityX(0)
-    }
     if (meshRef.current && state && state.get) {
       setElapsed(delta + elapsed);
       meshRef.current.position.y += velocityY;
       meshRef.current.position.x += velocityX;
-
-      // check if the two meshes are intersecting
-      const meshBox = new Box3().setFromObject(meshRef.current);
-      const playerBox = new Box3().setFromObject(playerMesh.current);
-      if (meshBox.intersectsBox(playerBox)) {
-        const playerCenter = new Vector3();
-        playerBox.getCenter(playerCenter);
-        const playerX = playerCenter.x;
-        const meshX = meshRef.current.position.x;
-        const diffX = meshX - playerX;
-        // console.log(`Difference in X position: ${diffX}`);
-        s__score({maxScore: score.score,score: score.score+1, velocityX: velocityX > score.velocityX ? velocityX : score.velocityX})
-        setVelocityX(diffX/10 + velocityX);
-        return setVelocityY(-velocityY);
-      }
-
-      if (
-        meshRef.current.position.y > boundaries[1] / 2 ||
-        meshRef.current.position.y < -boundaries[1] / 2
-      ) {
-        if (meshRef.current.position.y < 0)
-        { s__score({maxScore: score.score ,score: 0, velocityX: velocityX > score.velocityX ? velocityX : score.velocityX}) }
-        setVelocityY(-velocityY);        
-      }
-      if (
-        meshRef.current.position.x > boundaries[0] ||
-        meshRef.current.position.x < -boundaries[0]
-      ) {
-        setVelocityX(-velocityX);
-      }
-    }
-
-    if (playerMesh.current) {
-      // playerMesh.current.rotation.y = state.mouse.x * boundaries[0];
+      return
     }
   });
   const toggleGame = () => {
@@ -113,9 +115,20 @@ export default function Component({
     setClicked(true)
     setVelocityX((0.05+((Math.random()/2)-0.55)) / 5)
     setVelocityY(0.05)
+    s__clickedPrice(queryUSDT.data)
   }
   return (
     <group>
+      {clicked &&
+        <DynaText text={clickedPrice+"" || ""}  color={isSelectedId ? 0x006600 : 0x181818}
+          position={new Vector3(position[0],position[1]-0.29,position[2]-0.25)}
+          isSelected={isSelectedId} 
+        />
+      }
+      <DynaText text={queryUSDT.data+"" || ""} color={isSelectedId ? 0xff0000 : 0x181818}
+        position={new Vector3(position[0],position[1]-0.29,position[2]+0.3)} isSelected={isSelectedId} 
+      />
+      {/* <Text3D /> */}
       <mesh
         castShadow
         receiveShadow
@@ -128,8 +141,7 @@ export default function Component({
       >
         <boxGeometry args={[1, wallWidth, 1]} />
         <meshStandardMaterial
-          color={isSelectedId ? "gray" : "darkgray"} 
-          // color={hovered ? "hotpink" : "gray"} 
+          color={!isSelectedId ? "gray" : "darkgray"} 
         />
       </mesh>
       <mesh
@@ -148,41 +160,9 @@ export default function Component({
       >
         <boxGeometry args={[0.1, 0.1, 0.1]} />
         <meshStandardMaterial
-          // color={"orange"} 
           color={hovered ? "red" : tokenColor} 
         />
       </mesh>
-
-        {/* <Text  /> */}
-      
     </group>
   );
 }
-function MovingSpot({ ref, position, depthBuffer, vec = new THREE.Vector3(), ...props }) {
-    const light:any = useRef()
-    const viewport = useThree((state) => state.viewport)
-    useFrame((state) => {
-    //   light.current.target.position.lerp(vec.set((state.mouse.x * viewport.width) / 2, (state.mouse.y * viewport.height) / 2, 0), 0.1)
-    //   light.current.target.position.lerp(vec.set((state.mouse.x * viewport.width) / 2, (state.mouse.y * viewport.height) / 2, 0), 0.1)
-    //   light.current.target.updateMatrixWorld()
-    })
-    return (
-        
-        <mesh
-            castShadow receiveShadow
-            position={position}
-            ref={ref}
-            // scale={clicked ? 1.68 : 1}
-            // onClick={() => setClicked(!clicked)}
-            // onPointerOver={() => setHovered(true)}
-            // onPointerOut={() => setHovered(false)}
-        >
-            {/* <MovingSpot depthBuffer={depthBuffer} color="#fcac8f" position={[0,0,0]} /> */}
-            <boxGeometry args={[1,1,1]} />
-            <meshStandardMaterial color="blue" />
-        </mesh>
-    )
-    return <SpotLight castShadow ref={light} penumbra={1} distance={6} angle={0.35} attenuation={5} anglePower={4} intensity={2} {...props} />
-  }
-
-  

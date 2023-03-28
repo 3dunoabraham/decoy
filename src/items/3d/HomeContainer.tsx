@@ -36,7 +36,7 @@ import TradingBox from "./TradingBox";
 const Component = forwardRef(({}:any, ref)=>{
     const tokenColors = {
       "btc": "orange",
-      "eth": "green",
+      "eth": "emerald",
       "link": "cyan",
       "ftm": "violet",
     }
@@ -67,7 +67,14 @@ const Component = forwardRef(({}:any, ref)=>{
         },
     }));
     
+    const toggleTrade = (token, velocity) => {
+        console.log("token, velocity", token, velocity)
 
+        if (optsToggler["ceil"].bool) { 
+            if (velocity > 0) { alert(`Buy ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`) }
+            else { alert(`Sell ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`) }
+        }
+    }
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [mouseDown, setMouseDown] = useState(false);
     function handleMouseDown(e) {
@@ -81,7 +88,7 @@ const Component = forwardRef(({}:any, ref)=>{
         backwall: {bool:false},
         rightwall: {bool:false},
         leftwall: {bool:false},
-        roof: {bool:false},
+        ceil: {bool:false},
         floor: {bool:true},
         services: {bool:true},
     }
@@ -158,13 +165,13 @@ const Component = forwardRef(({}:any, ref)=>{
         
         <div className="flex-col pos-abs bottom-0 right-0  bord-r- pa-2 ma-2 b w-100">
             <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray tx-shadow-b-1 tx-lg g">
-                <div className="flex-center gap-1 opaci-50 tx-ls-5">
+                {/* <div className="flex-center gap-1 opaci-50 tx-ls-5">
                     ID: {form.id}
-                </div>
-                <div className="flex-center gap-1 opaci-50 tx-ls-5">
+                </div> */}
+                {/* <div className="flex-center gap-1 opaci-50 tx-ls-5">
                     SIZE
                     (ft)
-                </div>
+                </div> */}
                 {/* <div className="flex-col gap-1 opaci-50 tx-ls-">
                     <div className="flex tx-xsm">width: {sizeForm.x}</div>
                     <input type="range" min="3" max="77" className="w-100" value={sizeForm.x} onChange={(e)=>{be_size(e.target.value,"x")}} />
@@ -174,7 +181,7 @@ const Component = forwardRef(({}:any, ref)=>{
                     <input type="range" min="3" max="77" className="w-100" value={sizeForm.z} onChange={(e)=>{be_size(e.target.value,"z")}} />
                 </div> */}
                 <div className="flex-col gap-1 opaci-50 tx-ls- ">
-                    <div className="flex tx-xsm">height: {sizeForm.y}</div>
+                    <div className="flex tx-xsm">Height (ft): {sizeForm.y}</div>
                     <input type="range" min="1" max="12"
                         className="z-900 scale-150 w-100 pos-rel"
                         style={{filter: "hue-rotate(-189deg) "}}
@@ -184,7 +191,7 @@ const Component = forwardRef(({}:any, ref)=>{
                 </div>
             </div>
             <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray ">
-                <div className="flex-center gap-1 tx-bold-8 tx-ls-5 pa-5 bg-b-20 ma-2 tx-shadow-5">
+                <div className="flex-center gap-1 tx-bold-8 tx-ls-5 px-5 py-2 bg-b-20 ma-2 tx-shadow-5">
                     Score: {score.maxScore} | Speed: {parseDecimals(score.velocityX)}
                     {/* Y: {score.velocityY} */}
                 </div>
@@ -245,10 +252,10 @@ const Component = forwardRef(({}:any, ref)=>{
                         })}
                     </div>
                     <div className="flex tx-center  bord-r-8">
-                        <button onClick={()=>{toggleOption("roof")}}
+                        <button onClick={()=>{toggleOption("ceil")}}
                             style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
                             className={` tx-center w-100 px-1 bord-r- px-2 opaci-chov--50  tx-lx pt-2
-                                ${!optsToggler["roof"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
+                                ${!optsToggler["ceil"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
                             `}
                         >
                             <div className=""><TbChartAreaLine /></div>
@@ -329,10 +336,22 @@ const Component = forwardRef(({}:any, ref)=>{
             wallWidth={wallWidth} boundaries={[xOut, yOut, zOut]}  position={[0, (1.68/2) - 0.95, zOut]} /> 
             <CustomPillars position={[0, 0, 0]}  height={yOut*1.05} diameter={0.05} pillars={boundaryBox} /> 
 
-            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" position={[xOut/2,-0.35,zOut/2]} /> 
-            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="eth" position={[-xOut/2,-0.35,zOut/2]} /> 
-            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="link" position={[-xOut/2,-0.35,-zOut/2]} /> 
-            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="ftm" position={[xOut/2,-0.35,-zOut/2]} /> 
+            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" 
+                position={[xOut/2,-0.35,zOut/2]} 
+                setVelocityY={(data)=>{toggleTrade("btc",data)}}
+            /> 
+            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="eth" 
+                position={[-xOut/2,-0.35,zOut/2]} 
+                setVelocityY={(data)=>{toggleTrade("eth",data)}}
+            /> 
+            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="link" 
+                position={[-xOut/2,-0.35,-zOut/2]} 
+                setVelocityY={(data)=>{toggleTrade("link",data)}}
+            /> 
+            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="ftm" 
+                position={[xOut/2,-0.35,-zOut/2]} 
+                setVelocityY={(data)=>{toggleTrade("ftm",data)}}
+            /> 
 
             
 
@@ -350,15 +369,17 @@ const Component = forwardRef(({}:any, ref)=>{
                 /> 
             } 
 
-            {optsToggler["roof"].bool && <RoofContainer roofWidth={roofWidth} width={xOut/2} position={[0, yOut-(yOut/2), -(zOut+(wallWidth))]} wallWidth={wallWidth} length={((zOut*2)+(wallWidth*2))} /> }
+            {optsToggler["ceil"].bool &&
+                <RoofContainer roofWidth={roofWidth} width={xOut/2} position={[0, yOut-(yOut/2), -(zOut+(wallWidth))]} wallWidth={wallWidth} length={((zOut*2)+(wallWidth*2))} 
+            /> }
             
 
 
             {optsToggler["backwall"].bool && <CustomWall length={zOut} width={xOut/2} roofHeight={yOut} position={[0, 0, -(zOut-(wallWidth*(1.5/2)))]}  thickness={wallWidth}  />}
-            {optsToggler["roof"].bool && optsToggler["backwall"].bool && <ShapeContainer wallThick={wallWidth} width={xOut/2} position={[0, yOut-(yOut/2), -(zOut)]} thickness={wallWidth} />}
+            {optsToggler["ceil"].bool && optsToggler["backwall"].bool && <ShapeContainer wallThick={wallWidth} width={xOut/2} position={[0, yOut-(yOut/2), -(zOut)]} thickness={wallWidth} />}
             
             {optsToggler["frontwall"].bool && <CustomWall length={zOut} width={xOut/2} roofHeight={yOut} position={[0, 0, (zOut-(wallWidth*1.5))]}  thickness={wallWidth}  />}
-            {optsToggler["roof"].bool && optsToggler["frontwall"].bool && <ShapeContainer wallThick={wallWidth} width={xOut/2} position={[0, yOut-(yOut/2), (zOut-wallWidth)]}  thickness={wallWidth} />}
+            {optsToggler["ceil"].bool && optsToggler["frontwall"].bool && <ShapeContainer wallThick={wallWidth} width={xOut/2} position={[0, yOut-(yOut/2), (zOut-wallWidth)]}  thickness={wallWidth} />}
 
 
             {/* <MovingBox {...{s__score: scoreHandle,score, velocityX, setVelocityX, velocityY, setVelocityY}} 
@@ -369,15 +390,15 @@ const Component = forwardRef(({}:any, ref)=>{
             
 
 
-            {optsToggler["roof"].bool && <RoofContainer roofWidth={roofWidth} width={xOut/2} position={[0, yOut-(yOut/2), -(zOut+(wallWidth))]} wallWidth={wallWidth} length={((zOut*2)+(wallWidth*2))} /> }
+            {optsToggler["ceil"].bool && <RoofContainer roofWidth={roofWidth} width={xOut/2} position={[0, yOut-(yOut/2), -(zOut+(wallWidth))]} wallWidth={wallWidth} length={((zOut*2)+(wallWidth*2))} /> }
             <CustomPillars position={[0, 0, 0]}  height={yOut*1.05} diameter={0.05} pillars={boundaryBox} /> 
 
 
             {optsToggler["backwall"].bool && <CustomWall length={zOut} width={xOut/2} roofHeight={yOut} position={[0, 0, -(zOut-(wallWidth*(1.5/2)))]}  thickness={wallWidth}  />}
-            {optsToggler["roof"].bool && optsToggler["backwall"].bool && <ShapeContainer wallThick={wallWidth} width={xOut/2} position={[0, yOut-(yOut/2), -(zOut)]} thickness={wallWidth} />}
+            {optsToggler["ceil"].bool && optsToggler["backwall"].bool && <ShapeContainer wallThick={wallWidth} width={xOut/2} position={[0, yOut-(yOut/2), -(zOut)]} thickness={wallWidth} />}
             
             {optsToggler["frontwall"].bool && <CustomWall length={zOut} width={xOut/2} roofHeight={yOut} position={[0, 0, (zOut-(wallWidth*1.5))]}  thickness={wallWidth}  />}
-            {optsToggler["roof"].bool && optsToggler["frontwall"].bool && <ShapeContainer wallThick={wallWidth} width={xOut/2} position={[0, yOut-(yOut/2), (zOut-wallWidth)]}  thickness={wallWidth} />}
+            {optsToggler["ceil"].bool && optsToggler["frontwall"].bool && <ShapeContainer wallThick={wallWidth} width={xOut/2} position={[0, yOut-(yOut/2), (zOut-wallWidth)]}  thickness={wallWidth} />}
 
 
             {optsToggler["leftwall"].bool &&

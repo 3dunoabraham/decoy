@@ -150,18 +150,21 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
 
             <div className='flex-col   '>
                 <div className='flex w-100 w-max-1080px gap-2  z-500'>
-                    <Link href="https://github.com/3dunoabraham" target="_blank"  className="bg-w-10 pa-3 opaci-chov--50">
-                        <div className="flex bg-white bord-r-100p tx-lx pa-1">
+                    <Link href="https://github.com/3dunoabraham" target="_blank" 
+                        className="bg-w-10 pa-3 opaci-chov--50">
+                        <div className="flex bg-white bord-r-100p tx-lg pa-1">
                             <BsGithub />
                         </div>
                     </Link>
-                    <Link href="https://twitter.com/alt_dunno" target="_blank"  className="bg-w-10 pa-3 opaci-chov--50">
-                        <div className="flex bg-white bord-r-100p tx-lx pa-1">
+                    <Link href="https://twitter.com/alt_dunno" target="_blank" 
+                        className="bg-w-10 pa-3 opaci-chov--50">
+                        <div className="flex bg-white bord-r-100p tx-lg pa-1">
                             <BsTwitter />
                         </div>
                     </Link>
-                    <Link href="https://dev.to/3dunoabraham" target="_blank" className="bg-w-10 pa-3 opaci-chov--50">
-                        <div className="flex bg-white bord-r-100p tx-lx pa-1">
+                    <Link href="https://dev.to/3dunoabraham" target="_blank" 
+                        className="bg-w-10 pa-3 opaci-chov--50">
+                        <div className="flex bg-white bord-r-100p tx-lg pa-1">
                             <ImBook />
                         </div>
                     </Link>
