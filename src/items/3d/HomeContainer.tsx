@@ -378,7 +378,7 @@ const Component = forwardRef(({}:any, ref)=>{
         >
             <OrbitControls  enableZoom={true}
                  minDistance={0.5}
-                 maxDistance={9}
+                 maxDistance={6.5}
                 dampingFactor={0.08}  
                 enablePan={false}
                 maxPolarAngle={Math.PI/2+0.1}
