@@ -124,8 +124,8 @@ const Component = forwardRef(({}:any, ref)=>{
     // const wallWidth = 0.5
     const roofWidth = 0.2
     const wallWidth = 0.1
-    const wideFeet = 5
-    const lengthFeet = 6
+    const wideFeet = 4
+    const lengthFeet = 16
     const heightFeet = 5
     const [sizeForm, s__sizeForm] = useState({x:wideFeet,z:lengthFeet,y:heightFeet})
     const roofHeight = useMemo(()=>{
@@ -364,36 +364,37 @@ const Component = forwardRef(({}:any, ref)=>{
             camera={{ fov: fffooovvv, position: [xOut/2.5,yOut/2,zOut*1.3] }} 
         >
             <OrbitControls  enableZoom={true}
-                 minDistance={1.68}
-                 maxDistance={6}
+                 minDistance={0.5}
+                 maxDistance={9}
                 dampingFactor={0.08}  
                 enablePan={false}
+                maxPolarAngle={Math.PI/2}
             />
             <ambientLight intensity={0.2} />
             {/* <pointLight castShadow color={"#ffddcc"} intensity={1.2} position={[xOut*2, yOut*2, zOut*1.5]} /> */}
             <RotatingPointLight distance={yOut*2} {...{color:"#ffddcc", intensity:1.2, position:[xOut*2, yOut*2, zOut*1.5]}} />
-            <fog attach="fog" args={['#000000', 5, 10]} />
+            <fog attach="fog" args={['#C5E4E4', 5, 20]} />
 
 
-            <Cylinder args={[0.55, 0.55, 1.68, 6]}  position={new Vector3(0, 0, -0.7)} receiveShadow castShadow >
+            <Cylinder args={[0.55, 0.55, 1.68, 6]}  position={new Vector3(0, 0, -4)} receiveShadow castShadow >
                 <meshStandardMaterial attach="material" color="#aaaaaa" />
             </Cylinder>
-            <Cylinder args={[0.5, 0.5, 1.7, 9]}  position={new Vector3(0, 0, -0.7)}  receiveShadow castShadow>
+            <Cylinder args={[0.5, 0.5, 1.7, 9]}  position={new Vector3(0, 0, -4)}  receiveShadow castShadow>
                 <meshStandardMaterial attach="material" color="#ffffff"  />
             </Cylinder>
-            <Torus args={[0.6,0.1,4,5]}  position={new Vector3(0, 0.85, -0.7)} receiveShadow castShadow rotation={[Math.PI/2,0,Math.PI/2]}>
+            <Torus args={[0.6,0.1,4,5]}  position={new Vector3(0, 0.85, -4)} receiveShadow castShadow rotation={[Math.PI/2,0,Math.PI/2]}>
                 <meshStandardMaterial  attach="material" color="#777777" />
             </Torus>
             
             {!!power &&
-                <Cylinder args={[0.5, 0.6, power, 5]}  position={new Vector3(0, 0.85, -0.7)} >
+                <Cylinder args={[0.5, 0.6, power, 5]}  position={new Vector3(0, 0.85, -4)} >
                     <meshStandardMaterial attach="material" color={`#${power*320+50}${power*100+50}44`} 
                         emissive={`#${power*320+50}444477`}
                     />
                 </Cylinder>
             }
             {!power &&
-                <Cylinder args={[0.5, 0.6, 0.05, 5]}  position={new Vector3(0, 0.85, -0.7)} >
+                <Cylinder args={[0.5, 0.6, 0.05, 5]}  position={new Vector3(0, 0.85, -4)} >
                     <meshStandardMaterial attach="material" color={`#000`} 
                         
                     />
@@ -401,7 +402,7 @@ const Component = forwardRef(({}:any, ref)=>{
             }
 
             {optsToggler["floor"].bool && 
-                <FloorFloorScale  boundaries={[xOut, yOut, zOut]} color={"#485B19"}
+                <FloorFloorScale  boundaries={[xOut, yOut, zOut]} color={"#48721E"}
                 position={[0,(-yOut/2 - 0.05)*0.98,0]} floorWidth={0.1}
                 /> 
             }
@@ -411,8 +412,8 @@ const Component = forwardRef(({}:any, ref)=>{
                 position={[0,(-yOut/2 - (0.05*2))*0.98,0]} floorWidth={0.1}
                 /> 
             }
-            <EnvironmentFarm scale={0.2} />
-            <Text3D scale={0.2} />
+            <EnvironmentFarm scale={0.18} position={[2.2,-0.6,-1.3]}  />
+            <Text3D />
             <ChartBox {...{s__score: scoreHandle,score, velocityX:c_velocityX,
                 setVelocityX:c_setVelocityX, velocityY:c_velocityY, setVelocityY:c_setVelocityY}} 
             wallWidth={wallWidth} boundaries={[xOut, yOut, zOut]}  position={[0, (1.68/2) - 0.95, zOut]} /> 
