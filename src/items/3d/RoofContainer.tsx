@@ -7,8 +7,8 @@ export default function Component({ position=[0,0,0], points=null,  length, widt
     const { viewport } = useThree();
 
     const roofShape = [
-        [0, 1-(wallWidth/5)],[(width), 0-(wallWidth/5)],[(width+(roofWidth)), 0-(wallWidth/5)],[(width+(roofWidth)), 0.04],[(width), 0.04],
-        [0,1.04],
+        [0, 0.5-(wallWidth/5)],[(width), 0-(wallWidth/5)],[(width+(roofWidth)), 0-(wallWidth/5)],[(width+(roofWidth)), 0.04],[(width), 0.04],
+        [0,.54],
         [-(width), 0.04],[-(width+(roofWidth)), 0.04],[-(width+(roofWidth)), 0-(wallWidth/5)],[-(width), 0-(wallWidth/5)],
     ];
     const shapePoints = useMemo(() => {

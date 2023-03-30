@@ -1,39 +1,27 @@
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { MdRoofing, MdBorderLeft, MdBorderRight, MdOutlineRoofing } from "react-icons/md";
+import { forwardRef, useContext, useEffect, useImperativeHandle, useMemo, useRef, useState,  } from 'react'
+import { Torus, Cylinder, OrbitControls, PerspectiveCamera, Environment } from "@react-three/drei";
+import { Canvas, useThree } from "@react-three/fiber";
+import { MdOutlineRoofing } from "react-icons/md";
 import { MdFlipToBack } from "react-icons/md";
-import { FaWarehouse } from "react-icons/fa";
-import { CgBorderLeft } from "react-icons/cg";
-import { TfiLayoutSidebarLeft } from "react-icons/tfi";
-import { AiFillEyeInvisible, AiOutlineCaretUp, AiOutlineVerticalAlignBottom } from "react-icons/ai";
-import { TbChartAreaLine } from "react-icons/tb";
+import { AiFillEyeInvisible } from "react-icons/ai";
 import { TiChartAreaOutline } from "react-icons/ti";
-import { GiBrickWall, GiPayMoney, GiReceiveMoney } from "react-icons/gi";
-import { FiAlertTriangle } from "react-icons/fi";
+import { GiPayMoney, GiReceiveMoney } from "react-icons/gi";
 import { HiOutlineBellAlert } from "react-icons/hi2";
+import * as THREE from "three";
 
-import SemiOrbitCameraControl from "@/src/items/3d/SemiOrbitCameraControl";
 import CustomPillars from "@/src/items/3d/CustomPillars";
 import ShapeContainer from "@/src/items/3d/ShapeContainer";
 import RoofContainer from "@/src/items/3d/RoofContainer";
 import CustomWall from "@/src/items/3d/CustomWall";
 import CustomHorizontalWall from "@/src/items/3d/CustomHorizontalWall";
-import HumanScale from "@/src/items/3d/HumanScale";
-import FieldFloorScale from "./FieldFloorScale";
 import CustomHorizontalWallDoor from "./CustomHorizontalWallDoor";
-
-import { forwardRef, useContext, useEffect, useImperativeHandle, useMemo, useRef, useState,  } from 'react'
-import CustomBox from "./CustomBox";
-import MovingBox2 from "./MovingBox2";
-import { Torus, Cylinder, OrbitControls, PerspectiveCamera } from "@react-three/drei";
-import * as THREE from "three";
-import BaseballFieldFloorScale from "./BaseballFieldFloorScale";
 import { parseDecimals } from "@/components/scripts/helpers";
 import ChartBox from "./ChartBox";
 import FloorFloorScale from "./FloorFloorScale";
-import TradingOrbitCameraControl from "./TradingOrbitCameraControl";
 import TradingBox from "./TradingBox";
 import { Vector3 } from "three";
-import { BsFillHouseDoorFill } from "react-icons/bs";
+import EnvironmentFarm from "./core/EnvironmentFarm";
+import Text3D from "./Text3D";
 
 
 const RotatingPointLight = ({ color, intensity, distance, position }) => {
@@ -71,27 +59,21 @@ const Component = forwardRef(({}:any, ref)=>{
       "link": "cyan",
       "ftm": "blue",
     }
-    // const { camera, gl: { domElement }, } = useThree();
     const [form, s__form] = useState({
         id: "BTCUSDT3M",
     })
     const ccc = THREE.Camera
     useImperativeHandle(ref, ()=>({
-        // testConnect: () => {
-        //     console.log("connected")
-        // },
         resize: (size) => {
             let oldNewSize = {...sizeForm}
             console.log("resize with this", size)
             if (size.width && size.width.feet) {
                 console.log("width connected", size.width.feet)
                 oldNewSize.x = size.width.feet
-                // be_size(size.width.feet, "x")
             } // else { be_size(10, "x") }
             if (size.length && size.length.feet) {
                 console.log("length connected", size.length.feet)
                 oldNewSize.z = size.length.feet
-                // be_size(size.length.feet, "z")
             } // else { be_size(10, "z") }
 
             s__sizeForm(oldNewSize)
@@ -103,19 +85,16 @@ const Component = forwardRef(({}:any, ref)=>{
     const toggleTrade = (token, velocity) => {
         console.log("token, velocity", token, velocity)
         s__lastpower(velocity)
-        // if (optsToggler["ceil"].bool)
         { 
 
 
             if (velocity > 0) {
                 console.log(`Buy ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`, "new", power+velocity)
                 s__power(parseFloat(""+parseDecimals(power+velocity)))
-                // alert(`Buy ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`)
             }
             else {
                 console.log(`Sell ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`,"new", (power-lastpower))
                 s__power(parseFloat(""+parseDecimals(power-0.05)))
-                // alert(`Sell ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`)
             }
         }
     }
@@ -181,15 +160,7 @@ const Component = forwardRef(({}:any, ref)=>{
     },[xOut, zOut])
     const [score, s__score] = useState({score:0,maxScore:0,velocityX:0,velocityY:0})
     const scoreHandle = (data) => {
-        // if (score.score < 0) {
-        //     console.log("data.score < 0")
-        //     setVelocityY(0)
-        // }
         s__score(data)
-        // if (score.score > 3) {
-        //     console.log("score.score > 3")
-        //     setVelocityY(0)
-        // }
     }
     const fffooovvv = useMemo(()=>{
         return yOut * 70
@@ -210,36 +181,9 @@ const Component = forwardRef(({}:any, ref)=>{
     <div className='h-min-500px w-100 flex-col g-b-20 bord-r- flex-align-stretch flex-justify-stretch pos-rel'>
         
         <div className="flex-col pos-abs bottom-0 right-0  bord-r- pa-2 ma-2 b w-100">
-            <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray tx-shadow-b-1 tx-lg g">
-                {/* <div className="flex-center gap-1 opaci-50 tx-ls-5">
-                    ID: {form.id}
-                </div> */}
-                {/* <div className="flex-center gap-1 opaci-50 tx-ls-5">
-                    SIZE
-                    (ft)
-                </div> */}
-                {/* <div className="flex-col gap-1 opaci-50 tx-ls-">
-                    <div className="flex tx-xsm">width: {sizeForm.x}</div>
-                    <input type="range" min="3" max="77" className="w-100" value={sizeForm.x} onChange={(e)=>{be_size(e.target.value,"x")}} />
-                </div>
-                <div className="flex-col gap-1 opaci-50 tx-ls-">
-                    <div className="tx-xsm pr-1">length: {sizeForm.z}</div>
-                    <input type="range" min="3" max="77" className="w-100" value={sizeForm.z} onChange={(e)=>{be_size(e.target.value,"z")}} />
-                </div> */}
-                {/* <div className="flex-col gap-1 opaci-50 tx-ls- ">
-                    <div className="flex tx-xsm">Height (ft): {sizeForm.y}</div>
-                    <input type="range" min="1" max="12"
-                        className="z-900 scale-150 w-100 pos-rel"
-                        style={{filter: "hue-rotate(-189deg) "}}
-                        value={sizeForm.y} onChange={(e)=>{be_size(e.target.value,"y")}} 
-                        
-                    />
-                </div> */}
-            </div>
             <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray ">
                 <div className="flex-center gap-1 tx-bold-8 tx-ls-5 px-5 py-2 bg-b-20 ma-2 tx-shadow-b-3">
                     Score: {score.maxScore} | Speed: {parseDecimals(score.velocityX)}
-                    {/* Y: {score.velocityY} */}
                 </div>
             </div>
         </div>
@@ -254,12 +198,6 @@ const Component = forwardRef(({}:any, ref)=>{
                 <div className="flex-center gap-1 tx-shadow-b-1 ">
                     <div className="tx-  tx-gray tx-shadow-b-1">Power: {power}</div>
                 </div>
-                {/* <div className="flex-center gap-1 tx-shadow-b-1 ">
-                    <div className="tx-  tx-gray tx-shadow-b-1">Size (m)</div>
-                    <div className="flex bg-b- bord-r- opaci-chov--50">{parseInt(xOut*2+"")}</div>
-                    <div>x</div>
-                    <div className="flex bg-b- bord-r- opaci-chov--50">{parseInt(zOut*2+"")}</div>
-                </div> */}
                 <div className="flex-col flex-align-start gap-2 rot-180">
                     
                     <div className="flex gap-1">
@@ -276,9 +214,6 @@ const Component = forwardRef(({}:any, ref)=>{
                                     `}
                                 >
                                     {aTimeframe.toUpperCase()}
-                                    {/* {form.id} */}
-                                    {/* | */}
-                                    {/* {aTimeframe.toUpperCase()+"USDT3M"}  */}
                                 </button>
                             )
                         })}
@@ -299,36 +234,10 @@ const Component = forwardRef(({}:any, ref)=>{
                                     `}
                                 >
                                     {aToken.toUpperCase()}
-                                    {/* {form.id} */}
-                                    {/* | */}
-                                    {/* {aToken.toUpperCase()+"USDT3M"}  */}
                                 </button>
                             )
                         })}
                     </div>
-                    {/* <div className="flex tx-center  bord-r-8">
-                        <button onClick={()=>{toggleOption("ceil")}}
-                            style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
-                            className={` tx-center w-100 px-1 bord-r- px-2 opaci-chov--50  tx-lx pt-2
-                                ${!optsToggler["ceil"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gray" : " tx-blue border-blue"}
-                            `}
-                        >
-                            <div className=""><TbChartAreaLine /></div>
-                        </button>
-                    </div>
-                    <div className="flex-center ">
-                        <button onClick={()=>{toggleOption("frontwall")}}
-                            style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
-                            className={` tx-center w-100   bord-r- px-2 opaci-chov--50 tx-lx pt-1
-                                ${!optsToggler["frontwall"].bool
-                                    ? "bg-b-hov-20 opaci-25 border-white tx-gray"
-                                    : " tx-blue border-blue"
-                                }
-                            `}
-                        >
-                            <FiAlertTriangle />
-                        </button>
-                    </div> */}
                     <div className="flex-center">
                         <button onClick={()=>{toggleOption("backwall")}}
                             style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
@@ -375,9 +284,6 @@ const Component = forwardRef(({}:any, ref)=>{
         <div className="flex pos-abs top-0 right-0  bord-r- pa-2 ma-2">
             <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray mt-100 ">
 
-                {/* <div className="flex-center gap-1 tx-shadow-b-1 ">
-                    <div className="tx-  tx-gray tx-shadow-b-1">Power: {power}</div>
-                </div> */}
                 <div className="flex-center gap-1 tx-shadow-b-1 ">
                     <div className="tx-  tx-gray tx-shadow-b-1">Size (m)</div>
                     <div className="flex bg-b- bord-r- opaci-chov--50">{parseInt(xOut*2+"")}</div>
@@ -505,7 +411,8 @@ const Component = forwardRef(({}:any, ref)=>{
                 position={[0,(-yOut/2 - (0.05*2))*0.98,0]} floorWidth={0.1}
                 /> 
             }
-
+            <EnvironmentFarm scale={0.2} />
+            <Text3D scale={0.2} />
             <ChartBox {...{s__score: scoreHandle,score, velocityX:c_velocityX,
                 setVelocityX:c_setVelocityX, velocityY:c_velocityY, setVelocityY:c_setVelocityY}} 
             wallWidth={wallWidth} boundaries={[xOut, yOut, zOut]}  position={[0, (1.68/2) - 0.95, zOut]} /> 
