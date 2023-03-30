@@ -64,13 +64,13 @@ const RotatingPointLight = ({ color, intensity, distance, position, speed=10 }) 
     );
   };
   
+  export const tokenColors = {
+    "btc": "orange",
+    "eth": "green",
+    "link": "cyan",
+    "ftm": "blue",
+  }
 const Component = forwardRef(({}:any, ref)=>{
-    const tokenColors = {
-      "btc": "white",
-      "eth": "green",
-      "link": "cyan",
-      "ftm": "blue",
-    }
     const [form, s__form] = useState({
         id: "BTCUSDT3M",
     })
@@ -98,7 +98,7 @@ const Component = forwardRef(({}:any, ref)=>{
         console.log("token, velocity", token, velocity)
         s__lastpower(velocity)
         { 
-
+            setToken(token)
 
             if (velocity > 0) {
                 console.log(`Buy ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`, "new", power+velocity)
@@ -172,6 +172,7 @@ const Component = forwardRef(({}:any, ref)=>{
     },[xOut, zOut])
     const [score, s__score] = useState({score:0,maxScore:0,velocityX:0,velocityY:0})
     const scoreHandle = (data) => {
+        // alert()
         s__score(data)
     }
     const fffooovvv = useMemo(()=>{
@@ -373,7 +374,7 @@ const Component = forwardRef(({}:any, ref)=>{
         <Canvas shadows  onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onMouseMove={handleMouseMove}
             
             // camera={{ fov: 50, position: [-xOut*2, yOut/4, zOut*2] }} 
-            camera={{ fov: fffooovvv, position: [xOut/2.5,yOut/2,zOut*1.3] }} 
+            camera={{ fov: fffooovvv, position: [xOut/2.5,1,zOut*1.3] }} 
         >
             <OrbitControls  enableZoom={true}
                  minDistance={0.5}
@@ -420,13 +421,13 @@ const Component = forwardRef(({}:any, ref)=>{
             }
 
             {optsToggler["floor"].bool && 
-                <FloorFloorScale  boundaries={[xOut, yOut, zOut]} color={"#48721E"}
+                <FloorFloorScale  boundaries={[xOut, yOut, zOut]} color={"#A88658"}
                 position={[0,(-yOut/2 - 0.05)*0.98,0]} floorWidth={0.1}
                 /> 
             }
 
             {optsToggler["floor"].bool && 
-                <FloorFloorScale  boundaries={[xOut*2, yOut, zOut*.8]} color={"#A88658"}
+                <FloorFloorScale  boundaries={[xOut*2, yOut, zOut*.8]} color={"#48721E"}
                 position={[0,(-yOut/2 - (0.05*2))*0.98,0]} floorWidth={0.1}
                 /> 
             }

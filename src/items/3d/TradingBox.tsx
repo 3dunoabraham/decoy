@@ -1,4 +1,4 @@
-import { SpotLight, Torus, useDepthBuffer } from "@react-three/drei";
+import { Cylinder, SpotLight, Torus, useDepthBuffer } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useMemo, useRef, useState } from "react";
 import { Mesh, Box3, Vector3 } from "three";
@@ -9,6 +9,7 @@ import Text3D from "./Text3D";
 import { useLocalStorage } from "usehooks-ts";
 import { useQuery } from "@tanstack/react-query";
 import { fetchMultipleJsonArray, parseDecimals } from "@/components/scripts/helpers";
+import { tokenColors } from "./HomeContainer";
 type BoxProps = {
   position?: [number, number, number];
   camera?: any;
@@ -82,12 +83,12 @@ export default function Component({
   const depthBuffer = useDepthBuffer({ frames: 1 });
   const [elapsed, setElapsed] = useState<any>(0);
   const viewport = useThree((state) => state.viewport);
-  const tokenColors = {
-    "btc": "white",
-    "eth": "green",
-    "link": "cyan",
-    "ftm": "blue",
-  }
+  // const tokenColors = {
+  //   "btc": "white",
+  //   "eth": "green",
+  //   "link": "cyan",
+  //   "ftm": "blue",
+  // }
   const tokenColor = useMemo(()=>{
     return tokenColors[token]
   },[token])
@@ -121,15 +122,34 @@ export default function Component({
     <group>
       {clicked &&
         <DynaText text={clickedPrice+"" || ""}  color={0x006600}
-          position={new Vector3(position[0],position[1]-0.32,position[2]-0.25)}
-          isSelected={isSelectedId} font={0.2}
+          position={new Vector3(position[0]+0.25,position[1]-0.32,position[2]-0.25)}
+          isSelected={isSelectedId} font={0.15}
         />
       }
+      <DynaText text={token+"" || ""} color={isSelectedId ? 0xaaaaaa : 0xaaaaaa}
+        position={new Vector3(position[0]-0.2,position[1]-0.32,position[2]-0.3)}
+        isSelected={isSelectedId}  font={0.3}
+      />
       <DynaText text={queryUSDT.data+"" || ""} color={isSelectedId ? 0xff0000 : 0xaaaaaa}
         position={new Vector3(position[0],position[1]-0.32,position[2]+0.3)} isSelected={isSelectedId} 
       />
       {/* <Text3D /> */}
       {isSelectedId && <>
+        
+        
+        <Cylinder args={[0.5, 0.7, 0.5, 4, 1]}  
+          scale={[1,1,1]}
+          rotation={[0,Math.PI/4,0]}
+          position={[
+            position[0],
+            position[1] - 0.2 ,
+            position[2],
+          ]}
+        >
+                <meshStandardMaterial wireframe={true} attach="material" color="#aaaaaa" />
+            </Cylinder>
+      </>}
+      {/* {isSelectedId && <>
         
         <Torus args={[0.7,0.05,4,4]}  
         
@@ -141,7 +161,7 @@ export default function Component({
           rotation={[Math.PI/2,0,Math.PI/4]}>
                 <meshStandardMaterial  attach="material" color="#ff5555" />
             </Torus>
-      </>}
+      </>} */}
       
       {clicked && <>
         
@@ -169,7 +189,7 @@ export default function Component({
       >
         <boxGeometry args={[1, wallWidth, 1]} />
         <meshStandardMaterial
-          color={!isSelectedId ? "#A88658" : "#c8a678"} 
+          color={!isSelectedId ? "#48721E" : "#68923E"} 
         />
       </mesh>
       <mesh
@@ -188,6 +208,7 @@ export default function Component({
       >
         <boxGeometry args={[0.1, 0.1, 0.05]} />
         <meshStandardMaterial
+          
           color={hovered ? "red" : tokenColor} 
         />
       </mesh>
