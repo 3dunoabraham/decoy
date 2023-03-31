@@ -9,7 +9,7 @@ export default function Component({ position=[0,0,0], points=null, thickness=0.1
     const shapePoints = useMemo(() => {
       let mult = 2
       const starPoints = [
-          [width, 0], [0, 1 ],[-width, 0],
+          [width, 0], [0, 0.5 ],[-width, 0],
       ];
       return points ? points : starPoints.map(([x, y, z]) => [x * mult, y * mult, z * mult]);
     }, [points, width]);

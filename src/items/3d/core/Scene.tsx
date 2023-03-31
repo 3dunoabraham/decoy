@@ -1,5 +1,5 @@
-import { forwardRef, useContext, useEffect, useImperativeHandle, useMemo, useRef, useState,  } from 'react'
-import { Torus, Cylinder, OrbitControls, PerspectiveCamera, Environment } from "@react-three/drei";
+import { forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState,  } from 'react'
+import { Torus, Cylinder, OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import { Canvas, useThree } from "@react-three/fiber";
 import { MdOutlineRoofing } from "react-icons/md";
 import { MdFlipToBack } from "react-icons/md";
@@ -9,68 +9,46 @@ import { GiPayMoney, GiReceiveMoney } from "react-icons/gi";
 import { HiOutlineBellAlert } from "react-icons/hi2";
 import * as THREE from "three";
 
-import CustomPillars from "@/src/items/3d/CustomPillars";
-import ShapeContainer from "@/src/items/3d/ShapeContainer";
-import RoofContainer from "@/src/items/3d/RoofContainer";
-import CustomWall from "@/src/items/3d/CustomWall";
-import CustomHorizontalWall from "@/src/items/3d/CustomHorizontalWall";
-import CustomHorizontalWallDoor from "./CustomHorizontalWallDoor";
+import BoundaryPillars from "@/src/items/3d/farmhouse/BoundaryPillars";
 import { parseDecimals } from "@/components/scripts/helpers";
-import ChartBox from "./ChartBox";
-import FloorFloorScale from "./FloorFloorScale";
-import TradingBox from "./TradingBox";
+import ChartBox from "../ChartBox";
+import TradingBox from "../TradingBox";
 import { Vector3 } from "three";
-import EnvironmentFarm from "./core/EnvironmentFarm";
-import Text3D from "./Text3D";
+import HumanForReference from "./HumanForReference";
+import Environment from "./Environment";
+import { Building } from '../farmhouse/Building';
+import RotatingPointLight from './RotatingPointLight';
 
 
-const RotatingPointLight = ({ color, intensity, distance, position, speed=10 }) => {
-    const pointlightRef:any = useRef();
-    const amblightRef:any = useRef();
-    const lightRef:any = useRef();
-    const angleRef:any = useRef(0);
-    const step = 0.01; // set the step to the desired value
   
-    useEffect(() => {
-      const intervalId = setInterval(() => {
-        angleRef.current += step;
-        pointlightRef.current.position.y = Math.sin(angleRef.current)*5;
-        amblightRef.current.intensity = Math.sin(angleRef.current)/5+0.2;
-        lightRef.current.rotation.y = angleRef.current;
-        console.log(Math.sin(angleRef.current)/5+0.2)
-        // lightRef.current.rotation.z = angleRef.current;
-      }, speed); // set the interval duration to the desired value
-      
-      return () => clearInterval(intervalId); // clear the interval on unmount
-    }, []);
-  
-    return (
-      <group ref={lightRef}>
-        <ambientLight ref={amblightRef} intensity={0.1} />
-        <mesh>
-          <pointLight
-            ref={pointlightRef}
-            castShadow
-            color={color}
-            intensity={intensity}
-            position={[
-                position[0],
-                position[1],
-                position[2],
-            ]}
-          />
-        </mesh>
-      </group>
-    );
-  };
-  
-  export const tokenColors = {
+export const tokenColors = {
     "btc": "orange",
     "eth": "green",
     "link": "cyan",
     "ftm": "blue",
-  }
+}
+
 const Component = forwardRef(({}:any, ref)=>{
+    const DEFAULT_CARPORT_OTPS = {
+        frontwall: {bool:false},
+        backwall: {bool:false},
+        rightwall: {bool:false},
+        leftwall: {bool:false},
+        ceil: {bool:false},
+        floor: {bool:true},
+        services: {bool:true},
+    }
+    const tokensArray = ["btc", "eth", "link", "ftm"]
+    const timeframesArray = ["3m", "15m", "4h", "1d"]
+    // const roofWidth = 0.3
+    // const wallWidth = 0.5
+    const roofWidth = 0.2
+    const wallWidth = 0.1
+    const wideFeet = 4
+    const lengthFeet = 8
+    const heightFeet = 3
+    const [farmPosition,s__farmPosition]:any = useState([-3,-0.27,0]);
+    const [buildingPosition,s__buildingPosition]:any = useState([0,-0.27,0]);
     const [form, s__form] = useState({
         id: "BTCUSDT3M",
     })
@@ -112,33 +90,13 @@ const Component = forwardRef(({}:any, ref)=>{
     }
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [mouseDown, setMouseDown] = useState(false);
+    const [optsToggler, s__optsToggler] = useState(DEFAULT_CARPORT_OTPS)
     function handleMouseDown(e) {
         setMouseDown(true);
         setMousePos({ x: e.clientX, y: e.clientY });
     }
     function handleMouseUp(e) { setMouseDown(false); }
     function handleMouseMove(e) { if (mouseDown) { setMousePos({ x: e.clientX, y: e.clientY }); } }
-    const DEFAULT_CARPORT_OTPS = {
-        frontwall: {bool:false},
-        backwall: {bool:false},
-        rightwall: {bool:false},
-        leftwall: {bool:false},
-        ceil: {bool:false},
-        floor: {bool:true},
-        services: {bool:true},
-    }
-    const [optsToggler, s__optsToggler] = useState(DEFAULT_CARPORT_OTPS)
-    const toggleOption = (opt) => {
-        let oldBool = optsToggler[opt].bool
-        s__optsToggler({...optsToggler,...{[opt]:{bool:!oldBool}}})
-    }
-    // const roofWidth = 0.3
-    // const wallWidth = 0.5
-    const roofWidth = 0.2
-    const wallWidth = 0.1
-    const wideFeet = 4
-    const lengthFeet = 16
-    const heightFeet = 5
     const [sizeForm, s__sizeForm] = useState({x:wideFeet,z:lengthFeet,y:heightFeet})
     const roofHeight = useMemo(()=>{
         return parseInt(`${heightFeet/3.281}`)
@@ -171,15 +129,12 @@ const Component = forwardRef(({}:any, ref)=>{
         return [[(xOut), 0, zOut],[-(xOut), 0, -zOut],[-(xOut), 0, zOut],[(xOut), 0, -zOut]]
     },[xOut, zOut])
     const [score, s__score] = useState({score:0,maxScore:0,velocityX:0,velocityY:0})
-    const scoreHandle = (data) => {
-        // alert()
-        s__score(data)
-    }
     const fffooovvv = useMemo(()=>{
         return yOut * 70
     },[])
-    const tokensArray = ["btc", "eth", "link", "ftm"]
-    const timeframesArray = ["3m", "15m", "4h", "1d"]
+
+
+
     const setTimeframe = (timeframe) => {
         console.log("id", timeframe)
         let newId = form.id.split("USDT")[0] + "USDT" + timeframe.toUpperCase()
@@ -190,6 +145,17 @@ const Component = forwardRef(({}:any, ref)=>{
         let newId = token.toUpperCase()+"USDT"+form.id.split("USDT")[1].toUpperCase()
         s__form({...form,...{id:newId}})
     }
+    const scoreHandle = (data) => {
+        // alert()
+        s__score(data)
+    }
+    const toggleOption = (opt) => {
+        let oldBool = optsToggler[opt].bool
+        s__optsToggler({...optsToggler,...{[opt]:{bool:!oldBool}}})
+    }
+
+
+    /****** HTML ******/
     return (
     <div className='h-min-500px w-100 flex-col g-b-20 bord-r- flex-align-stretch flex-justify-stretch pos-rel'>
         
@@ -198,6 +164,7 @@ const Component = forwardRef(({}:any, ref)=>{
                 <div className="flex-center gap-1 tx-bold-8 tx-ls-5 px-5 py-2 bg-b-20 ma-2 tx-shadow-b-3">
                     Score: {score.maxScore} | Speed: {parseDecimals(score.velocityX)}
                 </div>
+
             </div>
         </div>
 
@@ -372,10 +339,12 @@ const Component = forwardRef(({}:any, ref)=>{
 
 
         <Canvas shadows  onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onMouseMove={handleMouseMove}
-            
-            // camera={{ fov: 50, position: [-xOut*2, yOut/4, zOut*2] }} 
             camera={{ fov: fffooovvv, position: [xOut/2.5,1,zOut*1.3] }} 
         >
+            <fog attach="fog" args={['#C5E4E4', 5, 20]} />
+            <RotatingPointLight distance={30} {...{color:"#ffddcc", intensity:1.2, position:[5,1,10]}} 
+                speed={10000}
+            />
             <OrbitControls  enableZoom={true}
                  minDistance={0.5}
                  maxDistance={6.5}
@@ -383,60 +352,61 @@ const Component = forwardRef(({}:any, ref)=>{
                 enablePan={false}
                 maxPolarAngle={Math.PI/2+0.1}
             />
-            
-            {/* <pointLight castShadow color={"#ffddcc"} intensity={1.2} position={[xOut*2, yOut*2, zOut*1.5]} /> */}
-            
-            <Cylinder args={[20, 20, 1, 8]}  position={new Vector3(0, -1.3, 0)} receiveShadow castShadow >
-                <meshStandardMaterial attach="material" color="#48721E" />
-            </Cylinder>
-            <RotatingPointLight distance={30} {...{color:"#ffddcc", intensity:1.2, position:[5,1,10]}} 
-                speed={10000}
+            <Environment />
+            <HumanForReference scale={0.18} position={[2.2,-0.6,-1.3]}  />
+            {/* Grass Floor */
+                <Cylinder args={[20, 20, 1, 8]}  position={new Vector3(0, -1.3, 0)} receiveShadow castShadow >
+                    <meshStandardMaterial attach="material" color="#48721E" />
+                </Cylinder>
+            }
+
+
+
+
+            {/* Storage Tower */ <>
+                <Cylinder args={[0.55, 0.55, 1.68, 6]}  position={new Vector3(4, 0, 0)} receiveShadow castShadow >
+                    <meshStandardMaterial attach="material" color="#aaaaaa" />
+                </Cylinder>
+                <Cylinder args={[0.5, 0.5, 1.7, 9]}  position={new Vector3(4, 0, 0)}  receiveShadow castShadow>
+                    <meshStandardMaterial attach="material" color="#ffffff"  />
+                </Cylinder>
+                <Torus args={[0.6,0.1,4,5]}  position={new Vector3(4, 0.85, 0)} receiveShadow castShadow rotation={[Math.PI/2,0,Math.PI/2]}>
+                    <meshStandardMaterial  attach="material" color="#777777" />
+                </Torus>
+            </>}
+            {/* Tower Live State */ <>
+                {!!power &&
+                    <Cylinder args={[0.5, 0.6, power, 5]}  position={new Vector3(4, 0.85, 0)} >
+                        <meshStandardMaterial attach="material" color={`#${power*320+50}${power*100+50}44`} 
+                            emissive={`#${power*320+50}444477`}
+                        />
+                    </Cylinder>
+                }
+                {!power &&
+                    <Cylinder args={[0.5, 0.6, 0.05, 5]}  position={new Vector3(4, 0.85, 0)} >
+                        <meshStandardMaterial attach="material" color={`#000`} 
+                            
+                        />
+                    </Cylinder>
+                }
+            </>}
+
+
+
+
+            {/* FarmHouse */}
+            <Building {...{xOut,yOut,zOut,wallWidth,roofWidth}} 
+                optsToggler={optsToggler} position={buildingPosition}
             />
-            <fog attach="fog" args={['#C5E4E4', 5, 20]} />
+            <Building {...{xOut,yOut,zOut,wallWidth,roofWidth}}  roofType="farm"
+                optsToggler={optsToggler} position={farmPosition}
+            />
 
-
-            <Cylinder args={[0.55, 0.55, 1.68, 6]}  position={new Vector3(0, 0, -4)} receiveShadow castShadow >
-                <meshStandardMaterial attach="material" color="#aaaaaa" />
-            </Cylinder>
-            <Cylinder args={[0.5, 0.5, 1.7, 9]}  position={new Vector3(0, 0, -4)}  receiveShadow castShadow>
-                <meshStandardMaterial attach="material" color="#ffffff"  />
-            </Cylinder>
-            <Torus args={[0.6,0.1,4,5]}  position={new Vector3(0, 0.85, -4)} receiveShadow castShadow rotation={[Math.PI/2,0,Math.PI/2]}>
-                <meshStandardMaterial  attach="material" color="#777777" />
-            </Torus>
+            <BoundaryPillars position={buildingPosition}  height={yOut*1.05} diameter={0.05} pillars={boundaryBox} /> 
             
-            {!!power &&
-                <Cylinder args={[0.5, 0.6, power, 5]}  position={new Vector3(0, 0.85, -4)} >
-                    <meshStandardMaterial attach="material" color={`#${power*320+50}${power*100+50}44`} 
-                        emissive={`#${power*320+50}444477`}
-                    />
-                </Cylinder>
-            }
-            {!power &&
-                <Cylinder args={[0.5, 0.6, 0.05, 5]}  position={new Vector3(0, 0.85, -4)} >
-                    <meshStandardMaterial attach="material" color={`#000`} 
-                        
-                    />
-                </Cylinder>
-            }
-
-            {optsToggler["floor"].bool && 
-                <FloorFloorScale  boundaries={[xOut, yOut, zOut]} color={"#A88658"}
-                position={[0,(-yOut/2 - 0.05)*0.98,0]} floorWidth={0.1}
-                /> 
-            }
-
-            {optsToggler["floor"].bool && 
-                <FloorFloorScale  boundaries={[xOut*2, yOut, zOut*.8]} color={"#48721E"}
-                position={[0,(-yOut/2 - (0.05*2))*0.98,0]} floorWidth={0.1}
-                /> 
-            }
-            <EnvironmentFarm scale={0.18} position={[2.2,-0.6,-1.3]}  />
-            <Text3D />
             <ChartBox {...{s__score: scoreHandle,score, velocityX:c_velocityX,
                 setVelocityX:c_setVelocityX, velocityY:c_velocityY, setVelocityY:c_setVelocityY}} 
             wallWidth={wallWidth} boundaries={[xOut, yOut, zOut]}  position={[0, (1.68/2) - 0.95, zOut]} /> 
-            <CustomPillars position={[0, 0, 0]}  height={yOut*1.05} diameter={0.05} pillars={boundaryBox} /> 
 
             <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" 
                 position={[xOut*1.5,-0.35,zOut/2]} 
@@ -454,36 +424,6 @@ const Component = forwardRef(({}:any, ref)=>{
                 position={[-xOut*1.5,-0.35,zOut/2]} 
                 setVelocityY={(data)=>{toggleTrade("ftm",data)}}
             /> 
-
-            
-
-            {optsToggler["leftwall"].bool &&
-                <CustomHorizontalWall position={[0, 0, 0]}  roofHeight={yOut*1.01} 
-                diameter={0.05} length={(zOut*2)-wallWidth}
-                    wallThick={wallWidth} pillars={ [[-xOut-(wallWidth/2), 0, 0]] } 
-                /> 
-            }
-            
-            {optsToggler["rightwall"].bool &&
-                <CustomHorizontalWallDoor position={[0, 0, 0]}  roofHeight={yOut*1.01} 
-                diameter={0.05} length={(zOut*2)-wallWidth}
-                    wallThick={wallWidth} pillars={ [[xOut+(wallWidth/2), 0, 0]] } 
-                /> 
-            } 
-
-            {optsToggler["ceil"].bool &&
-                <RoofContainer roofWidth={roofWidth} width={xOut/2} position={[0, yOut-(yOut/2), -(zOut+(wallWidth))]} wallWidth={wallWidth} length={((zOut*2)+(wallWidth*2))} 
-            /> }
-            
-
-
-            {optsToggler["backwall"].bool && <CustomWall length={zOut} width={xOut/2} roofHeight={yOut} position={[0, 0, -(zOut-(wallWidth*(1.5/2)))]}  thickness={wallWidth}  />}
-            {optsToggler["ceil"].bool && optsToggler["backwall"].bool && <ShapeContainer wallThick={wallWidth} width={xOut/2} position={[0, yOut-(yOut/2), -(zOut)]} thickness={wallWidth} />}
-            
-            {optsToggler["frontwall"].bool && <CustomWall length={zOut} width={xOut/2} roofHeight={yOut} position={[0, 0, (zOut-(wallWidth*1.5))]}  thickness={wallWidth}  />}
-            {optsToggler["ceil"].bool && optsToggler["frontwall"].bool && <ShapeContainer wallThick={wallWidth} width={xOut/2} position={[0, yOut-(yOut/2), (zOut-wallWidth)]}  thickness={wallWidth} />}
-
-
         </Canvas>
     </div>)
 })

@@ -1,36 +1,21 @@
 import { Canvas, useThree } from "@react-three/fiber";
-import { MdRoofing, MdBorderLeft, MdBorderRight } from "react-icons/md";
-import { MdFlipToBack } from "react-icons/md";
-import { FaWarehouse } from "react-icons/fa";
-import { CgBorderLeft } from "react-icons/cg";
-import { TfiLayoutSidebarLeft } from "react-icons/tfi";
-import { AiOutlineCaretUp, AiOutlineVerticalAlignBottom } from "react-icons/ai";
-import { TbChartAreaLine } from "react-icons/tb";
 import { TiChartAreaOutline } from "react-icons/ti";
 import { GiPayMoney, GiReceiveMoney } from "react-icons/gi";
 import { FiAlertTriangle } from "react-icons/fi";
-import { HiOutlineBellAlert } from "react-icons/hi2";
 
 import SemiOrbitCameraControl from "@/src/items/3d/SemiOrbitCameraControl";
-import CustomPillars from "@/src/items/3d/CustomPillars";
-import ShapeContainer from "@/src/items/3d/ShapeContainer";
-import RoofContainer from "@/src/items/3d/RoofContainer";
-import CustomWall from "@/src/items/3d/CustomWall";
-import CustomHorizontalWall from "@/src/items/3d/CustomHorizontalWall";
-import HumanScale from "@/src/items/3d/HumanScale";
-import FieldFloorScale from "./FieldFloorScale";
-import CustomHorizontalWallDoor from "./CustomHorizontalWallDoor";
+import CustomPillars from "@/src/items/3d/farmhouse/BoundaryPillars";
+import CustomWall from "@/src/items/3d/farmhouse/Facade";
+import CustomHorizontalWall from "@/src/items/3d/farmhouse/SideFacade";
+import HumanScale from "@/src/items/3d/core/HumanScale";
+import CustomHorizontalWallDoor from "./farmhouse/SideFacadeWDoor";
 
 import { forwardRef, useContext, useImperativeHandle, useMemo, useState,  } from 'react'
-import CustomBox from "./CustomBox";
 import MovingBox from "./MovingBox";
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
-import BaseballFieldFloorScale from "./BaseballFieldFloorScale";
 import { parseDecimals } from "@/components/scripts/helpers";
-import ChartBox from "./ChartBox";
-import FloorFloorScale from "./FloorFloorScale";
-import PongBall from "./PongBall";
+import FloorFloorScale from "./farmhouse/Floor";
 
 const Component = forwardRef(({}:any, ref)=>{
     // const { camera, gl: { domElement }, } = useThree();

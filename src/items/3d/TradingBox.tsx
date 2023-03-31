@@ -5,11 +5,10 @@ import { Mesh, Box3, Vector3 } from "three";
 import * as THREE from "three";
 import { TextGLB } from '@/src/items/3d/Text'
 import DynaText from "./DynaText";
-import Text3D from "./Text3D";
 import { useLocalStorage } from "usehooks-ts";
 import { useQuery } from "@tanstack/react-query";
 import { fetchMultipleJsonArray, parseDecimals } from "@/components/scripts/helpers";
-import { tokenColors } from "./HomeContainer";
+import { tokenColors } from "./core/Scene";
 type BoxProps = {
   position?: [number, number, number];
   camera?: any;

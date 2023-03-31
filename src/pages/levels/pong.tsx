@@ -22,7 +22,7 @@ import FailedRequest from '@/src/items/atoms/holders/FailedRequest';
 import { useIsClient } from 'usehooks-ts';
 // import HomeContainer from '@/src/items/3d/HomeContainer';
 import dynamic from 'next/dynamic'
-const HomeContainer = dynamic(import ("@/src/items/3d/HomeContainer"), { ssr: false })
+const HomeContainer = dynamic(import ("@/src/items/3d/PongContainer"), { ssr: false })
 const delay = ms => new Promise(res => setTimeout(res, ms));
 const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
     const router = useRouter()

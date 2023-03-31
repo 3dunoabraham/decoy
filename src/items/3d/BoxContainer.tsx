@@ -8,14 +8,14 @@ import { AiOutlineCaretUp, AiOutlineVerticalAlignBottom } from "react-icons/ai";
 
 
 import SemiOrbitCameraControl from "@/src/items/3d/SemiOrbitCameraControl";
-import CustomPillars from "@/src/items/3d/CustomPillars";
-import ShapeContainer from "@/src/items/3d/ShapeContainer";
-import RoofContainer from "@/src/items/3d/RoofContainer";
-import CustomWall from "@/src/items/3d/CustomWall";
-import CustomHorizontalWall from "@/src/items/3d/CustomHorizontalWall";
-import HumanScale from "@/src/items/3d/HumanScale";
+import BoundaryPillars from "@/src/items/3d/farmhouse/BoundaryPillars";
+import ShapeContainer from "@/src/items/3d/farmhouse/Pediment";
+import RoofContainer from "@/src/items/3d/farmhouse/Roof";
+import CustomWall from "@/src/items/3d/farmhouse/Facade";
+import CustomHorizontalWall from "@/src/items/3d/farmhouse/SideFacade";
+import HumanScale from "@/src/items/3d/core/HumanScale";
 import FieldFloorScale from "./FieldFloorScale";
-import CustomHorizontalWallDoor from "./CustomHorizontalWallDoor";
+import CustomHorizontalWallDoor from "./farmhouse/SideFacadeWDoor";
 
 import { forwardRef, useContext, useImperativeHandle, useMemo, useState,  } from 'react'
 import CustomBox from "./CustomBox";
@@ -233,7 +233,7 @@ const Component = forwardRef(({}:any, ref)=>{
 
 
             {optsToggler["roof"].bool && <RoofContainer roofWidth={roofWidth} width={xOut/2} position={[0, yOut-(yOut/2), -(zOut+(wallWidth))]} wallWidth={wallWidth} length={((zOut*2)+(wallWidth*2))} /> }
-            <CustomPillars position={[0, 0, 0]}  height={yOut*1.05} diameter={0.05} pillars={boundaryBox} /> 
+            <BoundaryPillars position={[0, 0, 0]}  height={yOut*1.05} diameter={0.05} pillars={boundaryBox} /> 
 
 
             {optsToggler["backwall"].bool && <CustomWall length={zOut} width={xOut/2} roofHeight={yOut} position={[0, 0, -(zOut-(wallWidth*(1.5/2)))]}  thickness={wallWidth}  />}
