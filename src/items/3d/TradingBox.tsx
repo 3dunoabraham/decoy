@@ -22,6 +22,7 @@ type BoxProps = {
   setVelocityY?: any;
   timeframe: any;
   token: any;
+  onTextClick: any;
   form: any;
 };
 
@@ -32,6 +33,7 @@ export default function Component({
   wallWidth=0.1,
   position=[0,0,0],
   boundaries=[1,1,1],
+  onTextClick=()=>{},
   score=0,s__score=()=>{},
   velocityX=0, setVelocityX=()=>{},
   velocityY=0, setVelocityY=()=>{},
@@ -103,7 +105,7 @@ export default function Component({
     }
   });
   const toggleGame = () => {
-    console.log("asd")
+    // console.log("asd")
     if (clicked) 
     {
       setVelocityX(0)
@@ -122,14 +124,15 @@ export default function Component({
       {clicked &&
         <DynaText text={clickedPrice+"" || ""}  color={0x006600}
           position={new Vector3(position[0]+0.25,position[1]-0.32,position[2]-0.25)}
-          isSelected={isSelectedId} font={0.15}
+          isSelected={isSelectedId} font={0.15} 
         />
       }
       <DynaText text={token+"" || ""} color={isSelectedId ? 0xaaaaaa : 0xaaaaaa}
         position={new Vector3(position[0]-0.2,position[1]-0.32,position[2]-0.3)}
-        isSelected={isSelectedId}  font={0.3}
+        isSelected={isSelectedId}  font={0.3} onClick={()=>{onTextClick()}}
       />
       <DynaText text={queryUSDT.data+"" || ""} color={isSelectedId ? 0xff0000 : 0xaaaaaa}
+        onClick={()=>{onTextClick()}}
         position={new Vector3(position[0],position[1]-0.32,position[2]+0.3)} isSelected={isSelectedId} 
       />
       {/* <Text3D /> */}
@@ -188,7 +191,7 @@ export default function Component({
       >
         <boxGeometry args={[1, wallWidth, 1]} />
         <meshStandardMaterial
-          color={!isSelectedId ? "#48721E" : "#68923E"} 
+          color={!isSelectedId ? "#48721E" : tokenColor} 
         />
       </mesh>
       <mesh

@@ -6,6 +6,8 @@ import SideFacadeWDoor from './SideFacadeWDoor';
 import Facade from './Facade';
 import Pediment from './Pediment';
 import Floor from './Floor';
+import FarmRoof from './FarmRoof';
+import FarmPediment from './FarmPediment';
 
 export const Building = ({
     roofType="pyramid",
@@ -21,11 +23,6 @@ export const Building = ({
 
     return (
         <group ref={groupRef}>
-            {optsToggler["ceil"].bool &&
-                <Roof roofWidth={roofWidth} width={xOut/2}
-                     position={[0, yOut-(yOut/2), -(zOut+(wallWidth))]} wallWidth={wallWidth} length={((zOut*2)+(wallWidth*2))} 
-                />
-            }
             {optsToggler["leftwall"].bool &&
                 <SideFacade position={[0, 0, 0]}  roofHeight={yOut*1.01} 
                 diameter={0.05} length={(zOut*2)-wallWidth}
@@ -39,10 +36,20 @@ export const Building = ({
                 /> 
             } 
 
+            {optsToggler["backwall"].bool &&
+                <Facade length={zOut} width={xOut/2} roofHeight={yOut}
+                    position={[0, 0, -(zOut-(wallWidth*(1.5/2)))]}  thickness={wallWidth}
+                />
+            }
+            {optsToggler["frontwall"].bool &&
+                <Facade length={zOut} width={xOut/2} roofHeight={yOut} 
+                    position={[0, 0, (zOut-(wallWidth*1.5))]}  thickness={wallWidth}  
+                />
+            }
             {roofType == "pyramid" && <>
-                {optsToggler["backwall"].bool &&
-                    <Facade length={zOut} width={xOut/2} roofHeight={yOut}
-                        position={[0, 0, -(zOut-(wallWidth*(1.5/2)))]}  thickness={wallWidth}
+                {optsToggler["ceil"].bool &&
+                    <Roof roofWidth={roofWidth} width={xOut/2}
+                        position={[0, yOut-(yOut/2), -(zOut+(wallWidth))]} wallWidth={wallWidth} length={((zOut*2)+(wallWidth*2))} 
                     />
                 }
                 {optsToggler["ceil"].bool && optsToggler["backwall"].bool &&
@@ -50,14 +57,26 @@ export const Building = ({
                         width={xOut/2} position={[0, yOut-(yOut/2), -(zOut)]} thickness={wallWidth}
                     />
                 }
-                
-                {optsToggler["frontwall"].bool &&
-                    <Facade length={zOut} width={xOut/2} roofHeight={yOut} 
-                        position={[0, 0, (zOut-(wallWidth*1.5))]}  thickness={wallWidth}  
+                {optsToggler["ceil"].bool && optsToggler["frontwall"].bool &&
+                    <Pediment width={xOut/2} position={[0, yOut-(yOut/2), (zOut-wallWidth)]}  
+                        thickness={wallWidth}   wallThick={wallWidth}
+                    />
+                }
+            </>}
+
+            {roofType == "farm" && <>
+                {optsToggler["ceil"].bool &&
+                    <FarmRoof roofWidth={roofWidth} width={xOut/2}
+                        position={[0, yOut-(yOut/2), -(zOut+(wallWidth))]} wallWidth={wallWidth} length={((zOut*2)+(wallWidth*2))} 
+                    />
+                }
+                {optsToggler["ceil"].bool && optsToggler["backwall"].bool &&
+                    <FarmPediment wallThick={wallWidth} 
+                        width={xOut/2} position={[0, yOut-(yOut/2), -(zOut)]} thickness={wallWidth}
                     />
                 }
                 {optsToggler["ceil"].bool && optsToggler["frontwall"].bool &&
-                    <Pediment width={xOut/2} position={[0, yOut-(yOut/2), (zOut-wallWidth)]}  
+                    <FarmPediment width={xOut/2} position={[0, yOut-(yOut/2), (zOut-wallWidth)]}  
                         thickness={wallWidth}   wallThick={wallWidth}
                     />
                 }

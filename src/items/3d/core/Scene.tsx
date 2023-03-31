@@ -30,14 +30,23 @@ export const tokenColors = {
 
 const Component = forwardRef(({}:any, ref)=>{
     const DEFAULT_CARPORT_OTPS = {
-        frontwall: {bool:false},
-        backwall: {bool:false},
-        rightwall: {bool:false},
-        leftwall: {bool:false},
-        ceil: {bool:false},
+        frontwall: {bool:true},
+        backwall: {bool:true},
+        rightwall: {bool:true},
+        leftwall: {bool:true},
+        ceil: {bool:true},
         floor: {bool:true},
         services: {bool:true},
     }
+    // const DEFAULT_CARPORT_OTPS = {
+    //     frontwall: {bool:false},
+    //     backwall: {bool:false},
+    //     rightwall: {bool:false},
+    //     leftwall: {bool:false},
+    //     ceil: {bool:false},
+    //     floor: {bool:true},
+    //     services: {bool:true},
+    // }
     const tokensArray = ["btc", "eth", "link", "ftm"]
     const timeframesArray = ["3m", "15m", "4h", "1d"]
     // const roofWidth = 0.3
@@ -152,6 +161,11 @@ const Component = forwardRef(({}:any, ref)=>{
     const toggleOption = (opt) => {
         let oldBool = optsToggler[opt].bool
         s__optsToggler({...optsToggler,...{[opt]:{bool:!oldBool}}})
+    }
+    const onTextClick = (token) => {
+        console.log("token", token)
+        setToken(token)
+
     }
 
 
@@ -339,7 +353,7 @@ const Component = forwardRef(({}:any, ref)=>{
 
 
         <Canvas shadows  onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onMouseMove={handleMouseMove}
-            camera={{ fov: fffooovvv, position: [xOut/2.5,1,zOut*1.3] }} 
+            camera={{ fov: fffooovvv, position: [xOut/2.5,1,zOut*2] }} 
         >
             <fog attach="fog" args={['#C5E4E4', 5, 20]} />
             <RotatingPointLight distance={30} {...{color:"#ffddcc", intensity:1.2, position:[5,1,10]}} 
@@ -395,10 +409,10 @@ const Component = forwardRef(({}:any, ref)=>{
 
 
             {/* FarmHouse */}
-            <Building {...{xOut,yOut,zOut,wallWidth,roofWidth}} 
-                optsToggler={optsToggler} position={buildingPosition}
+            <Building {...{xOut,yOut,zOut:zOut,wallWidth,roofWidth}} 
+                optsToggler={optsToggler} position={buildingPosition} roofType="farm"
             />
-            <Building {...{xOut,yOut,zOut,wallWidth,roofWidth}}  roofType="farm"
+            <Building {...{xOut,yOut,zOut:zOut/2,wallWidth,roofWidth}}  
                 optsToggler={optsToggler} position={farmPosition}
             />
 
@@ -409,19 +423,19 @@ const Component = forwardRef(({}:any, ref)=>{
             wallWidth={wallWidth} boundaries={[xOut, yOut, zOut]}  position={[0, (1.68/2) - 0.95, zOut]} /> 
 
             <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" 
-                position={[xOut*1.5,-0.35,zOut/2]} 
+                position={[xOut/2,-0.35,zOut/2]} onTextClick={()=>{onTextClick("btc")}}
                 setVelocityY={(data)=>{toggleTrade("btc",data)}}
             /> 
             <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="eth" 
-                position={[xOut*1.5,-0.35,-zOut/2]} 
+                position={[xOut/2,-0.35,-zOut/2]} onTextClick={()=>{onTextClick("eth")}}
                 setVelocityY={(data)=>{toggleTrade("eth",data)}}
             /> 
             <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="link" 
-                position={[-xOut*1.5,-0.35,-zOut/2]} 
+                position={[-xOut/2,-0.35,-zOut/2]} onTextClick={()=>{onTextClick("link")}}
                 setVelocityY={(data)=>{toggleTrade("link",data)}}
             /> 
             <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="ftm" 
-                position={[-xOut*1.5,-0.35,zOut/2]} 
+                position={[-xOut/2,-0.35,zOut/2]} onTextClick={()=>{onTextClick("ftm")}}
                 setVelocityY={(data)=>{toggleTrade("ftm",data)}}
             /> 
         </Canvas>

@@ -30,9 +30,9 @@ const TextGLB = (props) => {
 
   return <primitive ref={ref}
   
-            onClick={() => {
-              console.log(ref)
-            }}
+            // onClick={() => {
+            //   console.log(ref)
+            // }}
             position={[0,-0.8,0]}
             // scale={[0.6,0.6,0.6]}
             // scale={[0.6,0.6,0.6]}
