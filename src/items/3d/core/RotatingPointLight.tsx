@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export default function({ color, intensity, distance, position, speed=10 })  {
+export default function Component({ color, intensity, distance, position, speed=10 })  {
     
     const pointlightRef:any = useRef();
     const amblightRef:any = useRef();
