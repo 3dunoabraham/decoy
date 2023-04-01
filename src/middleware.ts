@@ -28,5 +28,5 @@ export async function middleware(req: NextRequest) {
 // See "Matching Paths" below to learn more
 export const config = {
     // matcher: [],
-    matcher: ['/inventory','/chart/:path*','/agreements'],
+    matcher: ['/inventory','/chart/:path*','/api/trade-history','/api/account-balance','/api/place-order','/agreements'],
 }
