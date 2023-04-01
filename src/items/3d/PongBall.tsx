@@ -5,7 +5,7 @@ import { Mesh, Box3, Vector3 } from "three";
 import * as THREE from "three";
 import { useIsClient } from "usehooks-ts";
 import { useQueryPlus } from "@/scripts/helpers/useHooksHelper";
-import { Asdasd, BtcInstances, Instances } from "./Asdasd";
+import CandleInstances from "./CandleInstances";
 
 type BoxProps = {
   position: [number, number, number];
@@ -174,7 +174,7 @@ export default function Component({
       </mesh>}
 
       
-    <Instances
+    <CandleInstances
         boundaries={boundaries}
       count={prices.length}
       positions={prices.slice(0, liveId || 499).map((price) => price)}

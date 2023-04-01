@@ -1,11 +1,11 @@
-import { SpotLight, useDepthBuffer } from "@react-three/drei";
+import { useDepthBuffer } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Mesh, Box3, Vector3 } from "three";
-import * as THREE from "three";
 import { useIsClient } from "usehooks-ts";
 import { useQueryPlus } from "@/scripts/helpers/useHooksHelper";
-import { Asdasd, BtcInstances, Instances } from "./Asdasd";
+import CandleInstances from "./CandleInstances";
+import * as THREE from "three";
 
 type BoxProps = {
   position: [number, number, number];
@@ -52,8 +52,9 @@ export default function Component({
       refetchOnWindowFocus: false,
       queryFn: async () =>{
         let t = "3m"
-        let startUnixDate = getRandomUnixDate()
-          let urlBase = `https://api.binance.com/api/v3/klines?interval=${t}&startTime=${startUnixDate}&symbol=`
+        // let startUnixDate = getRandomUnixDate()
+          // let urlBase = `https://api.binance.com/api/v3/klines?interval=${t}&startTime=${startUnixDate}&symbol=`
+          let urlBase = `https://api.binance.com/api/v3/klines?interval=${t}&symbol=`
           urlBase += "BTCUSDT"
           const theListRes = await fetch(urlBase)
           let theList = await theListRes.json()
@@ -130,60 +131,17 @@ export default function Component({
   }
   const [prices, setPrices] = useState<number[]>([]);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const response = await fetch(
-  //       "https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=3m"
-  //     );
-  //     const data: any = await response.json();
-  //     const closingPrices = data.map((item: any) => parseFloat(item[4]));
-  //     setPrices(closingPrices);
-  //   };
-  //   fetchData();
-  // }, []);
   return (
-    <group>
-      {/* <mesh
-        castShadow
-        receiveShadow
-        position={[
-          position[0],
-          position[1] - boundaries[1] / 2 + wallWidth,
-          position[2],
-        ]}
-        ref={playerMesh}
-      >
-        <boxGeometry args={[1, wallWidth, 1]} />
-        <meshStandardMaterial color={"gray"} />
-      </mesh>
-      {!clicked && <mesh
-        castShadow
-        receiveShadow
-        position={[
-          position[0] - boundaries[0],
-          0,
-          position[2],
-        ]}
-        ref={meshRef}
-        onClick={() => startGame()}
-        onPointerOver={() => setHovered(true)}
-        onPointerOut={() => setHovered(false)}
-      >
-        <boxGeometry args={[wallWidth*1.5, wallWidth*3, wallWidth*1.5]} />
-        <meshStandardMaterial color={hovered ? "hotpink" : "blue"} />
-      </mesh>} */}
-
+    <group position={position}>
       
-    {/* <Instances
-        boundaries={boundaries}
-      count={prices.length}
-      positions={prices.slice(0, liveId || 499).map((price) => price)}
-      xRange={[-boundaries[0], boundaries[0]*50]}
-      yRange={[-boundaries[2]*5, 1]}
-    /> */}
+        <CandleInstances
+            boundaries={boundaries}
+            count={prices.length}
+            positions={prices.slice(0, liveId || 499).map((price) => price)}
+            xRange={[-boundaries[0], boundaries[0]*50]}
+            yRange={[-boundaries[2]*20, 1]}
+        />
 
-      {/* <Asdasd /> */}
-      
     </group>
   );
 }
