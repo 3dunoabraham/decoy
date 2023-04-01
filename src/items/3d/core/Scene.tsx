@@ -18,6 +18,7 @@ import HumanForReference from "./HumanForReference";
 import Environment from "./Environment";
 import { Building } from '../farmhouse/Building';
 import RotatingPointLight from './RotatingPointLight';
+import NpcContainer from '../npc/NpcContainer';
 
 
   
@@ -39,21 +40,21 @@ const Component = forwardRef(({}:any, ref)=>{
     //     services: {bool:true},
     // }
     const FARM_CARPORT_OTPS = {
-        frontwall: {bool:true},
-        backwall: {bool:true},
-        rightwall: {bool:true},
-        leftwall: {bool:true},
-        ceil: {bool:true},
-        floor: {bool:true},
+        frontwall: {bool:false},
+        backwall: {bool:false},
+        rightwall: {bool:false},
+        leftwall: {bool:false},
+        ceil: {bool:false},
+        floor: {bool:false},
         services: {bool:true},
     }
     const DEFAULT_CARPORT_OTPS = {
-        frontwall: {bool:true},
-        backwall: {bool:true},
-        rightwall: {bool:true},
-        leftwall: {bool:true},
-        ceil: {bool:true},
-        floor: {bool:true},
+        frontwall: {bool:false},
+        backwall: {bool:false},
+        rightwall: {bool:false},
+        leftwall: {bool:false},
+        ceil: {bool:false},
+        floor: {bool:false},
         services: {bool:true},
     }
     const tokensArray = ["btc", "eth", "link", "ftm"]
@@ -377,6 +378,8 @@ const Component = forwardRef(({}:any, ref)=>{
                 maxPolarAngle={Math.PI/2+0.1}
             />
             <Environment />
+            
+            <NpcContainer position={[0,0,0]} />
             <HumanForReference scale={0.18} position={[2.2,-0.6,-1.3]}  />
             {/* Grass Floor */
                 <Cylinder args={[20, 20, 1, 8]}  position={new Vector3(0, -1.3, 0)} receiveShadow castShadow >
@@ -433,7 +436,7 @@ const Component = forwardRef(({}:any, ref)=>{
                 setVelocityX:c_setVelocityX, velocityY:c_velocityY, setVelocityY:c_setVelocityY}} 
             wallWidth={wallWidth} boundaries={[xOut, yOut, zOut]}  position={[0, (1.68/2) - 0.95, zOut]} /> 
 
-            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" 
+            {/* <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" 
                 position={[xOut/2,-0.35,zOut/2]} onTextClick={()=>{onTextClick("btc")}}
                 setVelocityY={(data)=>{toggleTrade("btc",data)}}
             /> 
@@ -448,7 +451,24 @@ const Component = forwardRef(({}:any, ref)=>{
             <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="ftm" 
                 position={[-xOut/2,-0.35,zOut/2]} onTextClick={()=>{onTextClick("ftm")}}
                 setVelocityY={(data)=>{toggleTrade("ftm",data)}}
+            />  */}
+            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" 
+                position={[2.,-0.35,-2]} onTextClick={()=>{onTextClick("btc")}}
+                setVelocityY={(data)=>{toggleTrade("btc",data)}}
             /> 
+            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="eth" 
+                position={[-3,-0.35,1]} onTextClick={()=>{onTextClick("eth")}}
+                setVelocityY={(data)=>{toggleTrade("eth",data)}}
+            /> 
+            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="link" 
+                position={[6,-0.35,3]} onTextClick={()=>{onTextClick("link")}}
+                setVelocityY={(data)=>{toggleTrade("link",data)}}
+            /> 
+            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="ftm" 
+                position={[-4,-0.35,-4]} onTextClick={()=>{onTextClick("ftm")}}
+                setVelocityY={(data)=>{toggleTrade("ftm",data)}}
+            /> 
+
         </Canvas>
     </div>)
 })
