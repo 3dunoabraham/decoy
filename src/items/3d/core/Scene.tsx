@@ -28,10 +28,16 @@ import { TbNetwork } from 'react-icons/tb';
 
   
 export const tokenColors = {
-    "btc": "orange",
-    "eth": "#00FF00",
-    "link": "cyan",
-    "ftm": "blue",
+    "btc": "#EE8E1B",
+    "eth": "#3EDF5D",
+    "link": "#2A5ADA",
+    "ftm": "#1A6AFF",
+}
+export const tokenTranslations = {
+    "btc": "Wheat",
+    "eth": "Money",
+    "link": "Network",
+    "ftm": "Tools",
 }
 export const tokenIcons
  = {
@@ -223,8 +229,11 @@ const Component = forwardRef(({}:any, ref)=>{
         <div className="flex pos-abs top-0 left-0  bord-r- pa-2 ma-2">
             <div className="flex-col flex-align-start z-700 gap-1 tx-gray mt-100 ">
 
-                <div className="flex-center gap-1 tx-shadow-b-1 ">
-                    <div className="tx-  tx-gray tx-shadow-b-1">SELECTED PRODUCT ID: {form.id}</div>
+                <div className="flex-center gap-1 tx-shadow-b-1 bg-b-50 px-3 py-2">
+                    <div className="tx-  tx-white tx-shadow-b-2">
+                        <div>SELECTED:</div>
+                        <div className='box-shadow-3 bg-b-50 pa-2 ma-1'>{form.id}</div>
+                    </div>
                 </div>
                 <div className="flex-center gap-1 tx-shadow-b-1 ">
                     <div className="tx-  tx-gray tx-shadow-b-1">Power: {power}</div>
@@ -250,22 +259,28 @@ const Component = forwardRef(({}:any, ref)=>{
                         })}
                     </div>
                     
-                    <div className="flex gap-1">
-                        { tokensArray.map((aToken, index) => {
+                    <div className="flex-wrap gap-1 w-max-220px">
+                        { ["ftm","btc","eth","link",].map((aToken, index) => {
 
                             return (
                                 <button onClick={()=>{setToken(aToken)}}
                                     key={index}
                                     style={{ color:tokenColors[aToken]}}
-                                    className={`flex-1 flex-col tx-center pa-1 bord-r- px-1 opaci-chov--50 tx-l
+                                    className={`flex-1 flex-col tx-center pa-1 bord-r- px-2   tx-l bg-glass-5
                                         ${form.id !== aToken.toUpperCase()+"USDT"+form.id.split("USDT")[1].toUpperCase()
-                                            ? "bg-b-hov-20 opaci-50 tx-bold-8 tx-shadow-b-1 bg-w-50 tx-ls-2 border-white tx-gray"
-                                            : " tx-bold-8 tx-lgx tx-shadow-b-2 border-red"
+                                            ? "bg-b-hov-20 tx-bold-8 tx-shadow-b-1 bg-b-50 tx-ls-2  tx-gray"
+                                            : " tx-bold-8 tx-lgx tx-shadow-b-2  bg-b-50  box-shadow-5 border-white "
                                         }
                                     `}
                                 >
-                                    <div className='tx-lg' style={{ color:tokenColors[aToken]}}>{tokenIcons[aToken]}</div>
-                                    {aToken.toUpperCase()}
+                                    <div className='tx-lg'
+                                        
+                                        style={{ color:tokenColors[aToken]}}
+                                    >
+                                        {tokenIcons[aToken]}
+                                    </div>
+                                    {/* {aToken.toUpperCase()} */}
+                                    {tokenTranslations[aToken]}
                                 </button>
                             )
                         })}
@@ -399,7 +414,7 @@ const Component = forwardRef(({}:any, ref)=>{
 
 
         <Canvas shadows  onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onMouseMove={handleMouseMove}
-            camera={{ fov: fffooovvv, position: [xOut/2.5,1,zOut*2] }} 
+            camera={{ fov: fffooovvv, position: [xOut,1,zOut*2] }} 
         >
             <fog attach="fog" args={['#C5E4E4', 5, 20]} />
             <RotatingPointLight distance={30} {...{color:"#ffddcc", intensity:1.2, position:[5,1,10]}} 
@@ -414,7 +429,9 @@ const Component = forwardRef(({}:any, ref)=>{
             />
             <Environment />
             
-            <NpcContainer {...{optsToggler}} position={[0,0,0]} />
+            <NpcContainer {...{optsToggler}} position={[0,0,0]}  
+                form={form} 
+            />
             <HumanForReference scale={0.18} position={[2.2,-0.6,-1.3]}  />
             {/* Grass Floor */
                 <Cylinder args={[20, 20, 1, 8]}  position={new Vector3(0, -1.3, 0)} receiveShadow castShadow >
@@ -474,9 +491,9 @@ const Component = forwardRef(({}:any, ref)=>{
 
             <BoundaryPillars position={buildingPosition}  height={yOut*1.05} diameter={0.05} pillars={boundaryBox} /> 
             
-            <ChartBox {...{s__score: scoreHandle,score, velocityX:c_velocityX,
+            {/* <ChartBox {...{s__score: scoreHandle,score, velocityX:c_velocityX,
                 setVelocityX:c_setVelocityX, velocityY:c_velocityY, setVelocityY:c_setVelocityY}} 
-            wallWidth={wallWidth} boundaries={[xOut, yOut, zOut]}  position={[0, (1.68/2) - 0.95, zOut]} /> 
+            wallWidth={wallWidth} boundaries={[xOut, yOut, zOut]}  position={[0, (1.68/2) - 0.95, zOut]} />  */}
 
             {/* <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" 
                 position={[xOut/2,-0.35,zOut/2]} onTextClick={()=>{onTextClick("btc")}}

@@ -1,4 +1,4 @@
-import { useDepthBuffer } from "@react-three/drei";
+import { Box, useDepthBuffer } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useRef, useState } from "react";
 import { Mesh, Box3, Vector3 } from "three";
@@ -6,6 +6,9 @@ import { useIsClient } from "usehooks-ts";
 import { useQueryPlus } from "@/scripts/helpers/useHooksHelper";
 import CandleInstances from "./CandleInstances";
 import * as THREE from "three";
+import DynaText from "./DynaText";
+import { AppContext } from "@/scripts/contexts/AppContext";
+import { useContext,  } from 'react'
 
 type BoxProps = {
   position: [number, number, number];
@@ -18,6 +21,8 @@ type BoxProps = {
   setVelocityX: any;
   velocityY: any;
   setVelocityY: any;
+  timeframe?: any;
+  theToken?: any;
 };
 function getRandomUnixDate() {
   const now = new Date();
@@ -34,7 +39,9 @@ export default function Component({
   score,s__score,
   velocityX, setVelocityX,
   velocityY, setVelocityY,
+  timeframe, theToken
 }: BoxProps) {
+  const app = useContext(AppContext)
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
   const meshRef = useRef<Mesh>();
@@ -49,13 +56,13 @@ export default function Component({
   const [diffUnix, s__diffUnix] = useState(0)
   const isClient = useIsClient()
   const [q__asd, asd] = useQueryPlus({ queryKey: ['asdasd'], 
-      refetchOnWindowFocus: false,
+      refetchOnWindowFocus: false, enabled: false ,
       queryFn: async () =>{
-        let t = "3m"
+        let t = timeframe || "3m"
         // let startUnixDate = getRandomUnixDate()
           // let urlBase = `https://api.binance.com/api/v3/klines?interval=${t}&startTime=${startUnixDate}&symbol=`
           let urlBase = `https://api.binance.com/api/v3/klines?interval=${t}&symbol=`
-          urlBase += "BTCUSDT"
+          urlBase += (theToken || "btc").toUpperCase()+"USDT"
           const theListRes = await fetch(urlBase)
           let theList = await theListRes.json()
           s__initUnix(theList[0][0])
@@ -68,10 +75,10 @@ export default function Component({
       const closingPrices = theList.map((item: any) => parseFloat(item[4]));
       setPrices(closingPrices);
 
-
+          app.alert("success","Chart refreshed")
           return theList
       }
-  },[])
+  },[theToken])
 
 
   useFrame((state: any, delta) => {
@@ -134,6 +141,15 @@ export default function Component({
   return (
     <group position={position}>
       
+      <DynaText text={!!theToken ? theToken.toUpperCase() : ""} color={0xaaaaaa}
+        position={new Vector3(-0.15,0.95+0.3,-0.06)} rotation={[0, Math.PI, 0]}
+
+        isSelected={false}  font={0.3} onClick={()=>{}}
+      />
+        <Box onClick={()=>{q__asd.refetch()}} args={[0.6,0.4,0.1]} 
+          position={[-0.15,0.99+0.3,0]} >
+            <meshStandardMaterial color="#888888" />
+        </Box>
         <CandleInstances
             boundaries={boundaries}
             count={prices.length}
@@ -141,7 +157,15 @@ export default function Component({
             xRange={[-boundaries[0], boundaries[0]*50]}
             yRange={[-boundaries[2]*20, 1]}
         />
-
+      <Box args={[1.2,1.7,.1]}  position={new Vector3(-0.5, 0.37, 0.09)} receiveShadow castShadow >
+          <meshStandardMaterial emissive={"#93603F22"} attach="material" color="#93603F" />
+      </Box>
+      <Box args={[0.05,2.2,.05]}  position={new Vector3(0, -0.5, 0.09)} receiveShadow castShadow >
+          <meshStandardMaterial emissive={"#93603F22"} attach="material" color="#93603F" />
+      </Box>
+      <Box args={[0.05,2.2,.05]}  position={new Vector3(-1, -0.5, 0.09)} receiveShadow castShadow >
+          <meshStandardMaterial emissive={"#93603F22"} attach="material" color="#93603F" />
+      </Box>
     </group>
   );
 }

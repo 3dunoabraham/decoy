@@ -3,7 +3,8 @@ import { MeshBasicMaterial, MeshStandardMaterial, Vector3 } from 'three';
 
 export default function Component ({
   onClick= ()=> {},
-  text="asd", position=new Vector3(), color , isSelected = false,font=0.35
+  text="asd", position=new Vector3(), color , isSelected = false,font=0.35,
+  ...props
 })  {
   const material = new MeshStandardMaterial({ color: color, emissive: color });
   return (
@@ -13,7 +14,9 @@ export default function Component ({
         onClick={onClick}
         material={material}
         position={position}
-        rotation={[-Math.PI/2,0,0]}
+        rotation={props.rotation || [-Math.PI/2,0,0]}
+        // rotation={[-Math.PI/2,0,0]}
+        // {...props,}
         fontSize={font}
         maxWidth={100}
         lineHeight={1}

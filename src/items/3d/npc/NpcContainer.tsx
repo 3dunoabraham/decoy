@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useLayoutEffect, useMemo, useRef, useState } from 'react'
 
 import { useFrame } from '@react-three/fiber'
 import { Box, Cylinder, useGLTF } from "@react-three/drei";
@@ -9,8 +9,9 @@ import Storefront from './Storefront';
 import Observatory from './Observatory';
 import TradingBox from '../TradingBox';
 import ChartBox from '../ChartBox';
+import DynaText from '../DynaText';
 
-export default function Component ({position, optsToggler, ...props}) {
+export default function Component ({position, optsToggler, form, ...props}) {
   const { scene } = useGLTF('/angel.glb')
   useLayoutEffect(() => scene.traverse(o =>
     {
@@ -34,7 +35,9 @@ export default function Component ({position, optsToggler, ...props}) {
   const [mycounter, setCount] = useState(0)
   const ref:any = useRef();
 
-
+    const timeframe = useMemo(()=>{
+      return form.id.split("USDT")[1]
+    },[form.id])
   // useFrame(({ mouse }) => {
   //   if (!ref.current) {
   //     return;
@@ -51,17 +54,11 @@ export default function Component ({position, optsToggler, ...props}) {
       {/* <Cylinder args={[20, 20, 1, 8]}  position={new Vector3(0, -1.3, 0)} receiveShadow castShadow >
           <meshStandardMaterial attach="material" color="#48721E" />
       </Cylinder> */}
-      <Box args={[1.2,0.7,.1]}  position={new Vector3(-0.5, 0.8, 2.95)} receiveShadow castShadow >
-          <meshStandardMaterial emissive={"#93603F22"} attach="material" color="#93603F" />
-      </Box>
-      <Box args={[0.05,2.2,.05]}  position={new Vector3(0, -0.5, 2.95)} receiveShadow castShadow >
-          <meshStandardMaterial emissive={"#93603F22"} attach="material" color="#93603F" />
-      </Box>
-      <Box args={[0.05,2.2,.05]}  position={new Vector3(-1, -0.5, 2.95)} receiveShadow castShadow >
-          <meshStandardMaterial emissive={"#93603F22"} attach="material" color="#93603F" />
-      </Box>
-      <ChartBox boundaries={[1,1,1]} score={{score:0}}
-        position={[0,0,2]} velocityX={0} 
+      {/* asd */}
+      
+      
+      <ChartBox boundaries={[1,0.1,0.04]} score={{score:0}} timeframe={timeframe.toLowerCase() || "1d"}
+        position={[-2.7,0,3]} velocityX={0}  theToken={form.id.split("USDT")[0]}
         velocityY={0} setVelocityX={()=>{}} setVelocityY={()=>{}}
       />
       {/* {optsToggler.safe.bool && <Observatory /> } */}
