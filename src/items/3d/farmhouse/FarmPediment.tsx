@@ -9,7 +9,11 @@ export default function Component({ position=[0,0,0], points=null, thickness=0.1
     const shapePoints = useMemo(() => {
       let mult = 2
       const starPoints = [
-          [width, 0], [0, 0.5 ],[-width, 0],
+          [width, 0],
+          [width/2, 0.4],
+          [0, 0.5 ],
+          [-width/2, 0.4],
+          [-width, 0],
       ];
       return points ? points : starPoints.map(([x, y, z]) => [x * mult, y * mult, z * mult]);
     }, [points, width]);
@@ -62,7 +66,7 @@ export default function Component({ position=[0,0,0], points=null, thickness=0.1
         ref={meshRef} // geometry={new THREE.BufferGeometry().setFromPoints(vertices)} material={basic_material}
     >
         <extrudeBufferGeometry attach="geometry" args={[shape, extrudeSettings]} />
-        <meshStandardMaterial color="#966B3D" side={DoubleSide} />
+        <meshStandardMaterial color="#963B2D" side={DoubleSide} />
 
     </mesh>    
     )

@@ -8,11 +8,11 @@ export default function Component({ position=[0,0,0], points=null,  length, widt
 
     const roofShape = [
         [0, 0.5-(wallWidth/5)],[width/2, 0.4-(wallWidth/5)],
-        [(width), 0-(wallWidth/5)],[(width+(roofWidth)), 0-(wallWidth/5)],[(width+(roofWidth)), 0.04],[(width), 0.04],
+        [(width), 0-(wallWidth/5)],[(width+(roofWidth/2)), 0-(wallWidth/5)],[(width+(roofWidth/2)), 0.04],[(width), 0.04],
         [width/2, (0.4+wallWidth/2)-(wallWidth/5)],
         [0,.54],
         [-width/2, (0.4+wallWidth/2)-(wallWidth/5)],
-        [-(width), 0.04],[-(width+(roofWidth)), 0.04],[-(width+(roofWidth)), 0-(wallWidth/5)],
+        [-(width), 0.04],[-(width+(roofWidth/2)), 0.04],[-(width+(roofWidth/2)), 0-(wallWidth/5)],
         [-(width), 0-(wallWidth/5)],
         [-(width/2), 0.4-(wallWidth/5)],
     ];

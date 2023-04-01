@@ -12,7 +12,8 @@ import FarmPediment from './FarmPediment';
 export const Building = ({
     roofType="pyramid",
     xOut=10, yOut=5, zOut=10, wallWidth=0.2, roofWidth=0.5, 
-    optsToggler={}, position=[0, 0, 0]
+    optsToggler={}, position=[0, 0, 0],
+    facadeColor="#966B3D",
 }) => {
     const groupRef = useRef<Group>(null);
     const { current: group } = groupRef;
@@ -37,15 +38,18 @@ export const Building = ({
             } 
 
             {optsToggler["backwall"].bool &&
-                <Facade length={zOut} width={xOut/2} roofHeight={yOut}
+                <Facade length={zOut} width={xOut/2} roofHeight={yOut} color={facadeColor}
                     position={[0, 0, -(zOut-(wallWidth*(1.5/2)))]}  thickness={wallWidth}
                 />
             }
             {optsToggler["frontwall"].bool &&
-                <Facade length={zOut} width={xOut/2} roofHeight={yOut} 
+                <Facade length={zOut} width={xOut/2} roofHeight={yOut} color={facadeColor}
                     position={[0, 0, (zOut-(wallWidth*1.5))]}  thickness={wallWidth}  
                 />
             }
+
+
+
             {roofType == "pyramid" && <>
                 {optsToggler["ceil"].bool &&
                     <Roof roofWidth={roofWidth} width={xOut/2}
@@ -63,7 +67,6 @@ export const Building = ({
                     />
                 }
             </>}
-
             {roofType == "farm" && <>
                 {optsToggler["ceil"].bool &&
                     <FarmRoof roofWidth={roofWidth} width={xOut/2}
@@ -83,20 +86,20 @@ export const Building = ({
             </>}
 
 
+
+
             {optsToggler["floor"].bool && 
                 <Floor  boundaries={[xOut, yOut, zOut]} color={"#777777"}
                 position={[0,(-yOut/2 - 0.05)*0.98,0]} floorWidth={0.1}
                 /> 
             }
-
             {optsToggler["floor"].bool && 
-                <Floor  boundaries={[xOut*2, yOut, zOut*.8]} color={"#48721E"}
+                <Floor  boundaries={[xOut*1.6, yOut, zOut*.8]} color={"#48721E"}
                 position={[0,(-yOut/2 - (0.05*2))*0.98,0]} floorWidth={0.1} 
                 />
             }
-
             {/* {optsToggler["floor"].bool &&  */}
-                <Floor  boundaries={[xOut*1.98, yOut, zOut*.78]} color={"#8B5A2B"}
+                <Floor  boundaries={[xOut*1.58, yOut, zOut*.78]} color={"#8B5A2B"}
                 position={[0,(-yOut/2 - (0.05*3))*0.98,0]} floorWidth={0.1} 
                 />
             {/* } */}

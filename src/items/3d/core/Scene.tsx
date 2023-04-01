@@ -23,12 +23,30 @@ import RotatingPointLight from './RotatingPointLight';
   
 export const tokenColors = {
     "btc": "orange",
-    "eth": "green",
+    "eth": "#00FF00",
     "link": "cyan",
     "ftm": "blue",
 }
 
 const Component = forwardRef(({}:any, ref)=>{
+    // const DEFAULT_CARPORT_OTPS = {
+    //     frontwall: {bool:true},
+    //     backwall: {bool:true},
+    //     rightwall: {bool:true},
+    //     leftwall: {bool:true},
+    //     ceil: {bool:true},
+    //     floor: {bool:true},
+    //     services: {bool:true},
+    // }
+    const FARM_CARPORT_OTPS = {
+        frontwall: {bool:true},
+        backwall: {bool:true},
+        rightwall: {bool:true},
+        leftwall: {bool:true},
+        ceil: {bool:true},
+        floor: {bool:true},
+        services: {bool:true},
+    }
     const DEFAULT_CARPORT_OTPS = {
         frontwall: {bool:true},
         backwall: {bool:true},
@@ -38,15 +56,6 @@ const Component = forwardRef(({}:any, ref)=>{
         floor: {bool:true},
         services: {bool:true},
     }
-    // const DEFAULT_CARPORT_OTPS = {
-    //     frontwall: {bool:false},
-    //     backwall: {bool:false},
-    //     rightwall: {bool:false},
-    //     leftwall: {bool:false},
-    //     ceil: {bool:false},
-    //     floor: {bool:true},
-    //     services: {bool:true},
-    // }
     const tokensArray = ["btc", "eth", "link", "ftm"]
     const timeframesArray = ["3m", "15m", "4h", "1d"]
     // const roofWidth = 0.3
@@ -54,10 +63,10 @@ const Component = forwardRef(({}:any, ref)=>{
     const roofWidth = 0.2
     const wallWidth = 0.1
     const wideFeet = 4
-    const lengthFeet = 8
+    const lengthFeet = 5
     const heightFeet = 3
-    const [farmPosition,s__farmPosition]:any = useState([-3,-0.27,0]);
-    const [buildingPosition,s__buildingPosition]:any = useState([0,-0.27,0]);
+    const [farmPosition,s__farmPosition]:any = useState([-3,-0.45,-4]);
+    const [buildingPosition,s__buildingPosition]:any = useState([0,-0.27,-4]);
     const [form, s__form] = useState({
         id: "BTCUSDT3M",
     })
@@ -80,26 +89,10 @@ const Component = forwardRef(({}:any, ref)=>{
     }));
     const [lastpower, s__lastpower] = useState(0)
     const [power, s__power] = useState(0)
-    
-    const toggleTrade = (token, velocity) => {
-        console.log("token, velocity", token, velocity)
-        s__lastpower(velocity)
-        { 
-            setToken(token)
-
-            if (velocity > 0) {
-                console.log(`Buy ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`, "new", power+velocity)
-                s__power(parseFloat(""+parseDecimals(power+velocity)))
-            }
-            else {
-                console.log(`Sell ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`,"new", (power-lastpower))
-                s__power(parseFloat(""+parseDecimals(power-0.05)))
-            }
-        }
-    }
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [mouseDown, setMouseDown] = useState(false);
     const [optsToggler, s__optsToggler] = useState(DEFAULT_CARPORT_OTPS)
+    const [farmOptsToggler, s__farmOptsToggler] = useState(FARM_CARPORT_OTPS)
     function handleMouseDown(e) {
         setMouseDown(true);
         setMousePos({ x: e.clientX, y: e.clientY });
@@ -144,6 +137,23 @@ const Component = forwardRef(({}:any, ref)=>{
 
 
 
+    /****** UPDATE ******/
+    const toggleTrade = (token, velocity) => {
+        console.log("token, velocity", token, velocity)
+        s__lastpower(velocity)
+        { 
+            setToken(token)
+
+            if (velocity > 0) {
+                console.log(`Buy ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`, "new", power+velocity)
+                s__power(parseFloat(""+parseDecimals(power+velocity)))
+            }
+            else {
+                console.log(`Sell ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`,"new", (power-lastpower))
+                s__power(parseFloat(""+parseDecimals(power-0.05)))
+            }
+        }
+    }
     const setTimeframe = (timeframe) => {
         console.log("id", timeframe)
         let newId = form.id.split("USDT")[0] + "USDT" + timeframe.toUpperCase()
@@ -378,26 +388,26 @@ const Component = forwardRef(({}:any, ref)=>{
 
 
             {/* Storage Tower */ <>
-                <Cylinder args={[0.55, 0.55, 1.68, 6]}  position={new Vector3(4, 0, 0)} receiveShadow castShadow >
+                <Cylinder args={[0.55, 0.55, 1.68, 6]}  position={new Vector3(3, 0, -3)} receiveShadow castShadow >
                     <meshStandardMaterial attach="material" color="#aaaaaa" />
                 </Cylinder>
-                <Cylinder args={[0.5, 0.5, 1.7, 9]}  position={new Vector3(4, 0, 0)}  receiveShadow castShadow>
+                <Cylinder args={[0.5, 0.5, 1.7, 9]}  position={new Vector3(3, 0, -3)}  receiveShadow castShadow>
                     <meshStandardMaterial attach="material" color="#ffffff"  />
                 </Cylinder>
-                <Torus args={[0.6,0.1,4,5]}  position={new Vector3(4, 0.85, 0)} receiveShadow castShadow rotation={[Math.PI/2,0,Math.PI/2]}>
-                    <meshStandardMaterial  attach="material" color="#777777" />
+                <Torus args={[0.6,0.1,4,5]}  position={new Vector3(3, 0.85, -3)} receiveShadow castShadow rotation={[Math.PI/2,0,Math.PI/2]}>
+                    <meshStandardMaterial  attach="material" color="#aaaaaa" />
                 </Torus>
             </>}
             {/* Tower Live State */ <>
                 {!!power &&
-                    <Cylinder args={[0.5, 0.6, power, 5]}  position={new Vector3(4, 0.85, 0)} >
+                    <Cylinder args={[0.5, 0.6, power, 5]}  position={new Vector3(3, 0.85, -3)} >
                         <meshStandardMaterial attach="material" color={`#${power*320+50}${power*100+50}44`} 
                             emissive={`#${power*320+50}444477`}
                         />
                     </Cylinder>
                 }
                 {!power &&
-                    <Cylinder args={[0.5, 0.6, 0.05, 5]}  position={new Vector3(4, 0.85, 0)} >
+                    <Cylinder args={[0.5, 0.6, 0.05, 5]}  position={new Vector3(3, 0.85, -3)} >
                         <meshStandardMaterial attach="material" color={`#000`} 
                             
                         />
@@ -409,11 +419,12 @@ const Component = forwardRef(({}:any, ref)=>{
 
 
             {/* FarmHouse */}
-            <Building {...{xOut,yOut,zOut:zOut,wallWidth,roofWidth}} 
+            <Building {...{xOut,yOut,zOut:zOut,wallWidth,roofWidth}}  facadeColor="#963B2D"
                 optsToggler={optsToggler} position={buildingPosition} roofType="farm"
             />
-            <Building {...{xOut,yOut,zOut:zOut/2,wallWidth,roofWidth}}  
-                optsToggler={optsToggler} position={farmPosition}
+            {/* House */}
+            <Building {...{xOut:xOut/2,yOut:yOut/1.5,zOut:zOut/2,wallWidth,roofWidth}}  
+                optsToggler={farmOptsToggler} position={farmPosition} 
             />
 
             <BoundaryPillars position={buildingPosition}  height={yOut*1.05} diameter={0.05} pillars={boundaryBox} /> 
