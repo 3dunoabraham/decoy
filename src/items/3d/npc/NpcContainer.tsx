@@ -4,8 +4,11 @@ import { useFrame } from '@react-three/fiber'
 import { useGLTF } from "@react-three/drei";
 import * as THREE from 'three';
 import { Group } from 'three';
+import Angel from './Angel';
+import Storefront from './Storefront';
+import Observatory from './Observatory';
 
-export default function Component ({position,...props}) {
+export default function Component ({position, optsToggler, ...props}) {
   const { scene } = useGLTF('/angel.glb')
   useLayoutEffect(() => scene.traverse(o =>
     {
@@ -38,18 +41,10 @@ export default function Component ({position,...props}) {
   //   ref.current.rotation.z = ( Math.cos(mycounter * 0.004 ) / 1.5 ) - ( mouse.x * 0.5 )
   // })
 
-  return <group ref={groupRef}>
-    <primitive ref={ref}
-  
-            // onClick={() => {
-            //   console.log(ref)
-            // }}
-            position={[0,-0.8,0]}
-            // scale={[0.6,0.6,0.6]}
-            // scale={[0.6,0.6,0.6]}
-            // rotation={[3.14/2,0,0]}
-            object={scene}
-             {...props} 
-          />
+  return <group ref={groupRef} >
+      {optsToggler.angel.bool && <Angel /> }
+      {optsToggler.storefront.bool && <Storefront /> }
+      {optsToggler.observatory.bool && <Observatory /> }
+      {/* {optsToggler.safe.bool && <Observatory /> } */}
   </group>
 }

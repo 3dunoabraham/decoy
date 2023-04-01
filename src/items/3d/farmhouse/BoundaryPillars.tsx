@@ -40,6 +40,23 @@ export default function Component ({ position, pillars, diameter=0.1, height= 1 
                 </mesh>
             )
         })}
+        
+        {pillars.map((aPillar, index) => {
+            return (
+                <mesh key={index}
+                    castShadow receiveShadow
+                    position={[aPillar[0],-0.5,aPillar[2]]}
+                    ref={meshRef}
+                    scale={[2,0.1,2]}
+                    onClick={() => setClicked(!clicked)}
+                    onPointerOver={() => setHovered(true)}
+                    onPointerOut={() => setHovered(false)}
+                >
+                    <boxGeometry args={[diameter, height, diameter]} />
+                    <meshStandardMaterial color={"gray"} />
+                </mesh>
+            )
+        })}
     </group>
     );
 };

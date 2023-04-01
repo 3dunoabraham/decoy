@@ -5,8 +5,10 @@ import { MdOutlineRoofing } from "react-icons/md";
 import { MdFlipToBack } from "react-icons/md";
 import { AiFillEyeInvisible } from "react-icons/ai";
 import { TiChartAreaOutline } from "react-icons/ti";
-import { GiPayMoney, GiReceiveMoney } from "react-icons/gi";
-import { HiOutlineBellAlert } from "react-icons/hi2";
+import { BiGhost } from "react-icons/bi";
+import { FaMoneyBillAlt } from "react-icons/fa";
+import { GiAngelWings, GiObservatory, GiPayMoney, GiReceiveMoney, GiWheat } from "react-icons/gi";
+import { HiBuildingStorefront, HiOutlineBellAlert } from "react-icons/hi2";
 import * as THREE from "three";
 
 import BoundaryPillars from "@/src/items/3d/farmhouse/BoundaryPillars";
@@ -19,6 +21,9 @@ import Environment from "./Environment";
 import { Building } from '../farmhouse/Building';
 import RotatingPointLight from './RotatingPointLight';
 import NpcContainer from '../npc/NpcContainer';
+import { BsCashStack, BsSafe2Fill } from 'react-icons/bs';
+import { GrCurrency, GrTechnology } from 'react-icons/gr';
+import { TbNetwork } from 'react-icons/tb';
 
 
   
@@ -28,6 +33,14 @@ export const tokenColors = {
     "link": "cyan",
     "ftm": "blue",
 }
+export const tokenIcons
+ = {
+    "btc": <GiWheat />,
+    "eth": <FaMoneyBillAlt />,
+    "link": <TbNetwork />,
+    "ftm": <BiGhost />,
+}
+
 
 const Component = forwardRef(({}:any, ref)=>{
     // const DEFAULT_CARPORT_OTPS = {
@@ -39,15 +52,15 @@ const Component = forwardRef(({}:any, ref)=>{
     //     floor: {bool:true},
     //     services: {bool:true},
     // }
-    const FARM_CARPORT_OTPS = {
-        frontwall: {bool:false},
-        backwall: {bool:false},
-        rightwall: {bool:false},
-        leftwall: {bool:false},
-        ceil: {bool:false},
-        floor: {bool:false},
-        services: {bool:true},
-    }
+    // const FARM_CARPORT_OTPS = {
+    //     frontwall: {bool:false},
+    //     backwall: {bool:false},
+    //     rightwall: {bool:false},
+    //     leftwall: {bool:false},
+    //     ceil: {bool:false},
+    //     floor: {bool:false},
+    //     services: {bool:true},
+    // }
     const DEFAULT_CARPORT_OTPS = {
         frontwall: {bool:false},
         backwall: {bool:false},
@@ -56,6 +69,19 @@ const Component = forwardRef(({}:any, ref)=>{
         ceil: {bool:false},
         floor: {bool:false},
         services: {bool:true},
+
+        
+        house_frontwall: {bool:false},
+        house_backwall: {bool:false},
+        house_rightwall: {bool:false},
+        house_leftwall: {bool:false},
+        house_ceil: {bool:false},
+        house_floor: {bool:false},
+
+        safe: {bool:false},
+        angel: {bool:false},
+        storefront: {bool:false},
+        observatory: {bool:false},
     }
     const tokensArray = ["btc", "eth", "link", "ftm"]
     const timeframesArray = ["3m", "15m", "4h", "1d"]
@@ -67,7 +93,7 @@ const Component = forwardRef(({}:any, ref)=>{
     const lengthFeet = 5
     const heightFeet = 3
     const [farmPosition,s__farmPosition]:any = useState([-3,-0.45,-4]);
-    const [buildingPosition,s__buildingPosition]:any = useState([0,-0.27,-4]);
+    const [buildingPosition,s__buildingPosition]:any = useState([0,-0.25,-4]);
     const [form, s__form] = useState({
         id: "BTCUSDT3M",
     })
@@ -93,7 +119,7 @@ const Component = forwardRef(({}:any, ref)=>{
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [mouseDown, setMouseDown] = useState(false);
     const [optsToggler, s__optsToggler] = useState(DEFAULT_CARPORT_OTPS)
-    const [farmOptsToggler, s__farmOptsToggler] = useState(FARM_CARPORT_OTPS)
+    const [farmOptsToggler, s__farmOptsToggler] = useState(DEFAULT_CARPORT_OTPS)
     function handleMouseDown(e) {
         setMouseDown(true);
         setMousePos({ x: e.clientX, y: e.clientY });
@@ -178,7 +204,7 @@ const Component = forwardRef(({}:any, ref)=>{
         setToken(token)
 
     }
-
+    
 
     /****** HTML ******/
     return (
@@ -198,7 +224,7 @@ const Component = forwardRef(({}:any, ref)=>{
             <div className="flex-col flex-align-start z-700 gap-1 tx-gray mt-100 ">
 
                 <div className="flex-center gap-1 tx-shadow-b-1 ">
-                    <div className="tx-  tx-gray tx-shadow-b-1">ID: {form.id}</div>
+                    <div className="tx-  tx-gray tx-shadow-b-1">SELECTED PRODUCT ID: {form.id}</div>
                 </div>
                 <div className="flex-center gap-1 tx-shadow-b-1 ">
                     <div className="tx-  tx-gray tx-shadow-b-1">Power: {power}</div>
@@ -231,19 +257,20 @@ const Component = forwardRef(({}:any, ref)=>{
                                 <button onClick={()=>{setToken(aToken)}}
                                     key={index}
                                     style={{ color:tokenColors[aToken]}}
-                                    className={`flex-1  tx-center pa-1 bord-r- px-1 opaci-chov--50 tx-l
+                                    className={`flex-1 flex-col tx-center pa-1 bord-r- px-1 opaci-chov--50 tx-l
                                         ${form.id !== aToken.toUpperCase()+"USDT"+form.id.split("USDT")[1].toUpperCase()
                                             ? "bg-b-hov-20 opaci-50 tx-bold-8 tx-shadow-b-1 bg-w-50 tx-ls-2 border-white tx-gray"
                                             : " tx-bold-8 tx-lgx tx-shadow-b-2 border-red"
                                         }
                                     `}
                                 >
+                                    <div className='tx-lg' style={{ color:tokenColors[aToken]}}>{tokenIcons[aToken]}</div>
                                     {aToken.toUpperCase()}
                                 </button>
                             )
                         })}
                     </div>
-                    <div className="flex-center">
+                    {/* <div className="flex-center">
                         <button onClick={()=>{toggleOption("backwall")}}
                             style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
                             className={` tx-center w-100 tx-shadow-b-3 pt-1 bord-r- px-2 opaci-chov--50  tx-lx
@@ -252,33 +279,41 @@ const Component = forwardRef(({}:any, ref)=>{
                         >
                             <HiOutlineBellAlert />
                         </button>
-                    </div>
+                    </div> */}
                     <div className="flex gap-1">
-                        <button onClick={()=>{toggleOption("leftwall")}}
+                        <button onClick={()=>{toggleOption("safe")}}
                             style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
-                            className={`flex-1 tx-center pa-1 pb-0 bord-r- px-2 opaci-chov--50 tx-lx 
-                                ${!optsToggler["leftwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-" : " tx-blue border-blue"}
+                            className={`flex-1 tx-white bg-black tx-center pa-1 pb-0 bord-r- px-2 opaci-chov--50 tx-lx 
+                                ${!optsToggler["safe"].bool ? "bg-b-hov-20 opaci-50 border-white tx-" : " tx-blue border-blue"}
                             `}
                         >
-                            <GiPayMoney />
+                            <BsSafe2Fill />
                         </button>
-                        <button onClick={()=>{toggleOption("rightwall")}} 
-                            style={{filter: "hue-rotate(-189deg) brightness(666%)"}}
-                            className={`flex-1 tx-center pt-2  bord-r- px-2 opaci-chov--50 tx-lx
-                                ${!optsToggler["rightwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-" : " tx-blue border-blue"}
+                        <button onClick={()=>{toggleOption("angel")}}
+                            style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
+                            className={`flex-1 tx-white bg-black tx-center pa-1 pb-0 bord-r- px-2 opaci-chov--50 tx-lx 
+                                ${!optsToggler["angel"].bool ? "bg-b-hov-20 opaci-50 border-white tx-" : " tx-blue border-blue"}
                             `}
                         >
-                            <div className="block" ><GiReceiveMoney /></div>
+                            <GiAngelWings />
                         </button>
                     </div>
                     <div className="flex-center">
-                        <button onClick={()=>{toggleOption("floor")}}
+                        <button onClick={()=>{toggleOption("storefront")}}
                             style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
-                            className={` tx-center w-100  pt-1 bord-r- px-2 opaci-chov--50  tx-lx
-                                ${!optsToggler["floor"].bool ? "bg-b-hov-20 opaci-25 border-white tx-" : " tx-blue border-blue"}
+                            className={`flex-1 tx-white bg-black tx-center pa-1 pb-0 bord-r- px-2 opaci-chov--50 tx-lx 
+                                ${!optsToggler["storefront"].bool ? "bg-b-hov-20 opaci-50 border-white tx-" : " tx-blue border-blue"}
                             `}
                         >
-                            <TiChartAreaOutline />
+                            <HiBuildingStorefront />
+                        </button>
+                        <button onClick={()=>{toggleOption("observatory")}}
+                            style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
+                            className={`flex-1 tx-white bg-black tx-center pa-1 pb-0 bord-r- px-2 opaci-chov--50 tx-lx 
+                                ${!optsToggler["observatory"].bool ? "bg-b-hov-20 opaci-50 border-white tx-" : " tx-blue border-blue"}
+                            `}
+                        >
+                            <GiObservatory />
                         </button>
                     </div>
                 </div>
@@ -379,7 +414,7 @@ const Component = forwardRef(({}:any, ref)=>{
             />
             <Environment />
             
-            <NpcContainer position={[0,0,0]} />
+            <NpcContainer {...{optsToggler}} position={[0,0,0]} />
             <HumanForReference scale={0.18} position={[2.2,-0.6,-1.3]}  />
             {/* Grass Floor */
                 <Cylinder args={[20, 20, 1, 8]}  position={new Vector3(0, -1.3, 0)} receiveShadow castShadow >
@@ -427,7 +462,14 @@ const Component = forwardRef(({}:any, ref)=>{
             />
             {/* House */}
             <Building {...{xOut:xOut/2,yOut:yOut/1.5,zOut:zOut/2,wallWidth,roofWidth}}  
-                optsToggler={farmOptsToggler} position={farmPosition} 
+                optsToggler={{
+                    leftwall: optsToggler.house_leftwall,
+                    rightwall: optsToggler.house_rightwall,
+                    backwall: optsToggler.house_backwall,
+                    frontwall: optsToggler.house_frontwall,
+                    ceil: optsToggler.house_ceil,
+                    floor: optsToggler.house_floor,
+                }} position={farmPosition} 
             />
 
             <BoundaryPillars position={buildingPosition}  height={yOut*1.05} diameter={0.05} pillars={boundaryBox} /> 
