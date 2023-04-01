@@ -142,14 +142,15 @@ export default function Component({
     <group position={position}>
       
       <DynaText text={!!theToken ? theToken.toUpperCase() : ""} color={0xaaaaaa}
-        position={new Vector3(-0.15,0.95+0.3,-0.06)} rotation={[0, Math.PI, 0]}
+        position={new Vector3(-0.15,0.95+0.3,0.17)} rotation={[0, 0, 0]}
 
         isSelected={false}  font={0.3} onClick={()=>{}}
       />
         <Box onClick={()=>{q__asd.refetch()}} args={[0.6,0.4,0.1]} 
-          position={[-0.15,0.99+0.3,0]} >
+          position={[-0.15,0.99+0.3,0.1]} >
             <meshStandardMaterial color="#888888" />
         </Box>
+    <group position={[0,0,0.1]}>
         <CandleInstances
             boundaries={boundaries}
             count={prices.length}
@@ -157,14 +158,16 @@ export default function Component({
             xRange={[-boundaries[0], boundaries[0]*50]}
             yRange={[-boundaries[2]*20, 1]}
         />
+    </group>
+
       <Box args={[1.2,1.7,.1]}  position={new Vector3(-0.5, 0.37, 0.09)} receiveShadow castShadow >
-          <meshStandardMaterial emissive={"#93603F22"} attach="material" color="#93603F" />
+          <meshStandardMaterial emissive={"#93603F22"} attach="material" color="#666666" />
       </Box>
       <Box args={[0.05,2.2,.05]}  position={new Vector3(0, -0.5, 0.09)} receiveShadow castShadow >
-          <meshStandardMaterial emissive={"#93603F22"} attach="material" color="#93603F" />
+          <meshStandardMaterial emissive={"#93603F22"} attach="material" color="#888888" />
       </Box>
       <Box args={[0.05,2.2,.05]}  position={new Vector3(-1, -0.5, 0.09)} receiveShadow castShadow >
-          <meshStandardMaterial emissive={"#93603F22"} attach="material" color="#93603F" />
+          <meshStandardMaterial emissive={"#93603F22"} attach="material" color="#888888" />
       </Box>
     </group>
   );
