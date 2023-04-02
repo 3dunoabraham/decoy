@@ -62,7 +62,7 @@ export default function Component({ live = false, buttonPosition }) {
         ]}
        >
         <boxBufferGeometry args={[0.4,0.3,0.2]} />
-        <meshStandardMaterial color={cameraMode === "orbit" ? "red" : "blue"} />
+        <meshStandardMaterial color={cameraMode === "orbit" ? "#555555" : "#555777"} />
       </mesh>
 
       {/* programmatic camera */}

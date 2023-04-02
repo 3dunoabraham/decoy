@@ -483,11 +483,19 @@ export default function Component({
           <boxGeometry args={[0.025, 0.01, 0.05]} />
           <meshStandardMaterial
             
-            color={!tokensArrayArray ? "#666" : "#996666"} 
+            color={!tokensArrayArray ? "#776666" : "#aa4444"} 
           />
         </mesh>
       }
       
+      <DynaText text={!!tokensArrayArray ? "IN" : "OUT"} color={isSelectedId ? 0xaaaaaa : 0xaaaaaa}
+          position={new Vector3(position[0]-0.44,position[1]-0.32,position[2]+0.28)}
+          isSelected={isSelectedId}  font={0.05} onClick={()=>{onTextClick()}}
+        />
+        <DynaText text={!!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state ? "ON" : "OFF"} color={isSelectedId ? 0xaaaaaa : 0xaaaaaa}
+            position={new Vector3(position[0]-0.33,position[1]-0.32,position[2]+0.28)}
+            isSelected={isSelectedId}  font={0.05} onClick={()=>{onTextClick()}}
+          />
       {
         <mesh
           castShadow

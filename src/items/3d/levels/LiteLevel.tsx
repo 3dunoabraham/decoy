@@ -29,26 +29,32 @@ export default function Component({
     },[tokensArrayObj])
     const turnOff = (token) => {
 
-        if (prompt("turnOff?","yes") !== "yes") return
+        // if (prompt("turnOff?","yes") !== "yes") return
         updateTokenOrder(token,0,"state","0")
+
         // window.location.reload()
     }
     const turnOn = (token) => {
         console.log("tokensArrayObj", tokensArrayObj)
         if (!(token in tokensArrayObj)) { return alert("join first") }
 
-        if (prompt("turnOn?","yes") !== "yes") return
+        // if (prompt("turnOn?","yes") !== "yes") return
         updateTokenOrder(token,0,"state",1)
         // window.location.reload()
     }
     const join = (token) => {
-        if (prompt("join?","yes") !== "yes") return
+        // if (prompt("join?","yes") !== "yes") return
         // updateTokenOrder(token,0,"state",1)
-        addToken(token,1)
-        window.location.reload()
+        let result = addToken(token,1)
+        s__tokensArrayObj(result)
+
+        // window.location.reload()
     }
     const leave = (token) => {
-        alert("Missing feature, please delete records manually")
+        // alert("Developer tools -> Storage -> Local Storage")
+        if (prompt("Confirm deletion (yes/no)","yes") !== "yes") return
+        let result = removeToken(token)
+        s__tokensArrayObj(result)
     }
     const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
 
@@ -86,7 +92,31 @@ export default function Component({
         }
         // s__tokensArrayObj(new_tokensArrayObj)
         s__LS_tokensArrayObj((prevValue) => JSON.stringify(new_tokensArrayObj))
+        return new_tokensArrayObj
     }
+    const removeToken = (token: string) => {
+        if (!token) return
+        let new_tokensArrayObj = {...tokensArrayObj};
+        delete new_tokensArrayObj[token];
+        s__LS_tokensArrayObj((prevValue) => JSON.stringify(new_tokensArrayObj));
+        return new_tokensArrayObj
+    }
+    
+    // const removeToken = (token:string,price:number) => {
+    //     if (!token) return
+    //     let new_tokensArrayObj = {
+    //         ...tokensArrayObj, ...
+    //         {
+    //             [`${token}`]: DEFAULT_TIMEFRAME_ARRAY.map((aTimeframe, index)=> (
+    //                 {...DEFAULT_TOKEN_OBJ,...{
+    //                     ...getComputedLevels({floor:price*0.8,ceil:price*1.2})
+    //                 }}
+    //             ) )
+    //         }
+    //     }
+    //     // s__tokensArrayObj(new_tokensArrayObj)
+    //     s__LS_tokensArrayObj((prevValue) => JSON.stringify(new_tokensArrayObj))
+    // }
 
 
     const updateTokenOrder = async (token:string, timeframe:any, substate:string,val:any="") => {
