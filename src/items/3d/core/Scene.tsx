@@ -511,13 +511,10 @@ const Component = forwardRef(({live=false}:any, ref)=>{
             }
             {/*  Concrete Floor  */}
             {live && optsToggler.floor.bool && 
-                <Cylinder args={[10, 10, 1, 24]}  position={new Vector3(0, -1.3, 0)} receiveShadow castShadow >
+                <Cylinder args={[4, 4, 1, 6]}  position={new Vector3(0, -1.3, 0)} receiveShadow castShadow >
                     <meshStandardMaterial attach="material" color="#5E6166" />
                 </Cylinder>
             }
-
-
-
 
             {!live && /* Storage Tower */ <>
                 <Cylinder args={[0.55, 0.55, 1.68, 6]}  position={new Vector3(3, 0, -3)} receiveShadow castShadow >
@@ -541,6 +538,31 @@ const Component = forwardRef(({live=false}:any, ref)=>{
                 {!power &&
                     <Cylinder args={[0.5, 0.6, 0.05, 5]}  position={new Vector3(3, 0.85, -3)} >
                         <meshStandardMaterial attach="material" color={`#000`} 
+                            
+                        />
+                    </Cylinder>
+                }
+            </>}
+
+
+
+            {live && /* Tower Live State */ <>
+                
+                <Cylinder args={[0.5, 0.6, 0.5, 6]}  position={new Vector3(0,-0.75,-3)} >
+                    <meshStandardMaterial attach="material" color={`#777777`} 
+                        // emissive={`#aa6600`}
+                    />
+                </Cylinder>
+                {!!power &&
+                    <Cylinder args={[0.29, 0.3, power*8, 12]}  position={new Vector3(0,-0.5+power*2,-3)} >
+                        <meshStandardMaterial attach="material" color={`#${power*320+30}${power*100+50}44`} 
+                            // emissive={`#${power*320+50}444477`}
+                        />
+                    </Cylinder>
+                }
+                {!power &&
+                    <Cylinder args={[0.29, 0.3, 0.05, 12]}  position={new Vector3(0,-0.5,-3)} >
+                        <meshStandardMaterial attach="material" color={`#777777`} 
                             
                         />
                     </Cylinder>

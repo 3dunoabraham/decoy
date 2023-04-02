@@ -126,21 +126,29 @@ export default function Component({
   return (
     <group>
       {clicked &&
-        <DynaText text={clickedPrice+"" || ""}  color={0x006600}
+        <DynaText text={""+clickedPrice+"" || ""}  color={0x006600}
           position={new Vector3(position[0]+0.25,position[1]-0.32,position[2]-0.25)}
           isSelected={isSelectedId} font={0.15} 
         />
       }
-      <DynaText text={token+"" || ""} color={isSelectedId ? 0xaaaaaa : 0xaaaaaa}
-        position={new Vector3(position[0]-0.2,position[1]-0.32,position[2]-0.3)}
-        isSelected={isSelectedId}  font={0.3} onClick={()=>{onTextClick()}}
-      />
-      <DynaText text={queryUSDT.data+"" || ""} color={isSelectedId ? 0xff0000 : 0xaaaaaa}
-        onClick={()=>{onTextClick()}}
-        position={new Vector3(position[0],position[1]-0.32,position[2]+0.3)} isSelected={isSelectedId} 
+      {!isSelectedId &&
+        <DynaText text={token+"" || ""} color={isSelectedId ? 0xaaaaaa : 0xaaaaaa}
+          position={new Vector3(position[0]-0.2,position[1]-0.32,position[2]-0.3)}
+          isSelected={isSelectedId}  font={0.25} onClick={()=>{onTextClick()}}
+        />
+      }
+      {isSelectedId &&
+        <DynaText text={token+"" || ""} color={isSelectedId ? tokenColor : tokenColor}
+          position={new Vector3(position[0]-0.2,position[1]-0.2,position[2]-0.3)} rotation={[-Math.PI/4,0,0]}
+          isSelected={isSelectedId}  font={0.25} onClick={()=>{onTextClick()}}
+        />
+      }
+      <DynaText text={queryUSDT.data+"" || ""} color={isSelectedId ? 0xaa6600 : 0xaaaaaa}
+        onClick={()=>{onTextClick()}} font={0.29}
+        position={new Vector3(position[0] + 0.1,position[1]-0.32,position[2]+0.3)} isSelected={isSelectedId} 
       />
       {/* <Text3D /> */}
-      {isSelectedId && <>
+      {/* {isSelectedId && <>
         
         
         <Cylinder args={[0.5, 0.7, 0.5, 4, 1]}  
@@ -154,8 +162,48 @@ export default function Component({
         >
                 <meshStandardMaterial wireframe={true} attach="material" color="#aaaaaa" />
             </Cylinder>
-      </>}
+      </>} */}
+      {isSelectedId && <>
+        
+        
+        
+        <mesh
+          castShadow
+          receiveShadow
+          position={[
+            position[0],
+            -0.73,
+            position[2]-0.32,
+          ]}
+          ref={playerMesh}
+        >
+          <boxGeometry args={[0.9, 0.1, wallWidth*3]} />
+          <meshStandardMaterial 
+            color={!isSelectedId ? unselectedColor : unselectedColor} 
+          />
+        </mesh>
+        </>}
       {/* {isSelectedId && <>
+        
+        
+        
+      <mesh
+        castShadow
+        receiveShadow
+        position={[
+          position[0],
+          -0.3*2,
+          position[2]-0.5,
+        ]}
+        ref={playerMesh}
+      >
+        <boxGeometry args={[0.9, 0.3, wallWidth]} />
+        <meshStandardMaterial
+          color={!isSelectedId ? unselectedColor : unselectedColor} 
+        />
+      </mesh>
+      </>} */}
+      {isSelectedId && <>
         
         <Torus args={[0.7,0.05,4,4]}  
         
@@ -165,9 +213,9 @@ export default function Component({
           position[2],
         ]}
           rotation={[Math.PI/2,0,Math.PI/4]}>
-                <meshStandardMaterial  attach="material" color="#ff5555" />
+                <meshStandardMaterial  attach="material" color="#aaaaaa" />
             </Torus>
-      </>} */}
+      </>}
       
       {clicked && <>
         
@@ -175,7 +223,7 @@ export default function Component({
         
         position={[
           position[0],
-          position[1]-0.39,
+          position[1]-0.36,
           position[2],
         ]}
          receiveShadow castShadow
@@ -184,18 +232,20 @@ export default function Component({
             </Torus>
       </>}
       <mesh
+      onClick={()=>{onTextClick()}}
         castShadow
         receiveShadow
         position={[
           position[0],
-          (position[1] - boundaries[1] / 2 + wallWidth) - (isSelectedId ? 0 : +0.05 ),
+          (position[1] - boundaries[1] / 2 + wallWidth) - (0 ),
+          // (position[1] - boundaries[1] / 2 + wallWidth) - (isSelectedId ? 0 : +0.05 ),
           position[2],
         ]}
         ref={playerMesh}
       >
         <boxGeometry args={[1, wallWidth, 1]} />
         <meshStandardMaterial
-          color={!isSelectedId ? unselectedColor : tokenColor} 
+          color={!isSelectedId ? unselectedColor : unselectedColor} 
         />
       </mesh>
       <mesh
@@ -203,8 +253,8 @@ export default function Component({
         receiveShadow
         onClick={() => toggleGame()}
         position={[
-          position[0],
-          clicked ? position[1] - 0.2 : position[1],
+          !clicked ? position[0] - 0.2 : position[0] + 0.2,
+          clicked ? position[1] - 0.4 : position[1] - 0.3,
           position[2],
         ]}
         ref={meshRef}
@@ -212,10 +262,33 @@ export default function Component({
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
       >
-        <boxGeometry args={[0.1, 0.1, 0.05]} />
+        <boxGeometry args={[0.1, 0.05, 0.05]} />
         <meshStandardMaterial
           
-          color={hovered ? "red" : tokenColor} 
+          color={clicked ? "red" : "#15C771"} 
+        />
+      </mesh>
+
+      
+      <mesh
+        castShadow
+        receiveShadow
+        // onClick={() => alert()}
+        rotation={[isSelectedId ? 0.25 : -0.25,0,0]}
+        position={[
+          position[0] - 0.4,
+          position[1] - 0.35,
+          position[2] + 0.3,
+        ]}
+        ref={meshRef}
+        scale={score.score ? 1 : 3}
+        onPointerOver={() => setHovered(true)}
+        onPointerOut={() => setHovered(false)}
+      >
+        <boxGeometry args={[0.04, 0.03, 0.06]} />
+        <meshStandardMaterial
+          
+          color={isSelectedId ? "red" : "orange"} 
         />
       </mesh>
     </group>
