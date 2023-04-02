@@ -34,6 +34,8 @@ export default function Component({
         // window.location.reload()
     }
     const turnOn = (token) => {
+        console.log("tokensArrayObj", tokensArrayObj)
+        if (!(token in tokensArrayObj)) { return alert("join first") }
 
         if (prompt("turnOn?","yes") !== "yes") return
         updateTokenOrder(token,0,"state",1)
@@ -51,6 +53,20 @@ export default function Component({
     const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
 
 
+    const clickImportConfig = () => {
+        try {
+            let backup = prompt("Backup:")
+            if (!backup) return
+            if (!JSON.parse(backup)) return
+            importConfig(backup)
+        } catch (e) {
+            console.log("backup failed ")
+        }
+    }
+    const importConfig = (strTokensArrayObj) => {
+        s__LS_tokensArrayObj(strTokensArrayObj)
+        window.location.reload()
+    }
     const DEFAULT_TOKEN_OBJ = {
         mode:0,state:0,buy:0,sell:0, floor:0,ceil:0,
         min:0,max:0,minMaxAvg:0,minMedian:0,maxMedian:0,
@@ -117,8 +133,8 @@ export default function Component({
             <LiteNpcContainer {...{optsToggler}} position={[0,0,0]}  
                 form={form} 
             />
+
             
-            {hasAnyToken && <>
                 <Cylinder args={[0.5, 0.6, 0.5, 6]}  position={new Vector3(0,-0.75,-3)} 
                     rotation={[0,Math.PI/2,0]}
                 >
@@ -126,6 +142,16 @@ export default function Component({
                         // emissive={`#aa6600`}
                     />
                 </Cylinder>
+                <Cylinder args={[0.15, 0.1, 0.1, 8]}  position={new Vector3(0,-0.8,-3.48)} 
+                    onClick={()=>{clickImportConfig()}}
+                    rotation={[Math.PI/1.8,0,0]}
+                >
+                    <meshStandardMaterial attach="material" color={`#773377`} 
+                        emissive={`#221122`}
+                    />
+                </Cylinder>
+            
+            {hasAnyToken && <>
                 {!!power &&
                     <Cylinder args={[0.29, 0.3, power*8, 12]}  position={new Vector3(0,-0.5+power*2,-3)} >
                         <meshStandardMaterial attach="material" color={`#${power*320+30}${power*100+50}44`} 

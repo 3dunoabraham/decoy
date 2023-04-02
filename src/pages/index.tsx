@@ -116,7 +116,7 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
             </div>
             <div className='flex-center z-500'>
                 <div className="flex-center pos-abs bg-b-50 bg-glass-5 " style={{border:"1px solid #FED034"}}>
-                    <Link target="_blank" href="/dashboard" className="tx-blue px-6 gap-2 tx-lgx flex-center opaci-chov--50 w-100 tx-bold-2 pt-100 pb-3"
+                    <Link target="_blank" href="/dashboard" className="tx-blue px-6 gap-2 tx-lgx flex-center opaci-chov--50 w-100 tx-bold-2 pt-100 pb-3 Q_sm_x"
                         style={{filter: "hue-rotate(-189deg) brightness(666%)"}}
                     >
                         <FaExternalLinkAlt /> Dashboard 

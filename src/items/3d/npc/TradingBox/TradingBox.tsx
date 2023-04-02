@@ -178,10 +178,12 @@ export default function Component({
           isSelected={isSelectedId}  font={0.25} onClick={()=>{onTextClick()}}
         />
       }
-      <DynaText text={queryUSDT.data+"" || ""} color={isSelectedId ? 0xaa6600 : 0xaaaaaa}
-        onClick={()=>{onTextClick()}} font={0.29}
-        position={new Vector3(position[0] + 0.1,position[1]-0.32,position[2]+0.3)} isSelected={isSelectedId} 
-      />
+      {!!tokensArrayArray &&
+        <DynaText text={queryUSDT.data+"" || ""} color={isSelectedId ? 0xaa6600 : 0xaaaaaa}
+          onClick={()=>{onTextClick()}} font={0.29}
+          position={new Vector3(position[0] + 0.1,position[1]-0.32,position[2]+0.3)} isSelected={isSelectedId} 
+        />
+      }
       {/* <Text3D /> */}
       {/* {isSelectedId && <>
         
