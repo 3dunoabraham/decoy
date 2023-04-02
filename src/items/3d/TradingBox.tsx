@@ -257,6 +257,7 @@ export default function Component({
 
 
       {/* buy/sell button */}
+      {isSelectedId &&
       <mesh
         castShadow
         receiveShadow
@@ -277,6 +278,7 @@ export default function Component({
           color={clicked ? "red" : "#15C771"} 
         />
       </mesh>
+      }
 
 
         {/* mini buttons */}
@@ -421,7 +423,7 @@ export default function Component({
         </mesh>
       }
       
-      {isSelectedId &&
+      {
         <mesh
           castShadow
           receiveShadow
