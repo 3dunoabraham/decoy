@@ -27,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx"
   , "src/items/3d/core/Text3D.js" 
-  ],
+, "src/items/3d/npc/LiteGame/index.jsx"  ],
   "exclude": [
     "node_modules"
   ]

@@ -3,7 +3,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useRef, useState } from "react";
 import { Vector3 } from "three";
 
-export default function Component({ live = false, buttonPosition }) {
+export default function Component({ live = false, buttonPosition, s__showPhysics, showPhysics }) {
   const camGroup: any = useRef();
   const [cameraMode, setCameraMode] = useState<"orbit" | "programmatic">("orbit");
   const programmaticCam: any = useRef();
@@ -17,6 +17,7 @@ export default function Component({ live = false, buttonPosition }) {
           programmaticCam.current.position.x < 1 &&
           programmaticCam.current.position.z < 5)
         {
+            if (!showPhysics) s__showPhysics(true)
             programmaticCam.current.position.set(
             programmaticCam.current.position.x- 0.0035,
             programmaticCam.current.position.y+ 0.001,
@@ -62,7 +63,7 @@ export default function Component({ live = false, buttonPosition }) {
         ]}
        >
         <boxBufferGeometry args={[0.4,0.3,0.2]} />
-        <meshStandardMaterial color={cameraMode === "orbit" ? "#555555" : "#555777"} />
+        <meshStandardMaterial color={cameraMode === "orbit" ? "red" : "blue"} />
       </mesh>
 
       {/* programmatic camera */}

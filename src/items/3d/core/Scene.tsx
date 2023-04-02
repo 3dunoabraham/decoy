@@ -271,7 +271,25 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
                             </div>
                         </div>
                     </details>
-                    
+                    {/* <details>
+                        <summary className='opaci-chov--50 tx-white tx-lg bg-b-50 box-shadow-5 pa-2 bg-glass-5'>
+                            Help
+                        </summary>
+                        <div className="flex-col flex-align-start  gap-1 mt-2 ">
+                            <div className="flex-col flex-align-start gap-2 rot-180">
+                                <TimeframeList {...{timeframesArray, setTimeframe, tokenColors, form}} />
+                                <TokenList {...{setToken,  tokenColors,  form, tokenIcons,}} />
+                                {!live && <>
+                                    <PlayerInventory {...{toggleOption, optsToggler}}  />
+                                </>}
+                            </div>
+                            <hr className='bg-white w-100 mt-2'  />
+                            <div className="flex-center gap-1 tx-shadow-b-1 ">
+                                <div className="tx-  tx-white tx-shadow-b-1">Power: {power}</div>
+                            </div>
+                        </div>
+                    </details>
+                     */}
                 </div>
             </div>
         }

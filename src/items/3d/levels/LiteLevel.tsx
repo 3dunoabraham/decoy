@@ -3,15 +3,18 @@ import ToggleOrbit from "../core/camera/ToggleOrbit";
 import { Vector3 } from "three";
 import TradingBox from "../npc/TradingBox/TradingBox";
 import LiteNpcContainer from "../npc/LiteNpcContainer";
-import { useEffect, useMemo } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { getComputedLevels } from "@/components/scripts/helpers";
 import { useLocalStorage } from "usehooks-ts";
 import { DEFAULT_TIMEFRAME_ARRAY } from "@/components/scripts/constants";
+import { Physics } from "use-cannon";
+import { BigBox, SmallBox2, smallboxes } from "../npc/LiteGame";
 
 
 export default function Component({
     power, form, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj, s__tokensArrayObj
 }) {
+    const [showPhysics, s__showPhysics] = useState(false)
     // useEffect(()=>{
     //     console.log("asdasd", tokensArrayObj)
     // },[tokensArrayObj])
@@ -157,7 +160,7 @@ export default function Component({
     
     return (
         <group>
-            <ToggleOrbit  buttonPosition={hasAnyToken ? [0,-0.7,-2.5] : [0,-99999,0]} />
+            <ToggleOrbit {...{s__showPhysics, showPhysics}}  buttonPosition={hasAnyToken ? [0,-0.7,-2.5] : [0,-99999,0]} />
 
             
             <LiteNpcContainer {...{optsToggler}} position={[0,0,0]}  
@@ -226,8 +229,18 @@ export default function Component({
                     
                 </>
             }
+            {showPhysics &&
 
-            
+                <Physics >
+                    <Suspense fallback={null}>
+                        {smallboxes.map((position, idx) => (
+                        <SmallBox2 position={position} key={idx} />
+                        ))}
+                        {/* <PlaneSimple /> */}
+                    </Suspense>
+                    <BigBox />
+                </Physics>
+            }
             {<>
                 <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" refetchInterval={60000}
                     position={[xOut/2,-0.35,-zOut/2]} onTextClick={()=>{onTextClick("btc")}} unselectedColor={"#50545B"}
