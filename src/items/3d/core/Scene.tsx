@@ -6,7 +6,8 @@ import { MdFlipToBack } from "react-icons/md";
 import { AiFillEyeInvisible } from "react-icons/ai";
 import { TiChartAreaOutline } from "react-icons/ti";
 import { BiGhost } from "react-icons/bi";
-import { FaMoneyBillAlt } from "react-icons/fa";
+import { FaBtc, FaEthereum, FaMoneyBillAlt } from "react-icons/fa";
+import { SiChainlink, SiFantom } from "react-icons/si";
 import { GiAngelWings, GiObservatory, GiPayMoney, GiReceiveMoney, GiWheat } from "react-icons/gi";
 import { HiBuildingStorefront } from "react-icons/hi2";
 import * as THREE from "three";
@@ -22,6 +23,8 @@ import RotatingPointLight from './RotatingPointLight';
 import NpcContainer from '../npc/NpcContainer';
 import { BsSafe2Fill } from 'react-icons/bs';
 import { TbNetwork } from 'react-icons/tb';
+import HouseButtons from '../overlay/HouseButtons';
+import BarnButtons from '../overlay/BarnButtons';
 
 
   
@@ -39,10 +42,10 @@ export const tokenTranslations = {
 }
 export const tokenIcons
  = {
-    "btc": <GiWheat />,
-    "eth": <FaMoneyBillAlt />,
-    "link": <TbNetwork />,
-    "ftm": <BiGhost />,
+    "btc": <FaBtc />,
+    "eth": <FaEthereum />,
+    "link": <SiChainlink />,
+    "ftm": <SiFantom />,
 }
 
 
@@ -225,7 +228,7 @@ const Component = forwardRef(({live=false}:any, ref)=>{
                         })}
                     </div>
                     
-                    <div className="flex-wrap gap-2 w-max-220px">
+                    <div className="flex-wrap gap-2 w-max-150px">
                         { ["ftm","btc","eth","link",].map((aToken, index) => {
 
                             return (
@@ -245,7 +248,8 @@ const Component = forwardRef(({live=false}:any, ref)=>{
                                     >
                                         {tokenIcons[aToken]}
                                     </div>
-                                    {tokenTranslations[aToken]}
+                                    {aToken.toUpperCase()}
+                                    {/* {tokenTranslations[aToken]} */}
                                 </button>
                             )
                         })}
@@ -345,138 +349,8 @@ const Component = forwardRef(({live=false}:any, ref)=>{
                         <div>x</div>
                         <div className="flex bg-b- bord-r- opaci-chov--50">{parseInt(zOut*2+"")}</div>
                     </div>
-                    <div className="flex-col flex-align-stretch gap-2 rot-180">
-                        
-                        <div className="flex tx-center  bord-r-8">
-                            <button onClick={()=>{toggleOption("ceil")}}
-                                style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
-                                className={` tx-center w-100 px-1 bord-r- px-2 opaci-chov--50  tx-lx pt-2
-                                    ${!optsToggler["ceil"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gra" : " tx-blue border-blue"}
-                                `}
-                            >
-                                <div className=""><MdOutlineRoofing /></div>
-                            </button>
-                        </div>
-                        <div className="flex-center ">
-                            <button onClick={()=>{toggleOption("frontwall")}}
-                                style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
-                                className={` tx-center w-100   bord-r- px-2 opaci-chov--50 tx-lx pt-1
-                                    ${!optsToggler["frontwall"].bool
-                                        ? "bg-b-hov-20 opaci-25 border-white tx-gra"
-                                        : " tx-blue border-blue"
-                                    }
-                                `}
-                            >
-                                <AiFillEyeInvisible />
-                            </button>
-                        </div>
-                        <div className="flex gap-1">
-                            <button onClick={()=>{toggleOption("leftwall")}}
-                                style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
-                                className={`flex-1 tx-center pa-1 pb-0 bord-r- px-2 opaci-chov--50 tx-lx 
-                                    ${!optsToggler["leftwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gra" : " tx-blue border-blue"}
-                                `}
-                            >
-                                <GiPayMoney />
-                            </button>
-                            <button onClick={()=>{toggleOption("rightwall")}} 
-                                style={{filter: "hue-rotate(-189deg) brightness(666%)"}}
-                                className={`flex-1 tx-center pt-2  bord-r- px-2 opaci-chov--50 tx-lx
-                                    ${!optsToggler["rightwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gra" : " tx-blue border-blue"}
-                                `}
-                            >
-                                <div className="block" ><GiReceiveMoney /></div>
-                            </button>
-                        </div>
-                        <div className="flex-center">
-                            <button onClick={()=>{toggleOption("backwall")}}
-                                style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
-                                className={` tx-center w-100  pt-1 bord-r- px-2 opaci-chov--50  tx-lx
-                                    ${!optsToggler["backwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gra" : " tx-blue border-blue"}
-                                `}
-                            >
-                                <MdFlipToBack />
-                            </button>
-                        </div>
-                        <div className="flex-center">
-                            <button onClick={()=>{toggleOption("floor")}}
-                                style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
-                                className={` tx-center w-100  pt-1 bord-r- px-2 opaci-chov--50  tx-lx
-                                    ${!optsToggler["floor"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gra" : " tx-blue border-blue"}
-                                `}
-                            >
-                                <TiChartAreaOutline />
-                            </button>
-                        </div>
-                    </div>
-
-
-
-
-                    <div className="flex-col flex-align-stretch gap-2 rot-180">
-                        
-                        <div className="flex tx-center  bord-r-8">
-                            <button onClick={()=>{toggleOption("house_ceil")}}
-                                style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
-                                className={` tx-center w-100 px-1 bord-r- px-2 opaci-chov--50  tx-lg pt-2
-                                    ${!optsToggler["house_ceil"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gra" : " tx-blue border-blue"}
-                                `}
-                            >
-                                <div className=""><MdOutlineRoofing /></div>
-                            </button>
-                        </div>
-                        <div className="flex-center ">
-                            <button onClick={()=>{toggleOption("house_frontwall")}}
-                                style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
-                                className={` tx-center w-100   bord-r- px-2 opaci-chov--50 tx-lg pt-1
-                                    ${!optsToggler["house_frontwall"].bool
-                                        ? "bg-b-hov-20 opaci-25 border-white tx-gra"
-                                        : " tx-blue border-blue"
-                                    }
-                                `}
-                            >
-                                <AiFillEyeInvisible />
-                            </button>
-                        </div>
-                        <div className="flex gap-1">
-                            <button onClick={()=>{toggleOption("house_leftwall")}}
-                                style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
-                                className={`flex-1 tx-center pa-1 pb-0 bord-r- px-2 opaci-chov--50 tx-lg 
-                                    ${!optsToggler["house_leftwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gra" : " tx-blue border-blue"}
-                                `}
-                            >
-                                <GiPayMoney />
-                            </button>
-                            <button onClick={()=>{toggleOption("house_rightwall")}} 
-                                style={{filter: "hue-rotate(-189deg) brightness(666%)"}}
-                                className={`flex-1 tx-center pt-2  bord-r- px-2 opaci-chov--50 tx-lg
-                                    ${!optsToggler["house_rightwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gra" : " tx-blue border-blue"}
-                                `}
-                            >
-                                <div className="block" ><GiReceiveMoney /></div>
-                            </button>
-                        </div>
-                        <div className="flex-center">
-                            <button onClick={()=>{toggleOption("house_backwall")}}
-                                style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
-                                className={` tx-center w-100  pt-1 bord-r- px-2 opaci-chov--50  tx-lg
-                                    ${!optsToggler["house_backwall"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gra" : " tx-blue border-blue"}
-                                `}
-                            >
-                                <MdFlipToBack />
-                            </button>
-                        </div>
-                        <div className="flex-center">
-                            <button onClick={()=>{toggleOption("house_floor")}}
-                                style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
-                                className={` tx-center w-100  pt-1 bord-r- px-2 opaci-chov--50  tx-lg
-                                    ${!optsToggler["house_floor"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gra" : " tx-blue border-blue"}
-                                `}
-                            >
-                                <TiChartAreaOutline />
-                            </button>
-                        </div>
-                    </div>
+                    <BarnButtons toggleOption={toggleOption} optsToggler={optsToggler} />
+                    <HouseButtons toggleOption={toggleOption} optsToggler={optsToggler} />
                 </div>
             </div>
         }
@@ -556,6 +430,7 @@ const Component = forwardRef(({live=false}:any, ref)=>{
                 {!!power &&
                     <Cylinder args={[0.29, 0.3, power*8, 12]}  position={new Vector3(0,-0.5+power*2,-3)} >
                         <meshStandardMaterial attach="material" color={`#${power*320+30}${power*100+50}44`} 
+                            emissive={`#6F4200`}
                             // emissive={`#${power*320+50}444477`}
                         />
                     </Cylinder>

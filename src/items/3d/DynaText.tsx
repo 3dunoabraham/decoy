@@ -3,10 +3,10 @@ import { MeshBasicMaterial, MeshStandardMaterial, Vector3 } from 'three';
 
 export default function Component ({
   onClick= ()=> {},
-  text="asd", position=new Vector3(), color , isSelected = false,font=0.35,
+  text="asd", position=new Vector3(), color , emissive="#000000", isSelected = false,font=0.35,
   ...props
 })  {
-  const material = new MeshStandardMaterial({ color: color, emissive: color });
+  const material = new MeshStandardMaterial({ color: color, emissive: emissive });
   return (
       <Text
         receiveShadow
