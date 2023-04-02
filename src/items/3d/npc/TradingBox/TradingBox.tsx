@@ -1,14 +1,14 @@
 import { Cylinder, SpotLight, Torus, useDepthBuffer } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Mesh, Box3, Vector3 } from "three";
 import * as THREE from "three";
 import { TextGLB } from '@/src/items/3d/Text'
-import DynaText from "./DynaText";
+import DynaText from "../../DynaText";
 import { useLocalStorage } from "usehooks-ts";
 import { useQuery } from "@tanstack/react-query";
 import { fetchMultipleJsonArray, parseDecimals } from "@/components/scripts/helpers";
-import { tokenColors } from "./core/Scene";
+import { tokenColors } from "../../core/Scene";
 type BoxProps = {
   position?: [number, number, number];
   camera?: any;
@@ -100,6 +100,17 @@ export default function Component({
   const isSelectedId = useMemo(()=>{
     return form && form.id == token.toUpperCase()+"USDT"+timeframe.toUpperCase()
   },[form])
+  useEffect(()=>{
+    // s__counter(counter+1)
+    s__tokensArrayObj(JSON.parse(LS_tokensArrayObj))
+    // console.log("LS_tokensArrayObj")
+    // console.log(JSON.parse(LS_tokensArrayObj)) 
+    s__uid(LS_uid)
+    s__clientIP(LS_uid.split(":")[0])
+    console.log("s__tokensArrayObj", JSON.parse(LS_tokensArrayObj))
+    console.log("s__uid", LS_uid)
+    console.log("s__clientIP", LS_uid.split(":")[0])
+},[])
   useFrame((state: any, delta) => {
     if (meshRef.current && state && state.get) {
       setElapsed(delta + elapsed);
@@ -123,6 +134,9 @@ export default function Component({
     setVelocityY(0.05)
     s__clickedPrice(queryUSDT.data)
   }
+
+
+
   return (
     <group>
       {clicked &&

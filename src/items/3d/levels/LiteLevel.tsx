@@ -1,7 +1,7 @@
 import { Cylinder } from "@react-three/drei";
 import ToggleOrbit from "../core/camera/ToggleOrbit";
 import { Vector3 } from "three";
-import TradingBox from "../TradingBox";
+import TradingBox from "../npc/TradingBox/TradingBox";
 import LiteNpcContainer from "../npc/LiteNpcContainer";
 
 

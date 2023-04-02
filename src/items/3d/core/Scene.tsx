@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useMemo, useRef, useState,  } from 'react'
+import { forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState,  } from 'react'
 import { Torus, Cylinder, OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import { Canvas, useThree } from "@react-three/fiber";
 import { MdOutlineRoofing } from "react-icons/md";
@@ -14,7 +14,7 @@ import * as THREE from "three";
 
 import BoundaryPillars from "@/src/items/3d/farmhouse/BoundaryPillars";
 import { parseDecimals } from "@/components/scripts/helpers";
-import TradingBox from "../TradingBox";
+import TradingBox from "../npc/TradingBox/TradingBox";
 import { Vector3 } from "three";
 import HumanForReference from "./HumanForReference";
 import Environment from "./Environment";
@@ -31,6 +31,9 @@ import ToggleOrbit from './camera/ToggleOrbit';
 import PlayerInventory from '../overlay/PlayerInventory';
 import TimeframeList from '../overlay/TimeframeList';
 import LiteIconsList from '../overlay/LiteIconsList';
+import { useLocalStorage } from 'usehooks-ts';
+import SimpleOrbit from './camera/SimpleOrbit';
+import LoginLevel from '../levels/LoginLevel';
 
 
   
@@ -192,6 +195,28 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
         return child;
       });
     
+
+    const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
+    const [LS_uid, s__LS_uid] = useLocalStorage('uid', "")
+    const [clickedPrice, s__clickedPrice] = useState(0)
+    const [uid, s__uid] = useState("")
+    const [showAllTokens,s__showAllTokens] = useState<any>(true)
+    const [chopAmount,s__chopAmount] = useState<any>(0)
+    const [tokensArrayObj,s__tokensArrayObj] = useState<any>({})
+    const [klinesArray,s__klinesArray] = useState<any[]>([])
+    const [clientIP, s__clientIP] = useState('');  
+    useEffect(()=>{
+        // s__counter(counter+1)
+        s__tokensArrayObj(JSON.parse(LS_tokensArrayObj))
+        // console.log("LS_tokensArrayObj")
+        // console.log(JSON.parse(LS_tokensArrayObj)) 
+        s__uid(LS_uid)
+        s__clientIP(LS_uid.split(":")[0])
+        console.log("s__tokensArrayObj", JSON.parse(LS_tokensArrayObj))
+        console.log("s__uid", LS_uid)
+        console.log("s__clientIP", LS_uid.split(":")[0])
+    },[])
+
     
 
 
@@ -199,41 +224,42 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
     return (
     <div className='h-min-500px w-100 flex-col g-b-20 bord-r- flex-align-stretch flex-justify-stretch pos-rel'>
         
+        {!!uid &&
+            <div className="flex pos-abs top-0 left-0  bord-r- pa-2 ma-2">
+                <div className="flex-col flex-align-start z-700 gap-1  mt-100 ">
 
-        <div className="flex pos-abs top-0 left-0  bord-r- pa-2 ma-2">
-            <div className="flex-col flex-align-start z-700 gap-1  mt-100 ">
-
-                <div className="flex-center gap-1 tx-shadow-b-1 bg-b-50 px-3 py-2 bg-glass-5">
-                    <div className="tx-  tx-white tx-shadow-b-2">
-                        <div>SELECTED:</div>
-                        <div className='box-shadow-3 bg-b-50 pa-2 ma-1'>{form.id}</div>
+                    <div className="flex-center gap-1 tx-shadow-b-1 bg-b-50 px-3 py-2 bg-glass-5">
+                        <div className="tx-  tx-white tx-shadow-b-2">
+                            <div>SELECTED:</div>
+                            <div className='box-shadow-3 bg-b-50 pa-2 ma-1'>{form.id}</div>
+                        </div>
                     </div>
+                    <details>
+                        <summary className='opaci-chov--50 tx-white tx-lg bg-b-50 box-shadow-5 pa-2 bg-glass-5'>
+                            Settings
+                        </summary>
+                        <div className="flex-col flex-align-start  gap-1 mt-2 ">
+                            <div className="flex-col flex-align-start gap-2 rot-180">
+                                <TimeframeList {...{timeframesArray, setTimeframe, tokenColors, form}} />
+                                <TokenList {...{setToken,  tokenColors,  form, tokenIcons,}} />
+                                {!live && <>
+                                    <PlayerInventory {...{toggleOption, optsToggler}}  />
+                                </>}
+                            </div>
+                            <hr className='bg-white w-100 mt-2'  />
+                            <div className="flex-center gap-1 tx-shadow-b-1 ">
+                                <div className="tx-  tx-white tx-shadow-b-1">Power: {power}</div>
+                            </div>
+                        </div>
+                    </details>
+                    
                 </div>
-                <details>
-                    <summary className='opaci-chov--50 tx-white tx-lg bg-b-50 box-shadow-5 pa-2 bg-glass-5'>
-                        Settings
-                    </summary>
-                    <div className="flex-col flex-align-start  gap-1 mt-2 ">
-                        <div className="flex-col flex-align-start gap-2 rot-180">
-                            <TimeframeList {...{timeframesArray, setTimeframe, tokenColors, form}} />
-                            <TokenList {...{setToken,  tokenColors,  form, tokenIcons,}} />
-                            {!live && <>
-                                <PlayerInventory {...{toggleOption, optsToggler}}  />
-                            </>}
-                        </div>
-                        <hr className='bg-white w-100 mt-2'  />
-                        <div className="flex-center gap-1 tx-shadow-b-1 ">
-                            <div className="tx-  tx-white tx-shadow-b-1">Power: {power}</div>
-                        </div>
-                    </div>
-                </details>
-                
             </div>
-        </div>
+        }
 
 
 
-        {live &&
+        {!!uid && (live) &&
             <div className="flex pos-abs top-0 right-0  bord-r- pa-2 ma-2">
                 <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray mt-100 ">
 
@@ -249,7 +275,7 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
         }
 
 
-        {!live &&
+        {!!uid && (!live) &&
             <div className="flex pos-abs top-0 right-0  bord-r- pa-2 ma-2">
                 <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray mt-100 ">
 
@@ -279,7 +305,15 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
             camera={{ fov: fffooovvv, position: [xOut,1,zOut*2] }} 
         >
             {/* {children} */}
-            {childrenWithProps}
+            {!uid && <>
+                <LoginLevel {...{
+                    power, form, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler
+                }} />
+            </>}
+            {!!uid && <>
+                {childrenWithProps}
+            </>}
+
             <RotatingPointLight distance={30} {...{color:"#ffddcc", intensity:1.2, position:[5,1,10]}} 
                 speed={10000}
             />

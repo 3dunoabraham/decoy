@@ -74,7 +74,7 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
             >
                 <Suspense>
                     {isClient &&
-                        <Scene ref={$boxContainer}>
+                        <Scene ref={$boxContainer} live={false}>
                             <DemoLevel {...{
                                 power:null, form:null, onTextClick:null, optsToggler: null,
                                 toggleTrade:null, xOut:null, yOut:null, zOut:null,

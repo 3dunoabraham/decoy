@@ -114,26 +114,26 @@ export function ChartDashboard({query}) {
     const DEFAULT_TOKEN = {}
     const tokensReqObj:any = ( DEFAULT_TOKENS_ARRAY.reduce((acc, aToken) => (
         { ...acc, [aToken]: [`${API_PRICE_BASEURL}${(aToken+baseToken).toUpperCase()}`] }
-        ), {}))
-        const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
-        const [LS_uid, s__LS_uid] = useLocalStorage('uid', "")
-        const [uid, s__uid] = useState("")
-        const [showAllTokens,s__showAllTokens] = useState<any>(true)
-        const [chopAmount,s__chopAmount] = useState<any>(0)
-        const [tokensArrayObj,s__tokensArrayObj] = useState<any>({})
-        const [klinesArray,s__klinesArray] = useState<any[]>([])
-        const [clientIP, s__clientIP] = useState('');
-        const DEFAULT_TOKEN_OBJ = {
-            mode:0,state:0,buy:0,sell:0, floor:0,ceil:0,
-            min:0,max:0,minMaxAvg:0,minMedian:0,maxMedian:0,
-        }
-        const p__klinesArray = useMemo(()=>{
-            let slicedArray = [...klinesArray]
-            for (let index = 0; index < chopAmount; index++) { slicedArray.push(klinesArray[499]) }
-            
-            return slicedArray.slice(slicedArray.length-500,slicedArray.length)
-        },[klinesArray,chopAmount])
-        const queryUSDT:any = useQuery({ queryKey: ['usdt'], refetchInterval: 3000,
+    ), {}))
+    const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
+    const [LS_uid, s__LS_uid] = useLocalStorage('uid', "")
+    const [uid, s__uid] = useState("")
+    const [showAllTokens,s__showAllTokens] = useState<any>(true)
+    const [chopAmount,s__chopAmount] = useState<any>(0)
+    const [tokensArrayObj,s__tokensArrayObj] = useState<any>({})
+    const [klinesArray,s__klinesArray] = useState<any[]>([])
+    const [clientIP, s__clientIP] = useState('');
+    const DEFAULT_TOKEN_OBJ = {
+        mode:0,state:0,buy:0,sell:0, floor:0,ceil:0,
+        min:0,max:0,minMaxAvg:0,minMedian:0,maxMedian:0,
+    }
+    const p__klinesArray = useMemo(()=>{
+        let slicedArray = [...klinesArray]
+        for (let index = 0; index < chopAmount; index++) { slicedArray.push(klinesArray[499]) }
+        
+        return slicedArray.slice(slicedArray.length-500,slicedArray.length)
+    },[klinesArray,chopAmount])
+    const queryUSDT:any = useQuery({ queryKey: ['usdt'], refetchInterval: 3000,
         queryFn: async () => online ? (await fetchMultipleJsonArray(tokensReqObj)) : DEFAULT_TOKEN,
     })
     const klinesStats = useMemo(()=>{

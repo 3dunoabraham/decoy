@@ -26,6 +26,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
+  , "src/items/3d/core/Text3D.js" 
   ],
   "exclude": [
     "node_modules"

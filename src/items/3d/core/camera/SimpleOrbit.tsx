@@ -3,7 +3,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useRef, useState } from "react";
 import { Vector3 } from "three";
 
-export default function Component({ live = false, buttonPosition }) {
+export default function Component({ live = false, buttonPosition=null }) {
   const camGroup: any = useRef();
   const [cameraMode, setCameraMode] = useState<"orbit" | "programmatic">("orbit");
   const programmaticCam: any = useRef();
