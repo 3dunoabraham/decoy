@@ -198,8 +198,8 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
 
     const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
     const [LS_uid, s__LS_uid] = useLocalStorage('uid', "")
-    const [clickedPrice, s__clickedPrice] = useState(0)
     const [uid, s__uid] = useState("")
+    const [clickedPrice, s__clickedPrice] = useState(0)
     const [showAllTokens,s__showAllTokens] = useState<any>(true)
     const [chopAmount,s__chopAmount] = useState<any>(0)
     const [tokensArrayObj,s__tokensArrayObj] = useState<any>({})
