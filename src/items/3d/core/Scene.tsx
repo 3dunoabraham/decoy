@@ -25,6 +25,9 @@ import { BsSafe2Fill } from 'react-icons/bs';
 import { TbNetwork } from 'react-icons/tb';
 import HouseButtons from '../overlay/HouseButtons';
 import BarnButtons from '../overlay/BarnButtons';
+import React from 'react';
+import TokenList from '../overlay/TokenList';
+import ToggleOrbit from './camera/ToggleOrbit';
 
 
   
@@ -49,7 +52,7 @@ export const tokenIcons
 }
 
 
-const Component = forwardRef(({live=false}:any, ref)=>{
+const Component = forwardRef(({live=false,children=null}:any, ref)=>{
     const DEFAULT_CARPORT_OTPS = {
         frontwall: {bool:false},
         backwall: {bool:false},
@@ -143,6 +146,14 @@ const Component = forwardRef(({live=false}:any, ref)=>{
 
 
     /****** UPDATE ******/
+    const childrenWithProps = React.Children.map(children, (child) => {
+        if (React.isValidElement<any>(child)) {
+          return React.cloneElement(child, { power });
+        }
+        return child;
+      });
+    
+    
     const toggleTrade = (token, velocity) => {
         console.log("token, velocity", token, velocity)
         s__lastpower(velocity)
@@ -227,33 +238,8 @@ const Component = forwardRef(({live=false}:any, ref)=>{
                             )
                         })}
                     </div>
-                    
-                    <div className="flex-wrap gap-2 w-max-150px">
-                        { ["ftm","btc","eth","link",].map((aToken, index) => {
-
-                            return (
-                                <button onClick={()=>{setToken(aToken)}}
-                                    key={index}
-                                    style={{ color:tokenColors[aToken]}}
-                                    className={`flex-1 flex-col tx-center pa-1 bord-r- px-2   tx-l bg-glass-5
-                                        ${form.id !== aToken.toUpperCase()+"USDT"+form.id.split("USDT")[1].toUpperCase()
-                                            ? "bg-b-hov-20 tx-bold-8 tx-shadow-b-1 bg-b-50 tx-ls-2  tx-gray"
-                                            : " tx-bold-8 tx-lgx tx-shadow-b-2  bg-b-50  box-shadow-5 border-white "
-                                        }
-                                    `}
-                                >
-                                    <div className='tx-lg'
-                                        
-                                        style={{ color:tokenColors[aToken]}}
-                                    >
-                                        {tokenIcons[aToken]}
-                                    </div>
-                                    {aToken.toUpperCase()}
-                                    {/* {tokenTranslations[aToken]} */}
-                                </button>
-                            )
-                        })}
-                    </div>
+                    <TokenList {...{setToken,  tokenColors,  form, tokenIcons,}} />
+                        
                     {!live && <>
                         <div className="flex gap-1">
                             <button onClick={()=>{toggleOption("safe")}}
@@ -359,16 +345,12 @@ const Component = forwardRef(({live=false}:any, ref)=>{
         <Canvas shadows  onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onMouseMove={handleMouseMove}
             camera={{ fov: fffooovvv, position: [xOut,1,zOut*2] }} 
         >
+            {/* {children} */}
+            {childrenWithProps}
             <RotatingPointLight distance={30} {...{color:"#ffddcc", intensity:1.2, position:[5,1,10]}} 
                 speed={10000}
             />
-            <OrbitControls  enableZoom={true}
-                 minDistance={0.5}
-                 maxDistance={6.5}
-                dampingFactor={live ?0.5 : 0.08}  
-                enablePan={false}
-                maxPolarAngle={Math.PI/2+0.1}
-            />
+            
             {/* {live && <fog attach="fog" args={['#2C2D32', 5, 10]} /> } */}
             {!live && <fog attach="fog" args={['#C5E4E4', 5, 20]} /> }
             {!live && <Environment /> }
@@ -418,31 +400,6 @@ const Component = forwardRef(({live=false}:any, ref)=>{
                 }
             </>}
 
-
-
-            {live && /* Tower Live State */ <>
-                
-                <Cylinder args={[0.5, 0.6, 0.5, 6]}  position={new Vector3(0,-0.75,-3)} >
-                    <meshStandardMaterial attach="material" color={`#777777`} 
-                        // emissive={`#aa6600`}
-                    />
-                </Cylinder>
-                {!!power &&
-                    <Cylinder args={[0.29, 0.3, power*8, 12]}  position={new Vector3(0,-0.5+power*2,-3)} >
-                        <meshStandardMaterial attach="material" color={`#${power*320+30}${power*100+50}44`} 
-                            emissive={`#6F4200`}
-                            // emissive={`#${power*320+50}444477`}
-                        />
-                    </Cylinder>
-                }
-                {!power &&
-                    <Cylinder args={[0.29, 0.3, 0.05, 12]}  position={new Vector3(0,-0.5,-3)} >
-                        <meshStandardMaterial attach="material" color={`#777777`} 
-                            
-                        />
-                    </Cylinder>
-                }
-            </>}
 
 
 
