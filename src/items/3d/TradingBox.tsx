@@ -24,9 +24,13 @@ type BoxProps = {
   token: any;
   onTextClick: any;
   form: any;
+  refetchInterval?: any;
+  unselectedColor?: any;
 };
 
 export default function Component({
+  unselectedColor="#48721E",
+  refetchInterval=3000,
   form= null,
   token= "btc",
   timeframe= "3m",
@@ -65,7 +69,7 @@ export default function Component({
         
         return slicedArray.slice(slicedArray.length-500,slicedArray.length)
     },[klinesArray,chopAmount])
-    const queryUSDT:any = useQuery({ queryKey: ['usdt'+token], refetchInterval: 3000,
+    const queryUSDT:any = useQuery({ queryKey: ['usdt'+token], refetchInterval: refetchInterval,
     queryFn: async () => {
       let theList = await fetchMultipleJsonArray(( [token].reduce((acc, aToken) => (
         { ...acc, [aToken]: [`${API_PRICE_BASEURL}${(aToken+baseToken).toUpperCase()}`] }
@@ -191,7 +195,7 @@ export default function Component({
       >
         <boxGeometry args={[1, wallWidth, 1]} />
         <meshStandardMaterial
-          color={!isSelectedId ? "#48721E" : tokenColor} 
+          color={!isSelectedId ? unselectedColor : tokenColor} 
         />
       </mesh>
       <mesh
