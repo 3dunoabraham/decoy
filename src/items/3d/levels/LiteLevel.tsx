@@ -3,42 +3,145 @@ import ToggleOrbit from "../core/camera/ToggleOrbit";
 import { Vector3 } from "three";
 import TradingBox from "../npc/TradingBox/TradingBox";
 import LiteNpcContainer from "../npc/LiteNpcContainer";
+import { useEffect, useMemo } from "react";
+import { getComputedLevels } from "@/components/scripts/helpers";
+import { useLocalStorage } from "usehooks-ts";
+import { DEFAULT_TIMEFRAME_ARRAY } from "@/components/scripts/constants";
 
 
 export default function Component({
-    power, form, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler
+    power, form, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj, 
 }) {
+    // useEffect(()=>{
+    //     console.log("asdasd", tokensArrayObj)
+    // },[tokensArrayObj])
+    const _timeframe = useMemo(()=>{
+        return form.id.split("USDT")[1].toLowerCase()
+    },[form.id])
+    const hasAnyToken = useMemo(()=>{
+        console.log("tokensArrayObj", tokensArrayObj)
+        let interestCount = Object.keys(tokensArrayObj).filter((token)=>{
+            console.log("token", token)
+            return token in tokensArrayObj
+        })
+        console.log("interestCount", interestCount)
+        return interestCount.length > 0
+    },[tokensArrayObj])
+    const turnOff = (token) => {
+
+        if (prompt("turnOff?","yes") !== "yes") return
+        updateTokenOrder(token,0,"state","0")
+        // window.location.reload()
+    }
+    const turnOn = (token) => {
+
+        if (prompt("turnOn?","yes") !== "yes") return
+        updateTokenOrder(token,0,"state",1)
+        // window.location.reload()
+    }
+    const join = (token) => {
+        if (prompt("join?","yes") !== "yes") return
+        // updateTokenOrder(token,0,"state",1)
+        addToken(token,1)
+        window.location.reload()
+    }
+    const leave = (token) => {
+        alert()
+    }
+    const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
+
+
+    const DEFAULT_TOKEN_OBJ = {
+        mode:0,state:0,buy:0,sell:0, floor:0,ceil:0,
+        min:0,max:0,minMaxAvg:0,minMedian:0,maxMedian:0,
+    }
+
+    const addToken = (token:string,price:number) => {
+        if (!token) return
+        let new_tokensArrayObj = {
+            ...tokensArrayObj, ...
+            {
+                [`${token}`]: DEFAULT_TIMEFRAME_ARRAY.map((aTimeframe, index)=> (
+                    {...DEFAULT_TOKEN_OBJ,...{
+                        ...getComputedLevels({floor:price*0.8,ceil:price*1.2})
+                    }}
+                ) )
+            }
+        }
+        // s__tokensArrayObj(new_tokensArrayObj)
+        s__LS_tokensArrayObj((prevValue) => JSON.stringify(new_tokensArrayObj))
+    }
+
+
+    const updateTokenOrder = async (token:string, timeframe:any, substate:string,val:any="") => {
+        if (!token) return
+        let promptVal = !val ? prompt("Enter Value") : val
+        let value = !promptVal ? 0 : parseFloat(promptVal)
+        let timeframeIndex = timeframe
+        let old_tokensArrayObj = tokensArrayObj[token][timeframeIndex]
+        
+        let old_tokensArrayObjArray = [...tokensArrayObj[token]]
+        let newCrystal = {
+            ...{[substate]:value},
+            ...getComputedLevels({
+                ...old_tokensArrayObjArray[timeframeIndex],
+                ...{[substate]:value}
+            }),
+        }
+        old_tokensArrayObjArray[timeframeIndex] = {...old_tokensArrayObj,...newCrystal}
+        let bigTokensObj = {...tokensArrayObj, ...{[token]:old_tokensArrayObjArray}}
+        // tokensArrayObj(bigTokensObj)
+        console.log("bigTokensObj", bigTokensObj)
+        s__LS_tokensArrayObj((prevValue) => JSON.stringify(bigTokensObj))
+        // let theKey = `${token.toUpperCase()}USDT${DEFAULT_TIMEFRAME_ARRAY[timeframe].toUpperCase()}`
+        // const response = await updateStrat(theKey, {key:theKey, [substate]:value})
+    }
+
+    
+    const selectedToken = useMemo(()=>{
+        return form.id.split("USDT")[0].toLowerCase()
+      },[form.id])
+      const selectedTimeframe = useMemo(()=>{
+        return form.id.split("USDT")[1].toLowerCase()
+      },[form.id])
+      const selectedTimeframeIndex = useMemo(()=>{
+        return DEFAULT_TIMEFRAME_ARRAY.indexOf(selectedTimeframe)
+      },[selectedTimeframe])
+
+    
     return (
         <group>
-            <ToggleOrbit  buttonPosition={[0,-0.7,-2.5]} />
+            <ToggleOrbit  buttonPosition={hasAnyToken ? [0,-0.7,-2.5] : [0,-99999,0]} />
 
             
             <LiteNpcContainer {...{optsToggler}} position={[0,0,0]}  
                 form={form} 
             />
             
-            <Cylinder args={[0.5, 0.6, 0.5, 6]}  position={new Vector3(0,-0.75,-3)} 
-                rotation={[0,Math.PI/2,0]}
-            >
-                <meshStandardMaterial attach="material" color={`#777777`} 
-                    // emissive={`#aa6600`}
-                />
-            </Cylinder>
-            {!!power &&
-                <Cylinder args={[0.29, 0.3, power*8, 12]}  position={new Vector3(0,-0.5+power*2,-3)} >
-                    <meshStandardMaterial attach="material" color={`#${power*320+30}${power*100+50}44`} 
-                        emissive={`#6F4200`}
-                        // emissive={`#${power*320+50}444477`}
-                    />
-                </Cylinder>
-            }
-            {!power &&
-                <Cylinder args={[0.29, 0.3, 0.05, 12]}  position={new Vector3(0,-0.5,-3)} >
+            {hasAnyToken && <>
+                <Cylinder args={[0.5, 0.6, 0.5, 6]}  position={new Vector3(0,-0.75,-3)} 
+                    rotation={[0,Math.PI/2,0]}
+                >
                     <meshStandardMaterial attach="material" color={`#777777`} 
-                        
+                        // emissive={`#aa6600`}
                     />
                 </Cylinder>
-            }
+                {!!power &&
+                    <Cylinder args={[0.29, 0.3, power*8, 12]}  position={new Vector3(0,-0.5+power*2,-3)} >
+                        <meshStandardMaterial attach="material" color={`#${power*320+30}${power*100+50}44`} 
+                            emissive={`#6F4200`}
+                            // emissive={`#${power*320+50}444477`}
+                        />
+                    </Cylinder>
+                }
+                {!power &&
+                    <Cylinder args={[0.29, 0.3, 0.05, 12]}  position={new Vector3(0,-0.5,-3)} >
+                        <meshStandardMaterial attach="material" color={`#777777`} 
+                            
+                        />
+                    </Cylinder>
+                }
+            </>}
 
 
             {/*  Concrete Floor  */}
@@ -69,22 +172,42 @@ export default function Component({
             }
 
             
-            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" refetchInterval={60000}
-                position={[xOut/2,-0.35,-zOut/2]} onTextClick={()=>{onTextClick("btc")}} unselectedColor={"#50545B"}
-                setVelocityY={(data)=>{toggleTrade("btc",data)}}
-            /> 
-            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="eth" refetchInterval={60000}
-                position={[-xOut/2,-0.35,zOut/2]} onTextClick={()=>{onTextClick("eth")}} unselectedColor={"#50545B"}
-                setVelocityY={(data)=>{toggleTrade("eth",data)}}
-            /> 
-            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="link" refetchInterval={60000}
-                position={[xOut/2,-0.35,zOut/2]} onTextClick={()=>{onTextClick("link")}} unselectedColor={"#50545B"}
-                setVelocityY={(data)=>{toggleTrade("link",data)}}
-            /> 
-            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="ftm" refetchInterval={60000}
-                position={[-xOut/2,-0.35,-zOut/2]} onTextClick={()=>{onTextClick("ftm")}} unselectedColor={"#50545B"}
-                setVelocityY={(data)=>{toggleTrade("ftm",data)}}
-            /> 
+            {<>
+                <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" refetchInterval={60000}
+                    position={[xOut/2,-0.35,-zOut/2]} onTextClick={()=>{onTextClick("btc")}} unselectedColor={"#50545B"}
+                    setVelocityY={(data)=>{toggleTrade("btc",data)}}
+                    turnOn={()=>{turnOn("btc")}} turnOff={()=>{turnOff("btc")}}
+                    join={()=>{join("btc")}} leave={()=>{leave("btc")}}
+                    tokensArrayArray={"btc" in tokensArrayObj ? tokensArrayObj["btc"] : null}
+                /> 
+            </>}
+            {<>
+                <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="eth" refetchInterval={60000}
+                    position={[-xOut/2,-0.35,zOut/2]} onTextClick={()=>{onTextClick("eth")}} unselectedColor={"#50545B"}
+                    setVelocityY={(data)=>{toggleTrade("eth",data)}}
+                    turnOn={()=>{turnOn("eth")}} turnOff={()=>{turnOff("eth")}}
+                    join={()=>{join("eth")}} leave={()=>{leave("eth")}}
+                    tokensArrayArray={"eth" in tokensArrayObj ? tokensArrayObj["eth"] : null}
+                /> 
+            </>}
+            {<>
+                <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="link" refetchInterval={60000}
+                    position={[xOut/2,-0.35,zOut/2]} onTextClick={()=>{onTextClick("link")}} unselectedColor={"#50545B"}
+                    setVelocityY={(data)=>{toggleTrade("link",data)}}
+                    turnOn={()=>{turnOn("link")}} turnOff={()=>{turnOff("link")}}
+                    join={()=>{join("link")}} leave={()=>{leave("link")}}
+                    tokensArrayArray={"link" in tokensArrayObj ? tokensArrayObj["link"] : null}
+                /> 
+            </>}
+            {<>
+                <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="ftm" refetchInterval={60000}
+                    position={[-xOut/2,-0.35,-zOut/2]} onTextClick={()=>{onTextClick("ftm")}} unselectedColor={"#50545B"}
+                    setVelocityY={(data)=>{toggleTrade("ftm",data)}}
+                    turnOn={()=>{turnOn("ftm")}} turnOff={()=>{turnOff("ftm")}}
+                    join={()=>{join("ftm")}} leave={()=>{leave("ftm")}}
+                    tokensArrayArray={"ftm" in tokensArrayObj ? tokensArrayObj["ftm"] : null}
+                /> 
+            </>}
 
 
         </group>

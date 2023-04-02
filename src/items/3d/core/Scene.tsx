@@ -34,6 +34,7 @@ import LiteIconsList from '../overlay/LiteIconsList';
 import { useLocalStorage } from 'usehooks-ts';
 import SimpleOrbit from './camera/SimpleOrbit';
 import LoginLevel from '../levels/LoginLevel';
+import { DEFAULT_TIMEFRAME_ARRAY } from '@/components/scripts/constants';
 
 
   
@@ -96,16 +97,17 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
         id: "BTCUSDT3M",
     })
     const ccc = THREE.Camera
+    
     useImperativeHandle(ref, ()=>({
         resize: (size) => {
             let oldNewSize = {...sizeForm}
-            console.log("resize with this", size)
+            // console.log("resize with this", size)
             if (size.width && size.width.feet) {
-                console.log("width connected", size.width.feet)
+                // console.log("width connected", size.width.feet)
                 oldNewSize.x = size.width.feet
             } // else { be_size(10, "x") }
             if (size.length && size.length.feet) {
-                console.log("length connected", size.length.feet)
+                // console.log("length connected", size.length.feet)
                 oldNewSize.z = size.length.feet
             } // else { be_size(10, "z") }
 
@@ -154,28 +156,28 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
     /****** UPDATE ******/
     
     const toggleTrade = (token, velocity) => {
-        console.log("token, velocity", token, velocity)
+        // console.log("token, velocity", token, velocity)
         s__lastpower(velocity)
         { 
             setToken(token)
 
             if (velocity > 0) {
-                console.log(`Buy ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`, "new", power+velocity)
+                // console.log(`Buy ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`, "new", power+velocity)
                 s__power(parseFloat(""+parseDecimals(power+velocity)))
             }
             else {
-                console.log(`Sell ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`,"new", (power-lastpower))
+                // console.log(`Sell ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`,"new", (power-lastpower))
                 s__power(parseFloat(""+parseDecimals(power-0.05)))
             }
         }
     }
     const setTimeframe = (timeframe) => {
-        console.log("id", timeframe)
+        // console.log("id", timeframe)
         let newId = form.id.split("USDT")[0] + "USDT" + timeframe.toUpperCase()
         s__form({...form,...{id:newId}})
     }
     const setToken = (token) => {
-        console.log("id", token)
+        // console.log("id", token)
         let newId = token.toUpperCase()+"USDT"+form.id.split("USDT")[1].toUpperCase()
         s__form({...form,...{id:newId}})
     }
@@ -184,18 +186,10 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
         s__optsToggler({...optsToggler,...{[opt]:{bool:!oldBool}}})
     }
     const onTextClick = (token) => {
-        console.log("token", token)
+        // console.log("token", token)
         setToken(token)
 
     }
-    const childrenWithProps = React.Children.map(children, (child) => {
-        if (React.isValidElement<any>(child)) {
-          return React.cloneElement(child, { power, form, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler });
-        }
-        return child;
-      });
-    
-
     const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
     const [LS_uid, s__LS_uid] = useLocalStorage('uid', "")
     const [uid, s__uid] = useState("")
@@ -212,14 +206,28 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
         // console.log(JSON.parse(LS_tokensArrayObj)) 
         s__uid(LS_uid)
         s__clientIP(LS_uid.split(":")[0])
-        console.log("s__tokensArrayObj", JSON.parse(LS_tokensArrayObj))
-        console.log("s__uid", LS_uid)
-        console.log("s__clientIP", LS_uid.split(":")[0])
+        // console.log("s__tokensArrayObj", JSON.parse(LS_tokensArrayObj))
+        // console.log("s__uid", LS_uid)
+        // console.log("s__clientIP", LS_uid.split(":")[0])
     },[])
-
+    const childrenWithProps = React.Children.map(children, (child) => {
+        if (React.isValidElement<any>(child)) {
+          return React.cloneElement(child, { power, form, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj });
+        }
+        return child;
+      });
     
 
-
+      const selectedToken = useMemo(()=>{
+        return form.id.split("USDT")[0].toLowerCase()
+      },[form.id])
+      const selectedTimeframe = useMemo(()=>{
+        return form.id.split("USDT")[1].toLowerCase()
+      },[form.id])
+      const selectedTimeframeIndex = useMemo(()=>{
+        return DEFAULT_TIMEFRAME_ARRAY.indexOf(selectedTimeframe)
+      },[selectedTimeframe])
+      
     /****** HTML ******/
     return (
     <div className='h-min-500px w-100 flex-col g-b-20 bord-r- flex-align-stretch flex-justify-stretch pos-rel'>
@@ -233,6 +241,16 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
                             <div>SELECTED:</div>
                             <div className='box-shadow-3 bg-b-50 pa-2 ma-1'>{form.id}</div>
                         </div>
+                        {selectedToken in tokensArrayObj &&
+                            <div className="tx-  tx-white tx-shadow-b-2 w-max-100px">
+                                <div>Stats:</div>
+                                <div className='box-shadow-3 bg-b-50 pa-2 ma-1'>
+                                    State: {(tokensArrayObj[selectedToken][selectedTimeframeIndex]).state}
+                                </div>
+                                {/* {JSON.stringify(tokensArrayObj[selectedToken][selectedTimeframeIndex])} */}
+                                {/* <div className='box-shadow-3 bg-b-50 pa-2 ma-1'>{JSON.stringify()}</div> */}
+                            </div>
+                        }
                     </div>
                     <details>
                         <summary className='opaci-chov--50 tx-white tx-lg bg-b-50 box-shadow-5 pa-2 bg-glass-5'>
@@ -307,7 +325,7 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
             {/* {children} */}
             {!uid && <>
                 <LoginLevel {...{
-                    power, form, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler
+                    power, form, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj
                 }} />
             </>}
             {!!uid && <>

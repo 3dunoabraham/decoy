@@ -77,7 +77,7 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
                         <LiteLevel 
                             {...{
                                 power:null, form:null, onTextClick:null, optsToggler: null,
-                                toggleTrade:null, xOut:null, yOut:null, zOut:null,
+                                toggleTrade:null, xOut:null, yOut:null, zOut:null, tokensArrayObj: null,
                             }}
                         />
                     </Scene>}

@@ -9,6 +9,7 @@ import { useLocalStorage } from "usehooks-ts";
 import { useQuery } from "@tanstack/react-query";
 import { fetchMultipleJsonArray, parseDecimals } from "@/components/scripts/helpers";
 import { tokenColors } from "../../core/Scene";
+import { DEFAULT_TIMEFRAME_ARRAY } from "@/components/scripts/constants";
 type BoxProps = {
   position?: [number, number, number];
   camera?: any;
@@ -26,9 +27,19 @@ type BoxProps = {
   form: any;
   refetchInterval?: any;
   unselectedColor?: any;
+  tokensArrayArray?: any;
+  turnOn?: any;
+  turnOff?: any;
+  leave?: any;
+  join?: any;
 };
 
 export default function Component({
+  turnOn,
+  turnOff,
+  leave,
+  join,
+  tokensArrayArray,
   unselectedColor="#48721E",
   refetchInterval=3000,
   form= null,
@@ -107,9 +118,9 @@ export default function Component({
     // console.log(JSON.parse(LS_tokensArrayObj)) 
     s__uid(LS_uid)
     s__clientIP(LS_uid.split(":")[0])
-    console.log("s__tokensArrayObj", JSON.parse(LS_tokensArrayObj))
-    console.log("s__uid", LS_uid)
-    console.log("s__clientIP", LS_uid.split(":")[0])
+    // console.log("s__tokensArrayObj", JSON.parse(LS_tokensArrayObj))
+    // console.log("s__uid", LS_uid)
+    // console.log("s__clientIP", LS_uid.split(":")[0])
 },[])
   useFrame((state: any, delta) => {
     if (meshRef.current && state && state.get) {
@@ -135,6 +146,16 @@ export default function Component({
     s__clickedPrice(queryUSDT.data)
   }
 
+  const selectedToken = useMemo(()=>{
+    return form.id.split("USDT")[0].toLowerCase()
+  },[form.id])
+  const selectedTimeframe = useMemo(()=>{
+    return form.id.split("USDT")[1].toLowerCase()
+  },[form.id])
+  const selectedTimeframeIndex = useMemo(()=>{
+    return DEFAULT_TIMEFRAME_ARRAY.indexOf(selectedTimeframe)
+  },[selectedTimeframe])
+  
 
 
   return (
@@ -413,11 +434,10 @@ export default function Component({
 
 
         {/* toggles */}
-      {isSelectedId &&
+      {/* {isSelectedId &&
         <mesh
           castShadow
           receiveShadow
-          // onClick={() => alert()}
           rotation={[isSelectedId ? 0.25 : -0.25,0,0]}
           position={[
             position[0] - 0.4,
@@ -435,28 +455,62 @@ export default function Component({
             color={"gray"} 
           />
         </mesh>
+      } */}
+      
+      {
+        <mesh
+          castShadow
+          receiveShadow
+          onClick={!tokensArrayArray ? join : leave}
+          position={[
+            position[0] - 0.44,
+            position[1] - 0.37,
+            position[2] + 0.41,
+          ]}
+          rotation={[!tokensArrayArray ? 0.25 : -0.25,0,0]}
+          // position={[
+          //   position[0] + 0.37,
+          //   position[1] - 0.35,
+          //   position[2] -0,
+          // ]}
+          ref={meshRef}
+          scale={score.score ? 1 : 3}
+          onPointerOver={() => setHovered(true)}
+          onPointerOut={() => setHovered(false)}
+        >
+          <boxGeometry args={[0.025, 0.02, 0.05]} />
+          <meshStandardMaterial
+            
+            color={!tokensArrayArray ? "#666" : "#996666"} 
+          />
+        </mesh>
       }
       
       {
         <mesh
           castShadow
           receiveShadow
-          // onClick={() => alert()}
-          rotation={[isSelectedId ? 0.25 : -0.25,0,0]}
+          onClick={!!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state ? turnOff : turnOn}
           position={[
-            position[0] + 0.37,
-            position[1] - 0.35,
-            position[2] -0,
+            position[0] - 0.32,
+            position[1] - 0.37,
+            position[2] + 0.41,
           ]}
+          rotation={[!!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state ? -0.25 : 0.25 ,0,0]}
+          // position={[
+          //   position[0] + 0.37,
+          //   position[1] - 0.35,
+          //   position[2] -0,
+          // ]}
           ref={meshRef}
           scale={score.score ? 1 : 3}
           onPointerOver={() => setHovered(true)}
           onPointerOut={() => setHovered(false)}
         >
-          <boxGeometry args={[0.03, 0.02, 0.05]} />
+          <boxGeometry args={[0.025, 0.02, 0.05]} />
           <meshStandardMaterial
             
-            color={"#555"} 
+            color={!!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state ? "#996666" : "#666" } 
           />
         </mesh>
       }
