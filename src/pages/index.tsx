@@ -72,8 +72,8 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
         <div className="h-min-100vh w-100   flex-col flex-justify-start flex-align-stretch" style={{}} >
             <div className="pos-abs h-min-100vh  w-100 flex z-10 flex-align-stretch top-0 left-0"
             >
-                <Suspense>
-                    {isClient && <Scene live={true} ref={$boxContainer}><LiteLevel /></Scene>}
+                <Suspense> {/* power is dynamic, argument sent is hardcoded and useless */}
+                    {isClient && <Scene live={true} ref={$boxContainer}><LiteLevel power={0} /></Scene>}
                 </Suspense>
             </div>
             <div className='flex flex-justify-center  gap-4 pos-fix w-100 z-800  ' >

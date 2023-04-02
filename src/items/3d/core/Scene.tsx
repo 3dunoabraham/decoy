@@ -28,6 +28,7 @@ import BarnButtons from '../overlay/BarnButtons';
 import React from 'react';
 import TokenList from '../overlay/TokenList';
 import ToggleOrbit from './camera/ToggleOrbit';
+import PlayerInventory from '../overlay/PlayerInventory';
 
 
   
@@ -207,78 +208,51 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
 
 
         <div className="flex pos-abs top-0 left-0  bord-r- pa-2 ma-2">
-            <div className="flex-col flex-align-start z-700 gap-1 tx-gray mt-100 ">
+            <div className="flex-col flex-align-start z-700 gap-1  mt-100 ">
 
-                <div className="flex-center gap-1 tx-shadow-b-1 bg-b-50 px-3 py-2">
+                <div className="flex-center gap-1 tx-shadow-b-1 bg-b-50 px-3 py-2 bg-glass-5">
                     <div className="tx-  tx-white tx-shadow-b-2">
                         <div>SELECTED:</div>
                         <div className='box-shadow-3 bg-b-50 pa-2 ma-1'>{form.id}</div>
                     </div>
                 </div>
-                <div className="flex-center gap-1 tx-shadow-b-1 ">
-                    <div className="tx-  tx-gray tx-shadow-b-1">Power: {power}</div>
-                </div>
-                <div className="flex-col flex-align-start gap-2 rot-180">
-                    
-                    <div className="flex gap-1">
-                        { timeframesArray.map((aTimeframe, index) => {
+                <details>
+                    <summary className='opaci-chov--50 tx-white tx-lg bg-b-50 box-shadow-5 pa-2 bg-glass-5'>
+                        Change
+                    </summary>
+                    <div className="flex-col flex-align-start  gap-1 mt-2 ">
+                        <div className="flex-col flex-align-start gap-2 rot-180">
+                            
+                            <div className="flex gap-1">
+                                { timeframesArray.map((aTimeframe, index) => {
 
-                            return (
-                                <button onClick={()=>{setTimeframe(aTimeframe)}}
-                                    key={index}
-                                    style={{ color:tokenColors[aTimeframe]}}
-                                    className={`flex-1  tx-center pa-1 bord-r- px-1 opaci-chov--50 tx-l
-                                        ${form.id.split("USDT")[1] !== aTimeframe.toUpperCase()
-                                            ? "bg-w-50 opaci-50 border-white tx-gray tx-shadow-b-1 "
-                                            : " tx-bold-8 tx-lg tx-red tx-shadow-b-1 "}
-                                    `}
-                                >
-                                    {aTimeframe.toUpperCase()}
-                                </button>
-                            )
-                        })}
+                                    return (
+                                        <button onClick={()=>{setTimeframe(aTimeframe)}}
+                                            key={index}
+                                            style={{ color:tokenColors[aTimeframe]}}
+                                            className={`flex-1  tx-center pa-1 bord-r- border-white px-1 tx-bold-8 opaci-chov--50 tx-l
+                                                ${form.id.split("USDT")[1] !== aTimeframe.toUpperCase()
+                                                    ? " tx-shadow-2 bg-b-50 tx-white tx-shadow-b-1 "
+                                                    : "  tx-lgx tx-red bg-w-50 tx-shadow-b-1 "}
+                                            `}
+                                        >
+                                            {aTimeframe.toUpperCase()}
+                                        </button>
+                                    )
+                                })}
+                            </div>
+                            <TokenList {...{setToken,  tokenColors,  form, tokenIcons,}} />
+                            {!live && <>
+                                <PlayerInventory {...{toggleOption, optsToggler}}  />
+                            </>}
+                        </div>
+                        <hr className='bg-white w-100 mt-2'  />
+                        <div className="flex-center gap-1 tx-shadow-b-1 ">
+                            <div className="tx-  tx-white tx-shadow-b-1">Power: {power}</div>
+                        </div>
                     </div>
-                    <TokenList {...{setToken,  tokenColors,  form, tokenIcons,}} />
-                        
-                    {!live && <>
-                        <div className="flex gap-1">
-                            <button onClick={()=>{toggleOption("safe")}}
-                                style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
-                                className={`flex-1 tx-white bg-black tx-center pa-1 pb-0 bord-r- px-2 opaci-chov--50 tx-lx 
-                                    ${!optsToggler["safe"].bool ? "bg-b-hov-20 opaci-50 border-white tx-" : " tx-blue border-blue"}
-                                `}
-                            >
-                                <BsSafe2Fill />
-                            </button>
-                            <button onClick={()=>{toggleOption("angel")}}
-                                style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
-                                className={`flex-1 tx-white bg-black tx-center pa-1 pb-0 bord-r- px-2 opaci-chov--50 tx-lx 
-                                    ${!optsToggler["angel"].bool ? "bg-b-hov-20 opaci-50 border-white tx-" : " tx-blue border-blue"}
-                                `}
-                            >
-                                <GiAngelWings />
-                            </button>
-                        </div>
-                        <div className="flex-center">
-                            <button onClick={()=>{toggleOption("storefront")}}
-                                style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
-                                className={`flex-1 tx-white bg-black tx-center pa-1 pb-0 bord-r- px-2 opaci-chov--50 tx-lx 
-                                    ${!optsToggler["storefront"].bool ? "bg-b-hov-20 opaci-50 border-white tx-" : " tx-blue border-blue"}
-                                `}
-                            >
-                                <HiBuildingStorefront />
-                            </button>
-                            <button onClick={()=>{toggleOption("observatory")}}
-                                style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
-                                className={`flex-1 tx-white bg-black tx-center pa-1 pb-0 bord-r- px-2 opaci-chov--50 tx-lx 
-                                    ${!optsToggler["observatory"].bool ? "bg-b-hov-20 opaci-50 border-white tx-" : " tx-blue border-blue"}
-                                `}
-                            >
-                                <GiObservatory />
-                            </button>
-                        </div>
-                    </>}
-                </div>
+                </details>
+                
             </div>
         </div>
 

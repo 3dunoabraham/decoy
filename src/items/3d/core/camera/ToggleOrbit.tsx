@@ -50,10 +50,15 @@ export default function Component({ live = false, buttonPosition }) {
         <></>
       )}
       <mesh onClick={toggleCameraMode} 
+        rotation={[
+          0 + (cameraMode !== "orbit" ? 0.25 : -0.4),
+          0,
+          0,
+        ]}
         position={[
           buttonPosition[0],
           buttonPosition[1],
-          buttonPosition[2] + (cameraMode === "orbit" ? 0 : -0.05),
+          buttonPosition[2],
         ]}
        >
         <boxBufferGeometry args={[0.4,0.3,0.2]} />
