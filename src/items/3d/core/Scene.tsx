@@ -34,7 +34,7 @@ export const tokenColors = {
 export const tokenTranslations = {
     "btc": "Wheat",
     "eth": "Money",
-    "link": "Network",
+    "link": "Data",
     "ftm": "Tools",
 }
 export const tokenIcons
@@ -225,7 +225,7 @@ const Component = forwardRef(({live=false}:any, ref)=>{
                         })}
                     </div>
                     
-                    <div className="flex-wrap gap-1 w-max-220px">
+                    <div className="flex-wrap gap-2 w-max-220px">
                         { ["ftm","btc","eth","link",].map((aToken, index) => {
 
                             return (
@@ -306,7 +306,7 @@ const Component = forwardRef(({live=false}:any, ref)=>{
                     </div>
                     <div className="flex-col flex-align-stretch gap-2 rot-180">
                         
-                        <div className="flex tx-center  bord-r-8">
+                        {/* <div className="flex tx-center  bord-r-8">
                             <button onClick={()=>{toggleOption("ceil")}}
                                 style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
                                 className={` tx-center w-100 px-1 bord-r- px-2 opaci-chov--50  tx-lx pt-2
@@ -315,12 +315,12 @@ const Component = forwardRef(({live=false}:any, ref)=>{
                             >
                                 <div className=""><MdOutlineRoofing /></div>
                             </button>
-                        </div>
+                        </div> */}
                         <div className="flex-center ">
-                            <button onClick={()=>{toggleOption("frontwall")}}
+                            <button onClick={()=>{toggleOption("floor")}}
                                 style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
                                 className={` tx-center w-100   bord-r- px-2 opaci-chov--50 tx-lx pt-1
-                                    ${!optsToggler["frontwall"].bool
+                                    ${!optsToggler["floor"].bool
                                         ? "bg-b-hov-20 opaci-25 border-white tx-gra"
                                         : " tx-blue border-blue"
                                     }
@@ -491,11 +491,11 @@ const Component = forwardRef(({live=false}:any, ref)=>{
             <OrbitControls  enableZoom={true}
                  minDistance={0.5}
                  maxDistance={6.5}
-                dampingFactor={0.08}  
+                dampingFactor={live ?0.5 : 0.08}  
                 enablePan={false}
                 maxPolarAngle={Math.PI/2+0.1}
             />
-            {live && <fog attach="fog" args={['#3B3E43', 5, 20]} /> }
+            {/* {live && <fog attach="fog" args={['#2C2D32', 5, 10]} /> } */}
             {!live && <fog attach="fog" args={['#C5E4E4', 5, 20]} /> }
             {!live && <Environment /> }
             
@@ -509,8 +509,9 @@ const Component = forwardRef(({live=false}:any, ref)=>{
                     <meshStandardMaterial attach="material" color="#48721E" />
                 </Cylinder>
             }
-            {live && /* Concrete Floor */
-                <Cylinder args={[20, 20, 1, 8]}  position={new Vector3(0, -1.3, 0)} receiveShadow castShadow >
+            {/*  Concrete Floor  */}
+            {live && optsToggler.floor.bool && 
+                <Cylinder args={[10, 10, 1, 24]}  position={new Vector3(0, -1.3, 0)} receiveShadow castShadow >
                     <meshStandardMaterial attach="material" color="#5E6166" />
                 </Cylinder>
             }
@@ -571,20 +572,20 @@ const Component = forwardRef(({live=false}:any, ref)=>{
                 setVelocityX:c_setVelocityX, velocityY:c_velocityY, setVelocityY:c_setVelocityY}} 
             wallWidth={wallWidth} boundaries={[xOut, yOut, zOut]}  position={[0, (1.68/2) - 0.95, zOut]} />  */}
 
-            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" refetchInterval={6000}
-                position={[xOut/2,-0.35,zOut/2]} onTextClick={()=>{onTextClick("btc")}} unselectedColor={"#50545B"}
+            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" refetchInterval={60000}
+                position={[xOut/2,-0.35,-zOut/2]} onTextClick={()=>{onTextClick("btc")}} unselectedColor={"#50545B"}
                 setVelocityY={(data)=>{toggleTrade("btc",data)}}
             /> 
-            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="eth" refetchInterval={6000}
-                position={[xOut/2,-0.35,-zOut/2]} onTextClick={()=>{onTextClick("eth")}} unselectedColor={"#50545B"}
+            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="eth" refetchInterval={60000}
+                position={[-xOut/2,-0.35,zOut/2]} onTextClick={()=>{onTextClick("eth")}} unselectedColor={"#50545B"}
                 setVelocityY={(data)=>{toggleTrade("eth",data)}}
             /> 
-            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="link" refetchInterval={6000}
-                position={[-xOut/2,-0.35,-zOut/2]} onTextClick={()=>{onTextClick("link")}} unselectedColor={"#50545B"}
+            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="link" refetchInterval={60000}
+                position={[xOut/2,-0.35,zOut/2]} onTextClick={()=>{onTextClick("link")}} unselectedColor={"#50545B"}
                 setVelocityY={(data)=>{toggleTrade("link",data)}}
             /> 
-            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="ftm" refetchInterval={6000}
-                position={[-xOut/2,-0.35,zOut/2]} onTextClick={()=>{onTextClick("ftm")}} unselectedColor={"#50545B"}
+            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="ftm" refetchInterval={60000}
+                position={[-xOut/2,-0.35,-zOut/2]} onTextClick={()=>{onTextClick("ftm")}} unselectedColor={"#50545B"}
                 setVelocityY={(data)=>{toggleTrade("ftm",data)}}
             /> 
             {/* <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" 
