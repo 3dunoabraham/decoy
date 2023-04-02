@@ -16,7 +16,7 @@ import BoundaryPillars from "@/src/items/3d/farmhouse/BoundaryPillars";
 import { parseDecimals } from "@/components/scripts/helpers";
 import TradingBox from "../TradingBox";
 import { Vector3 } from "three";
-import { Building } from '../farmhouse/Building';
+// import { Building } from '../farmhouse/Building';
 import NpcContainer from '../npc/NpcContainer';
 import { BsSafe2Fill } from 'react-icons/bs';
 import { TbNetwork } from 'react-icons/tb';
