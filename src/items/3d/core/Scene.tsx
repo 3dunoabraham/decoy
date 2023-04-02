@@ -29,6 +29,7 @@ import React from 'react';
 import TokenList from '../overlay/TokenList';
 import ToggleOrbit from './camera/ToggleOrbit';
 import PlayerInventory from '../overlay/PlayerInventory';
+import TimeframeList from '../overlay/TimeframeList';
 
 
   
@@ -147,13 +148,6 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
 
 
     /****** UPDATE ******/
-    const childrenWithProps = React.Children.map(children, (child) => {
-        if (React.isValidElement<any>(child)) {
-          return React.cloneElement(child, { power });
-        }
-        return child;
-      });
-    
     
     const toggleTrade = (token, velocity) => {
         console.log("token, velocity", token, velocity)
@@ -190,6 +184,13 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
         setToken(token)
 
     }
+    const childrenWithProps = React.Children.map(children, (child) => {
+        if (React.isValidElement<any>(child)) {
+          return React.cloneElement(child, { power, form, onTextClick, toggleTrade, xOut, yOut, zOut });
+        }
+        return child;
+      });
+    
     
 
 
@@ -197,15 +198,6 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
     return (
     <div className='h-min-500px w-100 flex-col g-b-20 bord-r- flex-align-stretch flex-justify-stretch pos-rel'>
         
-        <div className="flex-col pos-abs bottom-0 right-0  bord-r- pa-2 ma-2 b w-100">
-            <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray ">
-                <div className="flex-center gap-1 tx-bold-8 tx-ls-5 px-5 py-2 bg-b-20 ma-2 tx-shadow-b-3">
-                    Score: {score.maxScore} | Speed: {parseDecimals(score.velocityX)}
-                </div>
-
-            </div>
-        </div>
-
 
         <div className="flex pos-abs top-0 left-0  bord-r- pa-2 ma-2">
             <div className="flex-col flex-align-start z-700 gap-1  mt-100 ">
@@ -222,25 +214,7 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
                     </summary>
                     <div className="flex-col flex-align-start  gap-1 mt-2 ">
                         <div className="flex-col flex-align-start gap-2 rot-180">
-                            
-                            <div className="flex gap-1">
-                                { timeframesArray.map((aTimeframe, index) => {
-
-                                    return (
-                                        <button onClick={()=>{setTimeframe(aTimeframe)}}
-                                            key={index}
-                                            style={{ color:tokenColors[aTimeframe]}}
-                                            className={`flex-1  tx-center pa-1 bord-r- border-white px-1 tx-bold-8 opaci-chov--50 tx-l
-                                                ${form.id.split("USDT")[1] !== aTimeframe.toUpperCase()
-                                                    ? " tx-shadow-2 bg-b-50 tx-white tx-shadow-b-1 "
-                                                    : "  tx-lgx tx-red bg-w-50 tx-shadow-b-1 "}
-                                            `}
-                                        >
-                                            {aTimeframe.toUpperCase()}
-                                        </button>
-                                    )
-                                })}
-                            </div>
+                            <TimeframeList {...{timeframesArray, setTimeframe, tokenColors, form}} />
                             <TokenList {...{setToken,  tokenColors,  form, tokenIcons,}} />
                             {!live && <>
                                 <PlayerInventory {...{toggleOption, optsToggler}}  />
@@ -269,17 +243,6 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
                         <div className="flex bg-b- bord-r- opaci-chov--50">{parseInt(zOut*2+"")}</div>
                     </div>
                     <div className="flex-col flex-align-stretch gap-2 rot-180">
-                        
-                        {/* <div className="flex tx-center  bord-r-8">
-                            <button onClick={()=>{toggleOption("ceil")}}
-                                style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
-                                className={` tx-center w-100 px-1 bord-r- px-2 opaci-chov--50  tx-lx pt-2
-                                    ${!optsToggler["ceil"].bool ? "bg-b-hov-20 opaci-25 border-white tx-gra" : " tx-blue border-blue"}
-                                `}
-                            >
-                                <div className=""><MdOutlineRoofing /></div>
-                            </button>
-                        </div> */}
                         <div className="flex-center ">
                             <button onClick={()=>{toggleOption("floor")}}
                                 style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
@@ -314,6 +277,15 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
                 </div>
             </div>
         }
+
+        <div className="flex-col pos-abs bottom-0 right-0  bord-r- pa-2 ma-2 b w-100">
+            <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray ">
+                <div className="flex-center gap-1 tx-bold-8 tx-ls-5 px-5 py-2 bg-b-20 ma-2 tx-shadow-b-3">
+                    Score: {score.maxScore} | Speed: {parseDecimals(score.velocityX)}
+                </div>
+
+            </div>
+        </div>
 
 
         <Canvas shadows  onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onMouseMove={handleMouseMove}
@@ -400,22 +372,6 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
                 setVelocityX:c_setVelocityX, velocityY:c_velocityY, setVelocityY:c_setVelocityY}} 
             wallWidth={wallWidth} boundaries={[xOut, yOut, zOut]}  position={[0, (1.68/2) - 0.95, zOut]} />  */}
 
-            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" refetchInterval={60000}
-                position={[xOut/2,-0.35,-zOut/2]} onTextClick={()=>{onTextClick("btc")}} unselectedColor={"#50545B"}
-                setVelocityY={(data)=>{toggleTrade("btc",data)}}
-            /> 
-            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="eth" refetchInterval={60000}
-                position={[-xOut/2,-0.35,zOut/2]} onTextClick={()=>{onTextClick("eth")}} unselectedColor={"#50545B"}
-                setVelocityY={(data)=>{toggleTrade("eth",data)}}
-            /> 
-            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="link" refetchInterval={60000}
-                position={[xOut/2,-0.35,zOut/2]} onTextClick={()=>{onTextClick("link")}} unselectedColor={"#50545B"}
-                setVelocityY={(data)=>{toggleTrade("link",data)}}
-            /> 
-            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="ftm" refetchInterval={60000}
-                position={[-xOut/2,-0.35,-zOut/2]} onTextClick={()=>{onTextClick("ftm")}} unselectedColor={"#50545B"}
-                setVelocityY={(data)=>{toggleTrade("ftm",data)}}
-            /> 
             {/* <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" 
                 position={[2.,-0.35,-2]} onTextClick={()=>{onTextClick("btc")}}
                 setVelocityY={(data)=>{toggleTrade("btc",data)}}

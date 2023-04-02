@@ -1,10 +1,11 @@
 import { Cylinder } from "@react-three/drei";
 import ToggleOrbit from "../core/camera/ToggleOrbit";
 import { Vector3 } from "three";
+import TradingBox from "../TradingBox";
 
 
 export default function Component({
-    power,
+    power, form, onTextClick, toggleTrade, xOut, yOut, zOut
 }) {
     return (
         <group>
@@ -32,6 +33,27 @@ export default function Component({
                     />
                 </Cylinder>
             }
+
+
+
+
+            
+            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" refetchInterval={60000}
+                position={[xOut/2,-0.35,-zOut/2]} onTextClick={()=>{onTextClick("btc")}} unselectedColor={"#50545B"}
+                setVelocityY={(data)=>{toggleTrade("btc",data)}}
+            /> 
+            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="eth" refetchInterval={60000}
+                position={[-xOut/2,-0.35,zOut/2]} onTextClick={()=>{onTextClick("eth")}} unselectedColor={"#50545B"}
+                setVelocityY={(data)=>{toggleTrade("eth",data)}}
+            /> 
+            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="link" refetchInterval={60000}
+                position={[xOut/2,-0.35,zOut/2]} onTextClick={()=>{onTextClick("link")}} unselectedColor={"#50545B"}
+                setVelocityY={(data)=>{toggleTrade("link",data)}}
+            /> 
+            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="ftm" refetchInterval={60000}
+                position={[-xOut/2,-0.35,-zOut/2]} onTextClick={()=>{onTextClick("ftm")}} unselectedColor={"#50545B"}
+                setVelocityY={(data)=>{toggleTrade("ftm",data)}}
+            /> 
         </group>
     )
 }
