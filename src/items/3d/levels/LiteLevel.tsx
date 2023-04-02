@@ -2,6 +2,7 @@ import { Cylinder } from "@react-three/drei";
 import ToggleOrbit from "../core/camera/ToggleOrbit";
 import { Vector3 } from "three";
 import TradingBox from "../TradingBox";
+import LiteNpcContainer from "../npc/LiteNpcContainer";
 
 
 export default function Component({
@@ -10,6 +11,11 @@ export default function Component({
     return (
         <group>
             <ToggleOrbit  buttonPosition={[0,-0.7,-2.5]} />
+
+            
+            <LiteNpcContainer {...{optsToggler}} position={[0,0,0]}  
+                form={form} 
+            />
             
             <Cylinder args={[0.5, 0.6, 0.5, 6]}  position={new Vector3(0,-0.75,-3)} 
                 rotation={[0,Math.PI/2,0]}
@@ -35,7 +41,32 @@ export default function Component({
             }
 
 
+            {/*  Concrete Floor  */}
+            {optsToggler["floor"].bool && 
+                <>
+                    <Cylinder args={[4, 4, 0.1, 6]}  position={new Vector3(0, -0.8, 0)} receiveShadow castShadow >
+                        <meshStandardMaterial attach="material" color="#5E6166" />
+                    </Cylinder>
 
+
+                    
+                </>
+            }
+
+            {/*  Lower Floor  */}
+            {optsToggler["services"].bool && 
+                <>
+                    <Cylinder args={[4.2, 4.2, 1, 8]}  position={new Vector3(0, -1.3, 0)} receiveShadow castShadow >
+                        <meshStandardMaterial attach="material" color="#4E5156" />
+                    </Cylinder>
+
+                    <Cylinder args={[6, 6, 0.1, 9]}  position={new Vector3(0, -1.6, 0)} receiveShadow castShadow >
+                        <meshStandardMaterial attach="material" color="#81868E" />
+                    </Cylinder>
+
+                    
+                </>
+            }
 
             
             <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" refetchInterval={60000}
@@ -56,12 +87,6 @@ export default function Component({
             /> 
 
 
-                        {/*  Concrete Floor  */}
-            {optsToggler.floor.bool && 
-                <Cylinder args={[4, 4, 1, 6]}  position={new Vector3(0, -1.3, 0)} receiveShadow castShadow >
-                    <meshStandardMaterial attach="material" color="#5E6166" />
-                </Cylinder>
-            }
         </group>
     )
 }

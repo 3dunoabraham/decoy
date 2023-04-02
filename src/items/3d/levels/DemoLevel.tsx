@@ -5,6 +5,7 @@
 // import TradingBox from "../TradingBox";
 import dynamic from "next/dynamic";
 import { Suspense, useMemo, useState } from "react";
+import FarmNpcContainer from "../npc/FarmNpcContainer";
 
 'use client';
 // import { OrbitControls } from "@react-three/drei";
@@ -47,6 +48,13 @@ export default function Component({
                 // enablePan={false}
                 // maxPolarAngle={Math.PI / 2 + 0.1}
                 /> */}
+
+                    
+                <FarmNpcContainer {...{optsToggler}} position={[0,0,0]}  
+                    form={form} 
+                />
+
+                
 
                 {/* Storage Tower */}
                 {/* Tower Live State */}

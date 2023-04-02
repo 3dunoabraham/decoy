@@ -13,13 +13,13 @@ export default function Component({ live = false, buttonPosition }) {
   useFrame((state) => {
     if (cameraMode === "programmatic") {
       if (!!programmaticCam.current && !!programmaticCam.current.position) {
-        if (programmaticCam.current.position.y < 3 &&
-          programmaticCam.current.position.x < 3 &&
-          programmaticCam.current.position.z < 3)
+        if (programmaticCam.current.position.y < 1 &&
+          programmaticCam.current.position.x < 1 &&
+          programmaticCam.current.position.z < 5)
         {
             programmaticCam.current.position.set(
-            programmaticCam.current.position.x- 0.005,
-            programmaticCam.current.position.y+ 0.005,
+            programmaticCam.current.position.x- 0.0035,
+            programmaticCam.current.position.y+ 0.001,
             programmaticCam.current.position.z+ 0.005, 
             );
 

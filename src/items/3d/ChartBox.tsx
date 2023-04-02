@@ -9,6 +9,7 @@ import * as THREE from "three";
 import DynaText from "./DynaText";
 import { AppContext } from "@/scripts/contexts/AppContext";
 import { useContext,  } from 'react'
+import { tokenColors } from "./core/Scene";
 
 type BoxProps = {
   position: [number, number, number];
@@ -137,6 +138,7 @@ export default function Component({
     setVelocityX(wallWidth)
   }
   const [prices, setPrices] = useState<number[]>([]);
+  const [hovered2, setHovered2] = useState(false);
 
   return (
     <group position={position}>
@@ -147,8 +149,12 @@ export default function Component({
         isSelected={false}  font={0.3} onClick={()=>{}}
       />
         <Box onClick={()=>{q__asd.refetch()}} args={[0.6,0.4,0.1]} 
-          position={[-0.15,0.99+0.3,0.1]} >
-            <meshStandardMaterial color="#888888" />
+          position={[-0.15,0.99+0.3,0.1]} 
+
+            onPointerOver={() => setHovered2(true)}
+            onPointerOut={() => setHovered2(false)}
+        >
+            <meshStandardMaterial color={!hovered2 ? "#888888" : tokenColors[theToken.toLowerCase()] } />
         </Box>
     <group position={[0,0,0.1]}>
         <CandleInstances

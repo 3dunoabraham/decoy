@@ -17,7 +17,7 @@ import { parseDecimals } from "@/components/scripts/helpers";
 import TradingBox from "../TradingBox";
 import { Vector3 } from "three";
 // import { Building } from '../farmhouse/Building';
-import NpcContainer from '../npc/NpcContainer';
+import NpcContainer from '../npc/FarmNpcContainer';
 import { BsSafe2Fill } from 'react-icons/bs';
 import { TbNetwork } from 'react-icons/tb';
 import HouseButtons from '../overlay/HouseButtons';

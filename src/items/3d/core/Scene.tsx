@@ -20,7 +20,7 @@ import HumanForReference from "./HumanForReference";
 import Environment from "./Environment";
 // import { Building } from '../farmhouse/Building';
 import RotatingPointLight from './RotatingPointLight';
-import NpcContainer from '../npc/NpcContainer';
+import FarmNpcContainer from '../npc/FarmNpcContainer';
 import { BsSafe2Fill } from 'react-icons/bs';
 import { TbNetwork } from 'react-icons/tb';
 import HouseButtons from '../overlay/HouseButtons';
@@ -30,6 +30,7 @@ import TokenList from '../overlay/TokenList';
 import ToggleOrbit from './camera/ToggleOrbit';
 import PlayerInventory from '../overlay/PlayerInventory';
 import TimeframeList from '../overlay/TimeframeList';
+import LiteIconsList from '../overlay/LiteIconsList';
 
 
   
@@ -210,7 +211,7 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
                 </div>
                 <details>
                     <summary className='opaci-chov--50 tx-white tx-lg bg-b-50 box-shadow-5 pa-2 bg-glass-5'>
-                        Change
+                        Settings
                     </summary>
                     <div className="flex-col flex-align-start  gap-1 mt-2 ">
                         <div className="flex-col flex-align-start gap-2 rot-180">
@@ -242,21 +243,7 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
                         <div>x</div>
                         <div className="flex bg-b- bord-r- opaci-chov--50">{parseInt(zOut*2+"")}</div>
                     </div>
-                    <div className="flex-col flex-align-stretch gap-2 rot-180">
-                        <div className="flex-center ">
-                            <button onClick={()=>{toggleOption("floor")}}
-                                style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
-                                className={` tx-center w-100   bord-r- px-2 opaci-chov--50 tx-lx pt-1
-                                    ${!optsToggler["floor"].bool
-                                        ? "bg-b-hov-20 opaci-25 border-white tx-gra"
-                                        : " tx-blue border-blue"
-                                    }
-                                `}
-                            >
-                                <AiFillEyeInvisible />
-                            </button>
-                        </div>
-                    </div>
+                    <LiteIconsList {...{toggleOption, optsToggler,}} />
                 </div>
             </div>
         }
@@ -301,9 +288,6 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
             {!live && <fog attach="fog" args={['#C5E4E4', 5, 20]} /> }
             {!live && <Environment /> }
             
-            <NpcContainer {...{optsToggler}} position={[0,0,0]}  
-                form={form} 
-            />
             
             {!live && <HumanForReference scale={0.18} position={[2.2,-0.6,-1.3]}  />}
             {!live && /* Grass Floor */
