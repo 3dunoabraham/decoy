@@ -212,7 +212,7 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
     },[])
     const childrenWithProps = React.Children.map(children, (child) => {
         if (React.isValidElement<any>(child)) {
-          return React.cloneElement(child, { power, form, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj });
+          return React.cloneElement(child, { power, form, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj, s__tokensArrayObj });
         }
         return child;
       });
@@ -227,7 +227,7 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
       const selectedTimeframeIndex = useMemo(()=>{
         return DEFAULT_TIMEFRAME_ARRAY.indexOf(selectedTimeframe)
       },[selectedTimeframe])
-      
+
     /****** HTML ******/
     return (
     <div className='h-min-500px w-100 flex-col g-b-20 bord-r- flex-align-stretch flex-justify-stretch pos-rel'>
@@ -325,7 +325,7 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
             {/* {children} */}
             {!uid && <>
                 <LoginLevel {...{
-                    power, form, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj
+                    power, form, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj, s__tokensArrayObj
                 }} />
             </>}
             {!!uid && <>

@@ -464,8 +464,8 @@ export default function Component({
           onClick={!tokensArrayArray ? join : leave}
           position={[
             position[0] - 0.44,
-            position[1] - 0.37,
-            position[2] + 0.41,
+            position[1] - 0.33,
+            position[2] + 0.38,
           ]}
           rotation={[!tokensArrayArray ? 0.25 : -0.25,0,0]}
           // position={[
@@ -478,7 +478,7 @@ export default function Component({
           onPointerOver={() => setHovered(true)}
           onPointerOut={() => setHovered(false)}
         >
-          <boxGeometry args={[0.025, 0.02, 0.05]} />
+          <boxGeometry args={[0.025, 0.01, 0.05]} />
           <meshStandardMaterial
             
             color={!tokensArrayArray ? "#666" : "#996666"} 
@@ -493,8 +493,8 @@ export default function Component({
           onClick={!!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state ? turnOff : turnOn}
           position={[
             position[0] - 0.32,
-            position[1] - 0.37,
-            position[2] + 0.41,
+            position[1] - 0.33,
+            position[2] + 0.38,
           ]}
           rotation={[!!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state ? -0.25 : 0.25 ,0,0]}
           // position={[
@@ -507,7 +507,7 @@ export default function Component({
           onPointerOver={() => setHovered(true)}
           onPointerOut={() => setHovered(false)}
         >
-          <boxGeometry args={[0.025, 0.02, 0.05]} />
+          <boxGeometry args={[0.025, 0.01, 0.05]} />
           <meshStandardMaterial
             
             color={!!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state ? "#996666" : "#666" } 

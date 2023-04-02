@@ -10,7 +10,7 @@ import { DEFAULT_TIMEFRAME_ARRAY } from "@/components/scripts/constants";
 
 
 export default function Component({
-    power, form, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj, 
+    power, form, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj, s__tokensArrayObj
 }) {
     // useEffect(()=>{
     //     console.log("asdasd", tokensArrayObj)
@@ -46,7 +46,7 @@ export default function Component({
         window.location.reload()
     }
     const leave = (token) => {
-        alert()
+        alert("Missing feature, please delete records manually")
     }
     const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
 
@@ -90,7 +90,7 @@ export default function Component({
         }
         old_tokensArrayObjArray[timeframeIndex] = {...old_tokensArrayObj,...newCrystal}
         let bigTokensObj = {...tokensArrayObj, ...{[token]:old_tokensArrayObjArray}}
-        // tokensArrayObj(bigTokensObj)
+        s__tokensArrayObj(bigTokensObj)
         console.log("bigTokensObj", bigTokensObj)
         s__LS_tokensArrayObj((prevValue) => JSON.stringify(bigTokensObj))
         // let theKey = `${token.toUpperCase()}USDT${DEFAULT_TIMEFRAME_ARRAY[timeframe].toUpperCase()}`
