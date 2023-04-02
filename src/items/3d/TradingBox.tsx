@@ -263,7 +263,7 @@ export default function Component({
         onClick={() => toggleGame()}
         position={[
           !clicked ? position[0] - 0.2 : position[0] + 0.1,
-          clicked ? position[1] - 0.4 : position[1] - 0.3,
+          clicked ? position[1] - 0.33 : position[1] - 0.3,
           position[2],
         ]}
         ref={meshRef}
@@ -271,7 +271,7 @@ export default function Component({
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
       >
-        <boxGeometry args={[0.1, 0.05, 0.05]} />
+        <boxGeometry args={[0.1, clicked ? 0.015 : 0.04, 0.05]} />
         <meshStandardMaterial
           
           color={clicked ? "red" : "#15C771"} 
@@ -280,6 +280,51 @@ export default function Component({
 
 
         {/* mini buttons */}
+        
+        {clicked && <>
+        <mesh
+          castShadow
+          receiveShadow
+          // onClick={() => alert()}
+          // rotation={[isSelectedId ? 0.25 : -0.25,0,0]}
+          position={[
+            position[0] + 0.25,
+            position[1] - 0.2,
+            position[2] - 0.41
+          ]}
+          ref={meshRef}
+          scale={score.score ? 1 : 3}
+          onPointerOver={() => setHovered(true)}
+          onPointerOut={() => setHovered(false)}
+        >
+          <boxGeometry args={[0.1, 0.095, 0.01]} />
+          <meshStandardMaterial
+            
+            color={"#777777"} 
+          />
+        </mesh>
+        <mesh
+          castShadow
+          receiveShadow
+          // onClick={() => alert()}
+          // rotation={[isSelectedId ? 0.25 : -0.25,0,0]}
+          position={[
+            position[0] + 0.25,
+            position[1] - 0.22,
+            position[2] - 0.40
+          ]}
+          ref={meshRef}
+          scale={score.score ? 1 : 3}
+          onPointerOver={() => setHovered(true)}
+          onPointerOut={() => setHovered(false)}
+        >
+          <boxGeometry args={[0.08, 0.095, 0.01]} />
+          <meshStandardMaterial
+            emissive={tokenColor}
+            color={"#777777"} 
+          />
+        </mesh>
+        </>}
         {isSelectedId &&
         <mesh
           castShadow
@@ -296,7 +341,7 @@ export default function Component({
           onPointerOver={() => setHovered(true)}
           onPointerOut={() => setHovered(false)}
         >
-          <boxGeometry args={[0.02, 0.06, 0.02]} />
+          <boxGeometry args={[0.02, 0.07, 0.02]} />
           <meshStandardMaterial
             
             color={"#FEEA4D"} 
@@ -319,7 +364,7 @@ export default function Component({
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
       >
-        <boxGeometry args={[0.02, 0.06, 0.02]} />
+        <boxGeometry args={[0.02, 0.09, 0.02]} />
         <meshStandardMaterial
           
             color={"#FEEA4D"} 
@@ -342,7 +387,7 @@ export default function Component({
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
     >
-      <boxGeometry args={[0.02, 0.06, 0.02]} />
+      <boxGeometry args={[0.02, 0.07, 0.02]} />
       <meshStandardMaterial
         
         color={"red"} 
@@ -392,10 +437,10 @@ export default function Component({
           onPointerOver={() => setHovered(true)}
           onPointerOut={() => setHovered(false)}
         >
-          <boxGeometry args={[0.04, 0.03, 0.06]} />
+          <boxGeometry args={[0.03, 0.02, 0.05]} />
           <meshStandardMaterial
             
-            color={"#4CF8F8"} 
+            color={"#555"} 
           />
         </mesh>
       }
