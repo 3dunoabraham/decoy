@@ -186,7 +186,7 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
     }
     const childrenWithProps = React.Children.map(children, (child) => {
         if (React.isValidElement<any>(child)) {
-          return React.cloneElement(child, { power, form, onTextClick, toggleTrade, xOut, yOut, zOut });
+          return React.cloneElement(child, { power, form, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler });
         }
         return child;
       });
@@ -311,12 +311,7 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
                     <meshStandardMaterial attach="material" color="#48721E" />
                 </Cylinder>
             }
-            {/*  Concrete Floor  */}
-            {live && optsToggler.floor.bool && 
-                <Cylinder args={[4, 4, 1, 6]}  position={new Vector3(0, -1.3, 0)} receiveShadow castShadow >
-                    <meshStandardMaterial attach="material" color="#5E6166" />
-                </Cylinder>
-            }
+
 
             {!live && /* Storage Tower */ <>
                 <Cylinder args={[0.55, 0.55, 1.68, 6]}  position={new Vector3(3, 0, -3)} receiveShadow castShadow >

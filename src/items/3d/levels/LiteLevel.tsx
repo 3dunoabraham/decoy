@@ -5,7 +5,7 @@ import TradingBox from "../TradingBox";
 
 
 export default function Component({
-    power, form, onTextClick, toggleTrade, xOut, yOut, zOut
+    power, form, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler
 }) {
     return (
         <group>
@@ -54,6 +54,14 @@ export default function Component({
                 position={[-xOut/2,-0.35,-zOut/2]} onTextClick={()=>{onTextClick("ftm")}} unselectedColor={"#50545B"}
                 setVelocityY={(data)=>{toggleTrade("ftm",data)}}
             /> 
+
+
+                        {/*  Concrete Floor  */}
+            {optsToggler.floor.bool && 
+                <Cylinder args={[4, 4, 1, 6]}  position={new Vector3(0, -1.3, 0)} receiveShadow castShadow >
+                    <meshStandardMaterial attach="material" color="#5E6166" />
+                </Cylinder>
+            }
         </group>
     )
 }
