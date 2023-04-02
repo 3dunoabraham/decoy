@@ -18,7 +18,7 @@ import TradingBox from "../TradingBox";
 import { Vector3 } from "three";
 import HumanForReference from "./HumanForReference";
 import Environment from "./Environment";
-import { Building } from '../farmhouse/Building';
+// import { Building } from '../farmhouse/Building';
 import RotatingPointLight from './RotatingPointLight';
 import NpcContainer from '../npc/NpcContainer';
 import { BsSafe2Fill } from 'react-icons/bs';
@@ -311,78 +311,6 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
                     <meshStandardMaterial attach="material" color="#48721E" />
                 </Cylinder>
             }
-
-
-            {!live && /* Storage Tower */ <>
-                <Cylinder args={[0.55, 0.55, 1.68, 6]}  position={new Vector3(3, 0, -3)} receiveShadow castShadow >
-                    <meshStandardMaterial attach="material" color="#aaaaaa" />
-                </Cylinder>
-                <Cylinder args={[0.5, 0.5, 1.7, 9]}  position={new Vector3(3, 0, -3)}  receiveShadow castShadow>
-                    <meshStandardMaterial attach="material" color="#ffffff"  />
-                </Cylinder>
-                <Torus args={[0.6,0.1,4,5]}  position={new Vector3(3, 0.85, -3)} receiveShadow castShadow rotation={[Math.PI/2,0,Math.PI/2]}>
-                    <meshStandardMaterial  attach="material" color="#aaaaaa" />
-                </Torus>
-            </>}
-            {!live && /* Tower Live State */ <>
-                {!!power &&
-                    <Cylinder args={[0.5, 0.6, power, 5]}  position={new Vector3(3, 0.85, -3)} >
-                        <meshStandardMaterial attach="material" color={`#${power*320+50}${power*100+50}44`} 
-                            emissive={`#${power*320+50}444477`}
-                        />
-                    </Cylinder>
-                }
-                {!power &&
-                    <Cylinder args={[0.5, 0.6, 0.05, 5]}  position={new Vector3(3, 0.85, -3)} >
-                        <meshStandardMaterial attach="material" color={`#000`} 
-                            
-                        />
-                    </Cylinder>
-                }
-            </>}
-
-
-
-
-
-            {/* FarmHouse */}
-            {!live && <Building {...{xOut,yOut,zOut:zOut,wallWidth,roofWidth}}  facadeColor="#963B2D"
-                optsToggler={optsToggler} position={buildingPosition} roofType="farm"
-            />}
-            {/* House */}
-            {!live && <Building {...{xOut:xOut/2,yOut:yOut/1.5,zOut:zOut/2,wallWidth,roofWidth}}  
-                optsToggler={{
-                    leftwall: optsToggler.house_leftwall,
-                    rightwall: optsToggler.house_rightwall,
-                    backwall: optsToggler.house_backwall,
-                    frontwall: optsToggler.house_frontwall,
-                    ceil: optsToggler.house_ceil,
-                    floor: optsToggler.house_floor,
-                }} position={farmPosition} 
-            />}
-
-            {!live && <BoundaryPillars position={buildingPosition}  height={yOut*1.05} diameter={0.05} pillars={boundaryBox} /> }
-            
-            {/* <ChartBox {...{s__score: scoreHandle,score, velocityX:c_velocityX,
-                setVelocityX:c_setVelocityX, velocityY:c_velocityY, setVelocityY:c_setVelocityY}} 
-            wallWidth={wallWidth} boundaries={[xOut, yOut, zOut]}  position={[0, (1.68/2) - 0.95, zOut]} />  */}
-
-            {/* <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" 
-                position={[2.,-0.35,-2]} onTextClick={()=>{onTextClick("btc")}}
-                setVelocityY={(data)=>{toggleTrade("btc",data)}}
-            /> 
-            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="eth" 
-                position={[-3,-0.35,1]} onTextClick={()=>{onTextClick("eth")}}
-                setVelocityY={(data)=>{toggleTrade("eth",data)}}
-            /> 
-            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="link" 
-                position={[6,-0.35,3]} onTextClick={()=>{onTextClick("link")}}
-                setVelocityY={(data)=>{toggleTrade("link",data)}}
-            /> 
-            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="ftm" 
-                position={[-4,-0.35,-2.5]} onTextClick={()=>{onTextClick("ftm")}}
-                setVelocityY={(data)=>{toggleTrade("ftm",data)}}
-            />  */}
 
         </Canvas>
     </div>)

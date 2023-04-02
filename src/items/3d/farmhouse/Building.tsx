@@ -9,12 +9,12 @@ import Floor from './Floor';
 import FarmRoof from './FarmRoof';
 import FarmPediment from './FarmPediment';
 
-export const Building = ({
+export default function Component ({
     roofType="pyramid",
     xOut=10, yOut=5, zOut=10, wallWidth=0.2, roofWidth=0.5, 
     optsToggler={}, position=[0, 0, 0],
     facadeColor="#966B3D",
-}) => {
+}) {
     const groupRef = useRef<Group>(null);
     const { current: group } = groupRef;
 

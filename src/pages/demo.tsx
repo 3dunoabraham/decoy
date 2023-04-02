@@ -22,6 +22,7 @@ import FailedRequest from '@/src/items/atoms/holders/FailedRequest';
 import { useIsClient } from 'usehooks-ts';
 import dynamic from 'next/dynamic'
 import { FaExternalLinkAlt } from 'react-icons/fa';
+const DemoLevel = dynamic(import ("@/src/items/3d/levels/DemoLevel"), { ssr: false })
 const Scene = dynamic(import ("@/src/items/3d/core/Scene"), { ssr: false })
 const delay = ms => new Promise(res => setTimeout(res, ms));
 const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
@@ -72,7 +73,15 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
             <div className="pos-abs h-min-100vh  w-100 flex z-10 flex-align-stretch top-0 left-0"
             >
                 <Suspense>
-                    {isClient && <Scene ref={$boxContainer} />}
+                    {isClient &&
+                        <Scene ref={$boxContainer}>
+                            <DemoLevel {...{
+                                power:null, form:null, onTextClick:null, optsToggler: null,
+                                toggleTrade:null, xOut:null, yOut:null, zOut:null,
+
+                            }}/>
+                        </Scene>
+                    }
                 </Suspense>
             </div>
             <div className='flex flex-justify-center  gap-4 pos-fix w-100 z-800  ' >
@@ -112,7 +121,7 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
                         style={{filter: "hue-rotate(-189deg) brightness(666%)"}}
                     >
                         <FaExternalLinkAlt /> Dashboard 
-                    </Link>x
+                    </Link>
                 </div>
             </div>
             <div className='flex-1 noclick'>
