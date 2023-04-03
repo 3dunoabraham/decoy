@@ -254,7 +254,9 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
                         }
                     </div>
                     <details>
-                        <summary className='opaci-chov--50 tx-white tx-lg bg-b-50 box-shadow-5 pa-2 bg-glass-5'>
+                        <summary className='opaci-chov--50 tx-white tx-lg bg-b-50 box-shadow-5 pa-2 bg-glass-5'
+                            onClick={()=>{}}
+                        >
                             Settings
                         </summary>
                         <div className="flex-col flex-align-start  gap-1 mt-2 ">
@@ -380,6 +382,6 @@ function TheCamera() {
         <OrbitControls target={[.6, .4, 0]}/>
     )
 }
-Component.displayName = 'HomeContainer'
+Component.displayName = 'Scene'
 
 export default Component

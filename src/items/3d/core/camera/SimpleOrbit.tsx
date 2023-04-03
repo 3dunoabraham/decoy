@@ -5,10 +5,6 @@ import { Vector3 } from "three";
 
 export default function Component({ live = false, buttonPosition=null }) {
   const camGroup: any = useRef();
-  const [cameraMode, setCameraMode] = useState<"orbit" | "programmatic">("orbit");
-  const programmaticCam: any = useRef();
-
-  const { camera } = useThree();
 
   return (
     <group ref={camGroup}>

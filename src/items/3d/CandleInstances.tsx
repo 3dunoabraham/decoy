@@ -27,11 +27,12 @@ export default function Component({
     const distanceBetweenCubes = ssize;
     const xRangeSize = xRange[1] - xRange[0];
     const yRangeSize = yRange[1] - yRange[0];
+    const minValue = Math.min(...positions);
     for (let i = 0; i < count; i++) {
       temp.scale.set(ssize * 0.9, ssize * 0.9, ssize * 0.9);
       const x = (i * distanceBetweenCubes * xRangeSize) / count + xRange[0];
       const y =
-        ((positions[i] || 0) * yRangeSize) / Math.max(...positions) + yRange[0];
+        ((positions[i] - minValue) * yRangeSize) / (Math.max(...positions) - minValue) + yRange[0];
       temp.position.set(x, y, 0);
       temp.updateMatrix();
       ref.current.setMatrixAt(i, temp.matrix);
@@ -47,7 +48,3 @@ export default function Component({
     </instancedMesh>
   );
 }
-
-  
-  
-  

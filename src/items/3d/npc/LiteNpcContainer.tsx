@@ -9,6 +9,7 @@ import ChartBox from '../ChartBox';
 
 export default function Component ({position, optsToggler, form, ...props}) {
     const { scene } = useGLTF('/angel.glb')
+    const $chartBox:any = useRef()
     useLayoutEffect(() => scene.traverse(o =>
     {
         if(o instanceof THREE.Mesh ) {
@@ -34,7 +35,8 @@ export default function Component ({position, optsToggler, form, ...props}) {
         {optsToggler.observatory.bool && <Observatory /> }
 
         {optsToggler.services.bool && 
-        <ChartBox boundaries={[1,0.1,0.04]} score={{score:0}} timeframe={timeframe.toLowerCase() || "1d"}
+        <ChartBox boundaries={[1,0.1,0.02]} score={{score:0}} timeframe={timeframe.toLowerCase() || "1d"}
+            ref={$chartBox}
             position={[-2.7,0,3]} velocityX={0}  theToken={form.id.split("USDT")[0]}
             velocityY={0} setVelocityX={()=>{}} setVelocityY={()=>{}}
         />

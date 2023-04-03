@@ -1,6 +1,6 @@
 import { Box, useDepthBuffer } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
-import { useRef, useState } from "react";
+import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import { Mesh, Box3, Vector3 } from "three";
 import { useIsClient } from "usehooks-ts";
 import { useQueryPlus } from "@/scripts/helpers/useHooksHelper";
@@ -24,6 +24,7 @@ type BoxProps = {
   setVelocityY: any;
   timeframe?: any;
   theToken?: any;
+  refetched?: any;
 };
 function getRandomUnixDate() {
   const now = new Date();
@@ -33,7 +34,9 @@ function getRandomUnixDate() {
   return Math.floor(randomTime);
 }
 
-export default function Component({
+const Component = forwardRef(({
+  // export default function Component({
+  refetched=()=>{},
   wallWidth,
   position,
   boundaries,
@@ -41,7 +44,7 @@ export default function Component({
   velocityX, setVelocityX,
   velocityY, setVelocityY,
   timeframe, theToken
-}: BoxProps) {
+}: BoxProps, ref) => {
   const app = useContext(AppContext)
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
@@ -56,6 +59,7 @@ export default function Component({
   const [initUnix, s__initUnix] = useState(0)
   const [diffUnix, s__diffUnix] = useState(0)
   const isClient = useIsClient()
+  
   const [q__asd, asd] = useQueryPlus({ queryKey: ['asdasd'], 
       refetchOnWindowFocus: false, enabled: false ,
       queryFn: async () =>{
@@ -80,7 +84,14 @@ export default function Component({
           return theList
       }
   },[theToken])
+  // refetched(theList)
 
+
+  useImperativeHandle(ref, ()=>({
+    refetch: () => {
+      q__asd.refetch()
+    }
+  }))
 
   useFrame((state: any, delta) => {
     if (score.score <= 0)
@@ -156,7 +167,7 @@ export default function Component({
         >
             <meshStandardMaterial color={!hovered2 ? "#888888" : tokenColors[theToken.toLowerCase()] } />
         </Box>
-    <group position={[0,0,0.1]}>
+    <group position={[0,0,0.12]}>
         <CandleInstances
             boundaries={boundaries}
             count={prices.length}
@@ -177,4 +188,9 @@ export default function Component({
       </Box>
     </group>
   );
-}
+})
+
+
+Component.displayName = 'ChartBox'
+
+export default Component
