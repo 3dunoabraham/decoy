@@ -9,6 +9,7 @@ type Props = {
   xRange?: [number, number];
   yRange?: [number, number];
   boundaries?: any;
+  maPeriod?: number;
 };
 
 export default function Component({
@@ -18,6 +19,7 @@ export default function Component({
   xRange = [-1, 100],
   yRange = [-100, 1],
   boundaries,
+  maPeriod = 10,
 }: Props) {
   const refGreen = useRef<THREE.InstancedMesh>(null);
   const refRed = useRef<THREE.InstancedMesh>(null);
@@ -30,11 +32,12 @@ export default function Component({
     const xRangeSize = xRange[1] - xRange[0];
     const yRangeSize = yRange[1] - yRange[0];
     const minValue = Math.min(...positions);
+    const maPositions = calculateMA(positions, maPeriod);
     for (let i = 0; i < count; i++) {
       temp.scale.set(ssize * 0.4, ssize * 0.9, ssize * 0.9);
       const x = (i * distanceBetweenCubes * xRangeSize) / count + xRange[0];
       const y =
-        ((positions[i] - minValue) * yRangeSize) / (Math.max(...positions) - minValue) + yRange[0];
+        ((maPositions[i] - minValue) * yRangeSize) / (Math.max(...maPositions) - minValue) + yRange[0];
       temp.position.set(x, y, 0);
       temp.updateMatrix();
       refGreen.current.setMatrixAt(i, temp.matrix);
@@ -45,16 +48,29 @@ export default function Component({
     // refBlue.current.instanceMatrix.needsUpdate = true;
   }, [positions, xRange, yRange]);
 
+  function calculateMA(data: number[], period: number) {
+    let result = [];
+    for (let i = 0; i < data.length; i++) {
+      if (i < period) {
+        result.push(data[i]);
+      } else {
+        let sum = 0;
+        for (let j = i - period; j <= i; j++) {
+          sum += data[j];
+        }
+        result.push(sum / period);
+      }
+    }
+    return result;
+  }
+
   return (
-    <group position={[0,0,boundaries[2]*0.9]}>
+    <group position={[0, 0, boundaries[2] * 0.9]}>
       <instancedMesh ref={refGreen} args={[null, null, count]}>
         <boxBufferGeometry />
-        <meshStandardMaterial color={"#FFccaa"} />
+        <meshStandardMaterial color={"#aaccFF"} />
       </instancedMesh>
-      {/* <instancedMesh ref={refBlue} position={[0, 0, 0.1]} args={[null, null, count]} scale={1}>
-        <boxBufferGeometry args={[0.2, 1, 1]} />
-        <meshStandardMaterial color={"#aaaaff"} />
-      </instancedMesh> */}
     </group>
   );
 }
+

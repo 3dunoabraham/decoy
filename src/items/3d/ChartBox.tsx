@@ -11,6 +11,7 @@ import { AppContext } from "@/scripts/contexts/AppContext";
 import { useContext,  } from 'react'
 import { tokenColors } from "./core/Scene";
 import { parseDecimals } from "@/components/scripts/helpers";
+import SmoothCandleInstances from "./npc/SmoothCandleInstances";
 
 type BoxProps = {
   position: [number, number, number];
@@ -226,6 +227,13 @@ const Component = forwardRef(({
         </Box>
         <group position={[0.15,0,0.12]}>
             <CandleInstances
+                boundaries={boundaries}
+                count={prices.length}
+                positions={prices.slice(0, liveId || 499).map((price) => price)}
+                xRange={[-boundaries[0], boundaries[0]*50]}
+                yRange={[-boundaries[2]*20, 1]}
+            />
+            <SmoothCandleInstances
                 boundaries={boundaries}
                 count={prices.length}
                 positions={prices.slice(0, liveId || 499).map((price) => price)}
