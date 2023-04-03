@@ -7,8 +7,8 @@ import { Suspense, useEffect, useMemo, useState } from "react";
 import { getComputedLevels } from "@/components/scripts/helpers";
 import { useCopyToClipboard, useLocalStorage } from "usehooks-ts";
 import { DEFAULT_TIMEFRAME_ARRAY } from "@/components/scripts/constants";
-import { Physics } from "use-cannon";
-import { BigBox, SmallBox2, smallboxes } from "../npc/LiteGame";
+// import { Physics } from "use-cannon";
+// import { BigBox, SmallBox2, smallboxes } from "../npc/LiteGame";
 
 
 export default function Component({
@@ -246,18 +246,17 @@ export default function Component({
                     
                 </>
             }
-            {showPhysics &&
+            {/* {showPhysics &&
 
                 <Physics >
                     <Suspense fallback={null}>
                         {smallboxes.map((position, idx) => (
                         <SmallBox2 position={position} key={idx} />
                         ))}
-                        {/* <PlaneSimple /> */}
                     </Suspense>
                     <BigBox />
                 </Physics>
-            }
+            } */}
             {<>
                 <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" refetchInterval={60000}
                     position={[xOut/2,-0.35,-zOut/2]} onTextClick={()=>{onTextClick("btc")}} unselectedColor={"#50545B"}
