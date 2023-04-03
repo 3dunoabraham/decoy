@@ -19,7 +19,7 @@ export default function Component({
   xRange = [-1, 100],
   yRange = [-100, 1],
   boundaries,
-  maPeriod = 10,
+  maPeriod = 50,
 }: Props) {
   const refGreen = useRef<THREE.InstancedMesh>(null);
   const refRed = useRef<THREE.InstancedMesh>(null);
