@@ -12,12 +12,17 @@ export default function Component({ live = false, buttonPosition, s__showPhysics
 
   useFrame((state) => {
     if (cameraMode === "programmatic") {
+      if (!showPhysics) 
+      {
+
+        s__showPhysics(true)
+      }
+
       if (!!programmaticCam.current && !!programmaticCam.current.position) {
         if (programmaticCam.current.position.y < 1 &&
           programmaticCam.current.position.x < 1 &&
           programmaticCam.current.position.z < 5)
         {
-            if (!showPhysics) s__showPhysics(true)
             programmaticCam.current.position.set(
             programmaticCam.current.position.x- 0.0035,
             programmaticCam.current.position.y+ 0.001,
@@ -30,6 +35,14 @@ export default function Component({ live = false, buttonPosition, s__showPhysics
             }
         }
     }
+    
+    if (cameraMode === "orbit") {
+      if (showPhysics) 
+      {
+        
+        s__showPhysics(false)
+      }
+    }
   });
 
   const toggleCameraMode = () => {
@@ -38,19 +51,9 @@ export default function Component({ live = false, buttonPosition, s__showPhysics
 
   return (
     <group ref={camGroup}>
-      {cameraMode === "orbit" ? (
-        <OrbitControls
-          enableZoom={true}
-          minDistance={0.5}
-          maxDistance={6.5}
-          dampingFactor={live ? 0.5 : 0.08}
-          enablePan={false}
-          maxPolarAngle={Math.PI / 2 + 0.1}
-        />
-      ) : (
-        <></>
-      )}
-      <mesh onClick={toggleCameraMode} 
+
+      
+<mesh onClick={toggleCameraMode} 
         rotation={[
           0 + (cameraMode !== "orbit" ? 0.25 : -0.4),
           0,
@@ -66,8 +69,32 @@ export default function Component({ live = false, buttonPosition, s__showPhysics
         <meshStandardMaterial color={cameraMode === "orbit" ? "red" : "blue"} />
       </mesh>
 
+      
+      
+      <OrbitControls
+          enableZoom={true}
+          minDistance={0.5}
+          maxDistance={6.5}
+          dampingFactor={live ? 0.5 : 0.08}
+          enablePan={false}
+          maxPolarAngle={Math.PI / 2 + 0.1}
+        />
+{/*         
+      {cameraMode === "orbit" ? (
+        <OrbitControls
+          enableZoom={true}
+          minDistance={0.5}
+          maxDistance={6.5}
+          dampingFactor={live ? 0.5 : 0.08}
+          enablePan={false}
+          maxPolarAngle={Math.PI / 2 + 0.1}
+        />
+      ) : (
+        <></>
+      )} */}
+
       {/* programmatic camera */}
-      {cameraMode === "programmatic" && (
+      {/* {cameraMode === "programmatic" && (
         <perspectiveCamera
           ref={programmaticCam}
           position={[0, 0, 1]}
@@ -75,7 +102,7 @@ export default function Component({ live = false, buttonPosition, s__showPhysics
           far={100}
           fov={75}
         />
-      )}
+      )} */}
     </group>
   );
 }

@@ -294,7 +294,7 @@ export default function Component({
 
 
       {/* buy/sell button */}
-      {isSelectedId &&
+      {isSelectedId && !!tokensArrayArray && 
       <mesh
         castShadow
         receiveShadow
@@ -320,7 +320,7 @@ export default function Component({
 
         {/* mini buttons */}
         
-        {clicked && <>
+        {clicked &&  <>
         <mesh
           castShadow
           receiveShadow
@@ -364,7 +364,7 @@ export default function Component({
           />
         </mesh>
         </>}
-        {isSelectedId &&
+        {isSelectedId && !!tokensArrayArray && 
         <mesh
           castShadow
           receiveShadow
@@ -387,7 +387,7 @@ export default function Component({
           />
         </mesh>
       }
-      {isSelectedId &&
+      {isSelectedId && !!tokensArrayArray && 
       <mesh
         castShadow
         receiveShadow
@@ -410,7 +410,7 @@ export default function Component({
         />
       </mesh>
     }
-    {isSelectedId &&
+    {isSelectedId && !!tokensArrayArray && 
     <mesh
       castShadow
       receiveShadow

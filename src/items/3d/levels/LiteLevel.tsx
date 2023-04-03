@@ -175,6 +175,7 @@ export default function Component({
                         // emissive={`#aa6600`}
                     />
                 </Cylinder>
+                {optsToggler["services"].bool && 
                 <Cylinder args={[0.15, 0.1, 0.1, 8]}  position={new Vector3(0,-0.8,-3.48)} 
                     onClick={()=>{clickImportConfig()}}
                     rotation={[Math.PI/1.8,0,0]}
@@ -183,6 +184,7 @@ export default function Component({
                         emissive={`#221122`}
                     />
                 </Cylinder>
+                }
             
             {hasAnyToken && <>
                 {!!power &&
