@@ -29,7 +29,7 @@ export default function Component({
     const yRangeSize = yRange[1] - yRange[0];
     const minValue = Math.min(...positions);
     for (let i = 0; i < count; i++) {
-      temp.scale.set(ssize * 0.9, ssize * 0.9, ssize * 0.9);
+      temp.scale.set(ssize * 0.4, ssize * 0.9, ssize * 0.9);
       const x = (i * distanceBetweenCubes * xRangeSize) / count + xRange[0];
       const y =
         ((positions[i] - minValue) * yRangeSize) / (Math.max(...positions) - minValue) + yRange[0];
@@ -44,7 +44,7 @@ export default function Component({
   return (
     <instancedMesh ref={ref} args={[null, null, count]} position={[0,0,boundaries[2]*0.9]}>
       <boxBufferGeometry />
-      <meshStandardMaterial color={"gray"} />
+      <meshStandardMaterial color={"#aaaaaa"} />
     </instancedMesh>
   );
 }

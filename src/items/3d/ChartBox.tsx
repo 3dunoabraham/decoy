@@ -1,6 +1,6 @@
 import { Box, useDepthBuffer } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
-import { forwardRef, useImperativeHandle, useRef, useState } from "react";
+import { forwardRef, useImperativeHandle, useMemo, useRef, useState } from "react";
 import { Mesh, Box3, Vector3 } from "three";
 import { useIsClient } from "usehooks-ts";
 import { useQueryPlus } from "@/scripts/helpers/useHooksHelper";
@@ -10,6 +10,7 @@ import DynaText from "./DynaText";
 import { AppContext } from "@/scripts/contexts/AppContext";
 import { useContext,  } from 'react'
 import { tokenColors } from "./core/Scene";
+import { parseDecimals } from "@/components/scripts/helpers";
 
 type BoxProps = {
   position: [number, number, number];
@@ -25,6 +26,7 @@ type BoxProps = {
   timeframe?: any;
   theToken?: any;
   refetched?: any;
+  askAI?: any;
 };
 function getRandomUnixDate() {
   const now = new Date();
@@ -36,6 +38,7 @@ function getRandomUnixDate() {
 
 const Component = forwardRef(({
   // export default function Component({
+  askAI=()=>{},
   refetched=()=>{},
   wallWidth,
   position,
@@ -45,6 +48,9 @@ const Component = forwardRef(({
   velocityY, setVelocityY,
   timeframe, theToken
 }: BoxProps, ref) => {
+  const _askAI = ()  => {
+    askAI(prices)
+  }
   const app = useContext(AppContext)
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
@@ -59,6 +65,8 @@ const Component = forwardRef(({
   const [initUnix, s__initUnix] = useState(0)
   const [diffUnix, s__diffUnix] = useState(0)
   const isClient = useIsClient()
+
+
   
   const [q__asd, asd] = useQueryPlus({ queryKey: ['asdasd'], 
       refetchOnWindowFocus: false, enabled: false ,
@@ -150,34 +158,83 @@ const Component = forwardRef(({
   }
   const [prices, setPrices] = useState<number[]>([]);
   const [hovered2, setHovered2] = useState(false);
+  const [hovered3, setHovered3] = useState(false);
+
+  const maxPrice = useMemo(()=>{
+    return Math.max.apply(Math, prices)
+  },[prices])
+  const minPrice = useMemo(()=>{
+    return Math.min.apply(Math, prices)
+  },[prices])
+  const midPrice = useMemo(()=>{
+    return parseDecimals((minPrice + maxPrice)  / 2)
+  },[minPrice, maxPrice])
+
 
   return (
     <group position={position}>
       
       <DynaText text={!!theToken ? theToken.toUpperCase() : ""} color={0xaaaaaa}
-        position={new Vector3(-0.15,0.95+0.3,0.17)} rotation={[0, 0, 0]}
+        position={new Vector3(-0.17,0.95+0.36,0.19)} rotation={[0, 0, 0]}
+
+        isSelected={false}  font={0.28} onClick={()=>{}}
+      />
+      <DynaText text={!!timeframe ? timeframe.toLowerCase() : ""} color={0xaaaaaa}
+        position={new Vector3(0,1.16,0.19)} rotation={[0, 0, 0]}
+
+        isSelected={false}  font={0.1} onClick={()=>{}}
+      />
+      <DynaText text={"?"} color={0xaaaaaa}
+        position={new Vector3(-0.9,0.95+0.3,0.19)} rotation={[0, 0, 0]}
 
         isSelected={false}  font={0.3} onClick={()=>{}}
       />
-        <Box onClick={()=>{q__asd.refetch()}} args={[0.6,0.4,0.1]} 
-          position={[-0.15,0.99+0.3,0.1]} 
+      {prices.length > 0 &&  <>
+        <DynaText text={`${maxPrice}`} color={0xaaaaaa}
+          position={new Vector3(-1.12,1.02,0.145)} rotation={[0, 0, 0]}
 
-            onPointerOver={() => setHovered2(true)}
-            onPointerOut={() => setHovered2(false)}
-        >
-            <meshStandardMaterial color={!hovered2 ? "#888888" : tokenColors[theToken.toLowerCase()] } />
-        </Box>
-    <group position={[0,0,0.12]}>
-        <CandleInstances
-            boundaries={boundaries}
-            count={prices.length}
-            positions={prices.slice(0, liveId || 499).map((price) => price)}
-            xRange={[-boundaries[0], boundaries[0]*50]}
-            yRange={[-boundaries[2]*20, 1]}
+          isSelected={false}  font={0.05} onClick={()=>{}}
         />
-    </group>
+        <DynaText text={`${midPrice}`} color={0xaaaaaa}
+          position={new Vector3(-1.16,((1.02)+(-0.4))/2,0.145)} rotation={[0, 0, 0]}
 
-      <Box args={[1.2,1.7,.1]}  position={new Vector3(-0.5, 0.37, 0.09)} receiveShadow castShadow >
+          isSelected={false}  font={0.05} onClick={()=>{}}
+        />
+        <DynaText text={`${minPrice}`} color={0xaaaaaa}
+          position={new Vector3(-1.12,-0.4,0.145)} rotation={[0, 0, 0]}
+
+          isSelected={false}  font={0.05} onClick={()=>{}}
+        />
+    </>}
+      
+      <Box onClick={()=>{q__asd.refetch()}} args={[0.6,0.4,0.15]} 
+        position={[-0.15,0.99+0.3,0.1]} 
+
+          onPointerOver={() => setHovered2(true)}
+          onPointerOut={() => setHovered2(false)}
+      >
+          <meshStandardMaterial color={!hovered2 ? "#888888" : tokenColors[theToken.toLowerCase()] } />
+      </Box>
+      
+      <Box onClick={()=>{_askAI()}} args={[0.2,0.3,0.15]} 
+          position={[-0.9,0.99+0.3,0.1]} 
+
+            onPointerOver={() => setHovered3(true)}
+            onPointerOut={() => setHovered3(false)}
+        >
+            <meshStandardMaterial color={!hovered3 ? "#888888" : tokenColors[theToken.toLowerCase()] } />
+        </Box>
+        <group position={[0.15,0,0.12]}>
+            <CandleInstances
+                boundaries={boundaries}
+                count={prices.length}
+                positions={prices.slice(0, liveId || 499).map((price) => price)}
+                xRange={[-boundaries[0], boundaries[0]*50]}
+                yRange={[-boundaries[2]*20, 1]}
+            />
+        </group>
+
+      <Box args={[1.5,1.7,.1]}  position={new Vector3(-0.5, 0.37, 0.09)} receiveShadow castShadow >
           <meshStandardMaterial emissive={"#93603F22"} attach="material" color="#666666" />
       </Box>
       <Box args={[0.05,2.2,.05]}  position={new Vector3(0, -0.5, 0.09)} receiveShadow castShadow >

@@ -74,8 +74,9 @@ export default function Component({ live = false, buttonPosition, s__showPhysics
       <OrbitControls
           enableZoom={true}
           minDistance={0.5}
-          maxDistance={6.5}
-          dampingFactor={live ? 0.5 : 0.08}
+          maxDistance={7}
+          dampingFactor={0.3}
+          rotateSpeed={0.3}
           enablePan={false}
           maxPolarAngle={Math.PI / 2 + 0.1}
         />

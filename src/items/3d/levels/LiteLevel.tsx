@@ -5,7 +5,7 @@ import TradingBox from "../npc/TradingBox/TradingBox";
 import LiteNpcContainer from "../npc/LiteNpcContainer";
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { getComputedLevels } from "@/components/scripts/helpers";
-import { useLocalStorage } from "usehooks-ts";
+import { useCopyToClipboard, useLocalStorage } from "usehooks-ts";
 import { DEFAULT_TIMEFRAME_ARRAY } from "@/components/scripts/constants";
 import { Physics } from "use-cannon";
 import { BigBox, SmallBox2, smallboxes } from "../npc/LiteGame";
@@ -14,6 +14,21 @@ import { BigBox, SmallBox2, smallboxes } from "../npc/LiteGame";
 export default function Component({
     power, form, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj, s__tokensArrayObj
 }) {
+    const [clipbloardValue, clipbloard__do] = useCopyToClipboard()
+    const copyToClipboard = ()=>{
+        // clipbloard__do(OFFICIAL_URL+"unit/"+newUID)
+        // app.alert("neutral","Copied to clipboard")
+    }
+
+    const [AIdata, s__AIdata] = useState("please analize this data, make a report with trend direction, resistance and support levels only generate the report please \n\n")
+    const askAI = (data) => {
+        let newPrompt = "timeframe:"+selectedTimeframe+" ```"+data.splice(0,100).join(",")+"``` \n\n"
+        newPrompt = AIdata + newPrompt
+        s__AIdata(newPrompt)
+        console.clear()
+        console.log("timeframe", newPrompt)
+        clipbloard__do(newPrompt)
+    }
     const [showPhysics, s__showPhysics] = useState(false)
     // useEffect(()=>{
     //     console.log("asdasd", tokensArrayObj)
@@ -164,7 +179,7 @@ export default function Component({
 
             
             <LiteNpcContainer {...{optsToggler}} position={[0,0,0]}  
-                form={form} 
+                form={form} askAI={askAI}
             />
 
             

@@ -7,7 +7,7 @@ import Storefront from './Storefront';
 import Observatory from './Observatory';
 import ChartBox from '../ChartBox';
 
-export default function Component ({position, optsToggler, form, ...props}) {
+export default function Component ({position, optsToggler, form, askAI, ...props}) {
     const { scene } = useGLTF('/angel.glb')
     const $chartBox:any = useRef()
     useLayoutEffect(() => scene.traverse(o =>
@@ -36,7 +36,7 @@ export default function Component ({position, optsToggler, form, ...props}) {
 
         {optsToggler.services.bool && 
         <ChartBox boundaries={[1,0.1,0.02]} score={{score:0}} timeframe={timeframe.toLowerCase() || "1d"}
-            ref={$chartBox}
+            ref={$chartBox} askAI={askAI}
             position={[-2.7,0,3]} velocityX={0}  theToken={form.id.split("USDT")[0]}
             velocityY={0} setVelocityX={()=>{}} setVelocityY={()=>{}}
         />
