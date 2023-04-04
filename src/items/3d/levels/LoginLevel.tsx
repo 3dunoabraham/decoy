@@ -1,6 +1,6 @@
 import { Cylinder, } from "@react-three/drei";
 import { Vector3 } from "three";
-import TradingBox from "../npc/TradingBox/TradingBox";
+import TradingBox from "../npc/TradingBox";
 import SimpleOrbit from "../core/camera/SimpleOrbit";
 import HumanForReference from "../core/HumanForReference";
 import Text3D from "../core/Text3D";

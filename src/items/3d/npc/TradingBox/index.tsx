@@ -129,12 +129,15 @@ const Component = forwardRef(({
     // console.log("s__clientIP", LS_uid.split(":")[0])
 },[])
   useFrame((state: any, delta) => {
-    if (meshRef.current && state && state.get) {
-      setElapsed(delta + elapsed);
-      meshRef.current.position.y += velocityY;
-      meshRef.current.position.x += velocityX;
-      return
-    }
+    // if (meshRef.current && state && state.get) {
+    //   setElapsed(delta + elapsed);
+    //   meshRef.current.position.y += velocityY;
+    //   meshRef.current.position.x += velocityX;
+
+      
+    //   return
+    // }
+    
   });
   const toggleGame = () => {
     // console.log("asd")
@@ -197,7 +200,7 @@ const Component = forwardRef(({
         
         position={[
           position[0],
-          position[1]-0.45,
+          position[1]-0.36,
           position[2],
         ]}
           rotation={[Math.PI/2,0,Math.PI/4]}>
@@ -212,7 +215,7 @@ const Component = forwardRef(({
         
         position={[
           position[0],
-          position[1]-0.36,
+          position[1]-0.45,
           position[2],
         ]}
          receiveShadow castShadow
@@ -297,7 +300,7 @@ const Component = forwardRef(({
           clicked ? position[1] - 0.33 : position[1] - 0.3,
           position[2],
         ]}
-        ref={meshRef}
+        
         scale={score.score ? 1 : 3}
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
@@ -321,7 +324,7 @@ const Component = forwardRef(({
           position[1] - 0.2,
           position[2] - 0.41
         ]}
-        ref={meshRef}
+        
         scale={score.score ? 1 : 3}
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
@@ -342,7 +345,7 @@ const Component = forwardRef(({
             position[1] - 0.22,
             position[2] - 0.40
           ]}
-          ref={meshRef}
+          
           scale={score.score ? 1 : 3}
           onPointerOver={() => setHovered(true)}
           onPointerOut={() => setHovered(false)}
@@ -372,7 +375,7 @@ const Component = forwardRef(({
         position[1] - 0.35,
         position[2] - 0.12
       ]}
-      ref={meshRef}
+      
       scale={score.score ? 1 : 3}
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
@@ -397,7 +400,7 @@ const Component = forwardRef(({
           position[1] - 0.35,
           position[2] + 0.01
         ]}
-        ref={meshRef}
+        
         scale={score.score ? 1 : 3}
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
@@ -410,7 +413,7 @@ const Component = forwardRef(({
       </mesh>
     }
 
-        {isSelectedId && !!tokensArrayArray && 
+        {!!tokensArrayArray && 
         
         <mesh
           castShadow
@@ -427,7 +430,7 @@ const Component = forwardRef(({
             position[1] - 0.35,
             position[2] + 0.15
           ]}
-          ref={meshRef}
+          
           scale={score.score ? 1 : 3}
           onPointerOver={() => setHovered(true)}
           onPointerOut={() => setHovered(false)}
@@ -437,7 +440,7 @@ const Component = forwardRef(({
             
             color={
             !!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].mode ?
-              "#9A4DFE" : "green" } 
+              "red" : "green" } 
           />
         </mesh>
       }
@@ -455,7 +458,7 @@ const Component = forwardRef(({
             position[1] - 0.35,
             position[2] + 0.3,
           ]}
-          ref={meshRef}
+          
           scale={score.score ? 1 : 3}
           onPointerOver={() => setHovered(true)}
           onPointerOut={() => setHovered(false)}
@@ -484,7 +487,7 @@ const Component = forwardRef(({
           //   position[1] - 0.35,
           //   position[2] -0,
           // ]}
-          ref={meshRef}
+          
           scale={score.score ? 1 : 3}
           onPointerOver={() => setHovered(true)}
           onPointerOut={() => setHovered(false)}
@@ -522,7 +525,7 @@ const Component = forwardRef(({
           //   position[1] - 0.35,
           //   position[2] -0,
           // ]}
-          ref={meshRef}
+          
           scale={score.score ? 1 : 3}
           onPointerOver={() => setHovered(true)}
           onPointerOut={() => setHovered(false)}
