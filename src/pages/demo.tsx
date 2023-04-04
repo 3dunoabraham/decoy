@@ -77,7 +77,7 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
                         <Scene ref={$boxContainer} live={false}>
                             <DemoLevel {...{
                                 power:null, form:null, onTextClick:null, optsToggler: null, s__tokensArrayObj: null,
-                                toggleTrade:null, xOut:null, yOut:null, zOut:null, tokensArrayObj: null,
+                                toggleTrade:null, xOut:null, yOut:null, zOut:null, tokensArrayObj: null, onTimeframeClick: null
 
                             }}/>
                         </Scene>
