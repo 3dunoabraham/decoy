@@ -20,17 +20,17 @@ export default function Component({
         // app.alert("neutral","Copied to clipboard")
     }
     const AI_BASE = `
-    please analize this data and make a report:
+    analyze this data and make a report:
     include trend direction, resistance and support levels.
-    the key names in the json object are the time between the prices (timeframe)
-    only generate 1 report including all 4 timeframes  \n\n data:`
+    each array of the json represents the latest candlestick chart data with only the closing price
+    generate the report including all 4 timeframes  \n\n candles data:`
     const [AIdata, s__AIdata] = useState({})
     const askAI = (data) => {
         let verbose = {
-            "3m": "3 minutes = ",
-            "15m": "15 minutes = ",
-            "4h": "4 hours = ",
-            "1d": "24 hours = ",
+            "3m": "3 minutes between prices",
+            "15m": "15 minutes between prices",
+            "4h": "4 hours between prices",
+            "1d": "1 day between prices",
         }
         let newPrompt = AIdata
         newPrompt[verbose[selectedTimeframe.toLowerCase()]] = ([...data]).splice(400,499)
