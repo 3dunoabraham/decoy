@@ -186,6 +186,11 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
         let oldBool = optsToggler[opt].bool
         s__optsToggler({...optsToggler,...{[opt]:{bool:!oldBool}}})
     }
+    const onTimeframeClick = (token, timeframe) => {
+        // console.log("onTimeframeClick", token, timeframe)
+        // setToken(token)
+        setTimeframe(DEFAULT_TIMEFRAME_ARRAY[timeframe])
+    }
     const onTextClick = (token) => {
         // console.log("token", token)
         setToken(token)
@@ -213,7 +218,7 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
     },[])
     const childrenWithProps = React.Children.map(children, (child) => {
         if (React.isValidElement<any>(child)) {
-          return React.cloneElement(child, { power, form, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj, s__tokensArrayObj });
+          return React.cloneElement(child, { power, form, onTimeframeClick, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj, s__tokensArrayObj });
         }
         return child;
       });
@@ -346,7 +351,7 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
             {/* {children} */}
             {!uid && <>
                 <LoginLevel {...{
-                    power, form, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj, s__tokensArrayObj
+                    power, form, onTextClick, onTimeframeClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj, s__tokensArrayObj
                 }} />
             </>}
             {!!uid && <>

@@ -35,7 +35,7 @@ extend({ TextGeometry })
 //  }
 
 export default function Component({
-    power, form, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler
+    power, form, onTextClick, onTimeframeClick, toggleTrade, xOut, yOut, zOut, optsToggler
 }) {
     const font = new FontLoader().parse(myFont);
     const $signin:any = useRef()

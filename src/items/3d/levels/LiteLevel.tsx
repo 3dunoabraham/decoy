@@ -12,7 +12,7 @@ import { DEFAULT_TIMEFRAME_ARRAY } from "@/components/scripts/constants";
 
 
 export default function Component({
-    power, form, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj, s__tokensArrayObj
+    power, form, onTextClick, onTimeframeClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj, s__tokensArrayObj
 }) {
     const [clipbloardValue, clipbloard__do] = useCopyToClipboard()
     const copyToClipboard = ()=>{
@@ -108,7 +108,9 @@ export default function Component({
         s__tokensArrayObj(result)
     }
     const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
-
+    // const onTimeframeClick = (token, timeframe) => {
+    //     console.log("onTimeframeClick", token, timeframe)
+    // }
 
     const clickImportConfig = () => {
         try {
@@ -296,7 +298,7 @@ export default function Component({
                     setVelocityY={(data)=>{toggleTrade("btc",data)}}
                     turnOn={()=>{turnOn("btc")}} turnOff={()=>{turnOff("btc")}}
                     join={()=>{join("btc")}} leave={()=>{leave("btc")}}
-                    trendDown={()=>{trendDown("btc")}} trendUp={()=>{trendUp("btc")}}
+                    trendDown={()=>{trendDown("btc")}} trendUp={()=>{trendUp("btc")}} onTimeframeClick={(token, tf)=>{onTimeframeClick("btc",tf)}}
                     tokensArrayArray={"btc" in tokensArrayObj ? tokensArrayObj["btc"] : null}
                 /> 
             </>}
@@ -306,7 +308,7 @@ export default function Component({
                     setVelocityY={(data)=>{toggleTrade("eth",data)}}
                     turnOn={()=>{turnOn("eth")}} turnOff={()=>{turnOff("eth")}}
                     join={()=>{join("eth")}} leave={()=>{leave("eth")}}
-                    trendDown={()=>{trendDown("eth")}} trendUp={()=>{trendUp("eth")}}
+                    trendDown={()=>{trendDown("eth")}} trendUp={()=>{trendUp("eth")}} onTimeframeClick={(token, tf)=>{onTimeframeClick("eth",tf)}}
                     tokensArrayArray={"eth" in tokensArrayObj ? tokensArrayObj["eth"] : null}
                 /> 
             </>}
@@ -316,7 +318,7 @@ export default function Component({
                     setVelocityY={(data)=>{toggleTrade("link",data)}}
                     turnOn={()=>{turnOn("link")}} turnOff={()=>{turnOff("link")}}
                     join={()=>{join("link")}} leave={()=>{leave("link")}}
-                    trendDown={()=>{trendDown("link")}} trendUp={()=>{trendUp("link")}}
+                    trendDown={()=>{trendDown("link")}} trendUp={()=>{trendUp("link")}} onTimeframeClick={(token, tf)=>{onTimeframeClick("link",tf)}}
                     tokensArrayArray={"link" in tokensArrayObj ? tokensArrayObj["link"] : null}
                 /> 
             </>}
@@ -326,7 +328,7 @@ export default function Component({
                     setVelocityY={(data)=>{toggleTrade("ftm",data)}}
                     turnOn={()=>{turnOn("ftm")}} turnOff={()=>{turnOff("ftm")}}
                     join={()=>{join("ftm")}} leave={()=>{leave("ftm")}}
-                    trendDown={()=>{trendDown("ftm")}} trendUp={()=>{trendUp("ftm")}}
+                    trendDown={()=>{trendDown("ftm")}} trendUp={()=>{trendUp("ftm")}} onTimeframeClick={(token, tf)=>{onTimeframeClick("ftm",tf)}}
                     tokensArrayArray={"ftm" in tokensArrayObj ? tokensArrayObj["ftm"] : null}
                 /> 
             </>}

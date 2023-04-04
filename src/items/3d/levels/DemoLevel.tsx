@@ -23,7 +23,7 @@ const Building:any = dynamic(import ("@/src/items/3d/farmhouse/Building"), { ssr
 // const TradingBox = dynamic(import ("@/src/items/3d/core/camera/TradingBox"), { ssr: false });
 
 export default function Component({
-    power, form, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj
+    power, form, onTextClick, onTimeframeClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj
 }) {
     const roofWidth = 0.2
     const wallWidth = 0.1
