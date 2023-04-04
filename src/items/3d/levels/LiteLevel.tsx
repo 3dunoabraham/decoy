@@ -33,7 +33,7 @@ export default function Component({
             "1d": "24 hours = ",
         }
         let newPrompt = AIdata
-        newPrompt[verbose[selectedTimeframe.toLowerCase()]] = data.splice(400,499)
+        newPrompt[verbose[selectedTimeframe.toLowerCase()]] = ([...data]).splice(400,499)
         // newPrompt = AIdata + newPrompt
         s__AIdata(newPrompt)
         console.clear()
