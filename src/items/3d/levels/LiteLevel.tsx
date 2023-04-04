@@ -22,7 +22,13 @@ export default function Component({
 
     const [AIdata, s__AIdata] = useState("please analize this data, make a report with trend direction, resistance and support levels only generate the report please \n\n")
     const askAI = (data) => {
-        let newPrompt = "timeframe:"+selectedTimeframe+" ```"+data.splice(400,499).join(",")+"``` \n\n"
+        let verbose = {
+            "3m": "3 minutes = ",
+            "15m": "15 minutes = ",
+            "4h": "4 hours = ",
+            "1d": "1 day = ",
+        }
+        let newPrompt = "timeframe:"+verbose[selectedTimeframe.toLowerCase()]+" ```"+data.splice(400,499).join(",")+"``` \n\n"
         newPrompt = AIdata + newPrompt
         s__AIdata(newPrompt)
         console.clear()
