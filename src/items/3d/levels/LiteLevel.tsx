@@ -19,21 +19,26 @@ export default function Component({
         // clipbloard__do(OFFICIAL_URL+"unit/"+newUID)
         // app.alert("neutral","Copied to clipboard")
     }
-
-    const [AIdata, s__AIdata] = useState("please analize this data, make a report with trend direction, resistance and support levels only generate the report please \n\n")
+    const AI_BASE = `
+    please analize this data and make a report:
+    include trend direction, resistance and support levels.
+    the key names in the json object are the time between the prices (timeframe)
+    only generate 1 report including all 4 timeframes  \n\n data:`
+    const [AIdata, s__AIdata] = useState({})
     const askAI = (data) => {
         let verbose = {
             "3m": "3 minutes = ",
             "15m": "15 minutes = ",
             "4h": "4 hours = ",
-            "1d": "1 day = ",
+            "1d": "24 hours = ",
         }
-        let newPrompt = "timeframe:"+verbose[selectedTimeframe.toLowerCase()]+" ```"+data.splice(400,499).join(",")+"``` \n\n"
-        newPrompt = AIdata + newPrompt
+        let newPrompt = AIdata
+        newPrompt[verbose[selectedTimeframe.toLowerCase()]] = data.splice(400,499)
+        // newPrompt = AIdata + newPrompt
         s__AIdata(newPrompt)
         console.clear()
         console.log("timeframe", newPrompt)
-        clipbloard__do(newPrompt)
+        clipbloard__do(AI_BASE + JSON.stringify(newPrompt))
     }
     const [showPhysics, s__showPhysics] = useState(false)
     // useEffect(()=>{
