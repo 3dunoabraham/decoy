@@ -14,7 +14,7 @@ export default function Component({ color, intensity, distance, position, speed=
         pointlightRef.current.position.y = Math.sin(angleRef.current)*5;
         amblightRef.current.intensity = Math.sin(angleRef.current)/5+0.2;
         lightRef.current.rotation.y = angleRef.current;
-        console.log(Math.sin(angleRef.current)/5+0.2)
+        // console.log(Math.sin(angleRef.current)/5+0.2)
         // lightRef.current.rotation.z = angleRef.current;
       }, speed); // set the interval duration to the desired value
       

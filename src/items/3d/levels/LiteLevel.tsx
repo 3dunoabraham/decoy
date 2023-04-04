@@ -60,8 +60,8 @@ export default function Component({
 
         // if (prompt("turnOff?","yes") !== "yes") return
 
-        console.log(token,0,"state","0")
-        updateTokenOrder(token,0,"state","0")
+        // console.log(token,0,"state","0")
+        updateTokenOrder(token,selectedTimeframeIndex,"state","0")
 
         // window.location.reload()
     }
@@ -70,7 +70,7 @@ export default function Component({
         if (!(token in tokensArrayObj)) { return alert("join first") }
 
         // if (prompt("turnOn?","yes") !== "yes") return
-        updateTokenOrder(token,0,"mode","0")
+        updateTokenOrder(token,selectedTimeframeIndex,"mode","0")
         // window.location.reload()
     }
     const trendUp = (token) => {
@@ -79,7 +79,7 @@ export default function Component({
         // if (prompt("turnOff?","yes") !== "yes") return
 
         // console.log(token,0,"mode","1")
-        updateTokenOrder(token,0,"mode","1")
+        updateTokenOrder(token,selectedTimeframeIndex,"mode","1")
 
         // window.location.reload()
     }
@@ -88,7 +88,7 @@ export default function Component({
         if (!(token in tokensArrayObj)) { return alert("join first") }
 
         // if (prompt("turnOn?","yes") !== "yes") return
-        updateTokenOrder(token,0,"state",1)
+        updateTokenOrder(token,selectedTimeframeIndex,"state",1)
         // window.location.reload()
     }
     const join = (token) => {
@@ -291,7 +291,7 @@ export default function Component({
                 </Physics>
             } */}
             {<>
-                <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" refetchInterval={60000}
+                <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" refetchInterval={selectedToken == "btc" ? 1000 : 60000}
                     position={[xOut/2,-0.35,-zOut/2]} onTextClick={()=>{onTextClick("btc")}} unselectedColor={"#50545B"}
                     setVelocityY={(data)=>{toggleTrade("btc",data)}}
                     turnOn={()=>{turnOn("btc")}} turnOff={()=>{turnOff("btc")}}
@@ -301,7 +301,7 @@ export default function Component({
                 /> 
             </>}
             {<>
-                <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="eth" refetchInterval={60000}
+                <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="eth" refetchInterval={selectedToken == "eth" ? 1000 : 60000}
                     position={[-xOut/2,-0.35,zOut/2]} onTextClick={()=>{onTextClick("eth")}} unselectedColor={"#50545B"}
                     setVelocityY={(data)=>{toggleTrade("eth",data)}}
                     turnOn={()=>{turnOn("eth")}} turnOff={()=>{turnOff("eth")}}
@@ -311,7 +311,7 @@ export default function Component({
                 /> 
             </>}
             {<>
-                <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="link" refetchInterval={60000}
+                <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="link" refetchInterval={selectedToken == "link" ? 1000 : 60000}
                     position={[xOut/2,-0.35,zOut/2]} onTextClick={()=>{onTextClick("link")}} unselectedColor={"#50545B"}
                     setVelocityY={(data)=>{toggleTrade("link",data)}}
                     turnOn={()=>{turnOn("link")}} turnOff={()=>{turnOff("link")}}
@@ -321,7 +321,7 @@ export default function Component({
                 /> 
             </>}
             {<>
-                <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="ftm" refetchInterval={60000}
+                <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="ftm" refetchInterval={selectedToken == "ftm" ? 1000 : 60000}
                     position={[-xOut/2,-0.35,-zOut/2]} onTextClick={()=>{onTextClick("ftm")}} unselectedColor={"#50545B"}
                     setVelocityY={(data)=>{toggleTrade("ftm",data)}}
                     turnOn={()=>{turnOn("ftm")}} turnOff={()=>{turnOff("ftm")}}
