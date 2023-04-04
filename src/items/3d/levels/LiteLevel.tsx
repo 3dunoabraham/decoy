@@ -65,6 +65,24 @@ export default function Component({
 
         // window.location.reload()
     }
+    const trendDown = (token) => {
+        console.log("trendDown", token)
+        if (!(token in tokensArrayObj)) { return alert("join first") }
+
+        // if (prompt("turnOn?","yes") !== "yes") return
+        updateTokenOrder(token,0,"mode","0")
+        // window.location.reload()
+    }
+    const trendUp = (token) => {
+        console.log("trendUp", token)
+
+        // if (prompt("turnOff?","yes") !== "yes") return
+
+        // console.log(token,0,"mode","1")
+        updateTokenOrder(token,0,"mode","1")
+
+        // window.location.reload()
+    }
     const turnOn = (token) => {
         // console.log("tokensArrayObj", tokensArrayObj)
         if (!(token in tokensArrayObj)) { return alert("join first") }
@@ -278,6 +296,7 @@ export default function Component({
                     setVelocityY={(data)=>{toggleTrade("btc",data)}}
                     turnOn={()=>{turnOn("btc")}} turnOff={()=>{turnOff("btc")}}
                     join={()=>{join("btc")}} leave={()=>{leave("btc")}}
+                    trendDown={()=>{trendDown("btc")}} trendUp={()=>{trendUp("btc")}}
                     tokensArrayArray={"btc" in tokensArrayObj ? tokensArrayObj["btc"] : null}
                 /> 
             </>}
@@ -287,6 +306,7 @@ export default function Component({
                     setVelocityY={(data)=>{toggleTrade("eth",data)}}
                     turnOn={()=>{turnOn("eth")}} turnOff={()=>{turnOff("eth")}}
                     join={()=>{join("eth")}} leave={()=>{leave("eth")}}
+                    trendDown={()=>{trendDown("eth")}} trendUp={()=>{trendUp("eth")}}
                     tokensArrayArray={"eth" in tokensArrayObj ? tokensArrayObj["eth"] : null}
                 /> 
             </>}
@@ -296,6 +316,7 @@ export default function Component({
                     setVelocityY={(data)=>{toggleTrade("link",data)}}
                     turnOn={()=>{turnOn("link")}} turnOff={()=>{turnOff("link")}}
                     join={()=>{join("link")}} leave={()=>{leave("link")}}
+                    trendDown={()=>{trendDown("link")}} trendUp={()=>{trendUp("link")}}
                     tokensArrayArray={"link" in tokensArrayObj ? tokensArrayObj["link"] : null}
                 /> 
             </>}
@@ -305,6 +326,7 @@ export default function Component({
                     setVelocityY={(data)=>{toggleTrade("ftm",data)}}
                     turnOn={()=>{turnOn("ftm")}} turnOff={()=>{turnOff("ftm")}}
                     join={()=>{join("ftm")}} leave={()=>{leave("ftm")}}
+                    trendDown={()=>{trendDown("ftm")}} trendUp={()=>{trendUp("ftm")}}
                     tokensArrayArray={"ftm" in tokensArrayObj ? tokensArrayObj["ftm"] : null}
                 /> 
             </>}

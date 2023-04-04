@@ -77,7 +77,7 @@ export default function Component({ live = false, buttonPosition, s__showPhysics
           maxDistance={7}
           dampingFactor={0.3}
           rotateSpeed={0.3}
-          enablePan={false}
+          // enablePan={false}
           maxPolarAngle={Math.PI / 2 + 0.1}
         />
 {/*         

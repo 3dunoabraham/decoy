@@ -32,6 +32,8 @@ type BoxProps = {
   turnOff?: any;
   leave?: any;
   join?: any;
+  trendUp?: any;
+  trendDown?: any;
 };
 
 const Component = forwardRef(({
@@ -41,6 +43,8 @@ const Component = forwardRef(({
   turnOff,
   leave,
   join,
+  trendDown,
+  trendUp,
   tokensArrayArray,
   unselectedColor="#48721E",
   refetchInterval=3000,
@@ -357,7 +361,8 @@ const Component = forwardRef(({
         {/* mini buttons */}
         
     {isSelectedId && !!tokensArrayArray && 
-    <mesh
+            !!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].mode &&
+            <mesh
       castShadow
       receiveShadow
       // onClick={() => alert()}
@@ -379,33 +384,9 @@ const Component = forwardRef(({
       />
     </mesh>
   }
-        {isSelectedId && !!tokensArrayArray && 
-    !!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state &&
-        
-        <mesh
-          castShadow
-          receiveShadow
-          // onClick={() => alert()}
-          // rotation={[isSelectedId ? 0.25 : -0.25,0,0]}
-          position={[
-            position[0] - 0.42,
-            position[1] - 0.35,
-            position[2] + 0.15
-          ]}
-          ref={meshRef}
-          scale={score.score ? 1 : 3}
-          onPointerOver={() => setHovered(true)}
-          onPointerOut={() => setHovered(false)}
-        >
-          <boxGeometry args={[0.02, 0.05, 0.02]} />
-          <meshStandardMaterial
-            
-            color={"#FEEA4D"} 
-          />
-        </mesh>
-      }
-      {isSelectedId && !!tokensArrayArray && 
-      !!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state &&
+  
+  {isSelectedId && !!tokensArrayArray && 
+      clicked && 
       <mesh
         castShadow
         receiveShadow
@@ -429,6 +410,37 @@ const Component = forwardRef(({
       </mesh>
     }
 
+        {isSelectedId && !!tokensArrayArray && 
+        
+        <mesh
+          castShadow
+          receiveShadow
+          onClick={
+            !!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].mode ?
+            trendDown : trendUp}
+          rotation={
+            !!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].mode ?
+            [0,-0.5,0] : [0,0.5,0]
+          }
+          position={[
+            position[0] - 0.38,
+            position[1] - 0.35,
+            position[2] + 0.15
+          ]}
+          ref={meshRef}
+          scale={score.score ? 1 : 3}
+          onPointerOver={() => setHovered(true)}
+          onPointerOut={() => setHovered(false)}
+        >
+          <boxGeometry args={[0.05, 0.04, 0.015]} />
+          <meshStandardMaterial
+            
+            color={
+            !!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].mode ?
+              "#9A4DFE" : "green" } 
+          />
+        </mesh>
+      }
 
 
 
@@ -487,12 +499,12 @@ const Component = forwardRef(({
       
       <DynaText text={!!tokensArrayArray ? "LIVE" : "OFF"} color={!!tokensArrayArray ?  0xaaaaaa : 0x333333}
           position={new Vector3(position[0]-0.44,position[1]-0.32,position[2]+0.28)}
-          isSelected={isSelectedId}  font={0.045} onClick={()=>{onTextClick()}}
+          isSelected={isSelectedId}  font={0.04} onClick={()=>{onTextClick()}}
         />
         <DynaText color={!!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state ? 0xaaaaaa : 0x333333}
-         text={!!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state ? "ON" : "OFF"} 
-            position={new Vector3(position[0]-0.33,position[1]-0.32,position[2]+0.28)}
-            isSelected={isSelectedId}  font={0.05} onClick={()=>{onTextClick()}}
+         text={!!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state ? "TRADE" : "OFF"} 
+            position={new Vector3(position[0]-0.32,position[1]-0.32,position[2]+0.28)}
+            isSelected={isSelectedId}  font={0.04} onClick={()=>{onTextClick()}}
           />
       {
         <mesh
