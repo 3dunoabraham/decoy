@@ -178,7 +178,7 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
     }
     const setToken = (token) => {
         // console.log("id", token)
-        // if (!(token in tokensArrayObj)) return
+        if (!(token in tokensArrayObj)) return
         let newId = token.toUpperCase()+"USDT"+form.id.split("USDT")[1].toUpperCase()
         s__form({...form,...{id:newId}})
     }

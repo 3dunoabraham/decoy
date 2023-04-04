@@ -187,61 +187,6 @@ const Component = forwardRef(({
         />
       }
       {/* <Text3D /> */}
-      {/* {isSelectedId && <>
-        
-        
-        <Cylinder args={[0.5, 0.7, 0.5, 4, 1]}  
-          scale={[1,1,1]}
-          rotation={[0,Math.PI/4,0]}
-          position={[
-            position[0],
-            position[1] - 0.2 ,
-            position[2],
-          ]}
-        >
-                <meshStandardMaterial wireframe={true} attach="material" color="#aaaaaa" />
-            </Cylinder>
-      </>} */}
-      {isSelectedId && <>
-        
-        
-        
-        <mesh
-          castShadow
-          receiveShadow
-          position={[
-            position[0],
-            -0.73,
-            position[2]-0.32,
-          ]}
-          ref={playerMesh}
-        >
-          <boxGeometry args={[0.9, 0.1, wallWidth*3]} />
-          <meshStandardMaterial 
-            color={!isSelectedId ? "#777" : "#777"} 
-          />
-        </mesh>
-        </>}
-      {/* {isSelectedId && <>
-        
-        
-        
-      <mesh
-        castShadow
-        receiveShadow
-        position={[
-          position[0],
-          -0.3*2,
-          position[2]-0.5,
-        ]}
-        ref={playerMesh}
-      >
-        <boxGeometry args={[0.9, 0.3, wallWidth]} />
-        <meshStandardMaterial
-          color={!isSelectedId ? unselectedColor : unselectedColor} 
-        />
-      </mesh>
-      </>} */}
       {isSelectedId && <>
         
         <Torus args={[0.7,0.05,4,4]}  
@@ -276,7 +221,6 @@ const Component = forwardRef(({
 
       {/* platform */}
       <mesh
-      onClick={()=>{onTextClick()}}
         castShadow
         receiveShadow
         position={[
@@ -292,6 +236,48 @@ const Component = forwardRef(({
           color={!isSelectedId ? unselectedColor : unselectedColor} 
         />
       </mesh>
+      {isSelectedId && <>
+        
+        
+        
+        <mesh
+          castShadow
+          receiveShadow
+          position={[
+            position[0]+0.25,
+            -0.73,
+            position[2]-0.32,
+          ]}
+          ref={playerMesh}
+        >
+          <boxGeometry args={[0.45, 0.1, wallWidth*3]} />
+          <meshStandardMaterial 
+            color={!isSelectedId ? "#777777" : "#777777"} 
+          />
+        </mesh>
+        </>}
+        {!isSelectedId && <>
+          
+          
+          
+          <mesh
+            onClick={()=>{onTextClick()}}
+            castShadow
+            receiveShadow
+
+            position={[
+              position[0]-0.25,
+              -0.7,
+              position[2]-0.32,
+            ]}
+            ref={playerMesh}
+          >
+            <boxGeometry args={[0.45, 0.05, wallWidth*3]} />
+            <meshStandardMaterial 
+              color={!isSelectedId ? "#555555" : "#555555"} 
+            />
+          </mesh>
+          </>}
 
 
 
@@ -444,6 +430,8 @@ const Component = forwardRef(({
     }
 
 
+
+
         {/* toggles */}
       {/* {isSelectedId &&
         <mesh
@@ -492,16 +480,17 @@ const Component = forwardRef(({
           <boxGeometry args={[0.025, 0.02, 0.05]} />
           <meshStandardMaterial
             
-            color={!tokensArrayArray ? "#776666" : "#aa4444"} 
+            color={!tokensArrayArray ? "#776666" : "#44aa44"} 
           />
         </mesh>
       }
       
-      <DynaText text={!!tokensArrayArray ? "IN" : "OUT"} color={isSelectedId ? 0xaaaaaa : 0xaaaaaa}
+      <DynaText text={!!tokensArrayArray ? "LIVE" : "OFF"} color={!!tokensArrayArray ?  0xaaaaaa : 0x333333}
           position={new Vector3(position[0]-0.44,position[1]-0.32,position[2]+0.28)}
-          isSelected={isSelectedId}  font={0.05} onClick={()=>{onTextClick()}}
+          isSelected={isSelectedId}  font={0.045} onClick={()=>{onTextClick()}}
         />
-        <DynaText text={!!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state ? "ON" : "OFF"} color={isSelectedId ? 0xaaaaaa : 0xaaaaaa}
+        <DynaText color={!!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state ? 0xaaaaaa : 0x333333}
+         text={!!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state ? "ON" : "OFF"} 
             position={new Vector3(position[0]-0.33,position[1]-0.32,position[2]+0.28)}
             isSelected={isSelectedId}  font={0.05} onClick={()=>{onTextClick()}}
           />
@@ -529,7 +518,7 @@ const Component = forwardRef(({
           <boxGeometry args={[0.025, 0.02, 0.05]} />
           <meshStandardMaterial
             
-            color={!!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state ? "#aa4444" : "#777777" } 
+            color={!!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state ? "#44aa44" : "#777777" } 
           />
         </mesh>
       }

@@ -36,8 +36,8 @@ export default function Component({
         newPrompt[verbose[selectedTimeframe.toLowerCase()]] = ([...data]).splice(400,499)
         // newPrompt = AIdata + newPrompt
         s__AIdata(newPrompt)
-        console.clear()
-        console.log("timeframe", newPrompt)
+        // console.clear()
+        // console.log("timeframe", newPrompt)
         clipbloard__do(AI_BASE + JSON.stringify(newPrompt))
     }
     const [showPhysics, s__showPhysics] = useState(false)
@@ -48,23 +48,25 @@ export default function Component({
         return form.id.split("USDT")[1].toLowerCase()
     },[form.id])
     const hasAnyToken = useMemo(()=>{
-        console.log("tokensArrayObj", tokensArrayObj)
+        // console.log("tokensArrayObj", tokensArrayObj)
         let interestCount = Object.keys(tokensArrayObj).filter((token)=>{
-            console.log("token", token)
+            // console.log("token", token)
             return token in tokensArrayObj
         })
-        console.log("interestCount", interestCount)
+        // console.log("interestCount", interestCount)
         return interestCount.length > 0
     },[tokensArrayObj])
     const turnOff = (token) => {
 
         // if (prompt("turnOff?","yes") !== "yes") return
+
+        console.log(token,0,"state","0")
         updateTokenOrder(token,0,"state","0")
 
         // window.location.reload()
     }
     const turnOn = (token) => {
-        console.log("tokensArrayObj", tokensArrayObj)
+        // console.log("tokensArrayObj", tokensArrayObj)
         if (!(token in tokensArrayObj)) { return alert("join first") }
 
         // if (prompt("turnOn?","yes") !== "yes") return
@@ -81,7 +83,9 @@ export default function Component({
     }
     const leave = (token) => {
         // alert("Developer tools -> Storage -> Local Storage")
-        if (prompt("Confirm deletion (yes/no)","yes") !== "yes") return
+        // if (prompt("Confirm deletion (yes/no)","yes") !== "yes") return
+        if (selectedToken != token) return alert("You cant leave when unfocused, click again to leave.")
+        
         let result = removeToken(token)
         s__tokensArrayObj(result)
     }
@@ -166,7 +170,7 @@ export default function Component({
         old_tokensArrayObjArray[timeframeIndex] = {...old_tokensArrayObj,...newCrystal}
         let bigTokensObj = {...tokensArrayObj, ...{[token]:old_tokensArrayObjArray}}
         s__tokensArrayObj(bigTokensObj)
-        console.log("bigTokensObj", bigTokensObj)
+        // console.log("bigTokensObj", bigTokensObj)
         s__LS_tokensArrayObj((prevValue) => JSON.stringify(bigTokensObj))
         // let theKey = `${token.toUpperCase()}USDT${DEFAULT_TIMEFRAME_ARRAY[timeframe].toUpperCase()}`
         // const response = await updateStrat(theKey, {key:theKey, [substate]:value})
