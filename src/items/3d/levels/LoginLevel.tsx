@@ -65,12 +65,12 @@ export default function Component({
     }
     const getData = async (randomThousand) => {
         try {
-            const res = await fetch('https://geolocation-db.com/json/');
+            const res = await fetch('/api/ip');
             const { IPv4 } = await res.json();
             // s__clientIP(IPv4);
             const hash = crypto.createHash('sha256');
             hash.update(IPv4);
-            hash.update(randomThousand);
+            // hash.update(randomThousand);
             const new_uid = hash.digest('hex');
             // console.log("newuid", new_uid)
             return new_uid

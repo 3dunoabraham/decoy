@@ -162,7 +162,7 @@ const Component = forwardRef(({
         />
       }
       {!isSelectedId &&
-        <DynaText text={token+"" || ""} color={isSelectedId ? 0xaaaaaa : 0xaaaaaa}
+        <DynaText text={token+"" || ""} color={isSelectedId ? 0x222222 : 0x222222}
           position={new Vector3(position[0]-0.2,position[1]-0.32,position[2]-0.3)}
           isSelected={isSelectedId}  font={0.25} onClick={()=>{onTextClick()}}
         />

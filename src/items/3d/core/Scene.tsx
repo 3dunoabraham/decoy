@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState,  } from 'react'
+import { forwardRef, useContext, useEffect, useImperativeHandle, useMemo, useRef, useState,  } from 'react'
 import { Torus, Cylinder, OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import { Canvas, useThree } from "@react-three/fiber";
 import { MdOutlineRoofing } from "react-icons/md";
@@ -35,6 +35,7 @@ import { useLocalStorage } from 'usehooks-ts';
 import SimpleOrbit from './camera/SimpleOrbit';
 import LoginLevel from '../levels/LoginLevel';
 import { DEFAULT_TIMEFRAME_ARRAY } from '@/components/scripts/constants';
+import { AppContext } from '@/scripts/contexts/AppContext';
 
 
   
@@ -82,6 +83,7 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
         storefront: {bool:false},
         observatory: {bool:false},
     }
+    const app = useContext(AppContext)
     const tokensArray = ["btc", "eth", "link", "ftm"]
     const timeframesArray = ["3m", "15m", "4h", "1d"]
     // const roofWidth = 0.3
@@ -211,6 +213,7 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
         // console.log("LS_tokensArrayObj")
         // console.log(JSON.parse(LS_tokensArrayObj)) 
         s__uid(LS_uid)
+        if (!!LS_uid) {  app.alert("success","Logged in!")}
         s__clientIP(LS_uid.split(":")[0])
         // console.log("s__tokensArrayObj", JSON.parse(LS_tokensArrayObj))
         // console.log("s__uid", LS_uid)
