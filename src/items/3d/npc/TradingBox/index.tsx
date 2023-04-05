@@ -69,6 +69,7 @@ const Component = forwardRef(({
   //     { ...acc, [aToken]: [`${API_PRICE_BASEURL}${(aToken+baseToken).toUpperCase()}`] }
   //     ), {}))
   // },[token])
+  
     const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
     const [LS_uid, s__LS_uid] = useLocalStorage('uid', "")
     const [clickedPrice, s__clickedPrice] = useState(0)
@@ -100,19 +101,12 @@ const Component = forwardRef(({
     }
 })
 
-  const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
   const meshRef = useRef<Mesh>();
   const playerMesh = useRef<Mesh>();
   const depthBuffer = useDepthBuffer({ frames: 1 });
   const [elapsed, setElapsed] = useState<any>(0);
   const viewport = useThree((state) => state.viewport);
-  // const tokenColors = {
-  //   "btc": "white",
-  //   "eth": "green",
-  //   "link": "cyan",
-  //   "ftm": "blue",
-  // }
   const tokenColor = useMemo(()=>{
     return tokenColors[token]
   },[token])
@@ -120,29 +114,13 @@ const Component = forwardRef(({
     return form && form.id == token.toUpperCase()+"USDT"+timeframe.toUpperCase()
   },[form])
   useEffect(()=>{
-    // s__counter(counter+1)
     s__tokensArrayObj(JSON.parse(LS_tokensArrayObj))
-    // console.log("LS_tokensArrayObj")
-    // console.log(JSON.parse(LS_tokensArrayObj)) 
     s__uid(LS_uid)
     s__clientIP(LS_uid.split(":")[0])
-    // console.log("s__tokensArrayObj", JSON.parse(LS_tokensArrayObj))
-    // console.log("s__uid", LS_uid)
-    // console.log("s__clientIP", LS_uid.split(":")[0])
-},[])
+  },[])
   useFrame((state: any, delta) => {
-    // if (meshRef.current && state && state.get) {
-    //   setElapsed(delta + elapsed);
-    //   meshRef.current.position.y += velocityY;
-    //   meshRef.current.position.x += velocityX;
-
-      
-    //   return
-    // }
-    
   });
   const toggleGame = () => {
-    // console.log("asd")
     if (clicked) 
     {
       setVelocityX(0)
@@ -167,7 +145,13 @@ const Component = forwardRef(({
     return DEFAULT_TIMEFRAME_ARRAY.indexOf(selectedTimeframe)
   },[selectedTimeframe])
   
+  const selectedHasArray = useMemo(()=>{
+    return !!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state
+  },[tokensArrayArray, selectedTimeframeIndex])
 
+  const isDowntrend = useMemo(()=>{
+    return !!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].mode
+  },[selectedTimeframeIndex,tokensArrayArray])
 
   return (
     <group>
@@ -198,401 +182,166 @@ const Component = forwardRef(({
       {/* <Text3D /> */}
       {isSelectedId && <>
         
-        <Torus args={[0.7,0.05,4,4]}  
-        
-        position={[
-          position[0],
-          position[1]-0.36,
-          position[2],
-        ]}
-          rotation={[Math.PI/2,0,Math.PI/4]}>
-                <meshStandardMaterial  attach="material" color="#aaaaaa" />
-            </Torus>
+        <Torus args={[0.7,0.05,4,4]}   rotation={[Math.PI/2,0,Math.PI/4]}        
+          position={[ position[0], position[1]-0.36, position[2], ]}
+        >
+          <meshStandardMaterial  attach="material" color="#aaaaaa" />
+        </Torus>
       </>}
       
       {/* selected ring */}
       {clicked && <>
         
-        <Torus args={[0.7,0.04,4,4]}  
-        
-        position={[
-          position[0],
-          position[1]-0.45,
-          position[2],
-        ]}
-         receiveShadow castShadow
-          rotation={[Math.PI/2,0,Math.PI/4]}>
-                <meshStandardMaterial  attach="material" color="#55ff55" />
-            </Torus>
+        <Torus args={[0.7,0.04,4,4]}  rotation={[Math.PI/2,0,Math.PI/4]}
+          position={[ position[0], position[1]-0.45, position[2], ]}
+          receiveShadow castShadow
+        >
+          <meshStandardMaterial  attach="material" color="#55ff55" />
+        </Torus>
       </>}
 
 
 
       {/* platform */}
-      <mesh
-        castShadow
-        receiveShadow
+      <mesh castShadow receiveShadow ref={playerMesh}
         position={[
           position[0],
           (position[1] - boundaries[1] / 2 + wallWidth) - (0 ),
-          // (position[1] - boundaries[1] / 2 + wallWidth) - (isSelectedId ? 0 : +0.05 ),
           position[2],
         ]}
-        ref={playerMesh}
       >
         <boxGeometry args={[1, wallWidth, 1]} />
-        <meshStandardMaterial
-          color={!isSelectedId ? unselectedColor : unselectedColor} 
-        />
+        <meshStandardMaterial color={!isSelectedId ? unselectedColor : unselectedColor}  />
       </mesh>
       {isSelectedId && <>
-        
-        
-        
-        <mesh
-          castShadow
-          receiveShadow
-          position={[
-            position[0]+0.25,
-            -0.73,
-            position[2]-0.32,
-          ]}
-          ref={playerMesh}
+        <mesh castShadow receiveShadow ref={playerMesh}
+          position={[ position[0]+0.25, -0.73, position[2]-0.32, ]}          
         >
           <boxGeometry args={[0.45, 0.1, wallWidth*3]} />
-          <meshStandardMaterial 
-            color={!isSelectedId ? "#777777" : "#777777"} 
-          />
+          <meshStandardMaterial  color={!isSelectedId ? "#777777" : "#777777"}  />
         </mesh>
-        </>}
-        {!isSelectedId && <>
-          
-          
-          
-          <mesh
-            onClick={()=>{onTextClick()}}
-            castShadow
-            receiveShadow
-
-            position={[
-              position[0]-0.25,
-              -0.7,
-              position[2]-0.32,
-            ]}
-            ref={playerMesh}
-          >
-            <boxGeometry args={[0.45, 0.05, wallWidth*3]} />
-            <meshStandardMaterial 
-              color={!isSelectedId ? "#555555" : "#555555"} 
-            />
-          </mesh>
-          </>}
+      </>}
+      {!isSelectedId && <>
+        <mesh onClick={()=>{onTextClick()}} castShadow receiveShadow ref={playerMesh}
+          position={[ position[0]-0.25, -0.7, position[2]-0.32, ]}
+        >
+          <boxGeometry args={[0.45, 0.05, wallWidth*3]} />
+          <meshStandardMaterial color={!isSelectedId ? "#555555" : "#555555"}  />
+        </mesh>
+      </>}
 
 
 
       {/* buy/sell button */}
-      {isSelectedId && !!tokensArrayArray && 
-      !!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state &&
-      <mesh
-        castShadow
-        receiveShadow
-        onClick={() => toggleGame()}
+      {isSelectedId && selectedHasArray &&
+      <mesh castShadow receiveShadow onClick={() => toggleGame()} scale={score.score ? 1 : 3}
         position={[
           !clicked ? position[0] - 0.2 : position[0] + 0.1,
           clicked ? position[1] - 0.33 : position[1] - 0.3,
           position[2],
-        ]}
-        
-        scale={score.score ? 1 : 3}
-        onPointerOver={() => setHovered(true)}
-        onPointerOut={() => setHovered(false)}
+        ]}        
       >
         <boxGeometry args={[0.1, clicked ? 0.015 : 0.04, 0.05]} />
-        <meshStandardMaterial
-          
-          color={clicked ? "red" : "#15C771"} 
-        />
+        <meshStandardMaterial color={clicked ? "red" : "#15C771"}  />
       </mesh>
       }
         
       {clicked &&  <>
-      <mesh
-        castShadow
-        receiveShadow
-        // onClick={() => alert()}
-        // rotation={[isSelectedId ? 0.25 : -0.25,0,0]}
-        position={[
-          position[0] + 0.25,
-          position[1] - 0.2,
-          position[2] - 0.41
-        ]}
-        
-        scale={score.score ? 1 : 3}
-        onPointerOver={() => setHovered(true)}
-        onPointerOut={() => setHovered(false)}
+      <mesh castShadow receiveShadow scale={score.score ? 1 : 3}
+        position={[ position[0] + 0.25, position[1] - 0.2, position[2] - 0.41 ]}
       >
         <boxGeometry args={[0.1, 0.095, 0.01]} />
-        <meshStandardMaterial
-          
-          color={"#777777"} 
-        />
+        <meshStandardMaterial color={"#777777"}  />
       </mesh>
-        <mesh
-          castShadow
-          receiveShadow
-          // onClick={() => alert()}
-          // rotation={[isSelectedId ? 0.25 : -0.25,0,0]}
-          position={[
-            position[0] + 0.25,
-            position[1] - 0.22,
-            position[2] - 0.40
-          ]}
-          
-          scale={score.score ? 1 : 3}
-          onPointerOver={() => setHovered(true)}
-          onPointerOut={() => setHovered(false)}
-        >
-          <boxGeometry args={[0.08, 0.095, 0.01]} />
-          <meshStandardMaterial
-            emissive={tokenColor}
-            color={"#777777"} 
-          />
-        </mesh>
-        </>}
-
-
-
-
-        {/* mini buttons */}
-
-        {isSelectedId && !!tokensArrayArray && ["3m","15m","4h"].map((aTimeframe, index) => {
-          return (
-              
-            <mesh key={index}
-          castShadow
-          receiveShadow
-          onClick={() => {
-            // console.log("asd", index, aTimeframe)
-            onTimeframeClick(token, DEFAULT_TIMEFRAME_ARRAY.indexOf(aTimeframe))
-          }}
-          // rotation={[isSelectedId ? 0.25 : -0.25,0,0]}
-          position={[
-            position[0] + 0.42 ,
-            position[1] - (index == selectedTimeframeIndex ? 0.34 : 0.37),
-            position[2] - 0.12 + (index*0.1),
-          ]}
-          
-          scale={score.score ? 1 : 3}
-          onPointerOver={() => setHovered(true)}
-          onPointerOut={() => setHovered(false)}
-        >
-          <cylinderGeometry args={[0.009, 0.018, 0.02, 3+(index*2)]} />
-          {/* <boxGeometry args={[0.02, 0.02, 0.01]} /> */}
-          <meshStandardMaterial
-            
-            color={!!tokensArrayArray[index].state ? `#${index*28+40}${index*25+20}${index*25+20}` : 'gray'} 
-          />
-        </mesh>
-        
-          )
-        })}
-        
-    {isSelectedId && !!tokensArrayArray && 
-            !!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].mode &&
-            <>
-            <mesh
-      castShadow
-      receiveShadow
-      // onClick={() => alert()}
-      // rotation={[isSelectedId ? 0.25 : -0.25,0,0]}
-      position={[
-        position[0] - 0.42,
-        position[1] - 0,
-        position[2] - 0.42
-      ]}
-      
-      scale={score.score ? 1 : 3}
-      onPointerOver={() => setHovered(true)}
-      onPointerOut={() => setHovered(false)}
-    >
-      <boxGeometry args={[0.02, 0.1, 0.02]} />
-      <meshStandardMaterial
-        
-        color={"red"} 
-      />
-    </mesh>
-    
-    <mesh
-      castShadow
-      receiveShadow
-      // onClick={() => alert()}
-      // rotation={[isSelectedId ? 0.25 : -0.25,0,0]}
-      position={[
-        position[0] - 0.42,
-        position[1] - 0.28,
-        position[2] - 0.42
-      ]}
-      
-      scale={score.score ? 1 : 3}
-      onPointerOver={() => setHovered(true)}
-      onPointerOut={() => setHovered(false)}
-    >
-      <boxGeometry args={[0.02, 0.03, 0.02]} />
-      <meshStandardMaterial
-        
-        color={"red"} 
-      />
-    </mesh>
-    </>
-  }
-  
-  {isSelectedId && !!tokensArrayArray && 
-      clicked && 
-      <mesh
-        castShadow
-        receiveShadow
-        // onClick={() => alert()}
-        // rotation={[isSelectedId ? 0.25 : -0.25,0,0]}
-        position={[
-          position[0] - 0.42,
-          position[1] - 0.35,
-          position[2] + 0.01
-        ]}
-        
-        scale={score.score ? 1 : 3}
-        onPointerOver={() => setHovered(true)}
-        onPointerOut={() => setHovered(false)}
+      <mesh castShadow receiveShadow scale={score.score ? 1 : 3}
+        position={[ position[0] + 0.25, position[1] - 0.22, position[2] - 0.40 ]}
       >
-        <boxGeometry args={[0.02, 0.09, 0.02]} />
-        <meshStandardMaterial
-          
-            color={"#FEEA4D"} 
-        />
+        <boxGeometry args={[0.08, 0.095, 0.01]} />
+        <meshStandardMaterial emissive={tokenColor} color={"#777777"}  />
       </mesh>
-    }
+      </>}
 
-        {!!tokensArrayArray && 
-        
-        <mesh
-          castShadow
-          receiveShadow
-          onClick={
-            !!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].mode ?
-            trendDown : trendUp}
-          rotation={
-            !!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].mode ?
-            [0,-0.5,0] : [0,0.5,0]
-          }
-          position={[
-            position[0] - 0.38,
-            position[1] - 0.35,
-            position[2] + 0.15
-          ]}
-          
-          scale={score.score ? 1 : 3}
-          onPointerOver={() => setHovered(true)}
-          onPointerOut={() => setHovered(false)}
+
+
+      {/* mini buttons */}
+      {isSelectedId && !!tokensArrayArray && ["3m","15m","4h"].map((aTimeframe, index) => {
+        return (
+          <mesh key={index} castShadow receiveShadow scale={score.score ? 1 : 3}
+            onClick={() => { onTimeframeClick(token, DEFAULT_TIMEFRAME_ARRAY.indexOf(aTimeframe)) }}
+            position={[
+              position[0] + 0.42 ,
+              position[1] - (index == selectedTimeframeIndex ? 0.34 : 0.37),
+              position[2] - 0.12 + (index*0.1),
+            ]}
+          >
+            <cylinderGeometry args={[0.009, 0.018, 0.02, 3+(index*2)]} />
+            <meshStandardMaterial 
+              color={!!tokensArrayArray[index].state ? `#${index*28+40}${index*25+20}${index*25+20}` : 'gray'} 
+            />
+          </mesh>
+        )
+      })}
+      {isSelectedId && isDowntrend && <>
+        <mesh castShadow receiveShadow scale={score.score ? 1 : 3}
+          position={[ position[0] - 0.42, position[1] - 0, position[2] - 0.42 ]}
+        >
+          <boxGeometry args={[0.02, 0.1, 0.02]} />
+          <meshStandardMaterial color={"red"} />
+        </mesh>
+        <mesh castShadow receiveShadow scale={score.score ? 1 : 3}
+          position={[ position[0] - 0.42, position[1] - 0.28, position[2] - 0.42]}
+        >
+          <boxGeometry args={[0.02, 0.03, 0.02]} />
+          <meshStandardMaterial color={"red"} />
+        </mesh>
+      </>}
+      {isSelectedId && !!tokensArrayArray &&  clicked && 
+        <mesh castShadow receiveShadow scale={score.score ? 1 : 3}
+          position={[ position[0] - 0.42, position[1] - 0.35, position[2] + 0.01]}
+        >
+          <boxGeometry args={[0.02, 0.09, 0.02]} />
+          <meshStandardMaterial color={"#FEEA4D"} />
+        </mesh>
+      }
+      {!!tokensArrayArray && 
+        <mesh castShadow receiveShadow scale={score.score ? 1 : 3}
+          onClick={isDowntrend ? trendDown : trendUp}
+          rotation={isDowntrend ? [0,-0.5,0] : [0,0.5,0]}
+          position={[position[0] - 0.38, position[1] - 0.35, position[2] + 0.15]}
         >
           <boxGeometry args={[0.05, 0.04, 0.015]} />
-          <meshStandardMaterial
-            
-            color={
-            !!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].mode ?
-              "red" : "green" } 
-          />
+          <meshStandardMaterial color={isDowntrend ? "red" : "green" } />
         </mesh>
       }
 
 
 
-        {/* toggles */}
-      {/* {isSelectedId &&
-        <mesh
-          castShadow
-          receiveShadow
-          rotation={[isSelectedId ? 0.25 : -0.25,0,0]}
-          position={[
-            position[0] - 0.4,
-            position[1] - 0.35,
-            position[2] + 0.3,
-          ]}
-          
-          scale={score.score ? 1 : 3}
-          onPointerOver={() => setHovered(true)}
-          onPointerOut={() => setHovered(false)}
-        >
-          <boxGeometry args={[0.04, 0.03, 0.06]} />
-          <meshStandardMaterial
-            
-            color={"gray"} 
-          />
-        </mesh>
-      } */}
-      
-      {
-        <mesh
-          castShadow
-          receiveShadow
-          onClick={!tokensArrayArray ? join : leave}
-          position={[
-            position[0] - 0.44,
-            position[1] - 0.35,
-            position[2] + 0.38,
-          ]}
-          rotation={[!tokensArrayArray ? 0.25 : -0.25,0,0]}
-          // position={[
-          //   position[0] + 0.37,
-          //   position[1] - 0.35,
-          //   position[2] -0,
-          // ]}
-          
-          scale={score.score ? 1 : 3}
-          onPointerOver={() => setHovered(true)}
-          onPointerOut={() => setHovered(false)}
-        >
-          <boxGeometry args={[0.025, 0.02, 0.05]} />
-          <meshStandardMaterial
-            
-            color={!tokensArrayArray ? "#776666" : "#44aa44"} 
-          />
-        </mesh>
-      }
+      {/* toggles */}
+      <mesh castShadow receiveShadow onClick={!tokensArrayArray ? join : leave}
+        rotation={[!tokensArrayArray ? 0.25 : -0.25,0,0]} scale={score.score ? 1 : 3}
+        position={[ position[0] - 0.44, position[1] - 0.35, position[2] + 0.38,]}
+      >
+        <boxGeometry args={[0.025, 0.02, 0.05]} />
+        <meshStandardMaterial color={!tokensArrayArray ? "#776666" : "#44aa44"} />
+      </mesh>
       
       <DynaText text={!!tokensArrayArray ? "LIVE" : "OFF"} color={!!tokensArrayArray ?  0xaaaaaa : 0x333333}
           position={new Vector3(position[0]-0.44,position[1]-0.32,position[2]+0.28)}
           isSelected={isSelectedId}  font={0.04} onClick={()=>{onTextClick()}}
         />
-        <DynaText color={!!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state ? 0xaaaaaa : 0x333333}
-         text={!!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state ? "TRADE" : "OFF"} 
+        <DynaText color={selectedHasArray ? 0xaaaaaa : 0x333333}
+         text={selectedHasArray ? "TRADE" : "OFF"} 
             position={new Vector3(position[0]-0.32,position[1]-0.32,position[2]+0.28)}
             isSelected={isSelectedId}  font={0.04} onClick={()=>{onTextClick()}}
           />
       {
-        <mesh
-          castShadow
-          receiveShadow
-          onClick={!!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state ? turnOff : turnOn}
-          position={[
-            position[0] - 0.32,
-            position[1] - 0.35,
-            position[2] + 0.38,
-          ]}
-          rotation={[!!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state ? -0.25 : 0.25 ,0,0]}
-          // position={[
-          //   position[0] + 0.37,
-          //   position[1] - 0.35,
-          //   position[2] -0,
-          // ]}
-          
-          scale={score.score ? 1 : 3}
-          onPointerOver={() => setHovered(true)}
-          onPointerOut={() => setHovered(false)}
+        <mesh castShadow receiveShadow scale={score.score ? 1 : 3}
+          onClick={selectedHasArray ? turnOff : turnOn}
+          position={[ position[0] - 0.32, position[1] - 0.35, position[2] + 0.38, ]}
+          rotation={[selectedHasArray ? -0.25 : 0.25 ,0,0]}          
         >
           <boxGeometry args={[0.025, 0.02, 0.05]} />
-          <meshStandardMaterial
-            
-            color={!!tokensArrayArray && !!tokensArrayArray[selectedTimeframeIndex] && !!tokensArrayArray[selectedTimeframeIndex].state ? "#44aa44" : "#777777" } 
-          />
+          <meshStandardMaterial color={selectedHasArray ? "#44aa44" : "#777777" } />
         </mesh>
       }
     </group>
