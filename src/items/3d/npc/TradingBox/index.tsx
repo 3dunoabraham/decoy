@@ -386,10 +386,11 @@ const Component = forwardRef(({
           onPointerOver={() => setHovered(true)}
           onPointerOut={() => setHovered(false)}
         >
-          <boxGeometry args={[0.02, 0.02, 0.01]} />
+          <cylinderGeometry args={[0.009, 0.018, 0.02, 3+(index*2)]} />
+          {/* <boxGeometry args={[0.02, 0.02, 0.01]} /> */}
           <meshStandardMaterial
             
-            color={`#${index*28+40}${index*25+20}${index*25+20}`} 
+            color={!!tokensArrayArray[index].state ? `#${index*28+40}${index*25+20}${index*25+20}` : 'gray'} 
           />
         </mesh>
         
