@@ -241,7 +241,7 @@ export default function Component({
     
     return (
         <group>
-            <ToggleOrbit {...{s__showPhysics, showPhysics}}  buttonPosition={hasAnyToken ? [0,-0.7,-2.5] : [0,-99999,0]} />
+            <ToggleOrbit {...{s__showPhysics, showPhysics}}  buttonPosition={hasAnyToken ? [0,-0.75,-2.5] : [0,-99999,0]} />
 
             
             <LiteNpcContainer {...{optsToggler}} position={[0,0,0]}  
@@ -250,6 +250,7 @@ export default function Component({
 
             
                 <Cylinder args={[0.5, 0.6, 0.5, 6]}  position={new Vector3(0,-0.75,-3)} 
+                    castShadow receiveShadow
                     rotation={[0,Math.PI/2,0]}
                 >
                     <meshStandardMaterial attach="material" color={`#777777`} 
@@ -258,7 +259,8 @@ export default function Component({
                 </Cylinder>
                 {optsToggler["services"].bool && 
                 <Cylinder args={[0.15, 0.1, 0.1, 8]}  position={new Vector3(0,-0.8,-3.48)} 
-                    onClick={()=>{clickImportConfig()}}
+                        castShadow receiveShadow
+                        onClick={()=>{clickImportConfig()}}
                     rotation={[Math.PI/1.8,0,0]}
                 >
                     <meshStandardMaterial attach="material" color={`#773377`} 
@@ -269,7 +271,9 @@ export default function Component({
             
             {hasAnyToken && <>
                 {!!power &&
-                    <Cylinder args={[0.29, 0.3, power*8, 12]}  position={new Vector3(0,-0.5+power*2,-3)} >
+                    <Cylinder args={[0.29, 0.3, power*8, 12]}  position={new Vector3(0,-0.5+power*2,-3)} 
+                        castShadow receiveShadow
+                    >
                         <meshStandardMaterial attach="material" color={`#${power*320+30}${power*100+50}44`} 
                             emissive={`#6F4200`}
                             // emissive={`#${power*320+50}444477`}
@@ -277,7 +281,9 @@ export default function Component({
                     </Cylinder>
                 }
                 {!power &&
-                    <Cylinder args={[0.29, 0.3, 0.05, 12]}  position={new Vector3(0,-0.5,-3)} >
+                    <Cylinder args={[0.29, 0.3, 0.05, 12]}  position={new Vector3(0,-0.5,-3)} 
+                        castShadow receiveShadow
+                    >
                         <meshStandardMaterial attach="material" color={`#777777`} 
                             
                         />

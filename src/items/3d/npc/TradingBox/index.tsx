@@ -183,7 +183,7 @@ const Component = forwardRef(({
       {/* <Text3D /> */}
       {isSelectedId && <>
         
-        <Torus args={[0.7,0.05,4,4]}   rotation={[Math.PI/2,0,Math.PI/4]}        
+        <Torus args={[0.7,0.02,4,4]}   rotation={[Math.PI/2,0,Math.PI/4]}        
           position={[ position[0], position[1]-0.36, position[2], ]}
         >
           <meshStandardMaterial  attach="material" color="#aaaaaa" />

@@ -53,11 +53,11 @@ export default function Component({ live = false, buttonPosition, s__showPhysics
     <group ref={camGroup}>
 
       
-<mesh onClick={toggleCameraMode} 
+<mesh onClick={toggleCameraMode}  castShadow receiveShadow
         rotation={[
-          0 + (cameraMode !== "orbit" ? 0.25 : -0.4),
-          0,
-          0,
+          0 ,
+          0 ,
+          0 + (cameraMode !== "orbit" ? -Math.PI/1.5 : Math.PI/1.5),
         ]}
         position={[
           buttonPosition[0],
@@ -65,8 +65,8 @@ export default function Component({ live = false, buttonPosition, s__showPhysics
           buttonPosition[2],
         ]}
        >
-        <boxBufferGeometry args={[0.4,0.3,0.2]} />
-        <meshStandardMaterial color={cameraMode === "orbit" ? "red" : "blue"} />
+        <boxBufferGeometry args={[0.4,0.1,0.2]} />
+        <meshStandardMaterial color={cameraMode === "orbit" ? "#777777" : "#777777"} />
       </mesh>
 
       
