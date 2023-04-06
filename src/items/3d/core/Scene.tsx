@@ -190,9 +190,17 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
                 price,
             });
             const ress = await res.json();
-            console.log("ress", ress)
+            // console.log("ress", res.status >= 200 && res.status <= 300, ress)
+            if (res.status >= 200 && res.status <= 300)
+            {
+
+                app.alert("success","Trade saved")
+            } else {
+                app.alert("error","Trade not completed")
+            }
             return ress
         } catch (e) {
+            app.alert("error","Trade not completed")
             return false
         }
     };

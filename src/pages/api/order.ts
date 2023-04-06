@@ -75,12 +75,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if (!existingStart.attempts) {
           let thenow = Date.now()
           let thediff = (thenow - parseInt(existingStart.datenow))
-          if (thediff / 1000 > 1440) {
+          console.log("asdasdasd", thediff / 1000 )
+          if (thediff / 1000 > 60*3) // 3 minutes
+          {
 
             const { data: start, error } = await supabase
             .from<Start>('start')
             .update({
-              attempts: 5,
+              attempts: 2,
               datenow: `${Date.now()}`,
             })
             .match({ hash: new_uid })
@@ -95,22 +97,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             return
           }
         }
-        // // console.log("hash", hash)
-        // const { data: existingStart, error: selectError } = await supabase
-        // .from<Order>('order')
-        // .select('*')
-        // .match({ hash: new_uid })
-        // .single()
-
-        // if (existingStart) {
-        //   console.log("found")
-        //   throw new Error
-        //   return
-        // }
-        // console.log("not found", existingStart, { hash: new_uid })
-
-
-        // if (!existingStart)
         {
           console.log("order", asdasd)
           const { data: order, error } = await supabase
