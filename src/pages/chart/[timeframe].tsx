@@ -26,8 +26,11 @@ export default function Page({tokens}) {
     if (zzz) return
     return (
         <Layout>
-            <Head><title>DCOY | Chart</title></Head>
-            <Link className="pos-fix bg-white box-shadow-2 px-3 py-2 ord-r-1 ma-1 ord-r-5 z-1001" href="/">Home</Link>
+            <Head><title>BitCity | Chart</title></Head>
+            <div className="pos-fix flex z-1001">
+                <Link className=" bg-white box-shadow-2 px-3 py-2 ord-r-1 ma-1 ord-r-5 z-1001" href="/">Home</Link>
+                <Link className=" bg-white box-shadow-2 px-3 py-2 ord-r-1 ma-1 ord-r-5 z-1001" href="/dashboard">Dashboard</Link>
+            </div>
             <div className=" h-100 py-8 g-b-20 px-100 Q_xs_sm_px-2 "
                 // style={{background:"#2D313E"}}
             >

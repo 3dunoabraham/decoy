@@ -145,7 +145,7 @@ export default function UnitAddComponent({
     }
     
     return(<>        
-    <Head> <title>{`Add Unit | DCOY`}</title> </Head>
+    <Head> <title>{`Add Unit | BitCity`}</title> </Head>
     {(newUID != "") &&
         <div className=''>
             <div className='pt-2 flex-center '>

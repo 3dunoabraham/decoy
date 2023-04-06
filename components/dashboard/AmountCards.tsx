@@ -54,7 +54,7 @@ export default function Component ({ tokens, mul, bigmul, prices= null }) {
                         // },0)
                         // if (!index) return // hide  btc
                         return (
-                            <div className='box-shadow-1   flex-1 ord-r-8' key={index}>
+                            <div className='box-shadow-1   ord-r-8' key={index}>
                                 
                                 {(!!aCrystal0 || !!aCrystal1) && <>
                                     

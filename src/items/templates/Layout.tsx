@@ -29,10 +29,10 @@ export default function Layout({ children }) {
 	let appValue = useMemo(()=>{
 		return {
             institution: {
-                title: "DCOY",
-                email: "support@servicepad.com",
-                titleSupport: "ServicePad Customer Support:",
-                copyrights: "© 2022 ServicePad, Inc. All rights reserved.",
+                title: "BitCity",
+                email: "support@example.com",
+                titleSupport: "Open Source (MIT):",
+                copyrights: "IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY.",
             },
             THEME: {
                 primaryColor: "#3E5F58",

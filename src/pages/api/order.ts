@@ -13,11 +13,13 @@ export interface Order {
   orderid?: number
   orderListId?: number
   price?: string
+  trigger?: string
   qty?: string
   quoteQty?: string
   comission?: string
   comissionAsset?: string
   time?: number
+  datenow?: number
   isBuyer?: boolean
   isMaker?: boolean
   isBestMatch?: boolean
@@ -44,7 +46,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   let asdasd:any = {
     symbol: body.symbol,
     price: body.price,
+    trigger: body.trigger,
     startHash: new_uid,
+    datenow: Date.now(),
   }
 
   // hash.update(randomThousand);

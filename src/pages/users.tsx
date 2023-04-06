@@ -27,7 +27,7 @@ const Page: NextPageWithLayout = () => {
         <div className='flex-center w-100 h-min-100vh'>
             <div className="h-min-100vh w-100  flex-col flex-justify-start flex-align-stretch gap-4">
                 <div className="px-8  mb-">
-                    <BreadCrumbs pages={[["/","DCOY"]]} current="Users" />
+                    <BreadCrumbs pages={[["/","BitCity"]]} current="Users" />
                     
                     <div className="flex-center mb-">
                         <h1 className="pt-4 tx-bold-5 flex-1 "> Users</h1>
@@ -129,7 +129,7 @@ const Page: NextPageWithLayout = () => {
 Page.getLayout = function getLayout(page: ReactElement) {
     return (
     <Layout>
-        <Head><title>Users | DCOY</title></Head>
+        <Head><title>Users | BitCity</title></Head>
         <InventoryProvider>
             <SidebarContainer sidebar={<FilterSidebar online={true}/>}>
                 {page}

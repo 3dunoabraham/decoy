@@ -24,7 +24,7 @@ const Page: NextPageWithLayout = () => {
 Page.getLayout = function getLayout(page: ReactElement) {
     return (
     <Layout>
-        <Head><title>DCOY</title></Head>
+        <Head><title>BitCity</title></Head>
         {page}
     </Layout>
     )

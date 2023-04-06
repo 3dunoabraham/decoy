@@ -1,7 +1,7 @@
 import { forwardRef, useContext, useEffect, useImperativeHandle, useMemo, useState,  } from 'react'
 import { Cylinder } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { FaBtc, FaEthereum } from "react-icons/fa";
+import { FaBtc, FaEthereum, FaExternalLinkAlt } from "react-icons/fa";
 import { SiChainlink, SiFantom } from "react-icons/si";
 import * as THREE from "three";
 import React from 'react';
@@ -23,6 +23,7 @@ import LoginLevel from '../levels/LoginLevel';
 import { DEFAULT_TIMEFRAME_ARRAY } from '@/components/scripts/constants';
 import { AppContext } from '@/scripts/contexts/AppContext';
 import { fetchPost } from '@/scripts/helpers/fetchHelper';
+import Link from 'next/link';
 
 export const tokenColors = {
     "btc": "#EE8E1B",
@@ -155,9 +156,14 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
     }
     
     const startOrder = async (token, price) => {
+        
+        let target = prompt("Enter trigger price","")
+        if (!target) return
+
         try {
             const res = await fetchPost('/api/order',{
                 symbol: token.toUpperCase()+"USDT",
+                trigger: target,
                 price,
             });
             const ress = await res.json();
@@ -257,6 +263,12 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
                             <hr className='bg-white w-100 mt-2'  />
                             <div className="flex-center gap-1 tx-shadow-b-1 ">
                                 <div className="tx-  tx-white tx-shadow-b-1">Power: {power}</div>
+                            </div>
+                            <hr className='bg-white w-100 mt-2'  />
+                            <div className="flex-center gap-1 tx-shadow-b-1 ">
+                                <Link href="/dashboard" className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg">
+                                    <FaExternalLinkAlt /> <i>Dashboard</i>
+                                </Link>
                             </div>
                         </div>
                     </details>

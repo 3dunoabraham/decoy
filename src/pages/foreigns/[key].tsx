@@ -157,7 +157,7 @@ const Page: NextPageWithLayout & any = ({ data, asd, theK }) => {
 
     return (
     <div className='flex-center w-100 h-min-100vh'>
-        <Head><title>{hardCoded1[keyName] ? hardCoded1[keyName].title : `not found`} | DCOY</title></Head>
+        <Head><title>{hardCoded1[keyName] ? hardCoded1[keyName].title : `not found`} | BitCity</title></Head>
         <div className="h-min-100vh w-100 px-8 Q_xs_sm_px-2 mb-100">
             <BreadCrumbs pages={[["/settings/global/","Global"],["/settings/"+keyName,keyName]]} current={hardCodedMemo.title} />
 

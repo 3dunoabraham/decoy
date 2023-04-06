@@ -157,7 +157,7 @@ const Page: NextPageWithLayout = () => {
 Page.getLayout = function getLayout(page: ReactElement) {
     return (
     <Layout>
-        <Head><title>Settings | DCOY</title></Head>
+        <Head><title>Settings | BitCity</title></Head>
         <InventoryProvider>
             <SidebarContainer sidebar={<SessionSidebar/>}>
                 {page}

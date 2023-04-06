@@ -12,6 +12,7 @@ import { useContext, useEffect, useMemo } from "react";
 import { AppContext } from "@/scripts/contexts/AppContext";
 import { MdOutlineInventory2 } from "react-icons/md";
 import { isDevEnvironment } from "@/scripts/helpers/devHelper";
+import { GiEightBall, GiWheat } from "react-icons/gi";
 
 export default function Component({}) {
     const router = useRouter();
@@ -24,6 +25,8 @@ export default function Component({}) {
         agreements: <MdOutlineHistory />,
         users: <BsFillBarChartFill />,
         builder3d: <FaUncharted />,
+        farm: <GiWheat />,
+        bingo: <GiEightBall />,
         inventory: <MdOutlineInventory2 />,
     }
     

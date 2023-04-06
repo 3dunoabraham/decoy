@@ -96,7 +96,8 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
         app.s__sidebarPages([
             {id:0,label:"History",url:"/agreements/?pair=BTCUSDT",icon:"agreements"},
             // {id:1,label:"Chart",url:"https://www.tradingview.com/chart/EBa5RTfJ/?symbol=BITSTAMP%3ABTCUSD",icon:"users"},
-            {id:2,label:"3D Chart",url:"/builder/3d/",icon:"builder3d"},
+            {id:2,label:"Bit Bingo Boom",url:"/",icon:"bingo"},
+            {id:2,label:"Bit To Crop",url:"/demo",icon:"farm"},
         ])
     },[])
     const [clientIP, s__clientIP] = useState('');
@@ -212,7 +213,7 @@ type PageProps = {
 Page.getLayout = function getLayout(page: ReactElement) {
     return (
     <Layout>
-        <Head><title>DCOY</title></Head>
+        <Head><title>BitCity</title></Head>
         <InventoryProvider>
             <SidebarContainer sidebar={<SessionSidebar/>}>{page}</SidebarContainer>
         </InventoryProvider>

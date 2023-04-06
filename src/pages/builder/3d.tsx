@@ -156,7 +156,7 @@ Page.getLayout = function getLayout(page: ReactElement) {
     return (
         <Layout>
             <InventoryProvider>
-                <Head><title>3D Builder | DCOY</title></Head>
+                <Head><title>3D Builder | BitCity</title></Head>
                 <SidebarContainer sidebar={<SessionSidebar/>}>{page}</SidebarContainer>
             </InventoryProvider>
         </Layout>
