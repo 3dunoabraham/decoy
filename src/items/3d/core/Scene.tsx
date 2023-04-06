@@ -1,45 +1,29 @@
-import { forwardRef, useContext, useEffect, useImperativeHandle, useMemo, useRef, useState,  } from 'react'
-import { Torus, Cylinder, OrbitControls, PerspectiveCamera } from "@react-three/drei";
-import { Canvas, useThree } from "@react-three/fiber";
-import { MdOutlineRoofing } from "react-icons/md";
-import { MdFlipToBack } from "react-icons/md";
-import { AiFillEyeInvisible } from "react-icons/ai";
-import { TiChartAreaOutline } from "react-icons/ti";
-import { BiGhost } from "react-icons/bi";
-import { FaBtc, FaEthereum, FaMoneyBillAlt } from "react-icons/fa";
+import { forwardRef, useContext, useEffect, useImperativeHandle, useMemo, useState,  } from 'react'
+import { Cylinder } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { FaBtc, FaEthereum } from "react-icons/fa";
 import { SiChainlink, SiFantom } from "react-icons/si";
-import { GiAngelWings, GiObservatory, GiPayMoney, GiReceiveMoney, GiWheat } from "react-icons/gi";
-import { HiBuildingStorefront } from "react-icons/hi2";
 import * as THREE from "three";
-
-import BoundaryPillars from "@/src/items/3d/farmhouse/BoundaryPillars";
-import { parseDecimals } from "@/components/scripts/helpers";
-import TradingBox from "../npc/TradingBox";
+import React from 'react';
 import { Vector3 } from "three";
+import { useLocalStorage } from 'usehooks-ts';
+
+
+import { parseDecimals } from "@/components/scripts/helpers";
 import HumanForReference from "./HumanForReference";
 import Environment from "./Environment";
-// import { Building } from '../farmhouse/Building';
 import RotatingPointLight from './RotatingPointLight';
-import FarmNpcContainer from '../npc/FarmNpcContainer';
-import { BsSafe2Fill } from 'react-icons/bs';
-import { TbNetwork } from 'react-icons/tb';
 import HouseButtons from '../overlay/HouseButtons';
 import BarnButtons from '../overlay/BarnButtons';
-import React from 'react';
 import TokenList from '../overlay/TokenList';
-import ToggleOrbit from './camera/ToggleOrbit';
 import PlayerInventory from '../overlay/PlayerInventory';
 import TimeframeList from '../overlay/TimeframeList';
 import LiteIconsList from '../overlay/LiteIconsList';
-import { useLocalStorage } from 'usehooks-ts';
-import SimpleOrbit from './camera/SimpleOrbit';
 import LoginLevel from '../levels/LoginLevel';
 import { DEFAULT_TIMEFRAME_ARRAY } from '@/components/scripts/constants';
 import { AppContext } from '@/scripts/contexts/AppContext';
 import { fetchPost } from '@/scripts/helpers/fetchHelper';
 
-
-  
 export const tokenColors = {
     "btc": "#EE8E1B",
     "eth": "#3EDF5D",
@@ -59,8 +43,6 @@ export const tokenIcons
     "link": <SiChainlink />,
     "ftm": <SiFantom />,
 }
-
-
 const Component = forwardRef(({live=false,children=null}:any, ref)=>{
     const DEFAULT_CARPORT_OTPS = {
         frontwall: {bool:false},
@@ -104,16 +86,12 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
     useImperativeHandle(ref, ()=>({
         resize: (size) => {
             let oldNewSize = {...sizeForm}
-            // console.log("resize with this", size)
             if (size.width && size.width.feet) {
-                // console.log("width connected", size.width.feet)
                 oldNewSize.x = size.width.feet
-            } // else { be_size(10, "x") }
+            }
             if (size.length && size.length.feet) {
-                // console.log("length connected", size.length.feet)
                 oldNewSize.z = size.length.feet
-            } // else { be_size(10, "z") }
-
+            }
             s__sizeForm(oldNewSize)
         },
     }));
@@ -159,16 +137,13 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
     /****** UPDATE ******/
     
     const toggleTrade = (token, {value, price}) => {
-        // console.log("token, value", token, value)
         s__lastpower(value)
         { 
             setToken(token)
-
             if (value > 0) {
                 // console.log(`Buy ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`, "new", power+value)
                 
                 startOrder(token, price)
-
                 s__power(parseFloat(""+parseDecimals(power+value)))
             }
             else {
@@ -180,20 +155,14 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
     }
     
     const startOrder = async (token, price) => {
-        console.log("startOrder", token, price)
-        // let username = prompt("Enter username","")
-        // if (!username) return
-
         try {
             const res = await fetchPost('/api/order',{
                 symbol: token.toUpperCase()+"USDT",
                 price,
             });
             const ress = await res.json();
-            // console.log("ress", res.status >= 200 && res.status <= 300, ress)
             if (res.status >= 200 && res.status <= 300)
             {
-
                 app.alert("success","Trade saved")
             } else {
                 app.alert("error","Trade not completed")
@@ -204,14 +173,11 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
             return false
         }
     };
-
     const setTimeframe = (timeframe) => {
-        // console.log("id", timeframe)
         let newId = form.id.split("USDT")[0] + "USDT" + timeframe.toUpperCase()
         s__form({...form,...{id:newId}})
     }
     const setToken = (token) => {
-        // console.log("id", token)
         if (!(token in tokensArrayObj)) return
         let newId = token.toUpperCase()+"USDT"+form.id.split("USDT")[1].toUpperCase()
         s__form({...form,...{id:newId}})
@@ -221,35 +187,19 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
         s__optsToggler({...optsToggler,...{[opt]:{bool:!oldBool}}})
     }
     const onTimeframeClick = (token, timeframe) => {
-        // console.log("onTimeframeClick", token, timeframe)
-        // setToken(token)
         setTimeframe(DEFAULT_TIMEFRAME_ARRAY[timeframe])
     }
     const onTextClick = (token) => {
-        // console.log("token", token)
         setToken(token)
-
     }
     const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
     const [LS_uid, s__LS_uid] = useLocalStorage('uid', "")
     const [uid, s__uid] = useState("")
-    const [clickedPrice, s__clickedPrice] = useState(0)
-    const [showAllTokens,s__showAllTokens] = useState<any>(true)
-    const [chopAmount,s__chopAmount] = useState<any>(0)
     const [tokensArrayObj,s__tokensArrayObj] = useState<any>({})
-    const [klinesArray,s__klinesArray] = useState<any[]>([])
-    const [clientIP, s__clientIP] = useState('');  
     useEffect(()=>{
-        // s__counter(counter+1)
         s__tokensArrayObj(JSON.parse(LS_tokensArrayObj))
-        // console.log("LS_tokensArrayObj")
-        // console.log(JSON.parse(LS_tokensArrayObj)) 
         s__uid(LS_uid)
         if (!!LS_uid) {  app.alert("success","Logged in!")}
-        s__clientIP(LS_uid.split(":")[0])
-        // console.log("s__tokensArrayObj", JSON.parse(LS_tokensArrayObj))
-        // console.log("s__uid", LS_uid)
-        // console.log("s__clientIP", LS_uid.split(":")[0])
     },[])
     const childrenWithProps = React.Children.map(children, (child) => {
         if (React.isValidElement<any>(child)) {
@@ -257,8 +207,6 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
         }
         return child;
       });
-    
-
       const selectedToken = useMemo(()=>{
         return form.id.split("USDT")[0].toLowerCase()
       },[form.id])
@@ -269,10 +217,11 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
         return DEFAULT_TIMEFRAME_ARRAY.indexOf(selectedTimeframe)
       },[selectedTimeframe])
 
+
+
     /****** HTML ******/
     return (
     <div className='h-min-500px w-100 flex-col g-b-20 bord-r- flex-align-stretch flex-justify-stretch pos-rel'>
-        
         {!!uid &&
             <div className="flex pos-abs top-0 left-0  bord-r- pa-2 ma-2">
                 <div className="flex-col flex-align-start z-700 gap-1  mt-100 ">
@@ -288,8 +237,6 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
                                 <div className='box-shadow-3 bg-b-50 pa-2 ma-1'>
                                     State: {(tokensArrayObj[selectedToken][selectedTimeframeIndex]).state}
                                 </div>
-                                {/* {JSON.stringify(tokensArrayObj[selectedToken][selectedTimeframeIndex])} */}
-                                {/* <div className='box-shadow-3 bg-b-50 pa-2 ma-1'>{JSON.stringify()}</div> */}
                             </div>
                         }
                     </div>
@@ -313,25 +260,6 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
                             </div>
                         </div>
                     </details>
-                    {/* <details>
-                        <summary className='opaci-chov--50 tx-white tx-lg bg-b-50 box-shadow-5 pa-2 bg-glass-5'>
-                            Help
-                        </summary>
-                        <div className="flex-col flex-align-start  gap-1 mt-2 ">
-                            <div className="flex-col flex-align-start gap-2 rot-180">
-                                <TimeframeList {...{timeframesArray, setTimeframe, tokenColors, form}} />
-                                <TokenList {...{setToken,  tokenColors,  form, tokenIcons,}} />
-                                {!live && <>
-                                    <PlayerInventory {...{toggleOption, optsToggler}}  />
-                                </>}
-                            </div>
-                            <hr className='bg-white w-100 mt-2'  />
-                            <div className="flex-center gap-1 tx-shadow-b-1 ">
-                                <div className="tx-  tx-white tx-shadow-b-1">Power: {power}</div>
-                            </div>
-                        </div>
-                    </details>
-                     */}
                 </div>
             </div>
         }
@@ -413,16 +341,6 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
         </Canvas>
     </div>)
 })
-function TheCamera() {
-    
-    useThree(({camera}) => {
-        camera.rotation.set(0, 0, 0);
-      });
-
-    return (
-        <OrbitControls target={[.6, .4, 0]}/>
-    )
-}
 Component.displayName = 'Scene'
 
 export default Component
