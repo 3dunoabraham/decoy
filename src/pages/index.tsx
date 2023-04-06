@@ -14,6 +14,8 @@ import { AppContext } from '@/scripts/contexts/AppContext'
 import ReloadCube from '../items/3d/overlay/ReloadCube';
 import BitBingoLogo from '../items/3d/overlay/BitBingoLogo';
 import SocialMediaButtons from '../items/3d/overlay/SocialMediaButtons';
+import { useQuery } from '@tanstack/react-query';
+import { parseDecimals } from '@/components/scripts/helpers';
 const LiteLevel = dynamic(import ("@/src/items/3d/levels/LiteLevel"), { ssr: false })
 const Scene = dynamic(import ("@/src/items/3d/core/Scene"), { ssr: false })
 
@@ -25,6 +27,16 @@ const Page: NextPageWithLayout = ({}) => {
     const [LS_uid, s__LS_uid] = useLocalStorage('uid', "")
     const [uid, s__uid] = useState(LS_uid)
     const isClient = useIsClient()
+
+    const theuserstart:any = useQuery({ queryKey: ['theuserstart'], 
+        queryFn: async () => {
+            let theuserres = await fetch("/api/start")
+            let theuserinfo = await theuserres.json()
+            console.log("theuserstart", theuserinfo)
+            return theuserinfo
+        }
+    })
+
 
 
 

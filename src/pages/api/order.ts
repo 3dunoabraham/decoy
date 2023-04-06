@@ -23,7 +23,7 @@ export interface Order {
   isBestMatch?: boolean
   startHash?: string
 }
-
+const ATTEMPTS_PER_CYCLE = 3
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY
@@ -72,17 +72,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 
         console.log("existingStart", existingStart)
-        if (!existingStart.attempts) {
+        let attempts = existingStart.attempts
+        if (!attempts) {
           let thenow = Date.now()
           let thediff = (thenow - parseInt(existingStart.datenow))
           console.log("asdasdasd", thediff / 1000 )
           if (thediff / 1000 > 60*3) // 3 minutes
           {
 
+            attempts += ATTEMPTS_PER_CYCLE
             const { data: start, error } = await supabase
             .from<Start>('start')
             .update({
-              attempts: 2,
+              attempts: attempts,
               datenow: `${Date.now()}`,
             })
             .match({ hash: new_uid })
@@ -90,7 +92,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           if (error) {
             throw error
           }
-          res.status(201).json(start)
+          // res.status(201).json(start)
           } else {
             console.log("no more attempts|dates:", existingStart.datenow, thenow)
             throw new Error
@@ -107,13 +109,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if (error) {
           throw error
         }
-        res.status(201).json(order)
 
         
         const { data: start, error: error2 } = await supabase
         .from<Start>('start')
         .update({
-          attempts: existingStart.attempts-1,
+          attempts: attempts-1,
+          totalAttempts: existingStart.totalAttempts+1,
+          
           // datenow: `${Date.now()}`,
         })
         .match({ hash: new_uid })
@@ -121,7 +124,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (error2) {
         throw error2
       }
-      res.status(201).json(start)
+      // res.status(201).json(start)
+      res.status(201).json(order)
 
 
       }

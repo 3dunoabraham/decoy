@@ -14,6 +14,7 @@ export interface Start {
   datenow?: string
   hash?: string
   attempts?: number
+  totalAttempts?: number
 }
 
 
@@ -26,11 +27,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   
   const ipAddress:any = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-  // console.log("ipAddress", ipAddress)
-  // res.status(200).json({ IPv4: ipAddress });
   const hash = crypto.createHash('sha256');
   hash.update(ipAddress);
-  // hash.update(body.name);
   const new_uid = hash.digest('hex');
 
   let asdasd:any = {
@@ -40,18 +38,31 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     datenow: Date.now(),
   }
 
-  // hash.update(randomThousand);
-
-  // res.status(200).json({})
-  // return
   console.log("method", method)
   switch (method) {
-
+    case 'GET':
+      try {
+        const { data: existingStart, error } = await supabase
+          .from<Start>('start')
+          .select('*')
+          .match({ hash: new_uid })
+          .single()
+    
+        if (error) {
+          throw error
+        }
+    
+        res.status(200).json(existingStart)
+      } catch (error) {
+        console.error(error)
+        res.status(500).json({ message: 'Failed to fetch start' })
+      }
+      break
+    
     case 'POST':
       try {
 
         
-        // console.log("hash", hash)
         const { data: existingStart, error: selectError } = await supabase
         .from<Start>('start')
         .select('*')
@@ -84,7 +95,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       break
 
     default:
-      res.setHeader('Allow', ['POST'])
+      res.setHeader('Allow', ['GET','POST'])
       res.status(405).end(`Method ${method} Not Allowed`)
   }
 }
