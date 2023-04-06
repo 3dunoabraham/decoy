@@ -15,6 +15,7 @@ export interface Start {
   hash?: string
   attempts?: number
   totalAttempts?: number
+  goodAttempts?: number
 }
 
 

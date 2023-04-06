@@ -1,4 +1,4 @@
-import { ReactElement, Suspense, useContext, useRef, useState } from 'react'
+import { ReactElement, Suspense, useContext, useMemo, useRef, useState } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Link from 'next/link';
@@ -15,7 +15,7 @@ import ReloadCube from '../items/3d/overlay/ReloadCube';
 import BitBingoLogo from '../items/3d/overlay/BitBingoLogo';
 import SocialMediaButtons from '../items/3d/overlay/SocialMediaButtons';
 import { useQuery } from '@tanstack/react-query';
-import { parseDecimals } from '@/components/scripts/helpers';
+import { parseDecimals, parseUTCDateString, parseUTCString } from '@/components/scripts/helpers';
 const LiteLevel = dynamic(import ("@/src/items/3d/levels/LiteLevel"), { ssr: false })
 const Scene = dynamic(import ("@/src/items/3d/core/Scene"), { ssr: false })
 
@@ -36,7 +36,14 @@ const Page: NextPageWithLayout = ({}) => {
             return theuserinfo
         }
     })
-
+    const lastUpdate = useMemo(()=>{
+        if (!theuserstart.data) return ""
+        return parseUTCString(new Date(theuserstart.data.datenow)).replace("T","===")
+    }, [theuserstart.data])
+    const attemptRatio = useMemo(()=>{
+        if (!theuserstart.data) return ""
+        return parseInt(`${theuserstart.data.attempts / theuserstart.data.totalAttempts * 100}`)
+    }, [theuserstart.data])
 
 
 
@@ -55,9 +62,25 @@ const Page: NextPageWithLayout = ({}) => {
                     </Scene>}
                 </Suspense>
             </div>
+            {!!theuserstart.data &&
+                <div className='tx-white   pa-3 pos-abs dg left-0 bottom-0 -y-100  999 tx-ls-1'>
+                    <div className='pb-3'>
+                        <div className='opaci-50 tx-'>Coins Left:</div>
+                        <div className='opaci-75 tx-'>{theuserstart.data.attempts}/3</div>
+                        
+                        {/* {theuserstart.data.totalAttempts}={attemptRatio} */}
+                    </div>    
+                    <div className='pb-3'>
+                        <div className='opaci-50 tx-'>LAST UPDATE:</div>
+                        {lastUpdate}
+                    </div>    
+                </div>
+            }
             <div className='flex flex-justify-center  gap-4 pos-fix w-100 z-800  ' >
                 <BitBingoLogo />
-                <ReloadCube />
+                <div>
+                    <ReloadCube />
+                </div>
             </div>
             <div className='flex-center z-500'>
                 {isClient &&
