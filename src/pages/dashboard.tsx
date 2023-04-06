@@ -143,7 +143,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
                     
                     {uid &&
                         <button   className="ims-button-faded clickble nowrap tx-lg opaci-25"
-                            onClick={()=>{  }}
+                            onClick={()=>{ if (!isClient) return; localStorage.removeItem("localTokensArrayObj"); window.location.reload() }}
                         >
                             Leave
                         </button>

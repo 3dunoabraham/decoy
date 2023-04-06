@@ -62,7 +62,7 @@ const Page: NextPageWithLayout = ({}) => {
                     </Scene>}
                 </Suspense>
             </div>
-            {!!theuserstart.data &&
+            {!!uid && !!theuserstart.data &&
                 <div className='tx-white   pa-3 pos-abs dg left-0 bottom-0 -y-100  999 tx-ls-1'>
                     <div className='pb-3'>
                         <div className='opaci-50 tx-'>Coins Left:</div>
