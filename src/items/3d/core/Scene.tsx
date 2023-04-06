@@ -36,6 +36,7 @@ import SimpleOrbit from './camera/SimpleOrbit';
 import LoginLevel from '../levels/LoginLevel';
 import { DEFAULT_TIMEFRAME_ARRAY } from '@/components/scripts/constants';
 import { AppContext } from '@/scripts/contexts/AppContext';
+import { fetchPost } from '@/scripts/helpers/fetchHelper';
 
 
   
@@ -157,22 +158,45 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
 
     /****** UPDATE ******/
     
-    const toggleTrade = (token, velocity) => {
-        // console.log("token, velocity", token, velocity)
-        s__lastpower(velocity)
+    const toggleTrade = (token, {value, price}) => {
+        // console.log("token, value", token, value)
+        s__lastpower(value)
         { 
             setToken(token)
 
-            if (velocity > 0) {
-                // console.log(`Buy ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`, "new", power+velocity)
-                s__power(parseFloat(""+parseDecimals(power+velocity)))
+            if (value > 0) {
+                // console.log(`Buy ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`, "new", power+value)
+                
+                startOrder(token, price)
+
+                s__power(parseFloat(""+parseDecimals(power+value)))
             }
             else {
                 // console.log(`Sell ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`,"new", (power-lastpower))
                 s__power(parseFloat(""+parseDecimals(power-0.05)))
             }
         }
+
     }
+    
+    const startOrder = async (token, price) => {
+        console.log("startOrder", token, price)
+        // let username = prompt("Enter username","")
+        // if (!username) return
+
+        try {
+            const res = await fetchPost('/api/order',{
+                symbol: token.toUpperCase()+"USDT",
+                price,
+            });
+            const ress = await res.json();
+            console.log("ress", ress)
+            return ress
+        } catch (e) {
+            return false
+        }
+    };
+
     const setTimeframe = (timeframe) => {
         // console.log("id", timeframe)
         let newId = form.id.split("USDT")[0] + "USDT" + timeframe.toUpperCase()
@@ -354,6 +378,7 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
             {/* {children} */}
             {!uid && <>
                 <LoginLevel {...{
+                    s__uid, uid,
                     power, form, onTextClick, onTimeframeClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj, s__tokensArrayObj
                 }} />
             </>}

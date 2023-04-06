@@ -124,14 +124,15 @@ const Component = forwardRef(({
     if (clicked) 
     {
       setVelocityX(0)
-      setVelocityY(0)  
+      setVelocityY({value:0,price:queryUSDT.data})
       setClicked(false)
+      
       return
     }
     s__score({score:1,maxScore: 0, velocityX:0,velocityY:0})
     setClicked(true)
     setVelocityX((0.05+((Math.random()/2)-0.55)) / 5)
-    setVelocityY(0.05)
+    setVelocityY({value:0.05,price:queryUSDT.data})
     s__clickedPrice(queryUSDT.data)
   }
 
