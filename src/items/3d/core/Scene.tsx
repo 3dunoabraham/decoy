@@ -443,7 +443,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
         }
         
         {!uid && 
-            <div className='pos-abs mt-200 ml-8 z-1001 box-shadow-i-bl-8 flex' >
+            <div className='pos-abs mt-200 ml-8 z-1001 box-shadow-i-bl-8 flex-row Q_xs_sm_flex-col' >
                 <div onClick={setRandomName} className='pa-1 tx-white bg-b-50 flex-col px-3 tx-lx opaci-chov--50'>
                     <GiPerspectiveDiceSixFacesRandom />
                 </div>
