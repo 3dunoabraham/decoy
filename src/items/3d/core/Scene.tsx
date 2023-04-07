@@ -362,11 +362,11 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                         </div>
                     </div>
 
-                    <div className='tx-lg opaci-50 tx-center Q_xs mt-8'
+                    {/* <div className='tx-lg opaci-50 tx-center Q_xs  '
                          
                     >
                         How to Play?
-                    </div>
+                    </div> */}
 
                     <div className='tx-lg  flex-col gap-4 flex-align-start px-4 mb-8 Q_xs '>
                         <div className='flex flex-align-end gap-2'>
@@ -414,7 +414,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
             </div>
         }
         
-        {isClient && !!uid && !!theuserstart.data &&
+        {isClient && !!uid && !!theuserstart.data && <>
             <div className='tx-white   pa-3 pos-abs dg left-0 bottom-0 -y-100  z-999 tx-ls-1'>
                 <div className='pb-3 flex flex-align-end gap-2'>
                     <div className='opaci-75 tx-lg'>Tickets:</div>
@@ -437,8 +437,9 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                         <div className='opaci-50 tx-'>LAST UPDATE:</div>
                         {!!theuserstart.data.datenow && lastUpdate}
                     </div>    
-                    <hr className='bg-white w-100 my-2'  />
-                    <div className="flex-col  flex-align-start gap-1 tx-shadow-b-1 ">
+                    {/* <div className='w-100 py-4 Q_xs'  ></div> */}
+                    <hr className='bg-white w-100 my-2 Q_sm_x'  />
+                    <div className="flex-col  flex-align-start gap-1 tx-shadow-b-1 Q_sm_x">
                         <Link href="/dashboard" target='_blank'
                             className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg"
                         >
@@ -447,13 +448,30 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                     </div>
                     
                     <div onClick={()=>{toggleOption("tutorial")}}
-                        className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg pt-2"
+                        className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg pt-2 Q_sm_x"
                     >
                         <BsInfoCircleFill /> <i>Close Detail</i>
                     </div>
                 </>}
             </div>
-        }
+            <div className='tx-white   pa-3 pos-abs dg right-0 bottom-0 -y-100  z-999 tx-ls-1 Q_xs'>
+                {!!optsToggler.tutorial.bool && <>
+                    <div className="flex-col  flex-align-start gap-1 tx-shadow-b-1 Q_xs">
+                        <Link href="/dashboard" target='_blank'
+                            className="tx- opaci-chov--50  tx-white tx-shadow-b-1 py-2 tx-lg"
+                        >
+                            <FaExternalLinkAlt /> <i>Dashboard</i>
+                        </Link>
+                    </div>
+                    
+                    <div onClick={()=>{toggleOption("tutorial")}}
+                        className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg py-2  Q_xs"
+                    >
+                        <BsInfoCircleFill /> <i>Close Detail</i>
+                    </div>
+                </>}
+            </div>
+        </>}
         
         {!uid && 
             <div className='pos-abs mt-200 ml-8 z-1001 box-shadow-i-bl-8 flex-row Q_xs_sm_flex-col' >
