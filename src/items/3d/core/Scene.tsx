@@ -470,7 +470,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                 </div>
             </div>
         }
-        {!!uid && !optsToggler.tutorial.bool &&
+        {!!uid && // !optsToggler.tutorial.bool &&
             <div className="flex pos-abs top-0 left-0  bord-r- pa-2 ma-2">
                 <div className="flex-col flex-align-start z-700 gap-1  mt-100 ">
 
@@ -509,14 +509,14 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                             <div className="flex-center gap-1 tx-shadow-b-1 ">
                                 <div className="tx-  tx-white tx-shadow-b-1">Power: {power}</div>
                             </div>
-                            <hr className='bg-white w-100 mt-2'  />
+                            {/* <hr className='bg-white w-100 mt-2'  />
                             <div className="flex-col  flex-align-start gap-1 tx-shadow-b-1 ">
                                 <Link href="/dashboard" target='_blank'
                                     className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg"
                                 >
                                     <FaExternalLinkAlt /> <i>Dashboard</i>
                                 </Link>
-                            </div>
+                            </div> */}
                         </div>
                     </details>
                 </div>
