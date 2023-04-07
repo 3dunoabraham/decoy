@@ -91,6 +91,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
     const [form, s__form] = useState({
         id: "BTCUSDT3M",
         username:"",
+        password:"",
     })
     const ccc = THREE.Camera
     const setRandomName = ()=>{
@@ -161,8 +162,14 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
     }
     const startHash = async () => {
         let username = form.username
+        let password = form.password
         if (!username) {
             app.alert("neutral","Enter username")
+            document.getElementById("username").focus()
+            return
+        }
+        if (!username || !password) {
+            app.alert("neutral","Enter password")
             document.getElementById("username").focus()
             return
         }
@@ -336,7 +343,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                             order
                         </div>
                         <div className='bg-b-50 px-2 bord-r-5 py-1 w-100'>
-                            <div className='tx-xl opaci-chov-50 box-shadow-5 tx-center bg-b-90 bord-r-5 my-2 w-100 hover-3'
+                            <div className='tx-xl opaci-chov-50 box-shadow-5 tx-center bg-b-90 bord-r-5 my-2 w-100 hover-'
                                 onClick={()=>{toggleOption("tutorial")}}
                             >
                                 Start !
@@ -364,7 +371,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                     </div>
 
                     <div className='bg-b-50 px-2 bord-r-5 py-1 w-100 Q_xs'>
-                                <div className='tx-lx opaci-chov-50 box-shadow-5 tx-center bg-b-90 bord-r-5 my-2 hover-3'
+                                <div className='tx-lx opaci-chov-50 box-shadow-5 tx-center bg-b-90 bord-r-5 my-2 hover-'
                                     onClick={()=>{toggleOption("tutorial")}}
                                 >
                                     Start !
@@ -488,8 +495,13 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                     placeholder='Username' className='tx-lgx w-max-220px z-1001 px-3 py-2 tx-ls-1 box-shadow-5 '
                      onChange={(e)=>{s__form({...form,...{username:e.target.value}});console.log("qqq", e.target.value)}} 
                 />
+                <input type="text" value={form.password} id="password" name="password" maxLength={30}
+                    onSubmit={signup}
+                    placeholder='Password' className='tx-lgx w-max-220px z-1001 px-3 py-2 tx-ls-1 box-shadow-5 '
+                     onChange={(e)=>{s__form({...form,...{password:e.target.value}});console.log("qqq", e.target.value)}} 
+                />
                 <div onClick={signup} className='pa-1 tx-white bg-b-50 flex-col px-3 tx-lx opaci-chov--50'>
-                    Play
+                    Register
                 </div>
             </div>
         }

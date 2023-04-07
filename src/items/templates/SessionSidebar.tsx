@@ -139,7 +139,7 @@ export default function Component({}) {
                     <div className="flex-1 pl-1 Q_xl_x w-min-220px">Settings</div>
                 </Link>
             </div>
-            {!isDevEnvironment && <>
+            {<>
                 <hr className="w-90 opaci-50 mt-3" style={{borderColor: "white"}} />
                 <div className='pa-3 w-100'><LoginBtn><AppClientDesc /></LoginBtn></div>
             </>}

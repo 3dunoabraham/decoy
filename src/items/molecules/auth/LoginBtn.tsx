@@ -5,6 +5,7 @@ import { BsBoxArrowInRight, BsDoorClosed, BsBoxArrowInDown, BsBoxArrowRight } fr
 
 export default function Component({ children }) {
     const { data: session } = useSession();
+
     if (session) {
         return (
             <div className="flex Q_xs_md_flex-col">
@@ -19,7 +20,7 @@ export default function Component({ children }) {
     }
     return (
     <button className="w-100 tx-mdl nowrap  bg-w-10 pa-2 tx-white ord-r-8 opaci-chov--50"
-        onClick={() => signIn()}
+        onClick={() => signIn("google")}
     >
         <div className="Q_xl_x">Sign in</div>
         <div className="Q_xs_xl"><BsBoxArrowInRight /></div>
