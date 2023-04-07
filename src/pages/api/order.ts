@@ -106,88 +106,91 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 
 
-    case 'POST':
-      try {
-
-        
-        const { data: existingStart, error: selectError } = await supabase
-        .from<Start>('start')
-        .select('*')
-        .match({ hash: new_uid })
-        .single()
-
-        if (!existingStart) {
-          console.log("user start not found")
-          throw new Error
-          return
-        }
-
-
-        console.log("existingStart", existingStart)
-        let attempts = existingStart.attempts
-        if (!attempts) {
-          let thenow = Date.now()
-          let thediff = (thenow - parseInt(existingStart.datenow))
-          console.log("asdasdasd", thediff / 1000 )
-          if (thediff / 1000 > 60*3) // 3 minutes
-          {
-
-            attempts += ATTEMPTS_PER_CYCLE
-            const { data: start, error } = await supabase
-            .from<Start>('start')
-            .update({
-              attempts: attempts,
-              datenow: `${Date.now()}`,
-            })
-            .match({ hash: new_uid })
-            .single()
-          if (error) {
-            throw error
-          }
-          // res.status(201).json(start)
-          } else {
-            console.log("no more attempts|dates:", existingStart.datenow, thenow)
+      case 'POST':
+        try {
+  
+          
+          const { data: existingStart, error: selectError } = await supabase
+          .from<Start>('start')
+          .select('*')
+          .match({ hash: new_uid })
+          .single()
+  
+          if (!existingStart) {
+            console.log("user start not found")
             throw new Error
             return
           }
-        }
-        {
-          console.log("order", asdasd)
-          const { data: order, error } = await supabase
-          .from<Order>('order')
-          .insert(asdasd)
-          .single()
+  
+  
+          console.log("existingStart", existingStart)
+          let attempts = existingStart.attempts
+          if (!attempts) {
+            let thenow = Date.now()
+            let thediff = (thenow - parseInt(existingStart.datenow))
+            console.log("asdasdasd", thediff / 1000 )
+            if (thediff / 1000 > 60*3) // 3 minutes
+            {
+  
+              attempts += ATTEMPTS_PER_CYCLE
+              const { data: start, error } = await supabase
+              .from<Start>('start')
+              .update({
+                attempts: attempts,
+                datenow: `${Date.now()}`,
+              })
+              .match({ hash: new_uid })
+              .single()
+            if (error) {
+              throw error
+            }
+            // res.status(201).json(start)
+            } else {
+              console.log("no more attempts|dates:", existingStart.datenow, thenow)
+              throw new Error
+              return
+            }
+          }
+          {
+            console.log("order", asdasd)
+            const { data: order, error } = await supabase
+            .from<Order>('order')
+            .insert(asdasd)
+            .single()
+            
+          if (error) {
+            throw error
+          }
+  
           
-        if (error) {
-          throw error
+          const { data: start, error: error2 } = await supabase
+          .from<Start>('start')
+          .update({
+            attempts: attempts-1,
+            totalAttempts: existingStart.totalAttempts+1,
+            
+          })
+          .match({ hash: new_uid })
+          .single()
+        if (error2) {
+          throw error2
         }
+        res.status(201).json(order)
+  
+  
+        }
+  
+        } catch (error) {
+          console.error(error)
+          res.status(500).json({ message: 'Failed to create order' })
+        }
+        break
+
 
         
-        const { data: start, error: error2 } = await supabase
-        .from<Start>('start')
-        .update({
-          attempts: attempts-1,
-          totalAttempts: existingStart.totalAttempts+1,
-          
-        })
-        .match({ hash: new_uid })
-        .single()
-      if (error2) {
-        throw error2
-      }
-      res.status(201).json(order)
-
-
-      }
-
-      } catch (error) {
-        console.error(error)
-        res.status(500).json({ message: 'Failed to create order' })
-      }
-      break
 
     default:
-      res.setHeader('Allow', ['POST'])
+      res.setHeader('Allow', ['POST','PUT'])
       res.status(405).end(`Method ${method} Not Allowed`)
   }
 }

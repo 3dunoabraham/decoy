@@ -94,7 +94,7 @@ const Page: NextPageWithLayout = ({}) => {
             </div>
             <div className='flex-1 noclick'>
             </div>
-            <div className='flex-col   flex-align-end' >
+            <div className='flex-col   flex-align-end Q_sm_x' >
                 <SocialMediaButtons />
             </div>
         </div>

@@ -25,6 +25,7 @@ import { parseDecimals } from '@/components/scripts/helpers';
 import { useIsClient, useLocalStorage } from 'usehooks-ts';
 import AmountCards from '@/components/dashboard/AmountCards';
 import { DEFAULT_TOKENS_ARRAY } from '@/components/scripts/constants';
+import { fetchDelete } from '@/scripts/helpers/fetchHelper';
 
 const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
     const bigmul = 50
@@ -41,7 +42,26 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
             return price.price
         }
     },[])
-    
+        const leaveAll = async ()=> {
+            if (!isClient) return;
+
+            
+                                
+            localStorage.removeItem("localTokensArrayObj");
+            localStorage.removeItem("uid");
+
+                
+            try {
+                const res = await fetchDelete('/api/start',{
+                });
+                const res2 = await res.json();
+                // return res2
+            } catch (e) {
+                return false
+            }
+
+            window.location.reload()
+        }
     // const tokensReqObj:any = ( DEFAULT_TOKENS_ARRAY.reduce((acc, aToken) => (
     //     { ...acc, [aToken]: [`${API_PRICE_BASEURL}${(aToken+baseToken).toUpperCase()}`] }
     //     ), {}))
@@ -128,7 +148,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
     <div className='flex-center w-100 h-min-100vh'>
         <div className="h-min-100vh w-100  flex-col flex-justify-start flex-align-stretch">
             <div className="px-8 ">
-                <BreadCrumbs pages={[]} />
+                <BreadCrumbs pages={[["/dashboard", "Dashboard"]]} />
                 
                 <div className="flex my-4">
                     {/* <h1 className="pt-4 tx-bold-5 flex-1 ">
@@ -145,10 +165,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
                     {uid &&
                         <button   className="ims-button-faded clickble nowrap tx-lg opaci-25"
                             onClick={()=>{
-                                if (!isClient) return;
-                                localStorage.removeItem("localTokensArrayObj");
-                                localStorage.removeItem("uid");
-                                window.location.reload()
+                                leaveAll()
                             }}
                         >
                             Leave

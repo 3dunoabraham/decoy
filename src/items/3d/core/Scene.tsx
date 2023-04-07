@@ -423,10 +423,10 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                 {!optsToggler.tutorial.bool && <>
                 
                     <div onClick={()=>{toggleOption("tutorial")}}
-                                    className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg"
-                                >
-                                    <BsInfoCircleFill /> <i>How to Play?</i>
-                                </div>
+                        className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg"
+                    >
+                        <BsInfoCircleFill /> <i>How to Play?</i>
+                    </div>
                 </>}
                 {!!optsToggler.tutorial.bool && <>
                     <div className='pb-3 flex flex-align-end gap-2'>
@@ -437,7 +437,20 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                         <div className='opaci-50 tx-'>LAST UPDATE:</div>
                         {!!theuserstart.data.datenow && lastUpdate}
                     </div>    
-
+                    <hr className='bg-white w-100 my-2'  />
+                    <div className="flex-col  flex-align-start gap-1 tx-shadow-b-1 ">
+                        <Link href="/dashboard" target='_blank'
+                            className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg"
+                        >
+                            <FaExternalLinkAlt /> <i>Dashboard</i>
+                        </Link>
+                    </div>
+                    
+                    <div onClick={()=>{toggleOption("tutorial")}}
+                        className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg pt-2"
+                    >
+                        <BsInfoCircleFill /> <i>Close Detail</i>
+                    </div>
                 </>}
             </div>
         }

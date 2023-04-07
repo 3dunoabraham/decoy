@@ -60,41 +60,80 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
       break
     
-    case 'POST':
-      try {
-
-        
-        const { data: existingStart, error: selectError } = await supabase
-        .from<Start>('start')
-        .select('*')
-        .match({ hash: new_uid })
-        .single()
-
-        if (existingStart) {
-          console.log("found")
-          throw new Error
-          return
-        }
-        console.log("not found", existingStart, { hash: new_uid })
-
-
-        if (!existingStart) {
-          const { data: start, error } = await supabase
+      case 'POST':
+        try {
+  
+          
+          const { data: existingStart, error: selectError } = await supabase
           .from<Start>('start')
-          .insert(asdasd)
+          .select('*')
+          .match({ hash: new_uid })
           .single()
-        if (error) {
-          throw error
+  
+          if (existingStart) {
+            console.log("found")
+            throw new Error
+            return
+          }
+          console.log("not found", existingStart, { hash: new_uid })
+  
+  
+          if (!existingStart) {
+            const { data: start, error } = await supabase
+            .from<Start>('start')
+            .insert(asdasd)
+            .single()
+          if (error) {
+            throw error
+          }
+          res.status(201).json(start)
         }
-        res.status(201).json(start)
-      }
+  
+        } catch (error) {
+          console.error(error)
+          res.status(500).json({ message: 'Failed to create start' })
+        }
+        break
 
-      } catch (error) {
-        console.error(error)
-        res.status(500).json({ message: 'Failed to create start' })
-      }
-      break
+    
+        case 'POST':
+          try {
+    
+            
+            const { data: existingStart, error: selectError } = await supabase
+            .from<Start>('start')
+            .select('*')
+            .match({ hash: new_uid })
+            .single()
+    
+            if (!existingStart) {
+              console.log("not found")
+              throw new Error
+              return
+            }
+            console.log("found", existingStart, { hash: new_uid })
+    
+    
+            if (!!existingStart) {
+              const { data: start, error } = await supabase
+              .from<Start>('start')
+            
+            .delete()
+            .match({ hash: new_uid })
 
+              .single()
+            if (error) {
+              throw error
+            }
+            res.status(201).json(start)
+          }
+    
+          } catch (error) {
+            console.error(error)
+            res.status(500).json({ message: 'Failed to create start' })
+          }
+          break
+      
     default:
       res.setHeader('Allow', ['GET','POST'])
       res.status(405).end(`Method ${method} Not Allowed`)
