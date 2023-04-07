@@ -16,25 +16,10 @@ import crypto from 'crypto';
 import { useLocalStorage } from "usehooks-ts";
 import { fetchPost } from "@/scripts/helpers/fetchHelper";
 import { AppContext } from "@/scripts/contexts/AppContext";
+import adjectives from '@/scripts/adjectives.json'
+import nouns from '@/scripts/nouns.json'
 
 extend({ TextGeometry })
-
-
-// function Text3d(){
-//     const font = new FontLoader().parse(myFont);
-//     const textOptions = {
-//        font,
-//        size: 5,
-//        height: 1
-//     };
-//     return (<>
-//         {/* <mesh>
-//             {(<textGeometry attach='geometry' args={['three.js', textOptions]} />) as any}
-//             <meshStandardMaterial attach='material' color="hotpink" />
-//         </mesh> */}
-     
-//         </>)
-//  }
 
 export default function Component({
     power, form, onTextClick, onTimeframeClick, toggleTrade, xOut, yOut, zOut, optsToggler, s__uid, uid, theuserstart
@@ -45,6 +30,7 @@ export default function Component({
     const [loadings, s__loadings]:any = useState({join:false})
     const [LS_uid, s__LS_uid] = useLocalStorage('uid', "")
     // const [uid, s__uid] = useState("")
+    
 
     useFrame((state) => {
         if (!!$signin.current && !!$signin.current.rotation) {
@@ -61,17 +47,14 @@ export default function Component({
         s__uid(res)
         s__LS_uid(res)
         theuserstart.refetch()
-
-        // window.location.reload()
-        
-        // s__clientIP(awaited.IPv4)
-        // let new_uid = `${awaited.IPv4}:${randomThousand}`
-        // s__uid(new_uid)
-        // s__LS_uid(new_uid)
     }
     const startHash = async () => {
-        let username = prompt("Enter username","")
-        if (!username) return
+        let username = form.username
+        if (!username) {
+            app.alert("neutral","Enter username")
+            document.getElementById("username").focus()
+            return
+        }
 
         try {
             const res = await fetchPost('/api/start',{
@@ -84,6 +67,24 @@ export default function Component({
         }
     };
 
+    
+
+  // create the TextGeometry and add it to the scene
+  const UsernameText = useMemo(() => {
+    if (!form.username) return
+    return (<>
+        <DynaText text={form.username} color={0x00ff00}
+            position={new Vector3(0,0.32,-0)}  rotation={[0,0,0]}
+            isSelected={true}  font={0.11} onClick={()=>{}}
+        />
+        <DynaText text={form.username} color={0x00ff00}
+            position={new Vector3(0,0.32,-0)}  rotation={[0,Math.PI,0]}
+            isSelected={true}  font={0.11} onClick={()=>{}}
+        />
+    </>)
+    
+  }, [form.username]);
+
     return (
         <group>
             
@@ -95,6 +96,11 @@ export default function Component({
                 <meshStandardMaterial attach="material" color="#4E5156" />
             </Cylinder>
 
+            <DynaText text={!form.username ? "Enter Username" : "Username:\n"+form.username} color={0xffffff}
+                
+                position={new Vector3(0,-0.74,-0.7)} 
+                isSelected={true}  font={0.22} onClick={()=>{signup()}}
+            />
             {<group ref={$signin} position={new Vector3(0, -0.5, 1)} onClick={()=>{signup()}}>
                 <Cylinder 
                     rotation={[0,Math.PI/4,0]}
@@ -108,6 +114,7 @@ export default function Component({
                     position={new Vector3(0,0,0.36)} rotation={[0,0,0]}
                     isSelected={true}  font={0.25} onClick={()=>{}}
                 />
+                 {UsernameText}
 
                 <DynaText text={"Play"} color={0xaaaaaa}
                     position={new Vector3(0,0,-0.36)} rotation={[0,Math.PI,0]}
@@ -125,24 +132,6 @@ export default function Component({
                 />
 
             </group>}
-                
-            {/* <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="btc" refetchInterval={60000}
-                position={[xOut/2,-0.35,-zOut/2]} onTextClick={()=>{onTextClick("btc")}} unselectedColor={"#50545B"}
-                setVelocityY={(data)=>{toggleTrade("btc",data)}}
-            /> 
-
-            <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="eth" refetchInterval={60000}
-                position={[-xOut/2,-0.35,-zOut/2]} onTextClick={()=>{onTextClick("eth")}} unselectedColor={"#50545B"}
-                setVelocityY={(data)=>{toggleTrade("eth",data)}}
-            />  */}
-
-            {/* <mesh position={[0,10,0]}>
-                <textGeometry args={['test', {font, size:5, height: 1}]}/>
-                <meshLambertMaterial attach='material' color={'gold'}/>
-            </mesh> */}
-            {/* <Suspense>
-                <Text3D content="hello" />
-            </Suspense> */}
         </group>
     )
 }

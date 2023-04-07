@@ -1,15 +1,17 @@
 import { forwardRef, useContext, useEffect, useImperativeHandle, useMemo, useState,  } from 'react'
 import { Cylinder } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { FaBtc, FaEthereum, FaExternalLinkAlt } from "react-icons/fa";
+import { FaBtc, FaDiceD6, FaEthereum, FaExternalLinkAlt, FaRandom } from "react-icons/fa";
 import { SiChainlink, SiFantom } from "react-icons/si";
 import * as THREE from "three";
 import React from 'react';
 import { Vector3 } from "three";
-import { useLocalStorage } from 'usehooks-ts';
+import { useIsClient, useLocalStorage } from 'usehooks-ts';
 
 
-import { parseDecimals } from "@/components/scripts/helpers";
+import adjectives from '@/scripts/adjectives.json'
+import nouns from '@/scripts/nouns.json'
+import { parseDecimals, parseUTCString } from "@/components/scripts/helpers";
 import HumanForReference from "./HumanForReference";
 import Environment from "./Environment";
 import RotatingPointLight from './RotatingPointLight';
@@ -26,6 +28,8 @@ import { fetchPost } from '@/scripts/helpers/fetchHelper';
 import Link from 'next/link';
 import { BiQuestionMark } from 'react-icons/bi';
 import DynaText from '../DynaText';
+import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
+import { BsInfoCircleFill } from 'react-icons/bs';
 
 export const tokenColors = {
     "btc": "#EE8E1B",
@@ -82,11 +86,17 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
     const heightFeet = 3
     const [farmPosition,s__farmPosition]:any = useState([-3,-0.45,-4]);
     const [buildingPosition,s__buildingPosition]:any = useState([0,-0.25,-4]);
+    const rdm = function(opts,min=0) {return Math.floor(Math.random()*opts+min)}
     const [form, s__form] = useState({
         id: "BTCUSDT3M",
+        username:"",
     })
     const ccc = THREE.Camera
-    
+    const setRandomName = ()=>{
+        s__form({...form,...{username:
+            adjectives[rdm(adjectives.length)]+" "+nouns[rdm(nouns.length)]
+        }})
+    }
     useImperativeHandle(ref, ()=>({
         resize: (size) => {
             let oldNewSize = {...sizeForm}
@@ -137,6 +147,35 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
     },[])
 
 
+    const signup = async () => {
+        let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
+        // s__loadings({join:true})
+        let res:any = await startHash()
+        if (!res) return
+        app.alert("success","Signed in")
+        // s__loadings({join:false})
+        s__uid(res)
+        s__LS_uid(res)
+        theuserstart.refetch()
+    }
+    const startHash = async () => {
+        let username = form.username
+        if (!username) {
+            app.alert("neutral","Enter username")
+            document.getElementById("username").focus()
+            return
+        }
+
+        try {
+            const res = await fetchPost('/api/start',{
+                name: username,
+            });
+            const { IPv4, hash } = await res.json();
+            return hash
+        } catch (e) {
+            return false
+        }
+    };
 
     /****** UPDATE ******/
     
@@ -164,6 +203,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
         }
 
     }
+    const isClient = useIsClient()
     
     const startOrder = async (token, price, trigger) => {
         alert()
@@ -212,7 +252,11 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
     const [uid, s__uid] = useState("")
     const [tokensArrayObj,s__tokensArrayObj] = useState<any>({})
     useEffect(()=>{
-        console.log("theuserstart", theuserstart)
+        // let randomname = adjectives[rdm(adjectives.length)]+" "+nouns[rdm(nouns.length)]
+        // console.log("theuserstart", theuserstart, randomname)
+        console.log("max adjectives", Math.max.apply(Math, adjectives.map(x=>x.length)))
+        console.log("max nouns", Math.max.apply(Math, nouns.map(x=>x.length)))
+        
         app.s__userstart(theuserstart)
         s__tokensArrayObj(JSON.parse(LS_tokensArrayObj))
         s__uid(LS_uid)
@@ -237,6 +281,10 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
         return DEFAULT_TIMEFRAME_ARRAY.indexOf(selectedTimeframe)
       },[selectedTimeframe])
 
+      const lastUpdate = useMemo(()=>{
+        if (!theuserstart.data) return ""
+        return parseUTCString(new Date(theuserstart.data.datenow)).replace("T","===")
+    }, [theuserstart.data])
 
 
     /****** HTML ******/
@@ -246,12 +294,13 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
         {theuserstart.data && theuserstart.data.totalAttempts == 0 && optsToggler.tutorial.bool &&
             <div className='pos-abs top-0 left-0 w-100 h-100 bg-glass-5 z-100 flex-col'>
                 <div className='tx-white'>
-                    <div className='tx-lg opaci-50 tx-center'
+                    <div className='tx-lg opaci-50 tx-center Q_sm_x'
                          
                     >
                         How to Play?
                     </div>
-                    <div className='tx-lx flex-col gap-4 flex-align-start mb-8'>
+
+                    <div className='tx-lx flex-col gap-4 flex-align-start mb-8 Q_sm_x'>
                         <div className='flex flex-align-end gap-2'>
                             <div className='opaci-50'>1.</div> Turn 
                             <div className='tx-xl pt-1 tx-shadow-br-5' style={{color:"gold"}}>sync</div>
@@ -259,69 +308,133 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                         </div>
                         <div className='flex flex-align-end gap-2'>
                             <div className='opaci-50'>2.</div> Set
-                            <div className='tx-xl pt-1 tx-shadow-br-5' style={{color:"cyan"}}>live</div>
+                            <div className='tx-xl pt-1 tx-shadow-br-5' style={{color:"cyan"}}>demo</div>
+                            off
+                        </div>
+                        <div className='flex flex-align-end gap-2'>
+                            <div className='opaci-50'>3.</div> Send
+                            <div className='tx-xl pt-1 tx-shadow-br-5' style={{color:"#00ff00"}}>buy</div>
+                            order
+                        </div>
+                        <div className='bg-b-50 px-2 bord-r-5 py-1 w-100'>
+                            <div className='tx-xl opaci-chov-50 box-shadow-5 tx-center bg-b-90 bord-r-5 my-2 w-100'
+                                onClick={()=>{toggleOption("tutorial")}}
+                            >
+                                Start !
+                            </div>
+                            
+                            <details className='ops-rel tx-sm'>
+                                <summary className='w-100 opaci-chov--50'>
+                                    Details
+                                </summary>
+                                <div className='pos-abs flex-col flex-align-stretch  w-100 left-0 pt-2'>
+                                
+                                    <div className='tx-sm opaci-50 tx-center '>
+                                        <div>3 free virtual orders (tickets) every 3 minutes</div>
+                                        <div>New tickets cannot be stacked</div>
+                                    </div>
+                                    <div className='tx-sm  tx-center flex flex-justify-center gap-1'>
+                                        <div className='opaci-50'>* This message will dissapear </div>
+                                        <div className='flex gap-1'>
+                                            once you <div className='tx-bold'>level up</div><div className='tx-'>(send first order)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <div className='tx-lg opaci-50 tx-center Q_xs mt-100'
+                         
+                    >
+                        How to Play?
+                    </div>
+
+                    <div className='tx-lg  flex-col gap-4 flex-align-start px-4 mb-8 Q_xs '>
+                        <div className='flex flex-align-end gap-2'>
+                            <div className='opaci-50'>1.</div> Turn 
+                            <div className='tx-lx pt-1 tx-shadow-br-5' style={{color:"gold"}}>sync</div>
+                            on
+                        </div>
+                        <div className='flex flex-align-end gap-2'>
+                            <div className='opaci-50'>2.</div> Set
+                            <div className='tx-lx pt-1 tx-shadow-br-5' style={{color:"cyan"}}>live</div>
                             mode
                         </div>
                         <div className='flex flex-align-end gap-2'>
                             <div className='opaci-50'>3.</div> Send
-                            <div className='tx-xl pt-1 tx-shadow-br-5' style={{color:"#00ff00"}}>trade</div>
+                            <div className='tx-lx pt-1 tx-shadow-br-5' style={{color:"#00ff00"}}>trade</div>
                             order
                         </div>
-                        <div className='bg-b-50 px-2 bord-r-5 py-1'>
-                    <div className='tx-xl opaci-chov-50 box-shadow-5 tx-center bg-b-90 bord-r-5 my-2'
-                         onClick={()=>{toggleOption("tutorial")}}
-                    >
-                        Start !
-                    </div>
-                    <div className='tx-sm opaci-50 tx-center'
-                         
-                    >
-                        3 free virtual orders every 3 minutes that cannot be stacked
-                    </div>
-                    <div className='tx-sm  tx-center flex flex-justify-center gap-1'
-                         
-                    >
-                        <div className='opaci-50'>* This message will dissapear once you</div>
-                        <div className='tx-bold'>level up</div>
-                        <div>(send trade order)</div>
-                    </div>
-                    </div>
-                        
-                        {/* <details>
-                            <summary className='opaci-chov--50 tx-white tx-lg bg-b-50 box-shadow-5 pa-2 bg-glass-5'
-                                onClick={()=>{}}
-                            >
-                                Help
-                            </summary>
-                            <div className="flex-col flex-align-start  gap-1 mt-2 ">
-                                <div className="flex-col flex-align-start gap-2 rot-180">
-                                    <TimeframeList {...{timeframesArray, setTimeframe, tokenColors, form}} />
-                                    <TokenList {...{setToken,  tokenColors,  form, tokenIcons,}} />
-                                    {!live && <>
-                                        <PlayerInventory {...{toggleOption, optsToggler}}  />
-                                    </>}
+                        <div className='bg-b-50 px-2 bord-r-5 py-1 w-100'>
+                                <div className='tx-lx opaci-chov-50 box-shadow-5 tx-center bg-b-90 bord-r-5 my-2'
+                                    onClick={()=>{toggleOption("tutorial")}}
+                                >
+                                    Start !
                                 </div>
-                                <hr className='bg-white w-100 mt-2'  />
-                                <div className="flex-center gap-1 tx-shadow-b-1 ">
-                                    <div className="tx-  tx-white tx-shadow-b-1">Power: {power}</div>
-                                </div>
-                                <hr className='bg-white w-100 mt-2'  />
-                                <div className="flex-col  flex-align-start gap-1 tx-shadow-b-1 ">
-                                    <div onClick={()=>{toggleOption("tutorial")}}
-                                        className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg"
-                                    >
-                                        <BiQuestionMark /> <i>How to Play?</i>
+                        </div>
+                            <details className='ops-rel'>
+                                <summary className='w-100 opaci-chov--50'>
+                                    Details
+                                </summary>
+                                <div className='pos-abs flex-col flex-align-stretch  w-100 left-0 pt-2'>
+                                
+                                    <div className='tx-sm opaci-50 tx-center '>
+                                        <div>3 free virtual orders (tickets) every 3 minutes</div>
+                                        <div>New tickets cannot be stacked</div>
                                     </div>
-                                    <Link href="/dashboard" target='_blank'
-                                        className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg"
-                                    >
-                                        <FaExternalLinkAlt /> <i>Dashboard</i>
-                                    </Link>
+                                    <div className='tx-sm  tx-center flex-col flex-justify-center gap-1'>
+                                        <div className='opaci-50'>* This message will dissapear once </div>
+                                        <div className='flex gap-1'>
+                                            you <div className='tx-bold'>level up</div><div className='tx-'>(send first order)</div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </details> */}
+                            </details>
                     </div>
-                    {/* <div>{optsToggler.tutorial.bool ? "y" : "n"}</div> */}
+                </div>
+            </div>
+        }
+        
+        {isClient && !!uid && !!theuserstart.data &&
+            <div className='tx-white   pa-3 pos-abs dg left-0 bottom-0 -y-100  z-999 tx-ls-1'>
+                <div className='pb-3 flex flex-align-end gap-2'>
+                    <div className='opaci-75 tx-lg'>Tickets:</div>
+                    <div className='opaci- tx-bold tx-ls-3 tx-lgx'>{theuserstart.data.totalAttempts || 0}</div>
+                </div>    
+                {!optsToggler.tutorial.bool && <>
+                
+                    <div onClick={()=>{toggleOption("tutorial")}}
+                                    className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg"
+                                >
+                                    <BsInfoCircleFill /> <i>How to Play?</i>
+                                </div>
+                </>}
+                {!!optsToggler.tutorial.bool && <>
+                    <div className='pb-3 flex flex-align-end gap-2'>
+                        <div className='opaci-50 tx-'>Total Orders:</div>
+                        <div className='opaci-75 tx-bold tx-ls-3 tx-lg'>{theuserstart.data.attempts || 0}</div>
+                    </div>    
+                    <div className='pb-3'>
+                        <div className='opaci-50 tx-'>LAST UPDATE:</div>
+                        {!!theuserstart.data.datenow && lastUpdate}
+                    </div>    
+
+                </>}
+            </div>
+        }
+        
+        {!uid && 
+            <div className='pos-abs mt-200 ml-8 z-1001 box-shadow-i-bl-8 flex' >
+                <div onClick={setRandomName} className='pa-1 tx-white bg-b-50 flex-col px-3 tx-lx opaci-chov--50'>
+                    <GiPerspectiveDiceSixFacesRandom />
+                </div>
+                <input type="text" value={form.username} id="username" name="username" maxLength={30}
+                    placeholder='Username' className='tx-lgx w-max-220px z-1001 px-3 py-2 tx-ls-1 box-shadow-5 '
+                     onChange={(e)=>{s__form({...form,...{username:e.target.value}});console.log("qqq", e.target.value)}} 
+                />
+                <div onClick={signup} className='pa-1 tx-white bg-b-50 flex-col px-3 tx-lx opaci-chov--50'>
+                    Play
                 </div>
             </div>
         }
@@ -330,7 +443,9 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                 <div className="flex-col flex-align-start z-700 gap-1  mt-100 ">
 
                     <div className="flex-center gap-1 tx-shadow-b-1 bg-b-50 px-3 py-2 bg-glass-5">
-                        <div className="tx-  tx-white tx-shadow-b-2">
+                        
+                        <div className='Q_xs box-shadow-3 bg-b-50 pa-1  tx-white'>{form.id}</div>
+                        <div className="tx-  tx-white tx-shadow-b-2 Q_sm_x">
                             <div>SELECTED:</div>
                             <div className='box-shadow-3 bg-b-50 pa-2 ma-1'>{form.id}</div>
                         </div>
@@ -343,11 +458,12 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                             </div>
                         }
                     </div>
-                    <details>
+                    <details className='nodeco'>
                         <summary className='opaci-chov--50 tx-white tx-lg bg-b-50 box-shadow-5 pa-2 bg-glass-5'
                             onClick={()=>{}}
                         >
-                            Settings
+                            <div className='Q_xs tx-sm'>Settings</div>
+                            <div className='Q_sm_x'>Settings</div>
                         </summary>
                         <div className="flex-col flex-align-start  gap-1 mt-2 ">
                             <div className="flex-col flex-align-start gap-2 rot-180">
@@ -363,11 +479,6 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                             </div>
                             <hr className='bg-white w-100 mt-2'  />
                             <div className="flex-col  flex-align-start gap-1 tx-shadow-b-1 ">
-                                <div onClick={()=>{toggleOption("tutorial")}}
-                                    className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg"
-                                >
-                                    <BiQuestionMark /> <i>How to Play?</i>
-                                </div>
                                 <Link href="/dashboard" target='_blank'
                                     className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg"
                                 >
@@ -416,7 +527,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
             </div>
         }
 
-        {theuserstart.data && !(theuserstart.data.totalAttempts == 0 && optsToggler.tutorial.bool) &&
+        {/* {!!uid && theuserstart.data && !(theuserstart.data.totalAttempts == 0 && optsToggler.tutorial.bool) && 
             <div className="flex-col pos-abs bottom-0 right-0  bord-r- pa-2 ma-2 b w-100">
                 <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray ">
                     <div className="flex-center gap-1 tx-bold-8 tx-ls-5 px-5 py-2 bg-b-20 ma-2 tx-shadow-b-3">
@@ -425,7 +536,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
 
                 </div>
             </div>
-        }
+        } */}
 
 
         <Canvas shadows  onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onMouseMove={handleMouseMove}

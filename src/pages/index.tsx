@@ -52,7 +52,8 @@ const Page: NextPageWithLayout = ({}) => {
         <div className="h-min-100vh w-100   flex-col flex-justify-start flex-align-stretch" >
             <div className="pos-abs h-min-100vh  w-100 flex z-10 flex-align-stretch top-0 left-0"
             >
-                <Suspense> {/* power is dynamic, argument sent is hardcoded and useless */}
+                {/* power is dynamic, argument sent is hardcoded and useless */}   
+                <Suspense> 
                     {isClient && <Scene live={true} ref={$boxContainer} theuserstart={theuserstart}>
                         <LiteLevel {...{ power:null, form:null, onTextClick:null, optsToggler: null,
                                 s__tokensArrayObj: null, toggleTrade:null, xOut:null, yOut:null, zOut:null,
@@ -62,37 +63,25 @@ const Page: NextPageWithLayout = ({}) => {
                     </Scene>}
                 </Suspense>
             </div>
-            {!!uid && !!theuserstart.data &&
-                <div className='tx-white   pa-3 pos-abs dg left-0 bottom-0 -y-100  z-999 tx-ls-1'>
-                    <div className='pb-3'>
-                        <div className='opaci-50 tx-'>Total Orders:</div>
-                        <div className='opaci-75 tx-bold tx-ls-3 tx-lg'>{theuserstart.data.totalAttempts || 0}</div>
-                        
-                        {/* {theuserstart.data.totalAttempts}={attemptRatio} */}
-                    </div>    
-                    <div className='pb-3'>
-                        <div className='opaci-50 tx-'>LAST UPDATE:</div>
-                        {!!theuserstart.data.datenow && lastUpdate}
-                    </div>    
-                </div>
-            }
             <div className='flex flex-justify-center  gap-4 pos-fix w-100 z-800  ' >
                 <BitBingoLogo />
-                <div>
-                    <ReloadCube />
-                </div>
-            </div>
+                {isClient && !!uid &&
+                    <div>
+                        <ReloadCube />
+                    </div>
+                }   
+            </div> 
             <div className='flex-center z-500'>
                 {isClient &&
                     <div className="flex-center pos-abs bg-b-50 bg-glass-5 " style={{border:"1px solid #FED034"}}>
-                        {!uid &&
+                        {/* {!uid &&
                             <Link target="_blank" href="/dashboard"
                                 className="tx-blue px-6 gap-2 tx-lgx flex-center opaci-chov--50 w-100 tx-bold-2 pt-100 pb-3 Q_sm_x"
                                 style={{filter: "hue-rotate(-189deg) brightness(666%)"}}
                             >
                                 <FaExternalLinkAlt /> Dashboard 
                             </Link>
-                        }
+                        } */}
                         {!uid &&
                             <Link target="_blank" href="/demo" className="tx-blue px-6 gap-2 tx-lgx flex-center opaci-chov--50 w-100 tx-bold-2 pt-100 pb-3"
                                 style={{filter: "hue-rotate(-189deg) brightness(666%)"}}
@@ -105,7 +94,7 @@ const Page: NextPageWithLayout = ({}) => {
             </div>
             <div className='flex-1 noclick'>
             </div>
-            <div className='flex-col   '>
+            <div className='flex-col   flex-align-end' >
                 <SocialMediaButtons />
             </div>
         </div>
@@ -116,7 +105,7 @@ const Page: NextPageWithLayout = ({}) => {
 Page.getLayout = function getLayout(page: ReactElement) {
     return (
     <Layout>
-        <Head><title>Bit Bingo Boom</title></Head>
+        <Head><title>Bit City</title></Head>
         {page}
     </Layout>
     )

@@ -5,7 +5,7 @@ import { ImBook } from "react-icons/im";
 
 export default function Component ({}) {
     return (
-        <div className='flex w-100 w-max-1080px gap-2  z-500'>
+        <div className='flex w-100 w-max-1080px gap-2  flex-justify-end  z-500'>
             <Link href="https://github.com/3dunoabraham" target="_blank" 
                 className="bg-w-10 pa-3 opaci-chov--50">
                 <div className="flex bg-white bord-r-100p tx-lg pa-1">

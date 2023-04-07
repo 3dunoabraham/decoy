@@ -9,14 +9,14 @@ export default function Component ({}) {
                 <div className="a tx-xxl tx-bold-3 pl-5">t</div>
             </div>
             <div className="a tx-lx flex z-400 px-4 h-50px">
-                <div className="a tx-lx tx-bold-5 pl-3">B</div>
+                <div className="a tx-lx tx-bold-5 pl-3">C</div>
                 <div className="a tx-lx tx-bold-3 ">
                     <div className='invisible'>III</div>
                     <div className='tx-xxl scale-200 pos-abs bottom-0 pb-2 pl-1 tx-bold-3'>
                         i
                     </div>
                 </div>
-                <div className="a tx-lx tx-bold-6">NGO</div>
+                <div className="a tx-lx tx-bold-6">ITY</div>
             </div>
         </Link>
     )

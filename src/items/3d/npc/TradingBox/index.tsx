@@ -234,7 +234,7 @@ const Component = forwardRef(({
 
 
       {/* buy/sell button */}
-      {isSelectedId && selectedHasArray &&
+      {isSelectedId && selectedHasArray && <>
       <mesh castShadow receiveShadow onClick={() => toggleGame()} scale={score.score ? 1 : 3}
         position={[
           !clicked ? position[0] - 0.2 : position[0] + 0.1,
@@ -245,7 +245,12 @@ const Component = forwardRef(({
         <boxGeometry args={[0.1, clicked ? 0.015 : 0.04, 0.05]} />
         <meshStandardMaterial color={clicked ? "red" : "#00ff00"}  />
       </mesh>
-      }
+      
+      <DynaText text={!clicked ? "Send <BUY> Order" : "Send <SELL> Order"} color={!clicked ?  0x33ff33 : 0xff3333}
+          position={new Vector3(!clicked ? position[0] - 0.2 : position[0] + 0.1,position[1]-0.345,position[2]+0.115)}
+          isSelected={isSelectedId}  font={0.05} onClick={()=>{onTextClick()}}
+        />
+      </>}
         
       {clicked &&  <>
       <mesh castShadow receiveShadow scale={score.score ? 1 : 3}
@@ -265,22 +270,49 @@ const Component = forwardRef(({
 
 
       {/* mini buttons */}
+      
+      {isSelectedId && !!tokensArrayArray && <>
+
+        <mesh  castShadow receiveShadow scale={score.score ? 1 : 3}
+          onClick={() => { onTimeframeClick(token, DEFAULT_TIMEFRAME_ARRAY.indexOf(selectedTimeframe)) }}
+          position={[
+            position[0] + 0.35 +(selectedTimeframeIndex*0.04),
+            position[1] +0.05 - (selectedTimeframeIndex == selectedTimeframeIndex ? 0.34 : 0.37),
+            position[2] - 0.12 + (selectedTimeframeIndex*0.1),
+          ]}
+        >
+          <cylinderGeometry args={[0.005, 0.013, 0.015, 3+(selectedTimeframeIndex)]} />
+          <meshStandardMaterial 
+            color={!!tokensArrayArray[selectedTimeframeIndex].state ? `#${selectedTimeframeIndex*28+40}${selectedTimeframeIndex*25+20}${selectedTimeframeIndex*25+20}` : 'gray'} 
+          />
+        </mesh>
+        
+      </>}
       {isSelectedId && !!tokensArrayArray && ["3m","15m","4h"].map((aTimeframe, index) => {
-        return (
-          <mesh key={index} castShadow receiveShadow scale={score.score ? 1 : 3}
+        return (<group key={index}>
+
+        <DynaText text={aTimeframe} color={index == selectedTimeframeIndex ? 0xaa9900 : 0x888888}
+          position={new Vector3(
+            position[0] + 0.25 +(index*0.04),
+            position[1] - (index == index ? 0.34 : 0.37),
+            position[2] - 0.12 + (index*0.1),
+        )}
+          isSelected={isSelectedId}  font={0.04} onClick={()=>{onTextClick()}}
+        />
+          <mesh  castShadow receiveShadow scale={score.score ? 1 : 3}
             onClick={() => { onTimeframeClick(token, DEFAULT_TIMEFRAME_ARRAY.indexOf(aTimeframe)) }}
             position={[
-              position[0] + 0.42 ,
+              position[0] + 0.35 +(index*0.04),
               position[1] - (index == selectedTimeframeIndex ? 0.34 : 0.37),
               position[2] - 0.12 + (index*0.1),
             ]}
           >
-            <cylinderGeometry args={[0.005, 0.018, 0.05, 3+(index)]} />
+            <cylinderGeometry args={[0.005, 0.013, 0.04, 3+(index)]} />
             <meshStandardMaterial 
               color={!!tokensArrayArray[index].state ? `#${index*28+40}${index*25+20}${index*25+20}` : 'gray'} 
             />
           </mesh>
-        )
+        </group>)
       })}
       {isSelectedId && isDowntrend && <>
         <mesh castShadow receiveShadow scale={score.score ? 1 : 3}
@@ -312,7 +344,7 @@ const Component = forwardRef(({
         <mesh castShadow receiveShadow scale={score.score ? 1 : 3}
           onClick={isDowntrend ? trendDown : trendUp}
           rotation={isDowntrend ? [0,-0.5,0] : [0,0.5,0]}
-          position={[position[0] - 0.4, position[1] - 0.35, position[2] - 0.35]}
+          position={[position[0] + 0.4, position[1] - 0.35, position[2] + 0.42]}
         >
           <boxGeometry args={[0.04, 0.025, 0.01]} />
           <meshStandardMaterial color={isDowntrend ? "#7F524D" : "#527F4D" } />
@@ -335,7 +367,7 @@ const Component = forwardRef(({
           isSelected={isSelectedId}  font={0.04} onClick={()=>{onTextClick()}}
         />
         {!!tokensArrayArray &&
-        <DynaText color={selectedHasArray ? "cyan" : "#31958F"}
+        <DynaText color={selectedHasArray ? "#55ff55" : "#31958F"}
          text={selectedHasArray ? "TRADE" : "DEMO"} 
             position={new Vector3(position[0]-0.32,position[1]-0.345,position[2]+0.28)}
             isSelected={isSelectedId}  font={0.04} onClick={()=>{onTextClick()}}
@@ -350,7 +382,7 @@ const Component = forwardRef(({
           <boxGeometry args={[0.025, 0.02, 0.05]} />
           <meshStandardMaterial color={
               !tokensArrayArray ? "#777777" : 
-              isSelectedId ? (!!selectedHasArray ? "cyan" : "#777777") : "#777777" 
+              isSelectedId ? (!!selectedHasArray ? "#558855" : "#31958F") : "#777777" 
             } />
         </mesh>
       }
