@@ -362,7 +362,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                         </div>
                     </div>
 
-                    <div className='tx-lg opaci-50 tx-center Q_xs mt-100'
+                    <div className='tx-lg opaci-50 tx-center Q_xs mt-8'
                          
                     >
                         How to Play?
