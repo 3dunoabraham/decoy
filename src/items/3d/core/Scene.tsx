@@ -363,7 +363,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                         </div>
                     </div>
 
-                    <div className='bg-b-50 px-2 bord-r-5 py-1 w-100'>
+                    <div className='bg-b-50 px-2 bord-r-5 py-1 w-100 Q_xs'>
                                 <div className='tx-lx opaci-chov-50 box-shadow-5 tx-center bg-b-90 bord-r-5 my-2 hover-3'
                                     onClick={()=>{toggleOption("tutorial")}}
                                 >
