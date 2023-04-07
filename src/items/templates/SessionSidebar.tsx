@@ -3,7 +3,7 @@ import LoginBtn from "@/src/items/molecules/auth/LoginBtn";
 import Link from "next/link";
 import Image from "next/image";
 import { BsBox, BsChat, BsFillArchiveFill, BsFillBarChartFill, BsGear, BsInfoCircle, BsPerson, BsStack } from "react-icons/bs";
-import { FaUncharted } from "react-icons/fa";
+import { FaCity, FaUncharted } from "react-icons/fa";
 import { RxDashboard } from "react-icons/rx";
 import { MdOutlineHistory } from "react-icons/md";
 import { useRouter } from "next/router";
@@ -28,6 +28,7 @@ export default function Component({}) {
         farm: <GiWheat />,
         bingo: <GiEightBall />,
         inventory: <MdOutlineInventory2 />,
+        city: <FaCity />,
     }
     
     return (<>

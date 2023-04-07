@@ -117,8 +117,9 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
         app.s__sidebarPages([
             {id:0,label:"History",url:"/agreements/?pair=BTCUSDT",icon:"agreements"},
             // {id:1,label:"Chart",url:"https://www.tradingview.com/chart/EBa5RTfJ/?symbol=BITSTAMP%3ABTCUSD",icon:"users"},
-            {id:2,label:"Bit Bingo Boom",url:"/",icon:"bingo"},
+            {id:2,label:"Bit-Bingo (Trade Cards)",url:"/",icon:"bingo"},
             {id:2,label:"Bit To Crop",url:"/demo",icon:"farm"},
+            {id:2,label:"Bit Token Capital",url:"/demo",icon:"city"},
         ])
     },[])
     const [clientIP, s__clientIP] = useState('');
