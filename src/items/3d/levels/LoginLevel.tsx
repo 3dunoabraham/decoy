@@ -103,22 +103,22 @@ export default function Component({
                     <meshStandardMaterial attach="material" color="#56C779" opacity={0.5} transparent={true} />
                 </Cylinder>
 
-                <DynaText text={"Join"} color={0xaaaaaa}
+                <DynaText text={"Play"} color={0xaaaaaa}
                     position={new Vector3(0,0,0.36)} rotation={[0,0,0]}
                     isSelected={true}  font={0.25} onClick={()=>{}}
                 />
 
-                <DynaText text={"Join"} color={0xaaaaaa}
+                <DynaText text={"Play"} color={0xaaaaaa}
                     position={new Vector3(0,0,-0.36)} rotation={[0,Math.PI,0]}
                     isSelected={true}  font={0.25} onClick={()=>{}}
                 />
 
-                <DynaText text={"Join"} color={0xaaaaaa}
+                <DynaText text={"Play"} color={0xaaaaaa}
                     position={new Vector3(0.36,0,0)} rotation={[0,Math.PI/2,0]}
                     isSelected={true}  font={0.25} onClick={()=>{}}
                 />
 
-                <DynaText text={"Join"} color={0xaaaaaa}
+                <DynaText text={"Play"} color={0xaaaaaa}
                     position={new Vector3(-0.36,0,0)} rotation={[0,-Math.PI/2,0]}
                     isSelected={true}  font={0.25} onClick={()=>{}}
                 />

@@ -53,7 +53,7 @@ const Page: NextPageWithLayout = ({}) => {
             <div className="pos-abs h-min-100vh  w-100 flex z-10 flex-align-stretch top-0 left-0"
             >
                 <Suspense> {/* power is dynamic, argument sent is hardcoded and useless */}
-                    {isClient && <Scene live={true} ref={$boxContainer}>
+                    {isClient && <Scene live={true} ref={$boxContainer} theuserstart={theuserstart}>
                         <LiteLevel {...{ power:null, form:null, onTextClick:null, optsToggler: null,
                                 s__tokensArrayObj: null, toggleTrade:null, xOut:null, yOut:null, zOut:null,
                                 tokensArrayObj: null, onTimeframeClick: null

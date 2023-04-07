@@ -24,6 +24,7 @@ import { DEFAULT_TIMEFRAME_ARRAY } from '@/components/scripts/constants';
 import { AppContext } from '@/scripts/contexts/AppContext';
 import { fetchPost } from '@/scripts/helpers/fetchHelper';
 import Link from 'next/link';
+import { BiQuestionMark } from 'react-icons/bi';
 
 export const tokenColors = {
     "btc": "#EE8E1B",
@@ -44,7 +45,7 @@ export const tokenIcons
     "link": <SiChainlink />,
     "ftm": <SiFantom />,
 }
-const Component = forwardRef(({live=false,children=null}:any, ref)=>{
+const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, ref)=>{
     const DEFAULT_CARPORT_OTPS = {
         frontwall: {bool:false},
         backwall: {bool:false},
@@ -53,6 +54,7 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
         ceil: {bool:false},
         floor: {bool:false},
         services: {bool:false},
+        tutorial: {bool:true},
 
         
         house_frontwall: {bool:false},
@@ -138,32 +140,38 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
     /****** UPDATE ******/
     
     const toggleTrade = (token, {value, price}) => {
+        alert()
         s__lastpower(value)
         { 
             setToken(token)
             if (value > 0) {
                 // console.log(`Buy ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`, "new", power+value)
                 
-                startOrder(token, price)
-                s__power(parseFloat(""+parseDecimals(power+value)))
+                let trigger = prompt(`Enter trigger price (${parseDecimals(price)})`,``)//`${parseFloat(price)*0.99}`)
+                if (!!trigger) 
+                {
+                    startOrder(token, price, trigger)
+                    alert()
+                    s__power(parseFloat(""+parseDecimals(power+value)))
+                }
             }
             else {
-                // console.log(`Sell ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`,"new", (power-lastpower))
+        alert()
+        // console.log(`Sell ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`,"new", (power-lastpower))
                 s__power(parseFloat(""+parseDecimals(power-0.05)))
             }
         }
 
     }
     
-    const startOrder = async (token, price) => {
+    const startOrder = async (token, price, trigger) => {
+        alert()
         
-        let target = prompt("Enter trigger price","")
-        if (!target) return
 
         try {
             const res = await fetchPost('/api/order',{
                 symbol: token.toUpperCase()+"USDT",
-                trigger: target,
+                trigger: trigger,
                 price,
             });
             const ress = await res.json();
@@ -228,6 +236,29 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
     /****** HTML ******/
     return (
     <div className='h-min-500px w-100 flex-col g-b-20 bord-r- flex-align-stretch flex-justify-stretch pos-rel'>
+        
+        {theuserstart.data && theuserstart.data.totalAttempts == 0 && optsToggler.tutorial.bool &&
+            <div className='pos-abs top-0 left-0 w-100 h-100 bg-glass-5 z-100 flex-col'>
+                <div className='tx-white'>
+                    <div className='tx-lg opaci-50 tx-center'
+                         
+                    >
+                        How to Play?
+                    </div>
+                    <div className='tx-lx flex-col gap-4 flex-align-start my-8'>
+                        <div className='flex flex-align-end gap-2'>1. Join <div className='tx-xl tx-shadow-br-5' style={{color:"gold"}}>BTC</div></div>
+                        <div className='flex flex-align-end gap-2'>2. Turn <div className='tx-xl tx-shadow-br-5' style={{color:"cyan"}}>ON</div></div>
+                        <div className='flex flex-align-end gap-2'>3. Send <div className='tx-xl tx-shadow-br-5' style={{color:"green"}}>TRADE</div></div>
+                    </div>
+                    {/* <div>{optsToggler.tutorial.bool ? "y" : "n"}</div> */}
+                    <div className='tx-xl opaci-chov-50 box-shadow-5 tx-center bg-b-90 bord-r-5'
+                         onClick={()=>{toggleOption("tutorial")}}
+                    >
+                        Start!
+                    </div>
+                </div>
+            </div>
+        }
         {!!uid &&
             <div className="flex pos-abs top-0 left-0  bord-r- pa-2 ma-2">
                 <div className="flex-col flex-align-start z-700 gap-1  mt-100 ">
@@ -265,8 +296,15 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
                                 <div className="tx-  tx-white tx-shadow-b-1">Power: {power}</div>
                             </div>
                             <hr className='bg-white w-100 mt-2'  />
-                            <div className="flex-center gap-1 tx-shadow-b-1 ">
-                                <Link href="/dashboard" className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg">
+                            <div className="flex-col  flex-align-start gap-1 tx-shadow-b-1 ">
+                                <div onClick={()=>{toggleOption("tutorial")}}
+                                    className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg"
+                                >
+                                    <BiQuestionMark /> <i>How to Play?</i>
+                                </div>
+                                <Link href="/dashboard" target='_blank'
+                                    className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg"
+                                >
                                     <FaExternalLinkAlt /> <i>Dashboard</i>
                                 </Link>
                             </div>
@@ -330,13 +368,16 @@ const Component = forwardRef(({live=false,children=null}:any, ref)=>{
                     power, form, onTextClick, onTimeframeClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj, s__tokensArrayObj
                 }} />
             </>}
+
             {!!uid && <>
                 {childrenWithProps}
             </>}
+            {
 
-            <RotatingPointLight distance={30} {...{color:"#ffddcc", intensity:1.2, position:[5,1,10]}} 
-                speed={10000}
-            />
+                <RotatingPointLight distance={30} {...{color:"#ffddcc", intensity:1.2, position:[5,1,10]}} 
+                    speed={10000}
+                />
+            }
             
             {/* {live && <fog attach="fog" args={['#2C2D32', 5, 10]} /> } */}
             {!live && <fog attach="fog" args={['#C5E4E4', 5, 20]} /> }

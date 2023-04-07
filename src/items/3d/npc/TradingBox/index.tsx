@@ -330,19 +330,24 @@ const Component = forwardRef(({
           position={new Vector3(position[0]-0.44,position[1]-0.32,position[2]+0.28)}
           isSelected={isSelectedId}  font={0.04} onClick={()=>{onTextClick()}}
         />
-        <DynaText color={selectedHasArray ? 0xaaaaaa : 0x333333}
-         text={selectedHasArray ? "TRADE" : "OFF"} 
+        {!!tokensArrayArray &&
+        <DynaText color={selectedHasArray ? "cyan" : "cyan"}
+         text={selectedHasArray ? "TRADE" : "TRADE"} 
             position={new Vector3(position[0]-0.32,position[1]-0.32,position[2]+0.28)}
             isSelected={isSelectedId}  font={0.04} onClick={()=>{onTextClick()}}
           />
-      {
+        }
+      {!!tokensArrayArray &&
         <mesh castShadow receiveShadow scale={score.score ? 1 : 3}
           onClick={selectedHasArray ? turnOff : turnOn}
           position={[ position[0] - 0.32, position[1] - 0.35, position[2] + 0.38, ]}
           rotation={[selectedHasArray ? -0.25 : 0.25 ,0,0]}          
         >
           <boxGeometry args={[0.025, 0.02, 0.05]} />
-          <meshStandardMaterial color={selectedHasArray ? "#44aa44" : "#777777" } />
+          <meshStandardMaterial color={
+              !tokensArrayArray ? "#777777" : 
+              isSelectedId ? (!!selectedHasArray ? "cyan" : "#777777") : "#777777" 
+            } />
         </mesh>
       }
     </group>
