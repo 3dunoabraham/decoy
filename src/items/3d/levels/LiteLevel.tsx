@@ -259,7 +259,7 @@ export default function Component({
             />
             {!(app.userstart.totalAttempts > 0 || hasAnyToken) && 
                 <DynaText text={"Sync here ->"}  color={"#ff9900"}
-                position={new Vector3(-0.85,-0.7,0.6)} font={0.15}  rotation={[0,0.5,0]}
+                position={new Vector3(-0.75,-0.6,0.1)} font={0.15}  rotation={[-0.5,0.5,0]}
                 />
             }
             {/* {!(app.userstart.totalAttempts > 0 || hasAnyToken) && 
