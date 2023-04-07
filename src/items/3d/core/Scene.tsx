@@ -253,20 +253,25 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                     </div>
                     <div className='tx-lx flex-col gap-4 flex-align-start mb-8'>
                         <div className='flex flex-align-end gap-2'>
-                            1. Turn 
+                            <div className='opaci-50'>1.</div> Turn 
                             <div className='tx-xl pt-1 tx-shadow-br-5' style={{color:"gold"}}>sync</div>
                             on
                         </div>
                         <div className='flex flex-align-end gap-2'>
-                            2. Set
+                            <div className='opaci-50'>2.</div> Set
                             <div className='tx-xl pt-1 tx-shadow-br-5' style={{color:"cyan"}}>live</div>
                             mode
                         </div>
                         <div className='flex flex-align-end gap-2'>
-                            3. Send
+                            <div className='opaci-50'>3.</div> Send
                             <div className='tx-xl pt-1 tx-shadow-br-5' style={{color:"#00ff00"}}>trade</div>
                             order
                         </div>
+                    <div className='tx-sm opaci-50 tx-center'
+                         
+                    >
+                        * All players receive a minimum of free 3 orders per 3 minutes (non-stackeable)
+                    </div>
                         
                         {/* <details>
                             <summary className='opaci-chov--50 tx-white tx-lg bg-b-50 box-shadow-5 pa-2 bg-glass-5'
@@ -370,6 +375,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
 
         {!!uid && (live) &&
             <div className="flex pos-abs top-0 right-0  bord-r- pa-2 ma-2">
+                {theuserstart.data && !(theuserstart.data.totalAttempts == 0 && optsToggler.tutorial.bool) &&
                 <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray mt-100 ">
 
                     <div className="flex-center gap-1 tx-shadow-b-1 ">
@@ -380,7 +386,8 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                     </div>
                     <LiteIconsList {...{toggleOption, optsToggler,}} />
                 </div>
-            </div>
+            }
+        </div>
         }
 
 
@@ -400,14 +407,16 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
             </div>
         }
 
-        <div className="flex-col pos-abs bottom-0 right-0  bord-r- pa-2 ma-2 b w-100">
-            <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray ">
-                <div className="flex-center gap-1 tx-bold-8 tx-ls-5 px-5 py-2 bg-b-20 ma-2 tx-shadow-b-3">
-                    Score: {score.maxScore} | Speed: {parseDecimals(score.velocityX)}
-                </div>
+        {theuserstart.data && !(theuserstart.data.totalAttempts == 0 && optsToggler.tutorial.bool) &&
+            <div className="flex-col pos-abs bottom-0 right-0  bord-r- pa-2 ma-2 b w-100">
+                <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray ">
+                    <div className="flex-center gap-1 tx-bold-8 tx-ls-5 px-5 py-2 bg-b-20 ma-2 tx-shadow-b-3">
+                        Score: {score.maxScore} | Speed: {parseDecimals(score.velocityX)}
+                    </div>
 
+                </div>
             </div>
-        </div>
+        }
 
 
         <Canvas shadows  onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onMouseMove={handleMouseMove}
