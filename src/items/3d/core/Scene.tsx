@@ -252,11 +252,23 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                         How to Play?
                     </div>
                     <div className='tx-lx flex-col gap-4 flex-align-start mb-8'>
-                        <div className='flex flex-align-end gap-2'>1. Join <div className='tx-xl tx-shadow-br-5' style={{color:"gold"}}>Block</div></div>
-                        <div className='flex flex-align-end gap-2'>2. Turn <div className='tx-xl tx-shadow-br-5' style={{color:"cyan"}}>ON</div></div>
-                        <div className='flex flex-align-end gap-2'>3. Press <div className='tx-xl tx-shadow-br-5' style={{color:"green"}}>BUY</div></div>
+                        <div className='flex flex-align-end gap-2'>
+                            1. Turn 
+                            <div className='tx-xl pt-1 tx-shadow-br-5' style={{color:"gold"}}>sync</div>
+                            on
+                        </div>
+                        <div className='flex flex-align-end gap-2'>
+                            2. Set
+                            <div className='tx-xl pt-1 tx-shadow-br-5' style={{color:"cyan"}}>live</div>
+                            mode
+                        </div>
+                        <div className='flex flex-align-end gap-2'>
+                            3. Send
+                            <div className='tx-xl pt-1 tx-shadow-br-5' style={{color:"#00ff00"}}>trade</div>
+                            order
+                        </div>
                         
-                        <details>
+                        {/* <details>
                             <summary className='opaci-chov--50 tx-white tx-lg bg-b-50 box-shadow-5 pa-2 bg-glass-5'
                                 onClick={()=>{}}
                             >
@@ -288,13 +300,13 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                                     </Link>
                                 </div>
                             </div>
-                        </details>
+                        </details> */}
                     </div>
                     {/* <div>{optsToggler.tutorial.bool ? "y" : "n"}</div> */}
                     <div className='tx-xl opaci-chov-50 box-shadow-5 tx-center bg-b-90 bord-r-5'
                          onClick={()=>{toggleOption("tutorial")}}
                     >
-                        Start!
+                        Start !
                     </div>
                 </div>
             </div>

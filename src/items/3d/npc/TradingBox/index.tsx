@@ -164,13 +164,13 @@ const Component = forwardRef(({
       }
       {!isSelectedId &&
         <DynaText text={token+"" || ""} color={isSelectedId ? 0x222222 : 0x222222}
-          position={new Vector3(position[0]-0.2,position[1]-0.32,position[2]-0.3)}
-          isSelected={isSelectedId}  font={0.25} onClick={()=>{onTextClick()}}
+          position={new Vector3(position[0]-0.18,position[1]-0.32,position[2]-0.3)}
+          isSelected={isSelectedId}  font={0.2} onClick={()=>{onTextClick()}}
         />
       }
       {isSelectedId &&
         <DynaText text={token+"" || ""} color={isSelectedId ? tokenColor : tokenColor}
-          position={new Vector3(position[0]-0.2,position[1]-0.2,position[2]-0.3)} rotation={[-Math.PI/4,0,0]}
+          position={new Vector3(position[0]-0.18,position[1]-0.2,position[2]-0.3)} rotation={[-Math.PI/4,0,0]}
           isSelected={isSelectedId}  font={0.25} onClick={()=>{onTextClick()}}
         />
       }
@@ -243,7 +243,7 @@ const Component = forwardRef(({
         ]}        
       >
         <boxGeometry args={[0.1, clicked ? 0.015 : 0.04, 0.05]} />
-        <meshStandardMaterial color={clicked ? "red" : "#15C771"}  />
+        <meshStandardMaterial color={clicked ? "red" : "#00ff00"}  />
       </mesh>
       }
         
@@ -275,7 +275,7 @@ const Component = forwardRef(({
               position[2] - 0.12 + (index*0.1),
             ]}
           >
-            <cylinderGeometry args={[0.009, 0.018, 0.02, 3+(index*2)]} />
+            <cylinderGeometry args={[0.005, 0.018, 0.05, 3+(index)]} />
             <meshStandardMaterial 
               color={!!tokensArrayArray[index].state ? `#${index*28+40}${index*25+20}${index*25+20}` : 'gray'} 
             />
@@ -304,14 +304,18 @@ const Component = forwardRef(({
           <meshStandardMaterial color={"#FEEA4D"} />
         </mesh>
       }
+
+
+
+      {/* trend button */}
       {!!tokensArrayArray && 
         <mesh castShadow receiveShadow scale={score.score ? 1 : 3}
           onClick={isDowntrend ? trendDown : trendUp}
           rotation={isDowntrend ? [0,-0.5,0] : [0,0.5,0]}
-          position={[position[0] - 0.38, position[1] - 0.35, position[2] + 0.15]}
+          position={[position[0] - 0.4, position[1] - 0.35, position[2] - 0.35]}
         >
-          <boxGeometry args={[0.05, 0.04, 0.015]} />
-          <meshStandardMaterial color={isDowntrend ? "red" : "green" } />
+          <boxGeometry args={[0.04, 0.025, 0.01]} />
+          <meshStandardMaterial color={isDowntrend ? "#7F524D" : "#527F4D" } />
         </mesh>
       }
 
@@ -323,16 +327,16 @@ const Component = forwardRef(({
         position={[ position[0] - 0.44, position[1] - 0.35, position[2] + 0.38,]}
       >
         <boxGeometry args={[0.025, 0.02, 0.05]} />
-        <meshStandardMaterial color={!tokensArrayArray ? "#776666" : "#44aa44"} />
+        <meshStandardMaterial color={!tokensArrayArray ? "#776666" : "#558855"} />
       </mesh>
       
-      <DynaText text={!!tokensArrayArray ? "LIVE" : "OFF"} color={!!tokensArrayArray ?  0xaaaaaa : 0x888888}
+      <DynaText text={!!tokensArrayArray ? "SYNC" : "OFF"} color={!!tokensArrayArray ?  0xaaaaaa : 0x888888}
           position={new Vector3(position[0]-0.44,position[1]-0.345,position[2]+0.28)}
           isSelected={isSelectedId}  font={0.04} onClick={()=>{onTextClick()}}
         />
         {!!tokensArrayArray &&
-        <DynaText color={selectedHasArray ? "cyan" : "cyan"}
-         text={selectedHasArray ? "TRADE" : "TRADE"} 
+        <DynaText color={selectedHasArray ? "cyan" : "#31958F"}
+         text={selectedHasArray ? "TRADE" : "DEMO"} 
             position={new Vector3(position[0]-0.32,position[1]-0.345,position[2]+0.28)}
             isSelected={isSelectedId}  font={0.04} onClick={()=>{onTextClick()}}
           />

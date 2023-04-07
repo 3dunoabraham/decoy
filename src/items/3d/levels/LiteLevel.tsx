@@ -253,7 +253,7 @@ export default function Component({
                 form={form} askAI={askAI}
             />
             {!(app.userstart.totalAttempts > 0 || hasAnyToken) && 
-                <DynaText text={"Join here ->"}  color={"#ffffff"}
+                <DynaText text={"Sync here ->"}  color={"#ff9900"}
                 position={new Vector3(-0.3,-0.65,-0.4)} font={0.15}  rotation={[0,0,0]}
                 />
             }
@@ -349,7 +349,7 @@ export default function Component({
                     tokensArrayArray={"btc" in tokensArrayObj ? tokensArrayObj["btc"] : null}
                 /> 
             </>}
-            {app.userstart.totalAttempts > 0 && <>
+            {app.userstart.totalAttempts > 0 || hasAnyToken && <>
                 <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="eth" refetchInterval={selectedToken == "eth" ? 1000 : 60000}
                     position={[-xOut/2,-0.35,zOut/2]} onTextClick={()=>{onTextClick("eth")}} unselectedColor={"#50545B"}
                     setVelocityY={(data)=>{toggleTrade("eth",data)}}
@@ -359,7 +359,7 @@ export default function Component({
                     tokensArrayArray={"eth" in tokensArrayObj ? tokensArrayObj["eth"] : null}
                 /> 
             </>}
-            {app.userstart.totalAttempts > 0 && <>
+            {app.userstart.totalAttempts > 0 || hasAnyToken && <>
                 <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="link" refetchInterval={selectedToken == "link" ? 1000 : 60000}
                     position={[xOut/2,-0.35,zOut/2]} onTextClick={()=>{onTextClick("link")}} unselectedColor={"#50545B"}
                     setVelocityY={(data)=>{toggleTrade("link",data)}}
@@ -369,7 +369,7 @@ export default function Component({
                     tokensArrayArray={"link" in tokensArrayObj ? tokensArrayObj["link"] : null}
                 /> 
             </>}
-            {app.userstart.totalAttempts > 0 && <>
+            {app.userstart.totalAttempts > 0 || hasAnyToken && <>
                 <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="ftm" refetchInterval={selectedToken == "ftm" ? 1000 : 60000}
                     position={[-xOut/2,-0.35,-zOut/2]} onTextClick={()=>{onTextClick("ftm")}} unselectedColor={"#50545B"}
                     setVelocityY={(data)=>{toggleTrade("ftm",data)}}
