@@ -30,6 +30,7 @@ import { BiQuestionMark } from 'react-icons/bi';
 import DynaText from '../DynaText';
 import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
 import { BsInfoCircleFill } from 'react-icons/bs';
+import { MdClose } from 'react-icons/md';
 
 export const tokenColors = {
     "btc": "#EE8E1B",
@@ -143,7 +144,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
     },[xOut, zOut])
     const [score, s__score] = useState({score:0,maxScore:0,velocityX:0,velocityY:0})
     const fffooovvv = useMemo(()=>{
-        return yOut * 70
+        return yOut * 60
     },[])
 
 
@@ -315,7 +316,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                     <div className='tx-lg opaci-50 tx-center Q_sm_x'
                          
                     >
-                        How to Play?
+                        How to play?
                     </div>
 
                     <div className='tx-lx flex-col gap-4 flex-align-start mb-8 Q_sm_x'>
@@ -335,7 +336,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                             order
                         </div>
                         <div className='bg-b-50 px-2 bord-r-5 py-1 w-100'>
-                            <div className='tx-xl opaci-chov-50 box-shadow-5 tx-center bg-b-90 bord-r-5 my-2 w-100'
+                            <div className='tx-xl opaci-chov-50 box-shadow-5 tx-center bg-b-90 bord-r-5 my-2 w-100 hover-3'
                                 onClick={()=>{toggleOption("tutorial")}}
                             >
                                 Start !
@@ -362,38 +363,42 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                         </div>
                     </div>
 
-                    {/* <div className='tx-lg opaci-50 tx-center Q_xs  '
-                         
-                    >
-                        How to Play?
-                    </div> */}
-
-                    <div className='tx-lg  flex-col gap-4 flex-align-start px-4 mb-8 Q_xs '>
-                        <div className='flex flex-align-end gap-2'>
-                            <div className='opaci-50'>1.</div> Turn 
-                            <div className='tx-lx pt-1 tx-shadow-br-5' style={{color:"gold"}}>sync</div>
-                            on
-                        </div>
-                        <div className='flex flex-align-end gap-2'>
-                            <div className='opaci-50'>2.</div> Set
-                            <div className='tx-lx pt-1 tx-shadow-br-5' style={{color:"cyan"}}>live</div>
-                            mode
-                        </div>
-                        <div className='flex flex-align-end gap-2'>
-                            <div className='opaci-50'>3.</div> Send
-                            <div className='tx-lx pt-1 tx-shadow-br-5' style={{color:"#00ff00"}}>trade</div>
-                            order
-                        </div>
-                        <div className='bg-b-50 px-2 bord-r-5 py-1 w-100'>
-                                <div className='tx-lx opaci-chov-50 box-shadow-5 tx-center bg-b-90 bord-r-5 my-2'
+                    <div className='bg-b-50 px-2 bord-r-5 py-1 w-100'>
+                                <div className='tx-lx opaci-chov-50 box-shadow-5 tx-center bg-b-90 bord-r-5 my-2 hover-3'
                                     onClick={()=>{toggleOption("tutorial")}}
                                 >
                                     Start !
                                 </div>
                         </div>
+                    <div className='tx-lg opaci-50 tx-center Q_xs  '
+                         
+                    >
+                        How to play?
+                    </div>
+
+                    <div className='tx-lg  flex-col gap-1 flex-align-start px-4 mb-8 Q_xs '>
+                        <div className='flex flex-align-end gap-2'>
+                            <div className='opaci-50'>0.</div> <div className='opaci-50'>Press</div>
+                            <div className='tx-lx  tx-shadow-br-5' style={{color:"beige"}}>start</div>
+                        </div>
+                        <div className='flex flex-align-end gap-2'>
+                            <div className='opaci-50'>1.</div> Turn 
+                            <div className='tx-lx  tx-shadow-br-5' style={{color:"gold"}}>sync</div>
+                            on
+                        </div>
+                        <div className='flex flex-align-end gap-2'>
+                            <div className='opaci-50'>2.</div> Set
+                            <div className='tx-lx  tx-shadow-br-5' style={{color:"cyan"}}>demo</div>
+                            off
+                        </div>
+                        <div className='flex flex-align-end gap-2'>
+                            <div className='opaci-50'>3.</div> Send
+                            <div className='tx-lx  tx-shadow-br-5' style={{color:"#00ff00"}}>buy</div>
+                            order
+                        </div>
                             <details className='ops-rel'>
                                 <summary className='w-100 opaci-chov--50'>
-                                    Details
+                                    Game Details
                                 </summary>
                                 <div className='pos-abs flex-col flex-align-stretch  w-100 left-0 pt-2'>
                                 
@@ -425,7 +430,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                     <div onClick={()=>{toggleOption("tutorial")}}
                         className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg"
                     >
-                        <BsInfoCircleFill /> <i>How to Play?</i>
+                        <BsInfoCircleFill /> <i>Menu</i>
                     </div>
                 </>}
                 {!!optsToggler.tutorial.bool && <>
@@ -450,24 +455,24 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                     <div onClick={()=>{toggleOption("tutorial")}}
                         className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg pt-2 Q_sm_x"
                     >
-                        <BsInfoCircleFill /> <i>Close Detail</i>
+                        <MdClose /> <i>Close Menu</i>
                     </div>
                 </>}
             </div>
             <div className='tx-white   pa-3 pos-abs dg right-0 bottom-0 -y-100  z-999 tx-ls-1 Q_xs'>
                 {!!optsToggler.tutorial.bool && <>
-                    <div className="flex-col  flex-align-start gap-1 tx-shadow-b-1 Q_xs">
+                    <div className="flex-col  flex-align-end gap-1 tx-shadow-b-1 Q_xs">
                         <Link href="/dashboard" target='_blank'
                             className="tx- opaci-chov--50  tx-white tx-shadow-b-1 py-2 tx-lg"
                         >
-                            <FaExternalLinkAlt /> <i>Dashboard</i>
+                            <i>Dashboard</i> <FaExternalLinkAlt /> 
                         </Link>
                     </div>
                     
                     <div onClick={()=>{toggleOption("tutorial")}}
                         className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg py-2  Q_xs"
                     >
-                        <BsInfoCircleFill /> <i>Close Detail</i>
+                        <i>Close Menu</i> <MdClose /> 
                     </div>
                 </>}
             </div>
@@ -488,7 +493,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                 </div>
             </div>
         }
-        {!!uid && // !optsToggler.tutorial.bool &&
+        {!!uid && !optsToggler.tutorial.bool &&
             <div className="flex pos-abs top-0 left-0  bord-r- pa-2 ma-2">
                 <div className="flex-col flex-align-start z-700 gap-1  mt-100 ">
 
