@@ -24,7 +24,7 @@ import LiteIconsList from '../overlay/LiteIconsList';
 import LoginLevel from '../levels/LoginLevel';
 import { DEFAULT_TIMEFRAME_ARRAY } from '@/components/scripts/constants';
 import { AppContext } from '@/scripts/contexts/AppContext';
-import { fetchPost } from '@/scripts/helpers/fetchHelper';
+import { fetchPost, fetchPut } from '@/scripts/helpers/fetchHelper';
 import Link from 'next/link';
 import { BiQuestionMark } from 'react-icons/bi';
 import DynaText from '../DynaText';
@@ -262,11 +262,30 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
         s__uid(LS_uid)
         if (!!LS_uid) {  app.alert("success","Logged in!")}
     },[])
+    const askTicket = async () => {
+        console.log("askTicketaskTicketaskTicket")
+        try {
+            const res = await fetchPut('/api/order',{
+            });
+            const ress = await res.json();
+            if (res.status >= 200 && res.status <= 300)
+            {
+                app.alert("success","request saved")
+            } else {
+                app.alert("error","request not completed")
+            }
+            return ress
+        } catch (e) {
+            app.alert("error","request not completed")
+            return false
+        }
+
+    }
     const childrenWithProps = React.Children.map(children, (child) => {
         if (React.isValidElement<any>(child)) {
           return React.cloneElement(child, {
                 power, form, onTimeframeClick, onTextClick, toggleTrade, xOut, yOut,
-                zOut, optsToggler, tokensArrayObj, s__tokensArrayObj
+                zOut, optsToggler, tokensArrayObj, s__tokensArrayObj, askTicket
             });
         }
         return child;
@@ -285,7 +304,6 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
         if (!theuserstart.data) return ""
         return parseUTCString(new Date(theuserstart.data.datenow)).replace("T","===")
     }, [theuserstart.data])
-
 
     /****** HTML ******/
     return (
@@ -400,7 +418,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
             <div className='tx-white   pa-3 pos-abs dg left-0 bottom-0 -y-100  z-999 tx-ls-1'>
                 <div className='pb-3 flex flex-align-end gap-2'>
                     <div className='opaci-75 tx-lg'>Tickets:</div>
-                    <div className='opaci- tx-bold tx-ls-3 tx-lgx'>{theuserstart.data.totalAttempts || 0}</div>
+                    <div className='opaci- tx-bold tx-ls-3 tx-lgx'>{theuserstart.data.attempts || 0}</div>
                 </div>    
                 {!optsToggler.tutorial.bool && <>
                 
@@ -413,7 +431,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                 {!!optsToggler.tutorial.bool && <>
                     <div className='pb-3 flex flex-align-end gap-2'>
                         <div className='opaci-50 tx-'>Total Orders:</div>
-                        <div className='opaci-75 tx-bold tx-ls-3 tx-lg'>{theuserstart.data.attempts || 0}</div>
+                        <div className='opaci-75 tx-bold tx-ls-3 tx-lg'>{theuserstart.data.totalAttempts || 0}</div>
                     </div>    
                     <div className='pb-3'>
                         <div className='opaci-50 tx-'>LAST UPDATE:</div>
@@ -546,7 +564,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
             
             {!uid && <>
                 <LoginLevel {...{
-                    s__uid, uid,
+                    s__uid, uid, askTicket,
                     power, form, onTextClick, onTimeframeClick, toggleTrade, 
                     xOut, yOut, zOut, optsToggler, tokensArrayObj,theuserstart, s__tokensArrayObj
                 }} />

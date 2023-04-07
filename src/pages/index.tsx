@@ -57,7 +57,7 @@ const Page: NextPageWithLayout = ({}) => {
                     {isClient && <Scene live={true} ref={$boxContainer} theuserstart={theuserstart}>
                         <LiteLevel {...{ power:null, form:null, onTextClick:null, optsToggler: null,
                                 s__tokensArrayObj: null, toggleTrade:null, xOut:null, yOut:null, zOut:null,
-                                tokensArrayObj: null, onTimeframeClick: null
+                                tokensArrayObj: null, onTimeframeClick: null, askTicket: null,
                             }}
                         />
                     </Scene>}

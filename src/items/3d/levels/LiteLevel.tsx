@@ -39,7 +39,7 @@ import DynaText from "../DynaText";
 // }
 
 export default function Component({
-    power, form, onTextClick, onTimeframeClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj, s__tokensArrayObj
+    power, form, onTextClick, onTimeframeClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj, s__tokensArrayObj, askTicket
 }) {
     const app = useContext(AppContext)
     
@@ -73,6 +73,11 @@ export default function Component({
         console.log("main().catch(console.error)")
     }
     const [showPhysics, s__showPhysics] = useState(false)
+    useEffect(()=>{
+        console.log("changed physics")
+        askTicket()
+
+    },[showPhysics])
     // useEffect(()=>{
     //     console.log("asdasd", tokensArrayObj)
     // },[tokensArrayObj])

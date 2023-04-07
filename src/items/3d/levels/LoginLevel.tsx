@@ -22,7 +22,7 @@ import nouns from '@/scripts/nouns.json'
 extend({ TextGeometry })
 
 export default function Component({
-    power, form, onTextClick, onTimeframeClick, toggleTrade, xOut, yOut, zOut, optsToggler, s__uid, uid, theuserstart
+    power, form, onTextClick, onTimeframeClick, toggleTrade, xOut, yOut, zOut, optsToggler, s__uid, uid, theuserstart, askTicket
 }) {
     const app = useContext(AppContext)
     const font = new FontLoader().parse(myFont);
