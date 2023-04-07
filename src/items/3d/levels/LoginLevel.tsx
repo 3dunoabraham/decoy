@@ -37,7 +37,7 @@ extend({ TextGeometry })
 //  }
 
 export default function Component({
-    power, form, onTextClick, onTimeframeClick, toggleTrade, xOut, yOut, zOut, optsToggler, s__uid, uid
+    power, form, onTextClick, onTimeframeClick, toggleTrade, xOut, yOut, zOut, optsToggler, s__uid, uid, theuserstart
 }) {
     const app = useContext(AppContext)
     const font = new FontLoader().parse(myFont);
@@ -60,6 +60,7 @@ export default function Component({
         s__loadings({join:false})
         s__uid(res)
         s__LS_uid(res)
+        theuserstart.refetch()
 
         // window.location.reload()
         

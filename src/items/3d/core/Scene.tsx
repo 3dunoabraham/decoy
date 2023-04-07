@@ -267,10 +267,24 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                             <div className='tx-xl pt-1 tx-shadow-br-5' style={{color:"#00ff00"}}>trade</div>
                             order
                         </div>
+                        <div className='bg-b-50 px-2 bord-r-5 py-1'>
+                    <div className='tx-xl opaci-chov-50 box-shadow-5 tx-center bg-b-90 bord-r-5 my-2'
+                         onClick={()=>{toggleOption("tutorial")}}
+                    >
+                        Start !
+                    </div>
                     <div className='tx-sm opaci-50 tx-center'
                          
                     >
-                        * All players receive a minimum of free 3 orders per 3 minutes (non-stackeable)
+                        3 free virtual orders every 3 minutes that cannot be stacked
+                    </div>
+                    <div className='tx-sm  tx-center flex flex-justify-center gap-1'
+                         
+                    >
+                        <div className='opaci-50'>* This message will dissapear once you</div>
+                        <div className='tx-bold'>level up</div>
+                        <div>(send trade order)</div>
+                    </div>
                     </div>
                         
                         {/* <details>
@@ -308,11 +322,6 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                         </details> */}
                     </div>
                     {/* <div>{optsToggler.tutorial.bool ? "y" : "n"}</div> */}
-                    <div className='tx-xl opaci-chov-50 box-shadow-5 tx-center bg-b-90 bord-r-5'
-                         onClick={()=>{toggleOption("tutorial")}}
-                    >
-                        Start !
-                    </div>
                 </div>
             </div>
         }
@@ -427,7 +436,8 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
             {!uid && <>
                 <LoginLevel {...{
                     s__uid, uid,
-                    power, form, onTextClick, onTimeframeClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj, s__tokensArrayObj
+                    power, form, onTextClick, onTimeframeClick, toggleTrade, 
+                    xOut, yOut, zOut, optsToggler, tokensArrayObj,theuserstart, s__tokensArrayObj
                 }} />
             </>}
 

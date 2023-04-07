@@ -65,8 +65,8 @@ const Page: NextPageWithLayout = ({}) => {
             {!!uid && !!theuserstart.data &&
                 <div className='tx-white   pa-3 pos-abs dg left-0 bottom-0 -y-100  z-999 tx-ls-1'>
                     <div className='pb-3'>
-                        <div className='opaci-50 tx-'>Daily Orders:</div>
-                        <div className='opaci-75 tx-bold tx-ls-3 tx-lg'>{theuserstart.data.attempts || 0}/3</div>
+                        <div className='opaci-50 tx-'>Total Orders:</div>
+                        <div className='opaci-75 tx-bold tx-ls-3 tx-lg'>{theuserstart.data.totalAttempts || 0}</div>
                         
                         {/* {theuserstart.data.totalAttempts}={attemptRatio} */}
                     </div>    
