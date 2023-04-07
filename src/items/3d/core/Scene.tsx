@@ -448,6 +448,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                     <GiPerspectiveDiceSixFacesRandom />
                 </div>
                 <input type="text" value={form.username} id="username" name="username" maxLength={30}
+                    onSubmit={signup}
                     placeholder='Username' className='tx-lgx w-max-220px z-1001 px-3 py-2 tx-ls-1 box-shadow-5 '
                      onChange={(e)=>{s__form({...form,...{username:e.target.value}});console.log("qqq", e.target.value)}} 
                 />
