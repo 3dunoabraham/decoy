@@ -25,6 +25,7 @@ import { AppContext } from '@/scripts/contexts/AppContext';
 import { fetchPost } from '@/scripts/helpers/fetchHelper';
 import Link from 'next/link';
 import { BiQuestionMark } from 'react-icons/bi';
+import DynaText from '../DynaText';
 
 export const tokenColors = {
     "btc": "#EE8E1B",
@@ -211,13 +212,18 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
     const [uid, s__uid] = useState("")
     const [tokensArrayObj,s__tokensArrayObj] = useState<any>({})
     useEffect(()=>{
+        console.log("theuserstart", theuserstart)
+        app.s__userstart(theuserstart)
         s__tokensArrayObj(JSON.parse(LS_tokensArrayObj))
         s__uid(LS_uid)
         if (!!LS_uid) {  app.alert("success","Logged in!")}
     },[])
     const childrenWithProps = React.Children.map(children, (child) => {
         if (React.isValidElement<any>(child)) {
-          return React.cloneElement(child, { power, form, onTimeframeClick, onTextClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj, s__tokensArrayObj });
+          return React.cloneElement(child, {
+                power, form, onTimeframeClick, onTextClick, toggleTrade, xOut, yOut,
+                zOut, optsToggler, tokensArrayObj, s__tokensArrayObj
+            });
         }
         return child;
       });
@@ -245,10 +251,44 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                     >
                         How to Play?
                     </div>
-                    <div className='tx-lx flex-col gap-4 flex-align-start my-8'>
-                        <div className='flex flex-align-end gap-2'>1. Join <div className='tx-xl tx-shadow-br-5' style={{color:"gold"}}>BTC</div></div>
+                    <div className='tx-lx flex-col gap-4 flex-align-start mb-8'>
+                        <div className='flex flex-align-end gap-2'>1. Join <div className='tx-xl tx-shadow-br-5' style={{color:"gold"}}>Block</div></div>
                         <div className='flex flex-align-end gap-2'>2. Turn <div className='tx-xl tx-shadow-br-5' style={{color:"cyan"}}>ON</div></div>
-                        <div className='flex flex-align-end gap-2'>3. Send <div className='tx-xl tx-shadow-br-5' style={{color:"green"}}>TRADE</div></div>
+                        <div className='flex flex-align-end gap-2'>3. Press <div className='tx-xl tx-shadow-br-5' style={{color:"green"}}>BUY</div></div>
+                        
+                        <details>
+                            <summary className='opaci-chov--50 tx-white tx-lg bg-b-50 box-shadow-5 pa-2 bg-glass-5'
+                                onClick={()=>{}}
+                            >
+                                Help
+                            </summary>
+                            <div className="flex-col flex-align-start  gap-1 mt-2 ">
+                                <div className="flex-col flex-align-start gap-2 rot-180">
+                                    <TimeframeList {...{timeframesArray, setTimeframe, tokenColors, form}} />
+                                    <TokenList {...{setToken,  tokenColors,  form, tokenIcons,}} />
+                                    {!live && <>
+                                        <PlayerInventory {...{toggleOption, optsToggler}}  />
+                                    </>}
+                                </div>
+                                <hr className='bg-white w-100 mt-2'  />
+                                <div className="flex-center gap-1 tx-shadow-b-1 ">
+                                    <div className="tx-  tx-white tx-shadow-b-1">Power: {power}</div>
+                                </div>
+                                <hr className='bg-white w-100 mt-2'  />
+                                <div className="flex-col  flex-align-start gap-1 tx-shadow-b-1 ">
+                                    <div onClick={()=>{toggleOption("tutorial")}}
+                                        className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg"
+                                    >
+                                        <BiQuestionMark /> <i>How to Play?</i>
+                                    </div>
+                                    <Link href="/dashboard" target='_blank'
+                                        className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg"
+                                    >
+                                        <FaExternalLinkAlt /> <i>Dashboard</i>
+                                    </Link>
+                                </div>
+                            </div>
+                        </details>
                     </div>
                     {/* <div>{optsToggler.tutorial.bool ? "y" : "n"}</div> */}
                     <div className='tx-xl opaci-chov-50 box-shadow-5 tx-center bg-b-90 bord-r-5'
@@ -259,7 +299,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                 </div>
             </div>
         }
-        {!!uid &&
+        {!!uid && !optsToggler.tutorial.bool &&
             <div className="flex pos-abs top-0 left-0  bord-r- pa-2 ma-2">
                 <div className="flex-col flex-align-start z-700 gap-1  mt-100 ">
 
@@ -362,6 +402,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
             camera={{ fov: fffooovvv, position: [xOut,1,zOut*2] }} 
         >
             {/* {children} */}
+            
             {!uid && <>
                 <LoginLevel {...{
                     s__uid, uid,

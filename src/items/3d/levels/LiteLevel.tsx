@@ -1,5 +1,6 @@
 import { Cylinder } from "@react-three/drei";
 import ToggleOrbit from "../core/camera/ToggleOrbit";
+import { useContext } from "react";
 import { Vector3 } from "three";
 import TradingBox from "../npc/TradingBox";
 import LiteNpcContainer from "../npc/LiteNpcContainer";
@@ -7,6 +8,8 @@ import { Suspense, useEffect, useMemo, useState } from "react";
 import { getComputedLevels } from "@/components/scripts/helpers";
 import { useCopyToClipboard, useLocalStorage } from "usehooks-ts";
 import { DEFAULT_TIMEFRAME_ARRAY } from "@/components/scripts/constants";
+import { AppContext } from "@/scripts/contexts/AppContext";
+import DynaText from "../DynaText";
 // import { Physics } from "use-cannon";
 // import { BigBox, SmallBox2, smallboxes } from "../npc/LiteGame";
 // import { GPT4All } from 'gpt4all';
@@ -38,6 +41,8 @@ import { DEFAULT_TIMEFRAME_ARRAY } from "@/components/scripts/constants";
 export default function Component({
     power, form, onTextClick, onTimeframeClick, toggleTrade, xOut, yOut, zOut, optsToggler, tokensArrayObj, s__tokensArrayObj
 }) {
+    const app = useContext(AppContext)
+    
     const [clipbloardValue, clipbloard__do] = useCopyToClipboard()
     const copyToClipboard = ()=>{
         // clipbloard__do(OFFICIAL_URL+"unit/"+newUID)
@@ -247,8 +252,12 @@ export default function Component({
             <LiteNpcContainer {...{optsToggler}} position={[0,0,0]}  
                 form={form} askAI={askAI}
             />
-
-            
+            {!(app.userstart.totalAttempts > 0 || hasAnyToken) && 
+                <DynaText text={"Join here ->"}  color={"#ffffff"}
+                position={new Vector3(-0.3,-0.65,-0.4)} font={0.15}  rotation={[0,0,0]}
+                />
+            }
+            {app.userstart.totalAttempts > 0 || hasAnyToken && 
                 <Cylinder args={[0.5, 0.6, 0.5, 6]}  position={new Vector3(0,-0.75,-3)} 
                     castShadow receiveShadow
                     rotation={[0,Math.PI/2,0]}
@@ -257,6 +266,7 @@ export default function Component({
                         // emissive={`#aa6600`}
                     />
                 </Cylinder>
+                }
                 {optsToggler["services"].bool && 
                 <Cylinder args={[0.15, 0.1, 0.1, 8]}  position={new Vector3(0,-0.8,-3.48)} 
                         castShadow receiveShadow
@@ -339,7 +349,7 @@ export default function Component({
                     tokensArrayArray={"btc" in tokensArrayObj ? tokensArrayObj["btc"] : null}
                 /> 
             </>}
-            {<>
+            {app.userstart.totalAttempts > 0 && <>
                 <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="eth" refetchInterval={selectedToken == "eth" ? 1000 : 60000}
                     position={[-xOut/2,-0.35,zOut/2]} onTextClick={()=>{onTextClick("eth")}} unselectedColor={"#50545B"}
                     setVelocityY={(data)=>{toggleTrade("eth",data)}}
@@ -349,7 +359,7 @@ export default function Component({
                     tokensArrayArray={"eth" in tokensArrayObj ? tokensArrayObj["eth"] : null}
                 /> 
             </>}
-            {<>
+            {app.userstart.totalAttempts > 0 && <>
                 <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="link" refetchInterval={selectedToken == "link" ? 1000 : 60000}
                     position={[xOut/2,-0.35,zOut/2]} onTextClick={()=>{onTextClick("link")}} unselectedColor={"#50545B"}
                     setVelocityY={(data)=>{toggleTrade("link",data)}}
@@ -359,7 +369,7 @@ export default function Component({
                     tokensArrayArray={"link" in tokensArrayObj ? tokensArrayObj["link"] : null}
                 /> 
             </>}
-            {<>
+            {app.userstart.totalAttempts > 0 && <>
                 <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="ftm" refetchInterval={selectedToken == "ftm" ? 1000 : 60000}
                     position={[-xOut/2,-0.35,-zOut/2]} onTextClick={()=>{onTextClick("ftm")}} unselectedColor={"#50545B"}
                     setVelocityY={(data)=>{toggleTrade("ftm",data)}}

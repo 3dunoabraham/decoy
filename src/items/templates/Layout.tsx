@@ -19,6 +19,7 @@ export default function Layout({ children }) {
     const [alertMap,alertMap__do] = useMap<string,any>(DEFAULT_ALERT_MAPARRAY)
     const [sidebarLinks,s__sidebarLinks] = useState([])
     const [sidebarPages,s__sidebarPages] = useState([])
+    const [userstart,s__userstart] = useState([])
 
 
 
@@ -47,6 +48,7 @@ export default function Layout({ children }) {
             },
             sidebarLinks,s__sidebarLinks,
             sidebarPages,s__sidebarPages,
+            userstart,s__userstart,
             alertReset:()=>{alertMap__do.setAll(DEFAULT_ALERT_MAPARRAY)},
 			alert:(category, msg)=>{alertNotification(category, msg)}
 		}

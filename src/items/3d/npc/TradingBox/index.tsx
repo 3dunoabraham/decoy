@@ -326,14 +326,14 @@ const Component = forwardRef(({
         <meshStandardMaterial color={!tokensArrayArray ? "#776666" : "#44aa44"} />
       </mesh>
       
-      <DynaText text={!!tokensArrayArray ? "LIVE" : "OFF"} color={!!tokensArrayArray ?  0xaaaaaa : 0x333333}
-          position={new Vector3(position[0]-0.44,position[1]-0.32,position[2]+0.28)}
+      <DynaText text={!!tokensArrayArray ? "LIVE" : "OFF"} color={!!tokensArrayArray ?  0xaaaaaa : 0x888888}
+          position={new Vector3(position[0]-0.44,position[1]-0.345,position[2]+0.28)}
           isSelected={isSelectedId}  font={0.04} onClick={()=>{onTextClick()}}
         />
         {!!tokensArrayArray &&
         <DynaText color={selectedHasArray ? "cyan" : "cyan"}
          text={selectedHasArray ? "TRADE" : "TRADE"} 
-            position={new Vector3(position[0]-0.32,position[1]-0.32,position[2]+0.28)}
+            position={new Vector3(position[0]-0.32,position[1]-0.345,position[2]+0.28)}
             isSelected={isSelectedId}  font={0.04} onClick={()=>{onTextClick()}}
           />
         }
