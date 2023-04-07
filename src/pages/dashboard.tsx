@@ -47,20 +47,21 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
 
             
                                 
-            localStorage.removeItem("localTokensArrayObj");
-            localStorage.removeItem("uid");
 
                 
             try {
                 const res = await fetchDelete('/api/start',{
                 });
                 const res2 = await res.json();
+                localStorage.removeItem("localTokensArrayObj");
+                localStorage.removeItem("uid");
+                window.location.reload()
                 // return res2
             } catch (e) {
+                console.log("err",e)
                 return false
             }
 
-            window.location.reload()
         }
     // const tokensReqObj:any = ( DEFAULT_TOKENS_ARRAY.reduce((acc, aToken) => (
     //     { ...acc, [aToken]: [`${API_PRICE_BASEURL}${(aToken+baseToken).toUpperCase()}`] }
