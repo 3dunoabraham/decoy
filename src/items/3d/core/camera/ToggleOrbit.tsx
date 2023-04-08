@@ -66,7 +66,7 @@ export default function Component({ live = false, buttonPosition, s__showPhysics
         ]}
        >
         <boxBufferGeometry args={[0.4,0.1,0.2]} />
-        <meshStandardMaterial color={cameraMode === "orbit" ? "#777777" : "#777777"} />
+        <meshStandardMaterial color={cameraMode === "orbit" ? "#998877" : "#998877"} />
       </mesh>
 
       

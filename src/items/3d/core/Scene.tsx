@@ -320,28 +320,6 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
         {theuserstart.data && theuserstart.data.totalAttempts == 0 && optsToggler.tutorial.bool &&
             <div className='pos-abs top-0 left-0 w-100 h-100 bg-glass-5 z-100 flex-col'>
                 <div className='tx-white'>
-                    <div className='tx-lg opaci-50 tx-center Q_sm_x'
-                         
-                    >
-                        How to play?
-                    </div>
-
-                    <div className='tx-lx flex-col gap-4 flex-align-start mb-8 Q_sm_x'>
-                        <div className='flex flex-align-end gap-2'>
-                            <div className='opaci-50'>1.</div> Turn 
-                            <div className='tx-xl pt-1 tx-shadow-br-5' style={{color:"gold"}}>sync</div>
-                            on
-                        </div>
-                        <div className='flex flex-align-end gap-2'>
-                            <div className='opaci-50'>2.</div> Set
-                            <div className='tx-xl pt-1 tx-shadow-br-5' style={{color:"cyan"}}>demo</div>
-                            off
-                        </div>
-                        <div className='flex flex-align-end gap-2'>
-                            <div className='opaci-50'>3.</div> Send
-                            <div className='tx-xl pt-1 tx-shadow-br-5' style={{color:"#00ff00"}}>buy</div>
-                            order
-                        </div>
                         <div className='bg-b-50 px-2 bord-r-5 py-1 w-100'>
                             <div className='tx-xl opaci-chov-50 box-shadow-5 tx-center bg-b-90 bord-r-5 my-2 w-100 hover-'
                                 onClick={()=>{toggleOption("tutorial")}}
@@ -368,6 +346,28 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                                 </div>
                             </details>
                         </div>
+                    <div className='tx-lg opaci-50 tx-center Q_sm_x'
+                         
+                    >
+                        How to play?
+                    </div>
+
+                    <div className='tx-lx flex-col gap-4 flex-align-start mb-8 Q_sm_x'>
+                        <div className='flex flex-align-end gap-2'>
+                            <div className='opaci-50'>1.</div> Turn 
+                            <div className='tx-xl pt-1 tx-shadow-br-5' style={{color:"gold"}}>sync</div>
+                            on
+                        </div>
+                        <div className='flex flex-align-end gap-2'>
+                            <div className='opaci-50'>2.</div> Set
+                            <div className='tx-xl pt-1 tx-shadow-br-5' style={{color:"cyan"}}>demo</div>
+                            off
+                        </div>
+                        <div className='flex flex-align-end gap-2'>
+                            <div className='opaci-50'>3.</div> Send
+                            <div className='tx-xl pt-1 tx-shadow-br-5' style={{color:"#00ff00"}}>buy</div>
+                            order
+                        </div>
                     </div>
 
                     <div className='bg-b-50 px-2 bord-r-5 py-1 w-100 Q_xs'>
@@ -384,10 +384,10 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                     </div>
 
                     <div className='tx-lg  flex-col gap-1 flex-align-start px-4 mb-8 Q_xs '>
-                        <div className='flex flex-align-end gap-2'>
+                        {/* <div className='flex flex-align-end gap-2'>
                             <div className='opaci-50'>0.</div> <div className='opaci-50'>Press</div>
                             <div className='tx-lx  tx-shadow-br-5' style={{color:"beige"}}>start</div>
-                        </div>
+                        </div> */}
                         <div className='flex flex-align-end gap-2'>
                             <div className='opaci-50'>1.</div> Turn 
                             <div className='tx-lx  tx-shadow-br-5' style={{color:"gold"}}>sync</div>

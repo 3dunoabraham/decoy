@@ -364,7 +364,7 @@ export default function Component({
             {app.userstart.totalAttempts > 0 || hasAnyToken && <>
                 <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="eth" refetchInterval={selectedToken == "eth" ? 1000 : 60000}
                     // position={[-xOut/2,-0.35,zOut/2]} 
-                    position={[0,-0.35,-zOut]} 
+                    position={[0,-0.35,zOut/2]} 
                     onTextClick={()=>{onTextClick("eth")}} unselectedColor={"#50545B"}
                     setVelocityY={(data)=>{toggleTrade("eth",data)}}
                     turnOn={()=>{turnOn("eth")}} turnOff={()=>{turnOff("eth")}}
@@ -376,7 +376,7 @@ export default function Component({
             {app.userstart.totalAttempts > 0 || hasAnyToken && "eth" in tokensArrayObj && <>
                 <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="link" refetchInterval={selectedToken == "link" ? 1000 : 60000}
                     // position={[xOut/2,-0.35,zOut/2]} 
-                    position={[xOut,-0.35,-zOut]} 
+                    position={[xOut,-0.35,0]} 
                     onTextClick={()=>{onTextClick("link")}} unselectedColor={"#50545B"}
                     setVelocityY={(data)=>{toggleTrade("link",data)}}
                     turnOn={()=>{turnOn("link")}} turnOff={()=>{turnOff("link")}}
@@ -388,7 +388,7 @@ export default function Component({
             {app.userstart.totalAttempts > 0 || hasAnyToken && "eth" in tokensArrayObj && <>
                 <TradingBox form={form} timeframe={form.id.split("USDT")[1]} token="ftm" refetchInterval={selectedToken == "ftm" ? 1000 : 60000}
                     // position={[-xOut/2,-0.35,-zOut/2]} 
-                    position={[-xOut,-0.35,-zOut]} 
+                    position={[-xOut,-0.35,0]} 
                     onTextClick={()=>{onTextClick("ftm")}} unselectedColor={"#50545B"}
                     setVelocityY={(data)=>{toggleTrade("ftm",data)}}
                     turnOn={()=>{turnOn("ftm")}} turnOff={()=>{turnOff("ftm")}}
