@@ -3,7 +3,7 @@ import LoginBtn from "@/src/items/molecules/auth/LoginBtn";
 import Link from "next/link";
 import Image from "next/image";
 import { BsBox, BsChat, BsFillArchiveFill, BsFillBarChartFill, BsGear, BsInfoCircle, BsPerson, BsStack } from "react-icons/bs";
-import { FaCity, FaUncharted } from "react-icons/fa";
+import { FaChartLine, FaCity, FaQuestion, FaUncharted } from "react-icons/fa";
 import { RxDashboard } from "react-icons/rx";
 import { MdOutlineHistory } from "react-icons/md";
 import { useRouter } from "next/router";
@@ -29,10 +29,11 @@ export default function Component({}) {
         bingo: <GiEightBall />,
         inventory: <MdOutlineInventory2 />,
         city: <FaCity />,
+        chart: <FaChartLine />,
     }
     
     return (<>
-        <div className="flex-col  Q_sm_x invisible ">
+        <div className="flex-col   invisible ">
             <div className='flex px-3 px- w-100'>
                 
                 {/* <button onClick={()=>{handleClick("/")}} className='tx-white  tx-lgx nodeco py-4 flex-center '>
@@ -57,7 +58,7 @@ export default function Component({}) {
             <div className='flex-1'>
                 {!!app && !!app.sidebarPages && app.sidebarPages.map((aLink, index)=>{
                         return (
-                            <Link href="/users/" className="flex-center py-3 clickble  px-2 bg-w-hov-10  " key={index}>
+                            <Link href="/users/" className="flex-center py-3  clickble  px-2 bg-w-hov-10  " key={index}>
                                 <div className=" pr-3  Q_xl_x"></div>
                                 <div className="px-1 tx-center tx-lg opaci-hov--50">{aLink.icon ? ICONS[aLink.icon]: <BsPerson /> }</div>
                                 {/* <div className="flex-1 pl-3 Q_xl_x w-min-220px">{aLink.url}</div> */}
@@ -76,7 +77,7 @@ export default function Component({}) {
             </div>
         </div>
 
-        <div className="h-100vh flex-col pos-fix top-0  right-0 Q_sm_x ">
+        <div className="h-min-90vh flex-col pos-fix top-0  right-0  ">
             <div className='flex px-3 px- w-100'>
                 {/* <button onClick={()=>{handleClick("/")}} className='tx-white  tx-lgx nodeco py-4 flex-center '>
                     <div className='bg-white px-1 pt-1 ord-r-10 scale-90'>
@@ -101,7 +102,7 @@ export default function Component({}) {
                 
                 {!!app && !!app.sidebarPages && app.sidebarPages.map((aLink, index)=>{
                     return (
-                        <Link href={aLink.url || "#"} className="flex-center py-3 clickble  px-2 bg-w-hov-10  " key={index}>
+                        <Link href={aLink.url || "#"} className="flex-center pb-2 py-3 clickble  px-2 ims-bg-primary bord-r-5 my-1 box-shadow-2  " key={index}>
                             <div className=" pr-3  Q_xl_x"></div>
                             <div className="px-1 tx-center tx-lg opaci-hov--50">{aLink.icon ? ICONS[aLink.icon]: <BsPerson /> }</div>
                             {/* <div className="flex-1 pl-3 Q_xl_x w-min-220px">{aLink.url}</div> */}
@@ -128,22 +129,24 @@ export default function Component({}) {
                     )
                 })}
             </div>
+            {<>
+                <div className='w-100 bord-r-t-5 box-shadow-2 ' style={{background:"orangered"}}>
+                    <LoginBtn><AppClientDesc /></LoginBtn>
+                </div>
+                <hr className="w-90 opaci-50  my-3" style={{borderColor: "white"}} />
+            </>}
             <div className=''>
                 {/* <Link href="/#" className="flex-center py-2 clickble  px-2 bg-w-hov-10  ">
                     <div className=" pr-3  Q_xl_x"></div>
                     <div className="px-1 tx-center tx-lg opaci-hov--50"><BsInfoCircle /></div>
                     <div className="flex-1 pl-1 Q_xl_x w-min-220px">Support</div>
                 </Link> */}
-                <Link href="/settings/" className="flex-center py-2 clickble  px-2 bg-w-hov-10  ">
+                <Link href="/settings/" className="flex-center box-shadow-2 py-2 clickble  px-2 ims-bg-primary bord-r-b-5">
                     <div className=" pr-3  Q_xl_x"></div>
-                    <div className="px-1 tx-center tx-lg opaci-hov--50"><RxDashboard /></div>
-                    <div className="flex-1 pl-1 Q_xl_x w-min-220px">Settings</div>
+                    <div className="px-1 tx-center tx-lg opaci-hov--50"><FaQuestion /></div>
+                    <div className="flex-1 pl-1 Q_xl_x w-min-220px">Support</div>
                 </Link>
             </div>
-            {<>
-                <hr className="w-90 opaci-50 mt-3" style={{borderColor: "white"}} />
-                <div className='pa-3 w-100'><LoginBtn><AppClientDesc /></LoginBtn></div>
-            </>}
         </div>
 
 

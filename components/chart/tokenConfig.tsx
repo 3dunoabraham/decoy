@@ -91,7 +91,7 @@ export const TokenConfigStateButtons = ({
                     }
                 </div>
             </div>
-            <div className="flex-row flex-align-center  mq_xs_flex-col ">
+            <div className="flex-row flex-align-center  Q_xs_flex-col ">
                 <div className="flex-center ">
                     <div onClick={()=>{updateTokenOrder(aToken,DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe) ,"floor")}}
                         className="opaci-chov--50 bg-w-20  px-3 py-1 bord-r-15 mx-1 mt-1 tx-center"

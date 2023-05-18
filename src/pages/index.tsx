@@ -115,11 +115,12 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
         
         app.s__sidebarLinks([])
         app.s__sidebarPages([
-            {id:0,label:"History",url:"/agreements/?pair=BTCUSDT",icon:"agreements"},
+            {id:0,label:"History",url:"/trade/history/?pair=BTCUSDT",icon:"agreements"},
             // {id:1,label:"Chart",url:"https://www.tradingview.com/chart/EBa5RTfJ/?symbol=BITSTAMP%3ABTCUSD",icon:"users"},
-            {id:2,label:"Bit-Bingo (Trade Cards)",url:"/",icon:"bingo"},
-            {id:2,label:"Bit To Crop",url:"/demo",icon:"farm"},
-            {id:2,label:"Bit Token Capital",url:"/demo",icon:"city"},
+            {id:2,label:"Chart (BTC 4h)",url:"/chart/4h?token=btc",icon:"chart"},
+            // {id:2,label:"Bit-Bingo (Trade Cards)",url:"/",icon:"bingo"},
+            // {id:2,label:"Bit To Crop",url:"/demo",icon:"farm"},
+            // {id:2,label:"Bit Token Capital",url:"/demo",icon:"city"},
         ])
     },[])
     const [clientIP, s__clientIP] = useState('');
@@ -129,19 +130,20 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
     const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
 
     const getData = async (randomThousand:any) => {
-        const res:any = await fetch('https://geolocation-db.com/json/')
-        let awaited = await res.json()
-        s__clientIP(awaited.IPv4)
-        let new_uid = `${awaited.IPv4}:${randomThousand}`
+        // const res:any = await fetch('https://geolocation-db.com/json/')
+        // let awaited = await res.json()
+        // s__clientIP(awaited.IPv4)
+        s__clientIP(randomThousand)
+        // let new_uid = `${awaited.IPv4}:${randomThousand}`
+        let new_uid = randomThousand
         s__uid(new_uid)
         s__LS_uid(new_uid)
         app.alert("success", "Registered succesfully!")
     }
     const register = () => {
         let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
-        if (confirm(`IP+${randomThousand}\nWould you like to Register?`)) {
-            getData(randomThousand)
-
+        if (confirm(`Create local account -> user:${randomThousand}\nWould you like to Register? (user:${randomThousand})`)) {
+            getData("user:"+randomThousand)
         }
     }
 
@@ -194,7 +196,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
             {/* {JSON.stringify(tokens)} */}
             {/*!!session &&*/
             
-                <div className='flex-wrap flex-justify-start gap-4 flex-align-start' >
+                <div className='flex-wrap flex-justify-start  flex-align-stretch' >
                     {unitsArray.length > 0 && inventoryItems.map((item, index) => (
                         <ImsCard
                             key={index}
@@ -205,7 +207,9 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
                         ))
                     }
                     
-                    {isClient && <AmountCards tokens={tokens} {...{mul, bigmul}} /> }
+                    {isClient && <div className='border-lgrey-l pa-3 flex-1 '>
+                        <AmountCards tokens={tokens} {...{mul, bigmul}} />
+                    </div> }
                 </div>
             }
             
@@ -233,7 +237,7 @@ type PageProps = {
 Page.getLayout = function getLayout(page: ReactElement) {
     return (
     <Layout>
-        <Head><title>BitCity</title></Head>
+        <Head><title>tresduno</title></Head>
         <InventoryProvider>
             <SidebarContainer sidebar={<SessionSidebar/>}>{page}</SidebarContainer>
         </InventoryProvider>

@@ -87,18 +87,18 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
             <div className='flex flex-justify-center  gap-4 pos-fix w-100 z-800  ' >
                 <Link href="/" className="pos-abs top-0 left-0 flex-col flex-align-start gap-2 tx-white  z-800 ">
                     <div className="a tx-xl flex z-400 px-4 h-50px gap-2">
-                        <div className="a tx-xxl tx-bold-8">B</div>
-                        <div className="a tx-xxl tx-bold-3 pl-5">t</div>
+                        <div className="a tx-xxl tx-bold-8">tres</div>
+                        {/* <div className="a tx-xxl tx-bold-3 pl-5"></div> */}
                     </div>
                     <div className="a tx-lx flex z-400 px-4 h-50px">
-                        <div className="a tx-lx tx-bold-5 pl-3">C</div>
+                        {/* <div className="a tx-lx tx-bold-5 pl-3">C</div> */}
                         <div className="a tx-lx tx-bold-3 ">
-                            <div className='invisible'>III</div>
-                            <div className='tx-xxl scale-200 pos-abs bottom-0 pb-2 pl-1 tx-bold-3'>
-                                i
-                            </div>
+                            {/* <div className='invisible'>III</div> */}
+                            {/* <div className='tx-xxl scale-200 pos-abs bottom-0 pb-2 pl-1 tx-bold-3'>
+                                r
+                            </div> */}
                         </div>
-                        <div className="a tx-lx tx-bold-6">TY</div>
+                        <div className="a tx-lx tx-bold-6">DUNO</div>
                     </div>
                 </Link>
                 <div className=' tx-blue  tx-xl pa-8 opaci-chov--50 z-800 pos-abs right-0  spin-120'
@@ -115,15 +115,15 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
                     </div>
                 </div>
             </div>
-            <div className='flex-center z-500'>
+            {/* <div className='flex-center z-500 Q_sm_x'>
                 <div className="flex-center pos-abs bg-b-50 bg-glass-5 " style={{border:"1px solid #FED034"}}>
-                    <Link target="_blank" href="/dashboard" className="tx-blue px-6 gap-2 tx-lgx flex-center opaci-chov--50 w-100 tx-bold-2 pt-100 pb-3"
+                    <Link target="_blank" href="/" className="tx-blue px-6 gap-2 tx-lgx flex-center opaci-chov--50 w-100 tx-bold-2 pt-100 pb-3"
                         style={{filter: "hue-rotate(-189deg) brightness(666%)"}}
                     >
-                        <FaExternalLinkAlt /> Dashboard 
+                        <FaExternalLinkAlt /> Home 
                     </Link>
                 </div>
-            </div>
+            </div> */}
             <div className='flex-1 noclick'>
             </div>
             <div className='flex-col   '>
@@ -333,7 +333,7 @@ type PageProps = {
 Page.getLayout = function getLayout(page: ReactElement) {
     return (
     <Layout>
-        <Head><title>Bitcity</title></Head>
+        <Head><title>tresduno</title></Head>
         {page}
     </Layout>
     )

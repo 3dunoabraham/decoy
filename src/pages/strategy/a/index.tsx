@@ -113,7 +113,7 @@ const Page: NextPageWithLayout = () => {
             <BreadCrumbs pages={[["/inventory","Inventory"]]} />
             
             <div className="flex-center">
-                <h1 className="pt-6 tx-bold-5 flex-1 "> Inventory</h1>
+                <h1 className="pt-6 tx-bold-5 flex-1 "> Strategy A</h1>
                 <div></div>
                 <Dropdown buttonTitle={". . ."}>
                     <div className="flex-col flex-align-stretch gap-1">
@@ -188,7 +188,7 @@ const Page: NextPageWithLayout = () => {
 Page.getLayout = function getLayout(page: ReactElement) {
     return (
     <Layout>
-        <Head><title>Inventory | BitCity</title></Head>
+        <Head><title>Strategy A | tresduno</title></Head>
         <InventoryProvider>
             <SidebarContainer sidebar={<FilterSidebar/>}>
                 {page}

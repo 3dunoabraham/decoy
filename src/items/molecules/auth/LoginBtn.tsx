@@ -1,7 +1,8 @@
 "use client";
 
 import { useSession, signIn, signOut } from "next-auth/react";
-import { BsPersonCircle, BsDoorClosed, BsBoxArrowInDown, BsBoxArrowRight } from "react-icons/bs";
+import { BsDoorClosed, BsBoxArrowInDown, BsBoxArrowRight } from "react-icons/bs";
+import { AiOutlineLogin } from "react-icons/ai";
 
 export default function Component({ children }) {
     const { data: session } = useSession();
@@ -20,10 +21,11 @@ export default function Component({ children }) {
     }
     return (
     <button className="w-100 tx-mdl nowrap  bg-w-10 pa-2 tx-white ord-r-8 opaci-chov--50"
+        
         onClick={() => signIn("google")}
     >
-        <div className="Q_xl_x">Sign w/Google</div>
-        <div className="Q_xs_xl"><BsPersonCircle /></div>
+        <div className="Q_xl_x">Connect w/Google</div>
+        <div className="Q_xs_xl py-2"><AiOutlineLogin /></div>
     </button>
     );
 }

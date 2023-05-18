@@ -183,7 +183,7 @@ export function ChartDashboard({query}) {
     }
     const register = () => {
         let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
-        if (confirm(`IP+${randomThousand}\nWould you like to Register?`)) {
+        if (confirm(`Create local account -> user:${randomThousand}\nWould you like to Register? (user:${randomThousand})`)) {
             getData(randomThousand)
         }
     }
@@ -348,13 +348,13 @@ export function ChartDashboard({query}) {
 
     /********** HTML **********/
     if (!uid) {
-        return (
-            <button className="ma-2 tx-lg tx-gray opaci-chov-50 duno-btn hov-bord-1-w py-4 px-8 bord-r-50"
+        return (<div className="h-min-400px flex-col flex-justify-start">
+            <button className="ma-2 tx-lg   py-4 px-8 bord-r-5 bg-w-5 border-lgrey tx-contrast"
                 onClick={()=>{register()}}
             >
-                Register
+                + Add Local Account
             </button>
-        )
+        </div>)
     }
     // console.log("DEFAULT_TOKENS_ARRAY", DEFAULT_TOKENS_ARRAY, tokensArrayObj)
     return (
@@ -363,11 +363,11 @@ export function ChartDashboard({query}) {
         {/* {JSON.stringify(asd.balances)} */}
         {/* <div className="tx-white">BTC: {parseDecimals(asd.balances[3].free)}</div> */}
 
-            <div className="opaci-50 tx-ls-3 tx-lg  tx-white">Strategy</div>
+            <div className="opaci-50 tx-ls-3 tx-lg  tx-white pr-100">Strategy A</div>
         <div className={"bg-glass-6   bord-r-10 tx-gray mt-4 py-2 z-999 fade-in w-95 noverflow flex flex-between"}
             style={{border:"1px solid #777",boxShadow:"0 10px 50px -20px #00000077"}}
         >
-            <div className={` flex-row mq_xs_md_flex-col w-100 flex-align-start `}>
+            <div className={` flex-row Q_xs_md_flex-col w-100 flex-align-start `}>
                 <div className="flex-wrap flex-align-start w-100  my-">
                     <div className="flex-col flex-1 pa-4 ">
                         {!showAllTokens &&

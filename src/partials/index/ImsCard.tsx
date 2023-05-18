@@ -7,7 +7,7 @@ import { GrConfigure } from 'react-icons/gr';
 export default function Component({ companyName, unitsArray, totalValue }) {
   return (
     <div className="flex-center flex-justify-start px-3">
-      <div className="box-shadow-2 pt-4 w-min-400px ord-r-8">
+      <div className="box-shadow-2 pt-4  ord-r-8">
 
 
         <div className="tx-mdl tx-bold-5 mb-3 px-6">{companyName}</div>
@@ -18,10 +18,11 @@ export default function Component({ companyName, unitsArray, totalValue }) {
             </div>
           </div>
           <div className="pl-4 py-2">
-            <div className="ims-tx-faded py-1">Ongoing Tokens</div>
-            <div className="tx-lx tx-bold-6">
+            <div className="ims-tx-faded pt-1 ">Selected Tokens ({unitsArray.length || "-"})</div>
+            <div className="tx-  tx-bold  pb-1">{unitsArray.join(", ").toUpperCase()}</div>
+            {/* <div className="tx-lx tx-bold-6">
               {unitsArray.length || "-"}
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="flex-center flex-justify-start px-6">
@@ -38,9 +39,9 @@ export default function Component({ companyName, unitsArray, totalValue }) {
 
         <hr className="mt-3" />
         <div className='flex'>
-          <Link href="/inventory" className="px-6 opaci-chov--50 block flex-center gap-1">
+          <Link href="/strategy/a" className="px-6 opaci-chov--50 block flex-center gap-1">
             <GrConfigure />
-            <div className="ims-tx-primary tx-bold-5 py-4 tx-end">Token Settings</div>
+            <div className="ims-tx-primary tx-bold-5 py-4 tx-end">Settings</div>
           </Link>
           <div className='flex-1'></div>
           <Link href="/chart/4h?token=btc" className="px-6 opaci-chov--50 block flex-center gap-1">
