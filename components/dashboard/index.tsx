@@ -14,10 +14,14 @@ import { DownloadButton } from "./DownloadButton";
 import ToolButtons from "./ToolButtons";
 import { useQueryPlus } from "@/scripts/helpers/useHooksHelper";
 import { parseDateTimeString } from "@/scripts/helpers/type/dateHelper";
+import { useSession } from "next-auth/react";
+import LoginBtn from "@/src/items/molecules/auth/LoginBtn";
+import AppClientDesc from "@/src/items/molecules/auth/AppClientDesc";
 
 
 export function ChartDashboard({query}) {
     /********** CREATE **********/
+    const { data: session } = useSession();
 
     const isClient = useIsClient()
     const [q__asd, asd] = useQueryPlus({ queryKey: ['asdasd'], 
@@ -517,6 +521,27 @@ export function ChartDashboard({query}) {
             </div>
         </div>
         <div className=" pt-200"></div>
+        <div className="tx-white mb-100">
+            
+            {!session && <>
+                <div className="opaci-50 mt-8">Local account detected</div>
+                <div className="opaci-50 mb-3">but, Google is not connected</div>
+                <div className="" style={{background:"orangered"}}>
+                    <LoginBtn><AppClientDesc /></LoginBtn>
+                </div>
+            </>}
+            {!!session && <>
+                {!!session.user && <>
+                    <div className="tx-green">Is Connected w/ Google!</div>
+
+                    {<>
+                        <div>
+                            Sync Accounts
+                        </div>
+                    </>}
+                </>}
+            </>}
+        </div>
         <DownloadButton filename="database" data={tokensArrayObj} />
     </div>
     )
