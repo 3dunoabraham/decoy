@@ -120,7 +120,7 @@ const Page: NextPageWithLayout = () => {
                         <Link  href="/unit/add" className="ims-button-primary clickble nowrap">
                             + New Unit
                         </Link>
-                        <button className="ims-button-primary clickble nowrap opaci-75 mt-2"
+                        {/* <button className="ims-button-primary clickble nowrap opaci-75 mt-2"
                             onClick={()=>{s__isQuickAdd(!isQuickAdd)}}
                         >
                             New Quick Unit
@@ -129,7 +129,7 @@ const Page: NextPageWithLayout = () => {
                             onClick={()=>{s__isConfigEdit(!isConfigEdit)}}
                         >
                             Config
-                        </button>
+                        </button> */}
                     </div>
                 </Dropdown>
             </div>

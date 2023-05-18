@@ -9,6 +9,10 @@ import { AppContext } from "@/scripts/contexts/AppContext";
 import { InventoryContext } from "@/scripts/contexts/InventoryContext";
 import { useRouter } from "next/router";
 import { FAKE_UNIT_FOREIGNS } from "@/scripts/constants";
+import LoginBtn from "../molecules/auth/LoginBtn";
+import AppClientDesc from "../molecules/auth/AppClientDesc";
+import Link from "next/link";
+import { FaQuestion } from "react-icons/fa";
 
 export default function Component({ online=true }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -134,7 +138,7 @@ export default function Component({ online=true }) {
         <SidebarHeader />
         <div className='flex-1 w-100'>
             {/* {inv.unitsArray.length} */}
-            {!q_foreigns.data && 
+            {/* {!q_foreigns.data && 
                 <div className="pl-8 pt-6 opaci-50 w-300px Q_lg_x">Loading Filters...</div>
             }
             {!!q_foreigns.data && Object.keys(filtersObj).map((aFilterSection, index)=>{
@@ -145,7 +149,26 @@ export default function Component({ online=true }) {
                         />
                     </div>
                 )
-            })}
+            })} */}
+            
+            {<>
+                <div className='w-100 bord-r-t-5 box-shadow-2 ' style={{background:"orangered"}}>
+                    <LoginBtn><AppClientDesc /></LoginBtn>
+                </div>
+                <hr className="w-90 opaci-50  my-3" style={{borderColor: "white"}} />
+            </>}
+            <div className=''>
+                {/* <Link href="/#" className="flex-center py-2 clickble  px-2 bg-w-hov-10  ">
+                    <div className=" pr-3  Q_xl_x"></div>
+                    <div className="px-1 tx-center tx-lg opaci-hov--50"><BsInfoCircle /></div>
+                    <div className="flex-1 pl-1 Q_xl_x w-min-220px">Support</div>
+                </Link> */}
+                <Link href="https://twitter.com/tresduno" target="_blank" className="flex-center box-shadow-2 py-2 clickble  px-2 ims-bg-primary bord-r-b-5">
+                    <div className=" pr-3  Q_xl_x"></div>
+                    <div className="px-1 tx-center tx-lg opaci-hov--50"><FaQuestion /></div>
+                    <div className="flex-1 pl-1 Q_xl_x w-min-220px">Support</div>
+                </Link>
+            </div>
         </div>
     </div>
     </>)

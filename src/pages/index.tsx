@@ -43,6 +43,9 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
         }
     },[])
         const leaveAll = async ()=> {
+            let aconfirm = prompt("Delete Local Account Data? (yes/no)","ye")
+            if (aconfirm != "yes") return
+
             if (!isClient) return;
 
             
@@ -167,15 +170,6 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
                         <div className='pa-2 border-lgrey'>?</div>
                     </>}
                     
-                    {uid &&
-                        <button   className="ims-button-faded clickble nowrap tx-lg opaci-25"
-                            onClick={()=>{
-                                leaveAll()
-                            }}
-                        >
-                            Leave
-                        </button>
-                    }
                     <div className='flex-1'></div>
                 </div>
             </div>
@@ -216,6 +210,19 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
 
             <div className='flex-center  flex-1'>
             </div>
+                
+            {uid &&
+            <div className='flex pa-1'>
+                <div className='flex-1'></div>
+            <button   className="ims-button-faded clickble nowrap tx-lg opaci-25"
+                            onClick={()=>{
+                                leaveAll()
+                            }}
+                        >
+                            - Delete Local Account
+                        </button>
+                        </div>
+                    }
         </div>
     </div>
     )
