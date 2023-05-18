@@ -9,7 +9,7 @@ export const BreadCrumbs = ( { pages, current }: BreadCrumbsProps)=>{
     const app = useContext(AppContext)
     return (
     <div className="flex-center flex-justify-start pt-4 mt-1 tx-smd">
-        <Link  href="/" className=" opaci-hov--50 py-2 pr-1 tx-lx">
+        <Link  href="/" className=" opaci-hov--50 py-2 pr-2 tx-lx">
             <div className="ims-tx-primary tx-bold-6 ">{app.institution.title}</div>
         </Link>
         {pages.map(([pageUrl,pageTitle], index)=>(

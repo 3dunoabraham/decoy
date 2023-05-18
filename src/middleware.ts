@@ -4,7 +4,11 @@ import type { NextRequest } from 'next/server'
 import { getToken } from 'next-auth/jwt'
 // import { get } from '@vercel/edge-config';
 
-const dev = process.env.NODE_ENV !== "production";
+const dev = (
+    // false &&
+    process.env.NODE_ENV !== "production"
+)
+// const dev = process.env.NODE_ENV !== "production";
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(req: NextRequest) {

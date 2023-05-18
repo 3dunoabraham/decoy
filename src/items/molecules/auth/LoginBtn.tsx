@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession, signIn, signOut } from "next-auth/react";
-import { BsBoxArrowInRight, BsDoorClosed, BsBoxArrowInDown, BsBoxArrowRight } from "react-icons/bs";
+import { BsPersonCircle, BsDoorClosed, BsBoxArrowInDown, BsBoxArrowRight } from "react-icons/bs";
 
 export default function Component({ children }) {
     const { data: session } = useSession();
@@ -22,8 +22,8 @@ export default function Component({ children }) {
     <button className="w-100 tx-mdl nowrap  bg-w-10 pa-2 tx-white ord-r-8 opaci-chov--50"
         onClick={() => signIn("google")}
     >
-        <div className="Q_xl_x">Sign in</div>
-        <div className="Q_xs_xl"><BsBoxArrowInRight /></div>
+        <div className="Q_xl_x">Sign w/Google</div>
+        <div className="Q_xs_xl"><BsPersonCircle /></div>
     </button>
     );
 }

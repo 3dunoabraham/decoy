@@ -309,15 +309,16 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
       },[selectedTimeframe])
 
       const lastUpdate = useMemo(()=>{
+        if (!theuserstart) return ""
         if (!theuserstart.data) return ""
         return parseUTCString(new Date(theuserstart.data.datenow)).replace("T","===")
-    }, [theuserstart.data])
+    }, [theuserstart])
 
     /****** HTML ******/
     return (
     <div className='h-min-500px w-100 flex-col g-b-20 bord-r- flex-align-stretch flex-justify-stretch pos-rel'>
         
-        {theuserstart.data && theuserstart.data.totalAttempts == 0 && optsToggler.tutorial.bool &&
+        {!!theuserstart && theuserstart.data && theuserstart.data.totalAttempts == 0 && optsToggler.tutorial.bool &&
             <div className='pos-abs top-0 left-0 w-100 h-100 bg-glass-5 z-100 flex-col'>
                 <div className='tx-white'>
                         <div className='bg-b-50 px-2 bord-r-5 py-1 w-100'>

@@ -1,114 +1,259 @@
-import { ReactElement, Suspense, useContext, useMemo, useRef, useState } from 'react'
+import { ReactElement, useContext, useEffect, useMemo, useState } from 'react'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
-import Link from 'next/link';
-import { useIsClient, useLocalStorage } from 'usehooks-ts';
-import dynamic from 'next/dynamic'
-import { FaExternalLinkAlt } from 'react-icons/fa';
+import { ParsedUrlQuery } from 'querystring';
+import { GetServerSideProps } from 'next';
+// import { get, getAll } from '@vercel/edge-config';
 
-
-import Layout from '@/src/items/templates/Layout';
 import type { NextPageWithLayout } from '@/src/pages/_app'
+import Layout from '@/src/items/templates/Layout'
+import SidebarContainer from '@/src/items/templates/SidebarContainer'
+import SessionSidebar from "@/src/items/templates/SessionSidebar";
+import { BreadCrumbs } from '@/src/items/atoms/common/BreadCrumbs'
+import { useQueryPlus } from '@/scripts/helpers/useHooksHelper'
+import { API_UNITS, LOCAL_URL } from '@/scripts/constants/api'
 import { _parseDecimals } from '@/scripts/helpers/mathHelper'
+import ImsCard from '@/src/partials/index/ImsCard'
+import LoadingPill from '@/src/items/atoms/holders/LoadingPill'
+import FailedRequest from '@/src/items/atoms/holders/FailedRequest'
 import { AppContext } from '@/scripts/contexts/AppContext'
-import ReloadCube from '../items/3d/overlay/ReloadCube';
-import BitBingoLogo from '../items/3d/overlay/BitBingoLogo';
-import SocialMediaButtons from '../items/3d/overlay/SocialMediaButtons';
-import { useQuery } from '@tanstack/react-query';
-import { parseDecimals, parseUTCDateString, parseUTCString } from '@/components/scripts/helpers';
-const LiteLevel = dynamic(import ("@/src/items/3d/levels/LiteLevel"), { ssr: false })
-const Scene = dynamic(import ("@/src/items/3d/core/Scene"), { ssr: false })
+import { useRouter } from 'next/router'
+import { OFFLINE_UNITS_ARRAY } from '@/scripts/constants/inventory';
+import { InventoryContext, InventoryProvider } from '@/scripts/contexts/InventoryContext'
+import Link from 'next/link';
+import { useSession } from 'next-auth/react';
+import { parseDecimals } from '@/components/scripts/helpers';
+import { useIsClient, useLocalStorage } from 'usehooks-ts';
+import AmountCards from '@/components/dashboard/AmountCards';
+import { DEFAULT_TOKENS_ARRAY } from '@/components/scripts/constants';
+import { fetchDelete } from '@/scripts/helpers/fetchHelper';
 
-const Page: NextPageWithLayout = ({}) => {
+const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
+    const bigmul = 50
+    const mul = 11  
     const router = useRouter()
+    const inv = useContext(InventoryContext)
     const app = useContext(AppContext)
-    const $boxContainer:any = useRef()
-    
-    const [LS_uid, s__LS_uid] = useLocalStorage('uid', "")
-    const [uid, s__uid] = useState(LS_uid)
+    const API_PRICE_BASEURL = "https://api.binance.com/api/v3/ticker/price?symbol="
     const isClient = useIsClient()
-
-    const theuserstart:any = useQuery({ queryKey: ['theuserstart'], 
-        queryFn: async () => {
-            let theuserres = await fetch("/api/start")
-            let theuserinfo = await theuserres.json()
-            console.log("theuserstart", theuserinfo)
-            return theuserinfo
+    const [q__btcPrice, btcPrice] = useQueryPlus({ queryKey: ['btcData'], refetchOnWindowFocus: false, retry: 1,
+        queryFn: async () =>{
+            const priceRes = await fetch(API_PRICE_BASEURL+"BTCUSDT")
+            const price = await priceRes.json()
+            return price.price
         }
-    })
-    const lastUpdate = useMemo(()=>{
-        if (!theuserstart.data) return ""
-        return parseUTCString(new Date(theuserstart.data.datenow)).replace("T","===")
-    }, [theuserstart.data])
-    const attemptRatio = useMemo(()=>{
-        if (!theuserstart.data) return ""
-        return parseInt(`${theuserstart.data.attempts / theuserstart.data.totalAttempts * 100}`)
-    }, [theuserstart.data])
+    },[])
+        const leaveAll = async ()=> {
+            if (!isClient) return;
 
+            
+                                
 
+                
+            try {
+                const res = await fetchDelete('/api/start',{
+                });
+                const res2 = await res.json();
+                localStorage.removeItem("localTokensArrayObj");
+                localStorage.removeItem("uid");
+                window.location.reload()
+                // return res2
+            } catch (e) {
+                console.log("err",e)
+                return false
+            }
 
+        }
+    // const tokensReqObj:any = ( DEFAULT_TOKENS_ARRAY.reduce((acc, aToken) => (
+    //     { ...acc, [aToken]: [`${API_PRICE_BASEURL}${(aToken+baseToken).toUpperCase()}`] }
+    //     ), {}))
+    //     const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
+    //     const [LS_uid, s__LS_uid] = useLocalStorage('uid', "")
+    //     const [uid, s__uid] = useState("")
+    //     const [showAllTokens,s__showAllTokens] = useState<any>(true)
+    //     const [chopAmount,s__chopAmount] = useState<any>(0)
+    //     const [tokensArrayObj,s__tokensArrayObj] = useState<any>({})
+    //     const [klinesArray,s__klinesArray] = useState<any[]>([])
+    //     const [clientIP, s__clientIP] = useState('');
+    //     const DEFAULT_TOKEN_OBJ = {
+    //         mode:0,state:0,buy:0,sell:0, floor:0,ceil:0,
+    //         min:0,max:0,minMaxAvg:0,minMedian:0,maxMedian:0,
+    //     }
+    //     const p__klinesArray = useMemo(()=>{
+    //         let slicedArray = [...klinesArray]
+    //         for (let index = 0; index < chopAmount; index++) { slicedArray.push(klinesArray[499]) }
+            
+    //         return slicedArray.slice(slicedArray.length-500,slicedArray.length)
+    //     },[klinesArray,chopAmount])
+    //     const queryUSDT:any = useQuery({ queryKey: ['usdt'], refetchInterval: 3000,
+    //     queryFn: async () => online ? (await fetchMultipleJsonArray(tokensReqObj)) : DEFAULT_TOKEN,
+    // })
+
+    const [q__unitsArray, unitsArray] = useQueryPlus({ queryKey: ['unitData'], refetchOnWindowFocus: false, retry: 1,
+        queryFn: async () =>{
+            if (!app.online) { return OFFLINE_UNITS_ARRAY }
+            let theUrl = API_UNITS+"uids/"
+            let theRequest = await fetch(theUrl);
+            let theJsonResult = await theRequest.json()
+            return theJsonResult
+        }
+    },[])
+    const inventoryItems = useMemo(()=>{
+        let rdm = parseInt(`${Math.random()*1000 * unitsArray.length}`).toLocaleString("en-US")
+
+       
+        const _inventoryItems = [
+            { companyName: "Strategy A", unitsArray, totalValue: parseDecimals(btcPrice) },
+            // { companyName: "Company B", unitsArray: [4, 5, 6], totalValue: "20,000" },
+        ];
+        return _inventoryItems
+    },[unitsArray,q__btcPrice])
+    useEffect(()=>{
+        s__uid(LS_uid)
+        s__clientIP(LS_uid.split(":")[0])
+        // inv.s__unitsArray([])
+        // console.log(inv)
+        
+        app.s__sidebarLinks([])
+        app.s__sidebarPages([
+            {id:0,label:"History",url:"/agreements/?pair=BTCUSDT",icon:"agreements"},
+            // {id:1,label:"Chart",url:"https://www.tradingview.com/chart/EBa5RTfJ/?symbol=BITSTAMP%3ABTCUSD",icon:"users"},
+            {id:2,label:"Bit-Bingo (Trade Cards)",url:"/",icon:"bingo"},
+            {id:2,label:"Bit To Crop",url:"/demo",icon:"farm"},
+            {id:2,label:"Bit Token Capital",url:"/demo",icon:"city"},
+        ])
+    },[])
+    const [clientIP, s__clientIP] = useState('');
+    const [LS_uid, s__LS_uid] = useLocalStorage('uid', "")
+    const [uid, s__uid] = useState("")
+
+    const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
+
+    const getData = async (randomThousand:any) => {
+        const res:any = await fetch('https://geolocation-db.com/json/')
+        let awaited = await res.json()
+        s__clientIP(awaited.IPv4)
+        let new_uid = `${awaited.IPv4}:${randomThousand}`
+        s__uid(new_uid)
+        s__LS_uid(new_uid)
+        app.alert("success", "Registered succesfully!")
+    }
+    const register = () => {
+        let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
+        if (confirm(`IP+${randomThousand}\nWould you like to Register?`)) {
+            getData(randomThousand)
+
+        }
+    }
+
+    const { data: session } = useSession();
     return (
-    <div className='flex-col h-min-100vh' style={{background:"linear-gradient(-15deg,#50545B,#28292D)"}}>
-        <div className="h-min-100vh w-100   flex-col flex-justify-start flex-align-stretch" >
-            <div className="pos-abs h-min-100vh  w-100 flex z-10 flex-align-stretch top-0 left-0"
-            >
-                {/* power is dynamic, argument sent is hardcoded and useless */}   
-                <Suspense> 
-                    {isClient && <Scene live={true} ref={$boxContainer} theuserstart={theuserstart}>
-                        <LiteLevel {...{ power:null, form:null, onTextClick:null, optsToggler: null,
-                                s__tokensArrayObj: null, toggleTrade:null, xOut:null, yOut:null, zOut:null,
-                                tokensArrayObj: null, onTimeframeClick: null, askTicket: null,
+    <div className='flex-center w-100 h-min-100vh'>
+        <div className="h-min-100vh w-100  flex-col flex-justify-start flex-align-stretch">
+            <div className="px-8 ">
+                <BreadCrumbs pages={[["/", "Trading-Simulation Development"]]} />
+                
+                <div className="flex my-4">
+                    {/* <h1 className="pt-4 tx-bold-5 flex-1 ">
+                        Dashboard
+                    </h1> */}
+                    {!uid && <>
+                        <button   className="ims-button-primary clickble nowrap tx-lg"
+                            onClick={()=>{ register() }}
+                        >
+                            + Add Local Account
+                        </button>
+                        <div className='pa-2 border-lgrey'>?</div>
+                    </>}
+                    
+                    {uid &&
+                        <button   className="ims-button-faded clickble nowrap tx-lg opaci-25"
+                            onClick={()=>{
+                                leaveAll()
                             }}
-                        />
-                    </Scene>}
-                </Suspense>
+                        >
+                            Leave
+                        </button>
+                    }
+                    <div className='flex-1'></div>
+                </div>
             </div>
-            <div className='flex flex-justify-center  gap-4 pos-fix w-100 z-800  ' >
-                <BitBingoLogo />
-                {isClient && !!uid &&
-                    <div>
-                        <ReloadCube />
-                    </div>
-                }   
-            </div> 
-            <div className='flex-center z-500'>
-                {isClient &&
-                    <div className="flex-center pos-abs bg-b-50 bg-glass-5 " style={{border:"1px solid #FED034"}}>
-                        {/* {!uid &&
-                            <Link target="_blank" href="/dashboard"
-                                className="tx-blue px-6 gap-2 tx-lgx flex-center opaci-chov--50 w-100 tx-bold-2 pt-100 pb-3 Q_sm_x"
-                                style={{filter: "hue-rotate(-189deg) brightness(666%)"}}
-                            >
-                                <FaExternalLinkAlt /> Dashboard 
-                            </Link>
-                        } */}
-                        {!uid &&
-                            <Link target="_blank" href="/demo" className="tx-blue px-6 gap-2 tx-lgx flex-center opaci-chov--50 w-100 tx-bold-2 pt-100 pb-3"
-                                style={{filter: "hue-rotate(-189deg) brightness(666%)"}}
-                            >
-                                DEMO
-                            </Link>
-                        }
-                    </div>
-                }
-            </div>
-            <div className='flex-1 noclick'>
-            </div>
-            <div className='flex-col  flex-align-end Q_sm_x' >
-                <SocialMediaButtons />
+            {q__unitsArray.isLoading &&
+                <div className=' flex-col mt-150'>
+                    <LoadingPill title={"Loading Bitcoin Price..."} />
+                </div> 
+            }
+            {q__unitsArray.isError &&
+                <div className=' flex-col mt-150'>
+                    <FailedRequest preview={LOCAL_URL+"/?offline"} />
+                </div> 
+            }
+
+            
+
+            {/* |{JSON.stringify(tokens)}| */}
+            {/* {JSON.stringify(tokens)} */}
+            {/*!!session &&*/
+            
+                <div className='flex-wrap flex-justify-start gap-4 flex-align-start' >
+                    {unitsArray.length > 0 && inventoryItems.map((item, index) => (
+                        <ImsCard
+                            key={index}
+                            companyName={item.companyName}
+                            unitsArray={tokens}
+                            totalValue={item.totalValue}
+                            />
+                        ))
+                    }
+                    
+                    {isClient && <AmountCards tokens={tokens} {...{mul, bigmul}} /> }
+                </div>
+            }
+            
+
+            <div className='flex-center  flex-1'>
             </div>
         </div>
     </div>
     )
 }
 
+// const getEdgeConfig  = async () => {
+//     // return null
+//     const tokens = await getAll(["tokens"]);
+//     // const tokens = await get('tokens');
+//     console.log("tokens", tokens)
+//     const tokenstokens:any = tokens.tokens
+//     return tokenstokens.split(",")
+// }
+type PageProps = {
+    online: boolean;
+    tokens: any;
+};
+
 Page.getLayout = function getLayout(page: ReactElement) {
     return (
     <Layout>
-        <Head><title>Bit City</title></Head>
-        {page}
+        <Head><title>BitCity</title></Head>
+        <InventoryProvider>
+            <SidebarContainer sidebar={<SessionSidebar/>}>{page}</SidebarContainer>
+        </InventoryProvider>
     </Layout>
     )
 }
 
 export default Page
+
+export const getServerSideProps: GetServerSideProps<PageProps, ParsedUrlQuery> = async (context) => {
+    const { offline } = context.query;
+    const online = typeof offline === 'undefined';
+    // const tokens =  process.env.GITHUB_ID
+
+    // let tokens = await getEdgeConfig()
+    let tokens = DEFAULT_TOKENS_ARRAY
+    
+    return {
+      props: {
+        online,tokens,
+      },
+    };
+  };
