@@ -352,7 +352,7 @@ export function ChartDashboard({query}) {
             <button className="ma-2 tx-lg   py-4 px-8 bord-r-5 bg-w-5 border-lgrey tx-contrast"
                 onClick={()=>{register()}}
             >
-                + Add Local Account
+                + Create Local Account
             </button>
         </div>)
     }
@@ -488,11 +488,11 @@ export function ChartDashboard({query}) {
                             </summary>
                                 
                             <div className="  flex-col flex-justify-end ma-2">
-                                <div className="underline  bord-r-50 px-2 py-1 tx-sm mb-8 ">
+                                {/* <div className="underline  bord-r-50 px-2 py-1 tx-sm mb-8 ">
                                     {uid}
-                                </div>
+                                </div> */}
                                 
-                                <div className="opaci-50 tx-ls- tx-l mb-2 tx-white">Hot Wallet</div>
+                                <div className="opaci-50 tx-ls- tx-l mb-2 tx-white nowrap">Hot Wallet</div>
                                 <div className="flex-col gap-2">    
                                 
                                     {queryUSDT.data && asd.balances && asd.balances.map((anAsset, i)=>{

@@ -3,7 +3,7 @@ import LoginBtn from "@/src/items/molecules/auth/LoginBtn";
 import Link from "next/link";
 import Image from "next/image";
 import { BsBox, BsChat, BsFillArchiveFill, BsFillBarChartFill, BsGear, BsInfoCircle, BsPerson, BsStack } from "react-icons/bs";
-import { FaChartLine, FaCity, FaQuestion, FaUncharted } from "react-icons/fa";
+import { FaChartLine, FaCity, FaKey, FaQuestion, FaSync, FaUncharted } from "react-icons/fa";
 import { RxDashboard } from "react-icons/rx";
 import { MdOutlineHistory } from "react-icons/md";
 import { useRouter } from "next/router";
@@ -13,8 +13,13 @@ import { AppContext } from "@/scripts/contexts/AppContext";
 import { MdOutlineInventory2 } from "react-icons/md";
 import { isDevEnvironment } from "@/scripts/helpers/devHelper";
 import { GiEightBall, GiWheat } from "react-icons/gi";
+import { useSession } from "next-auth/react";
+import { useLocalStorage } from "usehooks-ts";
 
 export default function Component({}) {
+    const [LS_uid, s__LS_uid] = useLocalStorage('uid', "")
+    const { data: session } = useSession();
+
     const router = useRouter();
     const handleClick = async (newUrl,...args) => {
       await router.push(newUrl);
@@ -99,7 +104,15 @@ export default function Component({}) {
                 </Link>
             </div>
             <div className='flex-1'>
-                
+
+                {(!!session && !!session.user && !!LS_uid)  && <>
+                    <div>
+                        <FaSync />
+                        Sync
+                        Accounts
+                    </div>
+                </>}
+
                 {!!app && !!app.sidebarPages && app.sidebarPages.map((aLink, index)=>{
                     return (
                         <Link href={aLink.url || "#"} className="flex-center pb-2 py-3 clickble  px-2 ims-bg-primary bord-r-5 my-1 box-shadow-2  " key={index}>

@@ -22,10 +22,10 @@ export default function Component({
                                     <span className="tx-ls-2">{isK && parseDecimals(queryUSDT.data[index].price)}</span>
                                 </a>
                             </div>
-                            {(!aTokenCristayl || (!!aTokenCristayl && !aTokenCristayl.state)) && <div className="opaci-25">Inactive</div>}
+                            {(!aTokenCristayl || (!!aTokenCristayl && !aTokenCristayl.state)) && <div className="opaci- tx-red-75">Inactive</div>}
                             
                             {!isQ || (!aTokenCristayl || (!!aTokenCristayl && !aTokenCristayl.state))
-                                ? (<div className="opaci-25 tx-xs ">
+                                ? (<div className="opaci- tx-ls-1 tx-xsm ">
                                         offline
                                     </div>
                                 )
@@ -120,8 +120,8 @@ export default function Component({
                                         updateTokenOrder={updateTokenOrder}
                                     />
                                     {(aToken in tokensArrayObj) && 
-                                        <div className="tx-bold flex-center  mt-1  " >
-                                            <button className="clickble tx-ls-5  opaci-50 opaci-chov-50 duno-btn hov-bord-1-w py-2 px-3 bord-r-50 tx-lg"
+                                        <div className="tx-bold flex-center  mt-3  " >
+                                            <button className="clickble tx-ls-5  opaci-50 opaci-chov-50 duno-btn hov-bord-1-w py-2 px-3 bord-r-50 tx-md"
                                                 onClick={()=>{removeToken(aToken)}}
                                                 style={{boxShadow:"0px 0px 25px #CF589433"}}
                                             >

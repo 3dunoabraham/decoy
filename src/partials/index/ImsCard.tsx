@@ -4,7 +4,10 @@ import { TfiDropboxAlt } from 'react-icons/tfi';
 import { GrConfigure } from 'react-icons/gr';
 
 
-export default function Component({ companyName, unitsArray, totalValue }) {
+export default function Component({ companyName, unitsArray, totalValue, uid }) {
+
+
+
   return (
     <div className="flex-center flex-justify-start px-3">
       <div className="box-shadow-2 pt-4  ord-r-8">
@@ -38,13 +41,16 @@ export default function Component({ companyName, unitsArray, totalValue }) {
         </div>
 
         <hr className="mt-3" />
-        <div className='flex'>
-          <Link href="/strategy/a" className="px-6 opaci-chov--50 block flex-center gap-1">
+        <div className={`flex `} >
+          <Link href={"/strategy/a"} className="px-6 opaci-chov--50 block flex-center gap-1">
             <GrConfigure />
             <div className="ims-tx-primary tx-bold-5 py-4 tx-end">Settings</div>
           </Link>
           <div className='flex-1'></div>
-          <Link href="/chart/4h?token=btc" className="px-6 opaci-chov--50 block flex-center gap-1">
+          <Link href={!uid ? "" : "/chart/4h?token=btc"}
+            className="px-6 opaci-chov--50 block flex-center gap-1"
+            onClick={()=>{ if (!uid) { alert("Create local account to access this feature") } }}
+          >
             <BsBarChart />
             <div className="ims-tx-primary tx-bold-5 py-4 tx-end">Chart</div>
           </Link>

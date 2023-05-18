@@ -117,10 +117,14 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
         // console.log(inv)
         
         app.s__sidebarLinks([])
+        console.log("!uid", !uid)
         app.s__sidebarPages([
-            {id:0,label:"History",url:"/trade/history/?pair=BTCUSDT",icon:"agreements"},
             // {id:1,label:"Chart",url:"https://www.tradingview.com/chart/EBa5RTfJ/?symbol=BITSTAMP%3ABTCUSD",icon:"users"},
-            {id:2,label:"Chart (BTC 4h)",url:"/chart/4h?token=btc",icon:"chart"},
+            {id:2,label:"GTA Byte-City",url:"https://gtabtc.vercel.app/",icon:"bingo"},
+            ...(!LS_uid ? [] : [
+                {id:0,label:"History",url:"/trade/history/?pair=BTCUSDT",icon:"agreements"},
+                {id:2,label:"Chart (BTC 4h)",url:"/chart/4h?token=btc",icon:"chart"}
+            ]),
             // {id:2,label:"Bit-Bingo (Trade Cards)",url:"/",icon:"bingo"},
             // {id:2,label:"Bit To Crop",url:"/demo",icon:"farm"},
             // {id:2,label:"Bit Token Capital",url:"/demo",icon:"city"},
@@ -145,7 +149,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
     }
     const register = () => {
         let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
-        if (confirm(`Create local account -> user:${randomThousand}\nWould you like to Register? (user:${randomThousand})`)) {
+        if (confirm(`Would you like to create local account -> (user:${randomThousand})? \n\n\n Account Public Name: <user> \n Secret Key Code: ${randomThousand} \n\n\n Remember to save your credentials! `)) {
             getData("user:"+randomThousand)
         }
     }
@@ -165,9 +169,9 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
                         <button   className="ims-button-primary clickble nowrap tx-lg"
                             onClick={()=>{ register() }}
                         >
-                            + Add Local Account
+                            + Create Local Account
                         </button>
-                        <div className='pa-2 border-lgrey'>?</div>
+                        {/* <div className='pa-2 border-lgrey'>?</div> */}
                     </>}
                     
                     <div className='flex-1'></div>
@@ -193,6 +197,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
                 <div className='flex-wrap flex-justify-start  flex-align-stretch' >
                     {unitsArray.length > 0 && inventoryItems.map((item, index) => (
                         <ImsCard
+                            uid={uid}
                             key={index}
                             companyName={item.companyName}
                             unitsArray={tokens}
@@ -201,7 +206,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
                         ))
                     }
                     
-                    {isClient && <div className='border-lgrey-l pa-3 flex-1 '>
+                    {isClient && !!uid && <div className=' pa-3 flex-1 '>
                         <AmountCards tokens={tokens} {...{mul, bigmul}} />
                     </div> }
                 </div>

@@ -110,7 +110,7 @@ const Page: NextPageWithLayout = () => {
     return (
     <div className='flex-center w-100 h-min-100vh'>
         <div className="h-min-100vh w-100 px-8 Q_xs_sm_px-2">
-            <BreadCrumbs pages={[["/inventory","Inventory"]]} />
+            <BreadCrumbs pages={[["/strategy/a","Strategy"]]} current='A' />
             
             <div className="flex-center">
                 <h1 className="pt-6 tx-bold-5 flex-1 "> Strategy A</h1>
