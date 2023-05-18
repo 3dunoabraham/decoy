@@ -27,7 +27,7 @@ function Component() {
   },[])
 
   return (<>
-    <h1 className="ma-0 px-6 Q_xs_px-2 pa-0 tx-bold-2">Tradingview's Cryptocurrency Market Widget</h1>
+    <h1 className="ma-0 px-6 Q_xs_px-2 pa-0 tx-bold-2">Tradingview&apos;s Cryptocurrency Market Widget</h1>
     <h3 className="ma-0 px-6 Q_xs_px-2 pa-0 tx-link">
         <a href="https://www.tradingview.com/widget/crypto-mkt-screener/" target="_blank">
           Tradingview.com/widget/crypto-mkt-screener
