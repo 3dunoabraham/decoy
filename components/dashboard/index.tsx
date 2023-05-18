@@ -447,6 +447,11 @@ export function ChartDashboard({query}) {
                                 })}
                             </div>
                         </div>
+                        <div className="flex-center tx-link opaci-chov--50">
+                            <a href="https://www.tradingview.com/symbols/BTCUSD/ideas/?exchange=BITSTAMP">
+                            BTCUSD Tradingview Ideas Overview
+                            </a>
+                        </div>
                         <ToolButtons {...{cryptoToken, baseToken, timeframe, exportConfig, clickImportConfig}} />
                         {klinesArray.length > 0  && <div className="flex-1 w-100 flex-col mt-4 ">
                             <div className=" flex  flex-justify-between w-90">
@@ -532,7 +537,7 @@ export function ChartDashboard({query}) {
             </>}
             {!!session && <>
                 {!!session.user && <>
-                    <div className="tx-green">Is Connected w/ Google!</div>
+                    <div className="tx-green">Connected w/ Google!</div>
 
                     {<>
                         <div>

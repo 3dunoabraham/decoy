@@ -48,11 +48,11 @@ export default function Component({ companyName, unitsArray, totalValue, uid }) 
           </Link>
           <div className='flex-1'></div>
           <Link href={!uid ? "" : "/chart/4h?token=btc"}
-            className="px-6 opaci-chov--50 block flex-center gap-1"
+            className={`px-6 opaci-chov--50 block flex-center gap-1 ${!!uid ? "ims-tx-primary" : "tx-red"} `} 
             onClick={()=>{ if (!uid) { alert("Create local account to access this feature") } }}
           >
             <BsBarChart />
-            <div className="ims-tx-primary tx-bold-5 py-4 tx-end">Chart</div>
+            <div className={` tx-bold-5 py-4 tx-end `}>Chart</div>
           </Link>
         </div>
 

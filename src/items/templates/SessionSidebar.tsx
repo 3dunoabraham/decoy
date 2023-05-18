@@ -82,7 +82,7 @@ export default function Component({}) {
             </div>
         </div>
 
-        <div className="h-min-90vh flex-col pos-fix top-0  right-0  ">
+        <div className="h-min-100vh flex-col pos-fix ims-bg-primary top-0  right-0  ">
             <div className='flex px-3 px- w-100'>
                 {/* <button onClick={()=>{handleClick("/")}} className='tx-white  tx-lgx nodeco py-4 flex-center '>
                     <div className='bg-white px-1 pt-1 ord-r-10 scale-90'>
@@ -148,7 +148,7 @@ export default function Component({}) {
                 </div>
                 <hr className="w-90 opaci-50  my-3" style={{borderColor: "white"}} />
             </>}
-            <div className=''>
+            <div className='mb-100'>
                 {/* <Link href="/#" className="flex-center py-2 clickble  px-2 bg-w-hov-10  ">
                     <div className=" pr-3  Q_xl_x"></div>
                     <div className="px-1 tx-center tx-lg opaci-hov--50"><BsInfoCircle /></div>

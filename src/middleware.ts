@@ -16,7 +16,7 @@ export async function middleware(req: NextRequest) {
     const path = req.nextUrl.pathname;
     const session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
     // const greeting = await get('greeting');
-    console.log("SESSIONNNNN", session, origin)
+    // console.log("SESSIONNNNN", session, origin)
     if (!session && !dev) {
           return NextResponse.redirect(`${origin}`)
     }

@@ -26,6 +26,7 @@ import { useIsClient, useLocalStorage } from 'usehooks-ts';
 import AmountCards from '@/components/dashboard/AmountCards';
 import { DEFAULT_TOKENS_ARRAY } from '@/components/scripts/constants';
 import { fetchDelete } from '@/scripts/helpers/fetchHelper';
+import TradingViewNews from '../partials/index/TradingViewNews';
 
 const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
     const bigmul = 50
@@ -216,18 +217,23 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
             <div className='flex-center  flex-1'>
             </div>
                 
-            {uid &&
-            <div className='flex pa-1'>
-                <div className='flex-1'></div>
-            <button   className="ims-button-faded clickble nowrap tx-lg opaci-25"
-                            onClick={()=>{
-                                leaveAll()
-                            }}
-                        >
-                            - Delete Local Account
-                        </button>
+            {!!uid &&
+                <div className='flex pa-1'>
+                    {(!!session && !!session.user) &&
+                        <div className='flex-1 mt-100'>
+
+                            <TradingViewNews />
                         </div>
                     }
+                </div>
+            }
+            <div className='flex flex-justify-end  pa-1'>
+                <button   className="ims-button-faded clickble nowrap tx-lg opaci-25"
+                    onClick={()=>{ leaveAll() }}
+                >
+                    - Delete Local Account
+                </button>
+            </div>
         </div>
     </div>
     )
