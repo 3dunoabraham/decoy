@@ -18,7 +18,7 @@ export const DownloadButton = ({ data, filename }) => {
     {JSON.stringify(data).length <= 2 && <>
       <div className=' bg-white px-4 py-4 bord-r-50 tx-center flex-col gap-1'>
         <span className='tx-red'>
-            <div> Can't Export! </div>
+            <div> Can&apos;t Export! </div>
             <div> Empty Simulation! </div>
             </span> <br />  <span className='tx-mdl  ' ><b className='tx-lgx' style={{color:"orange"}}>Add BTC</b> <br />
             or any token <br /> to enable export.
