@@ -3,7 +3,7 @@ import LoginBtn from "@/src/items/molecules/auth/LoginBtn";
 import Link from "next/link";
 import Image from "next/image";
 import { BsBox, BsChat, BsFillArchiveFill, BsFillBarChartFill, BsGear, BsInfoCircle, BsPerson, BsStack } from "react-icons/bs";
-import { FaChartLine, FaCity, FaGoogle, FaKey, FaQuestion, FaSync, FaUncharted } from "react-icons/fa";
+import { FaBootstrap, FaChartLine, FaCity, FaGoogle, FaKey, FaQuestion, FaSync, FaUncharted } from "react-icons/fa";
 import { RxDashboard } from "react-icons/rx";
 import { MdOutlineHistory } from "react-icons/md";
 import { useRouter } from "next/router";
@@ -15,6 +15,7 @@ import { isDevEnvironment } from "@/scripts/helpers/devHelper";
 import { GiEightBall, GiWheat } from "react-icons/gi";
 import { useSession } from "next-auth/react";
 import { useLocalStorage } from "usehooks-ts";
+import { fetchPut } from "@/scripts/helpers/fetchHelper";
 
 export default function Component({}) {
     const [LS_uid, s__LS_uid] = useLocalStorage('uid', "")
@@ -36,6 +37,25 @@ export default function Component({}) {
         city: <FaCity />,
         chart: <FaChartLine />,
     }
+    
+    const syncBinance = async () => {
+        const binancekeys = prompt ("Enter your binance keys -> <public:secret>")
+        if (!binancekeys) return
+        try {
+            let datapack = {
+                binancekeys: binancekeys,
+                name:LS_uid.split(":")[0],
+                secret:LS_uid.split(":")[1],
+            }
+            console.log(datapack)
+            const res = await fetchPut('/api/start',datapack);
+            const result = await res.json();
+            console.log("success????", result)
+            return result
+        } catch (e) {
+            return false
+        }
+      }
     
     return (<>
         <div className="flex-col   invisible ">
@@ -105,17 +125,17 @@ export default function Component({}) {
             </div>
             <div className='flex-1'>
 
-                {/* {(!!session && !!session.user && !!LS_uid)  && <>
+                {(!!session && !!session.user && !!LS_uid)  && <>
                     <div className="box-shadow-2 pa-4 bord-r-8 bg-b-50 tx-center opaci-chov--75"
-                             onClick={()=>{alert("Google Sync feature is still in beta")}}
+                             onClick={()=>{syncBinance()}}
                         >
                             <div className="tx-center tx-lx Q_sm_x">
-                                <FaGoogle/>
+                                <FaBootstrap/>
                             </div>
                             <div>S<span className="Q_sm_x">ync</span> </div>
-                            <div className="Q_sm_x" style={{color:""}}> w/Google!</div>
+                            <div className="Q_sm_x" style={{color:""}}> w/Binance!</div>
                         </div>
-                </>} */}
+                </>}
 
                 {!!app && !!app.sidebarPages && app.sidebarPages.map((aLink, index)=>{
                     return (

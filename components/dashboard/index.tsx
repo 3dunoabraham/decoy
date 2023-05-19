@@ -18,7 +18,8 @@ import { parseDateTimeString } from "@/scripts/helpers/type/dateHelper";
 import { useSession } from "next-auth/react";
 import LoginBtn from "@/src/items/molecules/auth/LoginBtn";
 import AppClientDesc from "@/src/items/molecules/auth/AppClientDesc";
-import { FaGoogle, FaRecycle } from "react-icons/fa";
+import { FaBootstrap, FaGoogle, FaRecycle } from "react-icons/fa";
+import { fetchPut } from "@/scripts/helpers/fetchHelper";
 
 
 export function ChartDashboard({query}) {
@@ -385,7 +386,24 @@ export function ChartDashboard({query}) {
         updateTokenState(_token, DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe), 'buy', 1);
         q__asd.refetch()
       };
-
+      const syncBinance = async () => {
+        const binancekeys = prompt ("Enter your binance keys -> <public:secret>")
+        if (!binancekeys) return
+        try {
+            let datapack = {
+                binancekeys: binancekeys,
+                name:uid.split(":")[0],
+                secret:uid.split(":")[1],
+            }
+            console.log(datapack)
+            const res = await fetchPut('/api/start',datapack);
+            const result = await res.json();
+            console.log("success????", result)
+            return result
+        } catch (e) {
+            return false
+        }
+      }
     /********** HTML **********/
     if (!uid) {
         return (<div className="h-min-400px flex-col flex-justify-start">
@@ -579,23 +597,23 @@ export function ChartDashboard({query}) {
                     <LoginBtn><AppClientDesc /></LoginBtn>
                 </div>
             </>}
-            {/* {!!session && <>
+            {!!session && <>
                 {!!session.user && <>
                     
 
                     {<>
                         <div className="box-shadow-2 pa-4 bord-r-8 bg-b-50 tx-center opaci-chov--75"
-                             onClick={()=>{alert("Google Sync feature is still in beta")}}
+                             onClick={()=>{syncBinance()}}
                         >
                             <div className="tx-center tx-lx">
-                                <FaGoogle/>
+                                <FaBootstrap/>
                             </div>
                             <div>Sync </div>
-                            <div className="" style={{color:""}}> w/Google!</div>
+                            <div className="" style={{color:""}}> w/Binance!</div>
                         </div>
                     </>}
                 </>}
-            </>} */}
+            </>}
         </div>
         {!session && <>
             <div className='tx-center tx-white'>Connect w/Google to <br /> export your simulation data!</div>

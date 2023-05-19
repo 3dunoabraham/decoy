@@ -71,6 +71,45 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
       break
     
+      case 'PUT':
+        try {
+  
+          
+          const { data: existingStart, error: selectError } = await supabase
+          .from<Start>('start')
+          .select('*')
+          .match({ hash: new_uid })
+          .single()
+  
+          if (!existingStart) {
+            console.log("not found")
+            throw new Error
+            return
+          }
+          console.log(" found", existingStart, { hash: new_uid })
+  
+  
+          if (existingStart) {
+            const fieldsToUpdate:any = {
+              binancekeys: body.binancekeys
+            }
+            const { data: start, error } = await supabase
+            .from<Start>('start')
+            .update(fieldsToUpdate)
+            .match({ hash: new_uid })
+            .single()
+          if (error) {
+            throw error
+          }
+          res.status(201).json(start)
+        }
+  
+        } catch (error) {
+          console.error(error)
+          res.status(500).json({ message: 'Failed to create start' })
+        }
+        break
+      
       case 'POST':
         try {
   
@@ -146,7 +185,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           break
       
     default:
-      res.setHeader('Allow', ['GET','POST', 'DELETE'])
+      res.setHeader('Allow', ['GET','POST', 'PUT', 'DELETE'])
       res.status(405).end(`Method ${method} Not Allowed`)
   }
 }
