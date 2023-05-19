@@ -37,9 +37,10 @@ export const config = {
         '/demo',
         '/bitcity',
         '/trade/history',
-        '/chart/:path*',
-        '/api/trade-history','/api/account-balance',
+        // '/chart/:path*',
+        '/api/:path*',
+        // '/api/trade-history','/api/account-balance',
         
-        '/api/place-order',
+        // '/api/place-order',
     ],
 }
