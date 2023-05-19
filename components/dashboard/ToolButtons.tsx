@@ -19,11 +19,11 @@ export default function Component({cryptoToken, baseToken, timeframe, exportConf
                 >
                     Refresh
                 </div>
-                <div onClick={()=>{exportConfig()}}
+                {/* <div onClick={()=>{exportConfig()}}
                     className="px-2 py-1 bg-b-20 ma-1 opaci-50 opaci-chov-50 bord-r-8 "
                 >
                     export
-                </div>
+                </div> */}
                 <div onClick={()=>{clickImportConfig()}}
                     className="px-2 py-1 bg-b-20 ma-1 opaci-50 opaci-chov-50 bord-r-8 "
                 >

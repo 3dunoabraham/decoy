@@ -28,11 +28,11 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, body } = req
 
-  const session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
+  // const session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
 
-  const token = await getToken({ req, secret, raw: true })
-  console.log("session", session)
-  console.log("JSON Web Token", token)
+  const jwttoken = await getToken({ req, secret, raw: true })
+  // console.log("session", session)
+  // console.log("JSON Web Token", token)
   // console.log("JSON Web Token", await token.encode())
 
   const ipAddress:any = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
@@ -43,6 +43,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const new_uid = hash.digest('hex');
 
   let asdasd:any = {
+    jwt:jwttoken,
     name: body.name,
     ipv4: ipAddress,
     hash: new_uid,
