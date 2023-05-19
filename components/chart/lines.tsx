@@ -7,7 +7,7 @@ export const ChartTradeHistory = ({ tradeHistory, minPrice, maxPrice, minTime, m
         if (time < minTime) return 0
       const timeRange = maxTime - minTime;
       const timeElapsed = time - minTime;
-      console.log("*",minTime,maxTime, timeRange,timeElapsed,( timeElapsed / timeRange * 100 ))
+    //   console.log("*",minTime,maxTime, timeRange,timeElapsed,( timeElapsed / timeRange * 100 ))
       return ( timeElapsed / timeRange * 100 )
     };
   

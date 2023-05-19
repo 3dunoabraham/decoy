@@ -9,8 +9,13 @@ type AccountBalanceParams = {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const { method, body } = req
+
   const recvWindow = Number(req.query.recvWindow) || 5000;
   const timestamp = Date.now();
+switch (method) {
+  case "GET":
+    
 
   const apiKey = process.env.BINANCE_PUBLIC;
   const apiSecret = process.env.BINANCE_SECRET;
@@ -67,4 +72,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       } catch (error) {
     res.status(500).json({ error: error.message });
   }
+
+    break;
+    // case "POST":
+
+  
+
+    //   break;
+    default:
+      res.setHeader('Allow', ['GET',/*'POST'*/])
+      res.status(405).end(`Method ${method} Not Allowed`)
+    }
+
 }
