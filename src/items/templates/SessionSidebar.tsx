@@ -105,18 +105,17 @@ export default function Component({}) {
             </div>
             <div className='flex-1'>
 
-                {(!!session && !!session.user && !!LS_uid)  && <>
+                {/* {(!!session && !!session.user && !!LS_uid)  && <>
                     <div className="box-shadow-2 pa-4 bord-r-8 bg-b-50 tx-center opaci-chov--75"
                              onClick={()=>{alert("Google Sync feature is still in beta")}}
                         >
-                            {/* <div>Click here</div> */}
                             <div className="tx-center tx-lx Q_sm_x">
                                 <FaGoogle/>
                             </div>
                             <div>S<span className="Q_sm_x">ync</span> </div>
                             <div className="Q_sm_x" style={{color:""}}> w/Google!</div>
                         </div>
-                </>}
+                </>} */}
 
                 {!!app && !!app.sidebarPages && app.sidebarPages.map((aLink, index)=>{
                     return (

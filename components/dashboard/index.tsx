@@ -579,7 +579,7 @@ export function ChartDashboard({query}) {
                     <LoginBtn><AppClientDesc /></LoginBtn>
                 </div>
             </>}
-            {!!session && <>
+            {/* {!!session && <>
                 {!!session.user && <>
                     
 
@@ -587,7 +587,6 @@ export function ChartDashboard({query}) {
                         <div className="box-shadow-2 pa-4 bord-r-8 bg-b-50 tx-center opaci-chov--75"
                              onClick={()=>{alert("Google Sync feature is still in beta")}}
                         >
-                            {/* <div>Click here</div> */}
                             <div className="tx-center tx-lx">
                                 <FaGoogle/>
                             </div>
@@ -596,7 +595,7 @@ export function ChartDashboard({query}) {
                         </div>
                     </>}
                 </>}
-            </>}
+            </>} */}
         </div>
         {!session && <>
             <div className='tx-center tx-white'>Connect w/Google to <br /> export your simulation data!</div>
