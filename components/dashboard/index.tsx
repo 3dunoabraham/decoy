@@ -226,6 +226,9 @@ export function ChartDashboard({query}) {
     }
     const clickImportConfig = () => {
         let backup = prompt("Backup:")
+        if (!backup) return
+        if (!JSON.parse(backup)) return
+
         importConfig(backup)
     }
     const importConfig = (strTokensArrayObj) => {

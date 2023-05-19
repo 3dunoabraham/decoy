@@ -10,6 +10,7 @@ const dev = (
 )
 // const dev = process.env.NODE_ENV !== "production";
 
+
 // This function can be marked `async` if using `await` inside
 export async function middleware(req: NextRequest) {
     const { pathname, origin } = req.nextUrl

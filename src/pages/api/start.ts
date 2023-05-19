@@ -1,6 +1,6 @@
 
   
-
+import { getToken } from "next-auth/jwt"
   import type { NextApiRequest, NextApiResponse } from 'next'
 import { createClient } from '@supabase/supabase-js'
 import crypto from 'crypto';
@@ -19,6 +19,8 @@ export interface Start {
 }
 
 
+const secret = process.env.NEXTAUTH_SECRET
+
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
@@ -26,7 +28,13 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, body } = req
 
-  
+  const session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
+
+  const token = await getToken({ req, secret, raw: true })
+  console.log("session", session)
+  console.log("JSON Web Token", token)
+  // console.log("JSON Web Token", await token.encode())
+
   const ipAddress:any = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
   
   const hash = crypto.createHash('sha256');
