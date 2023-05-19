@@ -271,6 +271,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
         if (!!LS_uid) {  app.alert("success","Logged in!")}
     },[])
     const askTicket = async () => {
+        return
         console.log("askTicketaskTicketaskTicket")
         try {
             const res = await fetchPut('/api/order',{

@@ -10,6 +10,7 @@ import { AppContext } from "@/scripts/contexts/AppContext";
 import Providers from "@/scripts/contexts/Providers";
 import AlertContainer from "@/src/items/atoms/common/AlertContainer";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 export default function Layout({ children }) {
     const router = useRouter()
@@ -21,13 +22,14 @@ export default function Layout({ children }) {
     const [sidebarPages,s__sidebarPages] = useState([])
     const [userstart,s__userstart] = useState([])
 
-
+    
 
     const alertNotification = (category="neutral", msg="")=>{
 		alertMap__do.setAll(DEFAULT_ALERT_MAPARRAY)
         setTimeout(()=>{alertMap__do.set(category, msg)},100)
     }
 	let appValue = useMemo(()=>{
+        
 		return {
             institution: {
                 title: "tresduno",
@@ -53,7 +55,7 @@ export default function Layout({ children }) {
 			alert:(category, msg)=>{alertNotification(category, msg)}
 		}
         // eslint-disable-next-line react-hooks/exhaustive-deps
-	},[alertMap, filters, query,sidebarLinks, sidebarPages])
+	},[alertMap, filters, query,sidebarLinks, sidebarPages, ])
     
 
     // useEffect(()=>{

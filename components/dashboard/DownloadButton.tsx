@@ -15,12 +15,17 @@ export const DownloadButton = ({ data, filename }) => {
   }
 
   return (<>
+    {JSON.stringify(data).length <= 2 && <>
+      <div className=' bg-white px-4 py-4 bord-r-50 tx-center flex-col gap-1'>
+        <span className='tx-red'>Account Data not Found.</span> <br /> <span className='tx-mdl  '><b>Add any token</b> <br /> to enable export.</span>
+      </div>
+    </>}
     {JSON.stringify(data).length > 2 &&
       <button onClick={handleClick}
         className="noborder bg-b-20 tx-white tx-lg px-3 py-2 bord-r-5 mt-8 opaci-chov--50"
       >
         <div className='opaci-25 tx-lx'><b>Download</b></div>
-        <div className=''>Local Account Data</div>
+        <div className=''>Simulation Account Data</div>
         <div className='tx-italic tx-ls-2 tx-link'>{filename}.json</div>
       </button>
     }

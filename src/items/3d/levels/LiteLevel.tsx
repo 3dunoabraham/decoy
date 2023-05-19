@@ -75,7 +75,7 @@ export default function Component({
     const [showPhysics, s__showPhysics] = useState(false)
     useEffect(()=>{
         console.log("changed physics")
-        askTicket()
+        // askTicket()
 
     },[showPhysics])
     // useEffect(()=>{

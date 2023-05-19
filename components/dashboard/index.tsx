@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect, useMemo } from "react";
 import { useIsClient, useLocalStorage } from "usehooks-ts";
 import { useQuery } from '@tanstack/react-query'
@@ -17,6 +18,7 @@ import { parseDateTimeString } from "@/scripts/helpers/type/dateHelper";
 import { useSession } from "next-auth/react";
 import LoginBtn from "@/src/items/molecules/auth/LoginBtn";
 import AppClientDesc from "@/src/items/molecules/auth/AppClientDesc";
+import { FaGoogle, FaRecycle } from "react-icons/fa";
 
 
 export function ChartDashboard({query}) {
@@ -98,12 +100,26 @@ export function ChartDashboard({query}) {
         if (cryptoToken != selectedToken) { getKlineArray(timeframe,query.token) }
     },[counter,selectedToken,cryptoToken])
     useEffect(()=>{
+
+        
+        // if (!!session && !!session.user) {
+        //     if (window && window.localStorage) {
+        //         console.log('LS_uid', LS_uid)
+        //         if(!LS_uid) {
+        //             let thegooglenewuid = session.user.email.split("@")[0]+":"+session.user.name
+        //             s__LS_uid(thegooglenewuid)
+        //             s__uid(thegooglenewuid)
+        //             // window.location.reload()
+        //         }
+        //     }
+        // }
+        
         s__counter(counter+1)
         s__tokensArrayObj(JSON.parse(LS_tokensArrayObj))
         // console.log("LS_tokensArrayObj")
         // console.log(JSON.parse(LS_tokensArrayObj)) 
         s__uid(LS_uid)
-        s__clientIP(LS_uid.split(":")[0])
+        // s__clientIP(LS_uid.split(":")[0])
         {
             getKlineArray(timeframe,cryptoToken)
         }
@@ -177,18 +193,24 @@ export function ChartDashboard({query}) {
     
     
     /********** UPDATE **********/
-    const getData = async (randomThousand:any) => {
-        const res:any = await fetch('https://geolocation-db.com/json/')
-        let awaited = await res.json()
-        s__clientIP(awaited.IPv4)
-        let new_uid = `${awaited.IPv4}:${randomThousand}`
+    const getData = async (new_uid:any) => {
+        // const res:any = await fetch('https://geolocation-db.com/json/')
+        // let awaited = await res.json()
+        // s__clientIP(awaited.IPv4)
+        // let new_uid = `user:${randomThousand}`
         s__uid(new_uid)
         s__LS_uid(new_uid)
     }
     const register = () => {
-        let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
-        if (confirm(`Create local account -> user:${randomThousand}\nWould you like to Register? (user:${randomThousand})`)) {
-            getData(randomThousand)
+
+        let username = !session ? ( "user" ) : session.user.email.split("@")[0]
+        let randomThousand = !session ? (
+            parseInt(`${(Math.random()*9000) + 1000}`)
+        ) : session.user.email.split("@")[0]
+
+        
+        if (confirm(`Would you like to create simulation account -> (${username}:${randomThousand})? \n\n\n Account Name: <${username}> \n Secret Key Code: ${randomThousand} \n\n\n Remember to save your credentials! `)) {
+            getData(`${username}:${randomThousand}`)
         }
     }
     const clickImportConfig = () => {
@@ -356,8 +378,16 @@ export function ChartDashboard({query}) {
             <button className="ma-2 tx-lg   py-4 px-8 bord-r-5 bg-w-5 border-lgrey tx-contrast"
                 onClick={()=>{register()}}
             >
-                + Create Local Account
+                + Create Simulation Account
             </button>
+            {!session && <>
+                <div className="py-2 tx-white">or</div>
+                <div className="flex-col   tx-white" style={{background:"orangered"}}>
+                    <LoginBtn><AppClientDesc /></LoginBtn>
+                </div>
+                </>
+            }
+            
         </div>)
     }
     // console.log("DEFAULT_TOKENS_ARRAY", DEFAULT_TOKENS_ARRAY, tokensArrayObj)
@@ -529,25 +559,37 @@ export function ChartDashboard({query}) {
         <div className="tx-white mb-100">
             
             {!session && <>
-                <div className="opaci-50 mt-8">Local account detected</div>
-                <div className="opaci-50 mb-3">but, Google is not connected</div>
+                <div className="opaci-50 mt-8">Simulation account detected</div>
+                <div className="opaci-50 mb-3">but, Google connection not found</div>
                 <div className="" style={{background:"orangered"}}>
                     <LoginBtn><AppClientDesc /></LoginBtn>
                 </div>
             </>}
             {!!session && <>
                 {!!session.user && <>
-                    <div className="tx-green">Connected w/ Google!</div>
+                    
 
                     {<>
-                        <div>
-                            Sync Accounts
+                        <div className="box-shadow-2 pa-4 bord-r-8 bg-b-50 tx-center opaci-chov--75"
+
+                        >
+                            {/* <div>Click here</div> */}
+                            <div className="tx-center tx-lx">
+                                <FaGoogle/>
+                            </div>
+                            <div>Sync </div>
+                            <div className="" style={{color:""}}> w/Google!</div>
                         </div>
                     </>}
                 </>}
             </>}
         </div>
-        <DownloadButton filename="database" data={tokensArrayObj} />
+        {!session && <>
+            <div className='tx-center tx-white'>Connect w/Google to <br /> export your account data!</div>
+        </>}
+        {!!session && <>
+            <DownloadButton filename="database" data={tokensArrayObj} />
+        </>}
     </div>
     )
 }

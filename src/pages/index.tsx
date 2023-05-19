@@ -20,12 +20,12 @@ import { useRouter } from 'next/router'
 import { OFFLINE_UNITS_ARRAY } from '@/scripts/constants/inventory';
 import { InventoryContext, InventoryProvider } from '@/scripts/contexts/InventoryContext'
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { parseDecimals } from '@/components/scripts/helpers';
 import { useIsClient, useLocalStorage } from 'usehooks-ts';
 import AmountCards from '@/components/dashboard/AmountCards';
 import { DEFAULT_TOKENS_ARRAY } from '@/components/scripts/constants';
-import { fetchDelete } from '@/scripts/helpers/fetchHelper';
+import { fetchDelete, fetchPost, fetchPut } from '@/scripts/helpers/fetchHelper';
 import TradingViewNews from '../partials/index/TradingViewNews';
 
 const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
@@ -44,7 +44,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
         }
     },[])
         const leaveAll = async ()=> {
-            let aconfirm = prompt("Delete Local Account Data? (yes/no)","ye")
+            let aconfirm = prompt("Delete Simulation Account Data? (yes/no)","ye")
             if (aconfirm != "yes") return
 
             if (!isClient) return;
@@ -113,7 +113,24 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
     },[unitsArray,q__btcPrice])
     useEffect(()=>{
         s__uid(LS_uid)
-        s__clientIP(LS_uid.split(":")[0])
+        if (!!LS_uid) {
+            s__clientIP(LS_uid.split(":")[0])
+        }
+
+        
+        // if (!!sessiondata && !!sessiondata.user) {
+        //     console.log('there is session')
+        //     if (window && window.localStorage) {
+        //         console.log('LS_uid', LS_uid)
+        //         if(!LS_uid) {
+        //             let thegooglenewuid = sessiondata.user.email.split("@")[0]+":"+sessiondata.user.name
+        //             s__LS_uid(thegooglenewuid)
+        //             s__uid(thegooglenewuid)
+        //             // window.location.reload()
+        //         }
+        //     }
+        // }
+        
         // inv.s__unitsArray([])
         // console.log(inv)
         
@@ -137,43 +154,132 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
 
     const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
 
-    const getData = async (randomThousand:any) => {
-        // const res:any = await fetch('https://geolocation-db.com/json/')
-        // let awaited = await res.json()
-        // s__clientIP(awaited.IPv4)
-        s__clientIP(randomThousand)
-        // let new_uid = `${awaited.IPv4}:${randomThousand}`
-        let new_uid = randomThousand
-        s__uid(new_uid)
-        s__LS_uid(new_uid)
-        app.alert("success", "Registered succesfully!")
-    }
-    const register = () => {
-        let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
-        if (confirm(`Would you like to create local account -> (user:${randomThousand})? \n\n\n Account Public Name: <user> \n Secret Key Code: ${randomThousand} \n\n\n Remember to save your credentials! `)) {
-            getData("user:"+randomThousand)
+    
+    const askTicket = async () => {
+        console.log("askTicketaskTicketaskTicket")
+        try {
+            const res = await fetchPut('/api/order',{
+            });
+            const ress = await res.json();
+            if (res.status >= 200 && res.status <= 300)
+            {
+                app.alert("success","request saved")
+            } else {
+                app.alert("error","request not completed")
+            }
+            return ress
+        } catch (e) {
+            app.alert("error","request not completed")
+            return false
         }
+
     }
 
-    const { data: session } = useSession();
+
+    
+    const getData = async (newuid:any) => {
+        try {
+            const res:any = await fetchPost('/api/start',{
+                uid:uid,
+                name: sessiondata.user.email.split(":")[0],
+                secret:newuid.split(":")[1],
+                ...sessiondata
+            })
+
+            if (res.status <= 400 && res.status >= 200) {
+                console.log("res", res)
+                console.log("await res.json()",await res.json())
+            } else {
+                return alert("ERROR")
+            }
+            
+            // const res:any = await fetch('https://geolocation-db.com/json/')
+            // let awaited = await res.json()
+            // s__clientIP(awaited.IPv4)
+
+            // let askTicketRes = await askTicket()
+            // if (!askTicketRes) return
+
+
+            
+            s__clientIP(newuid)
+            // let new_uid = `${awaited.IPv4}:${newuid}`
+            let new_uid = newuid
+            s__uid(new_uid)
+            s__LS_uid(new_uid)
+            app.alert("success", "Simulation Account Registered succesfully!")
+        } catch (e:any) {
+            console.log("coudlnt register simulation account")
+        }
+    }
+    const register = () => {
+        let username = !sessiondata ? ( "user" ) : sessiondata.user.email.split("@")[0]
+
+        let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
+        if (confirm(`Would you like to create simulation account -> (${username}:${randomThousand})? \n\n\n Account Name: <${username}> \n Secret Key Code: ${randomThousand} \n\n\n Remember to save your credentials! `)) {
+            getData(`${username}:`+randomThousand)
+        }
+    }
+    // const registerWGoogle = () => {
+    //     let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
+    //     // let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
+    //     let cleanname = sessiondata.user.name.replace(" ")
+    //     if (confirm(`Would you like to create local account -> (user:${randomThousand})? \n\n\n Account Public Name: <user> \n Secret Key Code: ${randomThousand} \n\n\n Remember to save your credentials! `)) {
+    //         getData(sessiondata.user.email+":"+randomThousand)
+    //     }
+    // }
+
+    const { data:sessiondata, }:any = useSession();
     return (
     <div className='flex-center w-100 h-min-100vh'>
         <div className="h-min-100vh w-100  flex-col flex-justify-start flex-align-stretch">
             <div className="px-8 ">
                 <BreadCrumbs pages={[["/", "Trading-Simulation Development"]]} />
                 
-                <div className="flex my-4">
+                <div className="flex-row Q_xs_flex-col my-4 gap-2">
                     {/* <h1 className="pt-4 tx-bold-5 flex-1 ">
                         Dashboard
                     </h1> */}
+                    {/* {JSON.stringify(tokenx)}: */}
+                    {/* <br /> */}
+                    {/* {JSON.stringify(session)}: */}
+                    {/* <br /> */}
+                    {/* {JSON.stringify(sessiondata)}: */}
+                    {/* |{!!sessiondata && Object.keys(sessiondata)}| */}
                     {!uid && <>
-                        <button   className="ims-button-primary clickble nowrap tx-lg"
+                        <button   className={`px-3 py-2 clickble nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
+                            style={{background:!sessiondata ? "#F7C127" : "orangered"}}
                             onClick={()=>{ register() }}
                         >
-                            + Create Local Account
+                            + Create Simulation Account
                         </button>
-                        {/* <div className='pa-2 border-lgrey'>?</div> */}
                     </>}
+                    {/* {!uid && !!sessiondata && <>
+                        <button   className="px-3 py-2 clickble nowrap tx-lg opaci-chov--75 tx-white"
+                            style={{background:"orangered"}}
+                            onClick={()=>{ registerWGoogle() }}
+                        >
+                            + Create Simulation Account <span className='Q_sm_x'>w/Google</span> <div className='Q_xs'>w/Google</div>
+                        </button>
+                    </>} */}
+
+                    {/* {!sessiondata && !uid && <>
+                        <div className='flex-col'>or</div>
+                    </>} */}
+                    
+                    {!sessiondata &&
+                        <div className='flex-col'>
+                            {!sessiondata && !!uid && <>
+                                <div className='flex-col tx-sm'>Connect w/Google to upgrade your account!</div>
+                            </>}
+                            <button   className="px-3 py-2 clickble nowrap tx-lg tx-white opaci-chov--75"
+                                style={{background:"orangered"}}
+                                onClick={()=>{ signIn("google") }}
+                            >
+                                Connect w/Google
+                            </button>
+                        </div>
+                    }
                     
                     <div className='flex-1'></div>
                 </div>
@@ -193,7 +299,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
 
             {/* |{JSON.stringify(tokens)}| */}
             {/* {JSON.stringify(tokens)} */}
-            {/*!!session &&*/
+            {/*!!sessiondata &&*/
             
                 <div className='flex-wrap flex-justify-start  flex-align-stretch' >
                     {unitsArray.length > 0 && inventoryItems.map((item, index) => (
@@ -219,7 +325,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
                 
             {!!uid &&
                 <div className='flex pa-1'>
-                    {(!!session && !!session.user) &&
+                    {(!!sessiondata && !!sessiondata.user) &&
                         <div className='flex-1 mt-100'>
 
                             <TradingViewNews />
@@ -227,13 +333,15 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
                     }
                 </div>
             }
-            <div className='flex flex-justify-end  pa-1'>
-                <button   className="ims-button-faded clickble nowrap tx-lg opaci-25"
-                    onClick={()=>{ leaveAll() }}
-                >
-                    - Delete Local Account
-                </button>
-            </div>
+            {!!uid &&
+                <div className='flex flex-justify-end  pa-1'>
+                    <button   className="ims-button-faded clickble nowrap tx-lg opaci-25"
+                        onClick={()=>{ leaveAll() }}
+                    >
+                        - Delete Simulation Account
+                    </button>
+                </div>
+            }
         </div>
     </div>
     )

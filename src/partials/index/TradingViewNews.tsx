@@ -29,13 +29,13 @@ function Component() {
   return (<>
     <h1 className="ma-0 px-6 Q_xs_px-2 pa-0 tx-bold-2">Tradingview&apos;s Cryptocurrency Market Widget</h1>
     <h3 className="ma-0 px-6 Q_xs_px-2 pa-0 tx-link">
-        <a href="https://www.tradingview.com/widget/crypto-mkt-screener/" target="_blank">
-          Tradingview.com/widget/crypto-mkt-screener
+        <a href="https://www.tradingview.com/widget/timeline/" target="_blank">
+          Tradingview.com/widget/timeline
         </a>
       </h3>
     <div className="mt-">
       
-      <div className="tradingview-widget-container mt-8 _ddg w-100" ref={myRef}>
+      <div className="tradingview-widget-container mt-8  w-100" ref={myRef}>
           {/* <div className="tradingview-widget-container__widget"></div>     */}
       </div>
     </div>

@@ -30,7 +30,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const ipAddress:any = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
   
   const hash = crypto.createHash('sha256');
-  hash.update(ipAddress);
+  hash.update(body.name);
+  hash.update(body.secret);
   const new_uid = hash.digest('hex');
 
   let asdasd:any = {
