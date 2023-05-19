@@ -142,8 +142,10 @@ export default function Component({
             
             {!(aToken in tokensArrayObj) && !!uid &&
                 <div className={`tx-bold flex-center mt-1   ${!uid && "opaci-50"}`}
+                    
                 >
-                    <button className="box-shadow-5 bg-b-10 clickble tx-ls-5 opaci-50 tx-gray opaci-chov-50 duno-btn hov-bord-1-w py-2 px-4 bord-r-50 tx-lg"
+                    <button className="box-shadow-5 bg-b-10 clickble tx-ls-5 opaci-50 tx-gray opaci-chov-50  hov-bord-1-w py-2 px-4 bord-r-50 tx-lg"
+                        style={{color:aToken == cryptoToken ? "orange" : "grey"}}
                         onClick={()=>{!!uid && joinToken(aToken)}} 
                         // style={{boxShadow:"0px 0px 25px #CF589433"}}
                     >

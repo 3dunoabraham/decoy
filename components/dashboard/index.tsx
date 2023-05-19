@@ -202,16 +202,27 @@ export function ChartDashboard({query}) {
         s__LS_uid(new_uid)
     }
     const register = () => {
+        let username = !session ? ( "user" ) : session.user.email
 
-        let username = !session ? ( "user" ) : session.user.email.split("@")[0]
-        let randomThousand = !session ? (
-            parseInt(`${(Math.random()*9000) + 1000}`)
-        ) : session.user.email.split("@")[0]
+        let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
+        let numberaccount = prompt(
+            `Would you like to create simulation account -> (${username}:${randomThousand})? \n\n\n Account Name: <${username}> \n Secret Key Code: ${randomThousand} \n\n\n Remember to save your credentials \n You can use the *Secret Key Code* to recover your account! `,
+            `${randomThousand}`
+        )
+        if (numberaccount) {
+            getData(`${username}:`+numberaccount)
+        }
+
+
+        // let username = !session ? ( "user" ) : session.user.email.split
+        // let randomThousand = !session ? (
+        //     parseInt(`${(Math.random()*9000) + 1000}`)
+        // ) : session.user.email.split
 
         
-        if (confirm(`Would you like to create simulation account -> (${username}:${randomThousand})? \n\n\n Account Name: <${username}> \n Secret Key Code: ${randomThousand} \n\n\n Remember to save your credentials! `)) {
-            getData(`${username}:${randomThousand}`)
-        }
+        // if (confirm(`Would you like to create simulation account -> (${username}:${randomThousand})? \n\n\n Account Name: <${username}> \n Secret Key Code: ${randomThousand} \n\n\n Remember to save your credentials! `)) {
+        //     getData(`${username}:${randomThousand}`)
+        // }
     }
     const clickImportConfig = () => {
         let backup = prompt("Backup:")
@@ -571,7 +582,7 @@ export function ChartDashboard({query}) {
 
                     {<>
                         <div className="box-shadow-2 pa-4 bord-r-8 bg-b-50 tx-center opaci-chov--75"
-
+                             onClick={()=>{alert("Google Sync feature is still in beta")}}
                         >
                             {/* <div>Click here</div> */}
                             <div className="tx-center tx-lx">
@@ -585,7 +596,7 @@ export function ChartDashboard({query}) {
             </>}
         </div>
         {!session && <>
-            <div className='tx-center tx-white'>Connect w/Google to <br /> export your account data!</div>
+            <div className='tx-center tx-white'>Connect w/Google to <br /> export your simulation data!</div>
         </>}
         {!!session && <>
             <DownloadButton filename="database" data={tokensArrayObj} />

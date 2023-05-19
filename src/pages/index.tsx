@@ -54,9 +54,9 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
 
                 
             try {
-                const res = await fetchDelete('/api/start',{
-                });
-                const res2 = await res.json();
+                // const res = await fetchDelete('/api/start',{
+                // });
+                // const res2 = await res.json();
                 localStorage.removeItem("localTokensArrayObj");
                 localStorage.removeItem("uid");
                 window.location.reload()
@@ -179,9 +179,10 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
     
     const getData = async (newuid:any) => {
         try {
+            // let username = !sessiondata ? sessiondata.user.email : "user"
             const res:any = await fetchPost('/api/start',{
                 uid:uid,
-                name: sessiondata.user.email.split(":")[0],
+                name: newuid.split(":")[0],
                 secret:newuid.split(":")[1],
                 ...sessiondata
             })
@@ -213,11 +214,15 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
         }
     }
     const register = () => {
-        let username = !sessiondata ? ( "user" ) : sessiondata.user.email.split("@")[0]
+        let username = !sessiondata ? ( "user" ) : sessiondata.user.email
 
         let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
-        if (confirm(`Would you like to create simulation account -> (${username}:${randomThousand})? \n\n\n Account Name: <${username}> \n Secret Key Code: ${randomThousand} \n\n\n Remember to save your credentials! `)) {
-            getData(`${username}:`+randomThousand)
+        let numberaccount = prompt(
+            `Would you like to create simulation account -> (${username}:${randomThousand})? \n\n\n Account Name: <${username}> \n Secret Key Code: ${randomThousand} \n\n\n Remember to save your credentials \n You can use the *Secret Key Code* to recover your account! `,
+            `${randomThousand}`
+        )
+        if (numberaccount) {
+            getData(`${username}:`+numberaccount)
         }
     }
     // const registerWGoogle = () => {
@@ -233,7 +238,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
     return (
     <div className='flex-center w-100 h-min-100vh'>
         <div className="h-min-100vh w-100  flex-col flex-justify-start flex-align-stretch">
-            <div className="px-8 ">
+            <div className="px-8 Q_xs_px-2 ">
                 <BreadCrumbs pages={[["/", "Trading-Simulation Development"]]} />
                 
                 <div className="flex-row Q_xs_flex-col my-4 gap-2">
@@ -326,7 +331,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
             {!!uid &&
                 <div className='flex pa-1'>
                     {(!!sessiondata && !!sessiondata.user) &&
-                        <div className='flex-1 mt-100'>
+                        <div className='flex-1 mt-100 Q_sm_x'>
 
                             <TradingViewNews />
                         </div>
@@ -335,7 +340,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
             }
             {!!uid &&
                 <div className='flex flex-justify-end  pa-1'>
-                    <button   className="ims-button-faded clickble nowrap tx-lg opaci-25"
+                    <button   className="ims-button-faded clickble nowrap  opaci-25 tx-md"
                         onClick={()=>{ leaveAll() }}
                     >
                         - Delete Simulation Account

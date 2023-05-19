@@ -2,10 +2,11 @@ import Link from 'next/link';
 import { BsBarChart, BsBox, BsCurrencyDollar, BsFillGearFill, BsGearWide } from 'react-icons/bs';
 import { TfiDropboxAlt } from 'react-icons/tfi';
 import { GrConfigure } from 'react-icons/gr';
+import { useSession } from 'next-auth/react';
 
 
 export default function Component({ companyName, unitsArray, totalValue, uid }) {
-
+  const {data:session} = useSession()
 
 
   return (
@@ -22,7 +23,7 @@ export default function Component({ companyName, unitsArray, totalValue, uid }) 
           </div>
           <div className="pl-4 py-2">
             <div className="ims-tx-faded pt-1 ">Selected Tokens ({unitsArray.length || "-"})</div>
-            <div className="tx-  tx-bold  pb-1">{unitsArray.join(", ").toUpperCase()}</div>
+            <div className="tx-  tx-bold w-max-120px pb-1">{unitsArray.join(", ").toUpperCase()}</div>
             {/* <div className="tx-lx tx-bold-6">
               {unitsArray.length || "-"}
             </div> */}
@@ -48,11 +49,11 @@ export default function Component({ companyName, unitsArray, totalValue, uid }) 
           </Link>
           <div className='flex-1'></div>
           <Link href={!uid ? "" : "/chart/4h?token=btc"}
-            className={`px-6 opaci-chov--50 block flex-center gap-1 ${!!uid ? "ims-tx-primary" : "tx-red"} `} 
+            className={`px-6 opaci-chov--50 block flex-center gap-1 ${!!uid ? "ims-tx-primary" : "tx-red"} ${!!uid && !!session && "tx-green scale-hov-150"} `} 
             onClick={()=>{ if (!uid) { alert("Account Not Found! \n\n CREATE SIMULATION ACCOUNT and Connect w/Google \n to access view feature") } }}
           >
             <BsBarChart />
-            <div className={` tx-bold-5 py-4 tx-end `}>Chart</div>
+            <div className={` tx-bold-5 py-4 tx-end  `}>Chart</div>
           </Link>
         </div>
 

@@ -3,7 +3,7 @@ import LoginBtn from "@/src/items/molecules/auth/LoginBtn";
 import Link from "next/link";
 import Image from "next/image";
 import { BsBox, BsChat, BsFillArchiveFill, BsFillBarChartFill, BsGear, BsInfoCircle, BsPerson, BsStack } from "react-icons/bs";
-import { FaChartLine, FaCity, FaKey, FaQuestion, FaSync, FaUncharted } from "react-icons/fa";
+import { FaChartLine, FaCity, FaGoogle, FaKey, FaQuestion, FaSync, FaUncharted } from "react-icons/fa";
 import { RxDashboard } from "react-icons/rx";
 import { MdOutlineHistory } from "react-icons/md";
 import { useRouter } from "next/router";
@@ -106,11 +106,16 @@ export default function Component({}) {
             <div className='flex-1'>
 
                 {(!!session && !!session.user && !!LS_uid)  && <>
-                    <div>
-                        <FaSync />
-                        Sync
-                        Accounts
-                    </div>
+                    <div className="box-shadow-2 pa-4 bord-r-8 bg-b-50 tx-center opaci-chov--75"
+                             onClick={()=>{alert("Google Sync feature is still in beta")}}
+                        >
+                            {/* <div>Click here</div> */}
+                            <div className="tx-center tx-lx Q_sm_x">
+                                <FaGoogle/>
+                            </div>
+                            <div>S<span className="Q_sm_x">ync</span> </div>
+                            <div className="Q_sm_x" style={{color:""}}> w/Google!</div>
+                        </div>
                 </>}
 
                 {!!app && !!app.sidebarPages && app.sidebarPages.map((aLink, index)=>{
