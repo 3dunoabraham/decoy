@@ -30,6 +30,7 @@ const Page: NextPageWithLayout = ({}) => {
 
     const theuserstart:any = useQuery({ queryKey: ['theuserstart'], 
         queryFn: async () => {
+            return null
             let theuserres = await fetch("/api/start")
             let theuserinfo = await theuserres.json()
             console.log("theuserstart", theuserinfo)

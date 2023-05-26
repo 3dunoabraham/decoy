@@ -175,6 +175,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
         }
 
         try {
+            return null
             const res = await fetchPost('/api/start',{
                 name: username,
             });

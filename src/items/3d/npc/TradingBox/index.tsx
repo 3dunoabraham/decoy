@@ -48,7 +48,7 @@ const Component = forwardRef(({
   trendUp,
   tokensArrayArray,
   unselectedColor="#48721E",
-  refetchInterval=3000,
+  refetchInterval=13000,
   form= null,
   token= "btc",
   timeframe= "3m",

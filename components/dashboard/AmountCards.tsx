@@ -14,7 +14,7 @@ export default function Component ({ tokens, mul, bigmul, prices= null }) {
     const tokensReqObj:any = ( DEFAULT_TOKENS_ARRAY.reduce((acc, aToken) => (
         { ...acc, [aToken]: [`${API_PRICE_BASEURL}${(aToken+baseToken).toUpperCase()}`] }
     ), {}))
-    const queryUSDT:any = useQuery({ queryKey: ['usdt'], refetchInterval: 3000,
+    const queryUSDT:any = useQuery({ queryKey: ['usdt'], refetchInterval: 13000,
         queryFn: async () => (await fetchMultipleJsonArray(tokensReqObj))
     })
     const totals = useMemo(()=>{

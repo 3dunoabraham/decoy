@@ -57,6 +57,7 @@ export default function Component({
         }
 
         try {
+            return null
             const res = await fetchPost('/api/start',{
                 name: username,
             });

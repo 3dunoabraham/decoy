@@ -36,12 +36,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // console.log("JSON Web Token", await token.encode())
 
   const ipAddress:any = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+
+  let firstValue = body.name
+  let secondValue = body.secret
   
   const hash = crypto.createHash('sha256');
-  hash.update(body.name);
-  hash.update(body.secret);
-  const new_uid = hash.digest('hex');
+  console.log("hash values", firstValue, secondValue)
+  hash.update(firstValue);
+  hash.update(secondValue);
+  const hash_digest = hash.digest('hex');
+  console.log("hash_digest", hash_digest)
 
+const new_uid = hash_digest
   let asdasd:any = {
     jwt:jwttoken,
     name: body.name,
@@ -106,7 +112,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   
         } catch (error) {
           console.error(error)
-          res.status(500).json({ message: 'Failed to create start' })
+          res.status(500).json({ message: 'Failed to put start' })
         }
         break
       

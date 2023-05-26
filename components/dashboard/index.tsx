@@ -20,9 +20,9 @@ import LoginBtn from "@/src/items/molecules/auth/LoginBtn";
 import AppClientDesc from "@/src/items/molecules/auth/AppClientDesc";
 import { FaBootstrap, FaGoogle, FaRecycle } from "react-icons/fa";
 import { fetchPut } from "@/scripts/helpers/fetchHelper";
+import { GiCardExchange } from "react-icons/gi";
 
-
-export function ChartDashboard({query}) {
+export function ChartDashboard({query, user}:any) {
     /********** CREATE **********/
     const { data: session } = useSession();
 
@@ -154,7 +154,7 @@ export function ChartDashboard({query}) {
         
         return slicedArray.slice(slicedArray.length-500,slicedArray.length)
     },[klinesArray,chopAmount])
-    const queryUSDT:any = useQuery({ queryKey: ['usdt'], refetchInterval: 3000,
+    const queryUSDT:any = useQuery({ queryKey: ['usdt'], refetchInterval: 13000,
         queryFn: async () => online ? (await fetchMultipleJsonArray(tokensReqObj)) : DEFAULT_TOKEN,
     })
     const klinesStats = useMemo(()=>{
@@ -207,7 +207,7 @@ export function ChartDashboard({query}) {
 
         let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
         let numberaccount = prompt(
-            `Would you like to create simulation account -> (${username}:${randomThousand})? \n\n\n Account Name: <${username}> \n Secret Key Code: ${randomThousand} \n\n\n Remember to save your credentials \n You can use the *Secret Key Code* to recover your account! `,
+            `Would you like to create a simulation account -> (${username}:${randomThousand})? \n\n\n Account Name: <${username}> \n Secret Key Code: ${randomThousand} \n\n\n Remember to save your credentials \n You can use the *Secret Key Code* to recover your account! `,
             `${randomThousand}`
         )
         if (numberaccount) {
@@ -281,6 +281,7 @@ export function ChartDashboard({query}) {
     }
     
     async function updateStrat(key: string, updates: Partial<Strat>): Promise<Strat> {
+        return null
         const response = await fetch(`/api/strat`, {
             method: 'PUT',
             headers: {
@@ -387,7 +388,7 @@ export function ChartDashboard({query}) {
         q__asd.refetch()
       };
       const syncBinance = async () => {
-        const binancekeys = prompt ("Enter your binance keys -> <public:secret>")
+        const binancekeys = prompt ("Enter your keys -> <public:secret>")
         if (!binancekeys) return
         try {
             let datapack = {
@@ -524,9 +525,11 @@ export function ChartDashboard({query}) {
                             </div>
                         
                             {loadings == "" &&  tokensArrayObj[cryptoToken] && queryUSDT.data && isClient &&
+                             !!tradeHistory &&
                                 <div className=" w-100 h-100">
                                     <Chart
                                         {...{
+                                            user,
                                             tradeHistory: tradeHistory,
                                             klinesStats, klinesArray, p__klinesArray, tokensArrayObj, cryptoToken,
                                             timeframe, queryUSDT
@@ -606,10 +609,10 @@ export function ChartDashboard({query}) {
                              onClick={()=>{syncBinance()}}
                         >
                             <div className="tx-center tx-lx">
-                                <FaBootstrap/>
+                                <div><GiCardExchange/></div>
                             </div>
-                            <div>Sync </div>
-                            <div className="" style={{color:""}}> w/Binance!</div>
+                            <div className="Q_xl_x">Sync </div>
+                            <div className="Q_xl_x"  style={{color:""}}> Wallet!</div>
                         </div>
                     </>}
                 </>}

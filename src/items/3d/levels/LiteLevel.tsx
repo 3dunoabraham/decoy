@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { Vector3 } from "three";
 import TradingBox from "../npc/TradingBox";
 import LiteNpcContainer from "../npc/LiteNpcContainer";
+import RoofContainer from "@/src/items/3d/farmhouse/Roof";
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { getComputedLevels } from "@/components/scripts/helpers";
 import { useCopyToClipboard, useLocalStorage } from "usehooks-ts";
@@ -253,7 +254,6 @@ export default function Component({
         <group>
             <ToggleOrbit {...{s__showPhysics, showPhysics}}  buttonPosition={hasAnyToken ? [0,-0.75,-2.5] : [0,-99999,0]} />
 
-            
             <LiteNpcContainer {...{optsToggler}} position={[0,0,0]}  
                 form={form} askAI={askAI}
             />
@@ -311,7 +311,7 @@ export default function Component({
                 }
             </>}
 
-
+            
             {/*  Concrete Floor  */}
             {optsToggler["floor"].bool && 
                 <>

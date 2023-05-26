@@ -53,6 +53,7 @@ export default function Component ({keyName }) {
         await updateData(2, "rest", JSON.stringify( newColVal ))
     }
     async function updateData(id,key,val="") {
+        return null
         const response = await fetchPut("/api/settings/", {
             keyName:keyName,
             id: parseInt(id),

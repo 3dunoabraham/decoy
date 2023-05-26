@@ -50,7 +50,7 @@ export default function Component({ companyName, unitsArray, totalValue, uid }) 
           <div className='flex-1'></div>
           <Link href={!uid ? "" : "/chart/4h?token=btc"}
             className={`px-6 opaci-chov--50 block flex-center gap-1 ${!!uid ? "ims-tx-primary" : "tx-red"} ${!!uid && !!session && "tx-green scale-hov-150"} `} 
-            onClick={()=>{ if (!uid) { alert("Account Not Found! \n\n CREATE SIMULATION ACCOUNT and Connect w/Google \n to access view feature") } }}
+            onClick={()=>{ if (!uid) { alert("Account Not Found! \n\n Connect w/Google to the Dashboard") } }}
           >
             <BsBarChart />
             <div className={` tx-bold-5 py-4 tx-end  `}>Chart</div>

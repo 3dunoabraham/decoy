@@ -3,8 +3,9 @@ import LoginBtn from "@/src/items/molecules/auth/LoginBtn";
 import Link from "next/link";
 import Image from "next/image";
 import { BsBox, BsChat, BsFillArchiveFill, BsFillBarChartFill, BsGear, BsInfoCircle, BsPerson, BsStack } from "react-icons/bs";
-import { FaBootstrap, FaChartLine, FaCity, FaGoogle, FaKey, FaQuestion, FaSync, FaUncharted } from "react-icons/fa";
+import {  FaChartLine, FaCity, FaGoogle, FaKey, FaQuestion, FaSync, FaUncharted } from "react-icons/fa";
 import { RxDashboard } from "react-icons/rx";
+import { GiCardExchange } from "react-icons/gi";
 import { MdOutlineHistory } from "react-icons/md";
 import { useRouter } from "next/router";
 import { InventoryContext } from "@/scripts/contexts/InventoryContext";
@@ -39,7 +40,7 @@ export default function Component({}) {
     }
     
     const syncBinance = async () => {
-        const binancekeys = prompt ("Enter your binance keys -> <public:secret>")
+        const binancekeys = prompt ("Enter your keys -> <public:secret>")
         if (!binancekeys) return
         try {
             let datapack = {
@@ -48,6 +49,7 @@ export default function Component({}) {
                 secret:LS_uid.split(":")[1],
             }
             console.log(datapack)
+            return null
             const res = await fetchPut('/api/start',datapack);
             const result = await res.json();
             console.log("success????", result)
@@ -130,10 +132,10 @@ export default function Component({}) {
                              onClick={()=>{syncBinance()}}
                         >
                             <div className="tx-center tx-lx Q_sm_x">
-                                <FaBootstrap/>
+                                <GiCardExchange/>
                             </div>
-                            <div>S<span className="Q_sm_x">ync</span> </div>
-                            <div className="Q_sm_x" style={{color:""}}> w/Binance!</div>
+                            <div className="Q_xl_x">Sync </div>
+                            <div className="Q_xl_x"  style={{color:""}}> Hot Wallet!</div>
                         </div>
                 </>}
 

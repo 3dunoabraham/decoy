@@ -180,6 +180,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
     const getData = async (newuid:any) => {
         try {
             // let username = !sessiondata ? sessiondata.user.email : "user"
+            // return null
             const res:any = await fetchPost('/api/start',{
                 uid:uid,
                 name: newuid.split(":")[0],
@@ -214,11 +215,13 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
         }
     }
     const register = () => {
+        // if (!sessiondata) return
+
         let username = !sessiondata ? ( "user" ) : sessiondata.user.email
 
         let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
         let numberaccount = prompt(
-            `Would you like to create simulation account -> (${username}:${randomThousand})? \n\n\n Account Name: <${username}> \n Secret Key Code: ${randomThousand} \n\n\n Remember to save your credentials \n You can use the *Secret Key Code* to recover your account! `,
+            `Would you like to create a simulation account -> (${username}:${randomThousand})? \n\n\n Account Name: <${username}> \n Secret Key Code: ${randomThousand} \n\n\n Remember to save your credentials \n You can use the *Secret Key Code* to recover your account! `,
             `${randomThousand}`
         )
         if (numberaccount) {
@@ -251,7 +254,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
                     {/* <br /> */}
                     {/* {JSON.stringify(sessiondata)}: */}
                     {/* |{!!sessiondata && Object.keys(sessiondata)}| */}
-                    {!uid && <>
+                    {!uid && !!sessiondata && <>
                         <button   className={`px-3 py-2 clickble nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
                             style={{background:!sessiondata ? "#F7C127" : "orangered"}}
                             onClick={()=>{ register() }}
@@ -275,7 +278,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
                     {!sessiondata &&
                         <div className='flex-col'>
                             {!sessiondata && !!uid && <>
-                                <div className='flex-col tx-sm'>Connect w/Google to upgrade your account!</div>
+                                <div className='flex-col tx-sm'>Connect w/Google to create your new Account!</div>
                             </>}
                             <button   className="px-3 py-2 clickble nowrap tx-lg tx-white opaci-chov--75"
                                 style={{background:"orangered"}}
