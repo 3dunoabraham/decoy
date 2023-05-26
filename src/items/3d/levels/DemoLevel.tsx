@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 import { Suspense, useMemo, useState } from "react";
 import FarmNpcContainer from "../npc/FarmNpcContainer";
 
-'use client';
+// 'use client';
 // import { OrbitControls } from "@react-three/drei";
 
 // const Vector3 = dynamic(() => import('three').then(module => module.Vector3));
