@@ -19,11 +19,11 @@ export default function Component({}) {
     <div className='flex px-4'>
         <Link href={"/"} className='tx-white tx-lgx nodeco py-4' >
             {/* <div className='Q_xs_lg px-2'>{app.institution.title}</div> */}
-            <div className='Q_lg_x'>tresduno</div>
+            <div className='Q_lg_x'>webgamed</div>
             {/* <div className='Q_lg_x'>{app.institution.title}</div> */}
         </Link>
         {/* <button onClick={()=>{handleClick("/")}} className='tx-white tx-lgx nodeco py-4' >
-            <div className='Q_xs_lg px-2'>tresduno</div>
+            <div className='Q_xs_lg px-2'>webgamed</div>
             <div className='Q_lg_x'>Inventory</div>
         </button> */}
     </div>

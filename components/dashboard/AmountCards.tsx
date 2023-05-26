@@ -167,9 +167,9 @@ export default function Component ({ tokens, mul, bigmul, prices= null }) {
                     })}
             </div>
                 <div className='pa-2 w-100 flex-col flex-justify-end flex-align-end'>
-                    <div className='px-1 pt-1 opaci-25 tx-ls-3 tx-bold-6'>Hot + Cold = Wallet</div>
+                    <div className='px-1 pt-1 opaci-25 tx-ls-3 tx-bold-6'>Total Score</div>
                     <div className='px-1 flex-center gap-1'>
-                        <div className='opaci-50'>Total Balance:</div>
+                        <div className='opaci-50'>Balance:</div>
                         {totals[2]}+{totals[3]} =
                         <div className='tx-lgx'>{totals["total"]}</div>
                     </div>

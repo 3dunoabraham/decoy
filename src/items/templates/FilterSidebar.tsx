@@ -163,7 +163,7 @@ export default function Component({ online=true }) {
                     <div className="px-1 tx-center tx-lg opaci-hov--50"><BsInfoCircle /></div>
                     <div className="flex-1 pl-1 Q_xl_x w-min-220px">Support</div>
                 </Link> */}
-                <Link href="https://twitter.com/tresduno" target="_blank"
+                <Link href="https://twitter.com/webgamed" target="_blank"
                     className="flex-center box-shadow-2 py-2 clickble  px-2 ims-bg-primary bord-r-b-5"
                 >
                     <div className=" pr-3  Q_xl_x"></div>

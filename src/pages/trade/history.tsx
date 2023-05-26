@@ -193,7 +193,7 @@ const Page: NextPageWithLayout = ({pair}:any) => {
 Page.getLayout = function getLayout(page: ReactElement) {
     return (
     <Layout>
-        <Head><title>History | tresduno</title></Head>
+        <Head><title>History | webgamed</title></Head>
         <InventoryProvider>
             <SidebarContainer sidebar={<FilterSidebar online={true}/>}>
                 {page}

@@ -242,7 +242,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
     <div className='flex-center w-100 h-min-100vh'>
         <div className="h-min-100vh w-100  flex-col flex-justify-start flex-align-stretch">
             <div className="px-8 Q_xs_px-2 ">
-                <BreadCrumbs pages={[["/", "Trading-Simulation Development"]]} />
+                <BreadCrumbs pages={[["/", "Web Game App"]]} />
                 
                 <div className="flex-row Q_xs_flex-col my-4 gap-2">
                     {/* <h1 className="pt-4 tx-bold-5 flex-1 ">
@@ -371,7 +371,7 @@ type PageProps = {
 Page.getLayout = function getLayout(page: ReactElement) {
     return (
     <Layout>
-        <Head><title>tresduno</title></Head>
+        <Head><title>webgamed</title></Head>
         <InventoryProvider>
             <SidebarContainer sidebar={<SessionSidebar/>}>{page}</SidebarContainer>
         </InventoryProvider>

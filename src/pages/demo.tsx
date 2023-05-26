@@ -333,7 +333,7 @@ type PageProps = {
 Page.getLayout = function getLayout(page: ReactElement) {
     return (
     <Layout>
-        <Head><title>tresduno</title></Head>
+        <Head><title>webgamed</title></Head>
         {page}
     </Layout>
     )
