@@ -32,7 +32,7 @@ export default function Layout({ children }) {
         
 		return {
             institution: {
-                title: "webgamed",
+                title: "WebGamed",
                 email: "support@example.com",
                 titleSupport: "Open Source (MIT):",
                 copyrights: "IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY.",

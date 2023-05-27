@@ -105,7 +105,7 @@ export default function UnitPage({
     if (q_unit.error) return ErrorBlock({err:q_unit.error})
 
     return (<>
-    <Head> <title>{`${id} | webgamed`}</title> </Head>
+    <Head> <title>{`${id} | WebGamed`}</title> </Head>
     <div className={`ims-body-wide w-100 px-100 Q_xs_sm_px-2`}>
         <div className="ims-body-inner">
             <BreadCrumbs pages={[["/inventory","Inventory"]]} current={`Detail`} />

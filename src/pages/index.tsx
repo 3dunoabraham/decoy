@@ -371,7 +371,7 @@ type PageProps = {
 Page.getLayout = function getLayout(page: ReactElement) {
     return (
     <Layout>
-        <Head><title>webgamed</title></Head>
+        <Head><title>WebGamed</title></Head>
         <InventoryProvider>
             <SidebarContainer sidebar={<SessionSidebar/>}>{page}</SidebarContainer>
         </InventoryProvider>
