@@ -138,7 +138,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
         console.log("!uid", !uid)
         app.s__sidebarPages([
             // {id:1,label:"Chart",url:"https://www.tradingview.com/chart/EBa5RTfJ/?symbol=BITSTAMP%3ABTCUSD",icon:"users"},
-            {id:2,label:"GTA Byte-City",url:"https://gtabtc.vercel.app/",icon:"bingo"},
+            {id:2,label:"Web Byte City",url:"https://bytecity.vercel.app/",icon:"bingo"},
             ...(!LS_uid ? [] : [
                 {id:0,label:"History",url:"/trade/history/?pair=BTCUSDT",icon:"agreements"},
                 {id:2,label:"Chart (BTC 4h)",url:"/chart/4h?token=btc",icon:"chart"}
@@ -242,7 +242,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
     <div className='flex-center w-100 h-min-100vh'>
         <div className="h-min-100vh w-100  flex-col flex-justify-start flex-align-stretch">
             <div className="px-8 Q_xs_px-2 ">
-                <BreadCrumbs pages={[["/", "Web Game App"]]} />
+                <BreadCrumbs pages={[["/", "Web Gamed App"]]} />
                 
                 <div className="flex-row Q_xs_flex-col my-4 gap-2">
                     {/* <h1 className="pt-4 tx-bold-5 flex-1 ">
