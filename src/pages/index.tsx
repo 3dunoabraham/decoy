@@ -43,6 +43,10 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
             return price.price
         }
     },[])
+    const signInGoogle = () => {
+        
+        signIn("google")
+    }
         const leaveAll = async ()=> {
             let aconfirm = prompt("Delete Simulation Account Data? (yes/no)","ye")
             if (aconfirm != "yes") return
@@ -92,15 +96,22 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
     //     queryFn: async () => online ? (await fetchMultipleJsonArray(tokensReqObj)) : DEFAULT_TOKEN,
     // })
 
-    const [q__unitsArray, unitsArray] = useQueryPlus({ queryKey: ['unitData'], refetchOnWindowFocus: false, retry: 1,
-        queryFn: async () =>{
-            if (!app.online) { return OFFLINE_UNITS_ARRAY }
-            let theUrl = API_UNITS+"uids/"
-            let theRequest = await fetch(theUrl);
-            let theJsonResult = await theRequest.json()
-            return theJsonResult
-        }
-    },[])
+    const unitsArray = []
+    const s__unitsArray = ()=>{
+        
+    }
+    const q__unitsArray = ()=>{
+        
+    }
+    // const [q__unitsArray, unitsArray] = useQueryPlus({ queryKey: ['unitData'], refetchOnWindowFocus: false, retry: 1,
+    //     queryFn: async () =>{
+    //         if (!app.online) { return OFFLINE_UNITS_ARRAY }
+    //         let theUrl = API_UNITS+"uids/"
+    //         let theRequest = await fetch(theUrl);
+    //         let theJsonResult = await theRequest.json()
+    //         return theJsonResult
+    //     }
+    // },[])
     const inventoryItems = useMemo(()=>{
         let rdm = parseInt(`${Math.random()*1000 * unitsArray.length}`).toLocaleString("en-US")
 
@@ -138,7 +149,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
         console.log("!uid", !uid)
         app.s__sidebarPages([
             // {id:1,label:"Chart",url:"https://www.tradingview.com/chart/EBa5RTfJ/?symbol=BITSTAMP%3ABTCUSD",icon:"users"},
-            {id:2,label:"Web Byte City",url:"https://bytecity.vercel.app/",icon:"bingo"},
+            {id:2,label:"Web Byte City",url:"https://wbyte.vercel.app/",icon:"bingo"},
             ...(!LS_uid ? [] : [
                 {id:0,label:"History",url:"/trade/history/?pair=BTCUSDT",icon:"agreements"},
                 {id:2,label:"Chart (BTC 4h)",url:"/chart/4h?token=btc",icon:"chart"}
@@ -282,7 +293,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
                             </>}
                             <button   className="px-3 py-2 clickble nowrap tx-lg tx-white opaci-chov--75"
                                 style={{background:"orangered"}}
-                                onClick={()=>{ signIn("google") }}
+                                onClick={()=>{ signInGoogle() }}
                             >
                                 Connect w/Google
                             </button>
@@ -292,7 +303,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
                     <div className='flex-1'></div>
                 </div>
             </div>
-            {q__unitsArray.isLoading &&
+            {/* {q__unitsArray.isLoading &&
                 <div className=' flex-col mt-150'>
                     <LoadingPill title={"Loading Bitcoin Price..."} />
                 </div> 
@@ -301,7 +312,7 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
                 <div className=' flex-col mt-150'>
                     <FailedRequest preview={LOCAL_URL+"/?offline"} />
                 </div> 
-            }
+            } */}
 
             
 

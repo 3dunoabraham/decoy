@@ -51,6 +51,7 @@ const new_uid = hash_digest
   let asdasd:any = {
     jwt:jwttoken,
     name: body.name,
+    attempts: 32,
     ipv4: ipAddress,
     hash: new_uid,
     datenow: Date.now(),

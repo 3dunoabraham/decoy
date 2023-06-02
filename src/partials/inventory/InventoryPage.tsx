@@ -15,7 +15,8 @@ import { DEFAULT_TOKENS_ARRAY } from "@/components/scripts/constants";
 export default function Component({ unitsArray=[], fetchConfig=null, tableConfigObj, exportConfig, selectedItem, s__selectedItem }) {
     const app = useContext(AppContext)
     const q_foreigns = useQuery({queryKey: ['foreignsData'], queryFn: async () =>
-        await fetchUnitForeigns()
+        // await fetchUnitForeigns()
+        (null)
     ,})
     const q__foreigns = useMemo(()=>
         (q_foreigns.error || !q_foreigns.data || q_foreigns.isLoading)

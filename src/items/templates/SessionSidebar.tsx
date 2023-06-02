@@ -49,7 +49,7 @@ export default function Component({}) {
                 secret:LS_uid.split(":")[1],
             }
             console.log(datapack)
-            return null
+            // return null
             const res = await fetchPut('/api/start',datapack);
             const result = await res.json();
             console.log("success????", result)

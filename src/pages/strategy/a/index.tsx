@@ -190,7 +190,7 @@ Page.getLayout = function getLayout(page: ReactElement) {
     <Layout>
         <Head><title>Strategy A | WebGamed</title></Head>
         <InventoryProvider>
-            <SidebarContainer sidebar={<FilterSidebar/>}>
+            <SidebarContainer sidebar={/*<FilterSidebar/>*/<></>}>
                 {page}
             </SidebarContainer>
         </InventoryProvider>
