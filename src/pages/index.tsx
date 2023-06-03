@@ -129,7 +129,7 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
         <div className="h-min-100vh w-100  flex-col flex-justify-start flex-align-stretch"
             
         >
-            <div className='w-100 flex-col pt-100' style={{background:"#46B7FA"}}>
+            <div className='w-100 flex-col pt- pb-100' style={{background:"#46B7FA"}}>
                 <div className='tx-white tx-center py-8 '>
                     <Link href="https://twitter.com/webgame">
                         <h1 className='tx-bold-2 opaci-50 tx-ls-5 tx-lg pt-4 '
@@ -146,7 +146,7 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
                     </h1>
                 </div>
                 <Link 
-className='pos-abs top-0  mt-200 py-2 opaci-chov--75 block pb-8 flex-col bg-glass-4 bg-b-10 px-1 pt-8  bord-r-25'
+className='pos-abs top-0  mt-200 py-2 opaci-chov--75 block pb-8 flex-col bg-glass-4 bg-b-10 px-1 pt-2  bord-r-25'
                     style={{boxShadow:"0 4px 3px #00000022"}}
                     href='https://bytc.vercel.app'
                 >

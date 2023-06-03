@@ -6,8 +6,8 @@ function LandingInfo({}) {
     return (
         <div className="px-4">
             <div className="flex-col">
-                <h1 className="tx-primary tx-xl tx-center Q_xs">Welcome to Byte City:</h1>
-                <h1 className="tx-primary tx-xxl tx-center Q_sm_x">Welcome to Byte City:</h1>
+                <h1 className="tx-primary tx-xl tx-center Q_xs ">Welcome to Byte City:</h1>
+                <h1 className="tx-primary tx-xxl tx-center Q_sm_x ">Welcome to Byte City:</h1>
                 <div style={{color:"orangered"}} className="flex-col tx-lg tx-center">
                     <div>Simplifying Learning</div>
                     <div>and Investing</div>
