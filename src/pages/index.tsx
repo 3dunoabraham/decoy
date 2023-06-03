@@ -23,6 +23,7 @@ import { fetchPost, fetchPut } from '@/scripts/helpers/fetchHelper';
 import TradingViewNews from '../partials/index/TradingViewNews';
 import Image from 'next/image';
 import LandingInfo from '../partials/index/LandingInfo';
+import Link from 'next/link';
 
 const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
     const bigmul = 50
@@ -130,24 +131,24 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
         >
             <div className='w-100 flex-col pt-100' style={{background:"#46B7FA"}}>
                 <div className='tx-white tx-center py-8 '>
-                    <a href="https://twitter.com/webgame">
+                    <Link href="https://twitter.com/webgame">
                         <h1 className='tx-bold-2 opaci-50 tx-ls-5 tx-lg pt-4 '
                             style={{color:"orangered"}}
                         >
                             Web Gamed
                         </h1>
-                    </a>
+                    </Link>
                     <h1 className=' tx-bold '
                         style={{fontSize:"7em !important"}}
                     >Byte City</h1>
                 </div>
-                <a className='pos-abs top-0  mt-200 py-2 opaci-chov--75 block pb-8 flex-col bg-b-10 px-2 pt-8  bord-r-25'
+                <Link className='pos-abs top-0  mt-200 py-2 opaci-chov--75 block pb-8 flex-col bg-b-10 px-2 pt-8  bord-r-25'
                     style={{boxShadow:"0 4px 3px #00000022"}}
                     href='https://wbyte.vercel.app'
                 >
                     <Image src="/main2.png" alt="bank" width={244} height={255} className='mt-8' />
                     <h1 className='tx-xl ' style={{color:"orangered"}}>Play Now!</h1>
-                </a>
+                </Link>
             </div>
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#46B7FA" 
