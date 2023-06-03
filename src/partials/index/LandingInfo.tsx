@@ -34,12 +34,12 @@ function LandingInfo({}) {
 
             <h2 className="mt-8 flex flex-justify-start Q_xs_flex-col gap-3">
                 <span className="opaci-20 ">Get Started:</span>
-                <Link target="_blank" className="tx-blue hover-4 opaci-chov--50 tx-lx" href="https://3duno.gitbook.io/gtabtc/documentation/getting-started/how-to-play">How to Play?</Link>
-                <div className="opaci-chov--50" style={{color:"orangered"}}><Link target="_blank" href="https://3duno.gitbook.io/gtabtc/documentation/getting-started/how-to-play">(Stage 1)</Link></div>
+                <Link target="_blank" className="tx-blue hover-4 opaci-chov--50 tx-lx" href="https://webgamed.gitbook.io/gtabtc/documentation/getting-started/how-to-play">How to Play?</Link>
+                <div className="opaci-chov--50" style={{color:"orangered"}}><Link target="_blank" href="https://webgamed.gitbook.io/gtabtc/documentation/getting-started/how-to-play">(Stage 1)</Link></div>
                 <div className="opaci-10">|</div>
-                <div className="opaci-chov--50" style={{color:"orange"}}><Link target="_blank" href="https://3duno.gitbook.io/gtabtc/documentation/getting-started/stage-2">(Stage 2)</Link></div>
+                <div className="opaci-chov--50" style={{color:"orange"}}><Link target="_blank" href="https://webgamed.gitbook.io/gtabtc/documentation/getting-started/stage-2">(Stage 2)</Link></div>
                 <div className="opaci-10">|</div>
-                <div className="opaci-chov--50" style={{color:"gold"}}><Link target="_blank" href="https://3duno.gitbook.io/gtabtc/documentation/getting-started/stage-3">(Stage 3)</Link></div>
+                <div className="opaci-chov--50" style={{color:"gold"}}><Link target="_blank" href="https://webgamed.gitbook.io/gtabtc/documentation/getting-started/stage-3">(Stage 3)</Link></div>
             </h2>
             <div className="mt-200">
                 <div className="flex-wrap flex-justify-center gap-6 ">
