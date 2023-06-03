@@ -149,8 +149,8 @@ function LandingInfo({}) {
                             <Link href="/" className="tx-link pt tx-lg opaci-chov--50">
                                 Twitter: <b>@webgamed</b>
                             </Link>
-                            <Link href="/" className="tx-link pt tx-lg opaci-chov--50">
-                                Byte City Game: <b>bytc.vercel.app</b>
+                            <Link href="/" className="tx-link pt tx-lgx opaci-chov--50 py-6">
+                                Byte City Game URL: <b>bytc.vercel.app</b>
                             </Link>
                         </div>
                         <div className="flex-col flex-align-start">
