@@ -145,8 +145,9 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
                         <span className=" Q_sm_x" style={{fontSize:"3.5em !important"}}>Byte City</span>
                     </h1>
                 </div>
+                <div className='py-5 invisible  block Q_xs'>q</div>
                 <Link 
-className='pos-abs top-0  mt-200 py-2 opaci-chov--75 block pb-8 flex-col bg-glass-4 bg-b-10 px-1 pt-2  bord-r-25'
+                    className='pos-abs top-0 mt-250 py-2 opaci-chov--75 block pb-8 flex-col bg-glass-4 bg-b-10 px-1 pt-2  bord-r-25'
                     style={{boxShadow:"0 4px 3px #00000022"}}
                     href='https://bytc.vercel.app'
                 >
