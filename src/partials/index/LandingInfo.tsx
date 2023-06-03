@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Suspense } from "react"
+import { FaAccessibleIcon, FaAddressBook, FaAdversal, FaMoneyBillAlt, FaStackExchange } from "react-icons/fa"
 
 
 function LandingInfo({}) {
@@ -107,19 +108,22 @@ function LandingInfo({}) {
             </Suspense>
             <div className=" py-100 my-100 flex-col flex-align-end px-2">
                 <div className="w-100 w-max-600px my-100">
-                    <Link href="/" className="flex-col flex-align-end pa-8 Q_xs_pa-4 opaci-chov-50 opaci-75 box-shadow-2-b bord-r-25">
+                    <Link href="/" className="flex-col flex-align-end px-8 Q_xs_px-4 pt-8 pb-6 opaci-chov-50 opaci-75 box-shadow-2-b bord-r-25 pos-rel">
+                        <div className="tx-xxxl pos-abs opaci-10 left-0 pa-4  top-0 tx-start"><FaStackExchange /></div>
                         <h3 className="tx-end pb-2 tx-lgx">Dive Into Investment Strategies:</h3>
                         <p className="tx-end w-100 w-max-500px">Understand the concepts behind Dollar Cost Averaging (DCA) and Automated Trading Systems (ATS).</p>
                         <p className="tx-end w-100 w-max-500px Q_sm_x">Explore how these strategies can benefit your investment journey and enhance your trading approach.</p>
                     </Link>
-                    <Link href="/" className="flex-col flex-align-end my-100 pa-8 Q_xs_pa-4 opaci-chov-50 opaci-75 box-shadow-2-b bord-r-25">
+                    <Link href="/" className="flex-col flex-align-end my-100 px-8 Q_xs_px-4 pt-8 pb-6 opaci-chov-50 opaci-75 box-shadow-2-b bord-r-25 pos-rel">
+                        <div className="tx-xxxl pos-abs opaci-25 left-0 pa-4 tx-green top-0 tx-start"><FaMoneyBillAlt /></div>
                         <h3 className="tx-end pb-2 tx-lgx">Learn About DCA | Learn About ATS</h3>
 
                         <p className="tx-end w-100 w-max-500px">Explore the Ecosystem:</p>
                         <p className="tx-end w-100 w-max-500px ">Discover the different market sectors, protocols, and tokens that form the foundation of Byte City. </p>
                         <p className="tx-end w-100 w-max-500px Q_sm_x">Gain insights into the core, utility, and side-chain tokens that power our platform.</p>
                     </Link>
-                    <Link href="/" className="flex-col flex-align-end pa-8 Q_xs_pa-4 opaci-chov-50 opaci-75 box-shadow-2-b bord-r-25">
+                    <Link href="/" className="flex-col flex-align-end px-8 Q_xs_px-4 pt-8 pb-6 opaci-chov-50 opaci-75 box-shadow-2-b bord-r-25 pos-rel">
+                        <div className="tx-xxxl pos-abs opaci-25 left-0 pa-4 tx-link top-0 tx-start"><FaAddressBook /></div>
                         <h3 className="tx-end pb-2 tx-lgx">Browse Ecosystem</h3>
 
                         <p className="tx-end w-100 w-max-500px">Get Started with Byte City:</p>
@@ -131,7 +135,40 @@ function LandingInfo({}) {
 
             </div>
 
-
+            <div>
+                <div>
+                    <div className="flex-wrap flex-align-start w-100  gap-8">
+                        <div className="flex-col flex-align-start">
+                            <div className="opaci-50 underline pb-3">Important Links</div>
+                            <Link href="/" className="tx-link pt tx-lg opaci-chov--50">
+                                Twitter: <b>@bytecty</b>
+                            </Link>
+                            <Link href="/" className="tx-link pt tx-lg opaci-chov--50">
+                                Youtube: <b>@webgamed</b>
+                            </Link>
+                            <Link href="/" className="tx-link pt tx-lg opaci-chov--50">
+                                Twitter: <b>@webgamed</b>
+                            </Link>
+                            <Link href="/" className="tx-link pt tx-lg opaci-chov--50">
+                                Byte City Game: <b>bytc.vercel.app</b>
+                            </Link>
+                        </div>
+                        <div className="flex-col flex-align-start">
+                            <div className="opaci-50 underline pb-3">Documentation</div>
+                            <Link href="/" className="tx-link pt tx-lg opaci-chov--50">
+                                Getting Started: <b>How to Play?</b>
+                            </Link>
+                            <Link href="https://webgamed.gitbook.io/gtabtc/what-is-byte-city/faq" className="tx-link pt tx-lg opaci-chov--50">
+                                FAQ: <b>Frequently Asked Questions</b>
+                            </Link>
+                            <Link href="https://webgamed.gitbook.io/gtabtc/about-us/where-to-go-links" className="tx-link pt tx-lg opaci-chov--50">
+                                More: <b>More Links</b>
+                            </Link>
+                        </div>
+                        <div className="flex-1"></div>
+                    </div>
+                </div>
+            </div>
 
 
 
