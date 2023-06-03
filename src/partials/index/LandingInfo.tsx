@@ -5,10 +5,11 @@ function LandingInfo({}) {
     return (
         <div className="px-4">
             <div className="flex-col">
-                <h1 className="tx-xl Q_xs">Welcome to Byte City:</h1>
-                <h1 className="tx-xxl Q_sm_x">Welcome to Byte City:</h1>
-                <div style={{color:"orangered"}} className="flex-col tx-lgx">
-                    <div>Simplifying Learning and Investing</div>
+                <h1 className="tx-primary tx-xl tx-center Q_xs">Welcome to Byte City:</h1>
+                <h1 className="tx-primary tx-xxl tx-center Q_sm_x">Welcome to Byte City:</h1>
+                <div style={{color:"orangered"}} className="flex-col tx-lg tx-center">
+                    <div>Simplifying Learning</div>
+                    <div>and Investing</div>
                     <div>Through Gamification!</div>
                 </div>
             </div>
@@ -16,17 +17,18 @@ function LandingInfo({}) {
 
             <h1 className="tx-link opaci-chov--25 mt-100 tx-center">
                 <Link href="https://wbyte.vercel.app">
-                    Play Now: → WByte.vercel.app ←
+                    Play Now: WByte.vercel.app ←
                 </Link>
             </h1>
             <div className="w-100 flex-col pb-100 pt-8 ">
                 <div className="w-100 w-max-500px tx-l">
                     Byte City is an innovative 3D Browser platform that merges learning and investing.
-                    <small>With our gamified approach and automated processes, we make investing easy and enjoyable for everyone.</small>
+                    <small className="py-2 block">With our gamified approach and automated processes, we make investing easy and enjoyable for everyone.</small>
                 </div>
             </div>
 
-            <h2 className="mt-8 tx-xxl">Investing made simple:</h2>
+            <h2 className="mt-8 tx-xxl Q_sm_x">Investing made simple:</h2>
+            <h2 className="mt-8 tx-xl Q_xs">Investing made simple:</h2>
             <div className="w-100 w-max-600px tx-lg">
                 Byte City is the ideal platform for passive investors. Our automated system manages portfolios, minimizes risks, maximizes profits, and offers a user-friendly 3D Browser interface            </div>
 

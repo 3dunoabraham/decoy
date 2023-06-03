@@ -141,11 +141,12 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
                     <h1 className=' tx-bold '
                         
                     >
-                        <span className=" Q_xs" style={{fontSize:"2.5em !important"}}>Byte City</span>
-                        <span className=" Q_sm_x" style={{fontSize:"4.4em !important"}}>Byte City</span>
+                        <span className=" Q_xs " style={{fontSize:"2.5em !important"}}>Byte City</span>
+                        <span className=" Q_sm_x" style={{fontSize:"3.5em !important"}}>Byte City</span>
                     </h1>
                 </div>
-                <Link className='pos-abs top-0  mt-200 py-2 opaci-chov--75 block pb-8 flex-col bg-glass-5 bg-b-10 px-2 pt-8  bord-r-25'
+                <Link 
+className='pos-abs top-0  mt-200 py-2 opaci-chov--75 block pb-8 flex-col bg-glass-4 bg-b-10 px-1 pt-8  bord-r-25'
                     style={{boxShadow:"0 4px 3px #00000022"}}
                     href='https://wbyte.vercel.app'
                 >
@@ -154,8 +155,11 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
                 </Link>
             </div>
             <div>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#46B7FA" 
-                    fill-opacity="1" d="M0,396L720,-20L1440,250L1440,0L720,0L0,0Z"></path>
+                <svg className='Q_sm_x' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#46B7FA" 
+                    fill-opacity="1" d="M0,396L720,30L1440,310L1440,0L720,0L0,0Z"></path>
+                </svg>
+                <svg className='Q_xs' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#46B7FA" 
+                    fill-opacity="1" d="M0,396L720,100L1440,310L1440,0L720,0L0,0Z"></path>
                 </svg>
             </div>
             <div className="px-8 Q_xs_px-2 pt-200 ">
