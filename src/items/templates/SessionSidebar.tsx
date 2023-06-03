@@ -59,6 +59,9 @@ export default function Component({}) {
         }
       }
     
+      if (!session) {
+        return <></>
+      }
     return (<>
         <div className="flex-col   invisible ">
             <div className='flex px-3 px- w-100'>
@@ -131,7 +134,7 @@ export default function Component({}) {
                     <div className="box-shadow-2 pa-4 bord-r-8 bg-b-50 tx-center opaci-chov--75"
                              onClick={()=>{syncBinance()}}
                         >
-                            <div className="tx-center tx-lx Q_sm_x">
+                            <div className="tx-center tx-lx ">
                                 <GiCardExchange/>
                             </div>
                             <div className="Q_xl_x">Sync </div>

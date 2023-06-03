@@ -2,7 +2,7 @@ import { ReactElement, useContext, useEffect, useMemo, useState } from 'react'
 import Head from 'next/head'
 import { ParsedUrlQuery } from 'querystring';
 import { GetServerSideProps } from 'next';
-// import { get, getAll } from '@vercel/edge-config';
+import { getToken } from "next-auth/jwt"
 
 import type { NextPageWithLayout } from '@/src/pages/_app'
 import Layout from '@/src/items/templates/Layout'
@@ -10,29 +10,22 @@ import SidebarContainer from '@/src/items/templates/SidebarContainer'
 import SessionSidebar from "@/src/items/templates/SessionSidebar";
 import { BreadCrumbs } from '@/src/items/atoms/common/BreadCrumbs'
 import { useQueryPlus } from '@/scripts/helpers/useHooksHelper'
-import { API_UNITS, LOCAL_URL } from '@/scripts/constants/api'
 import { _parseDecimals } from '@/scripts/helpers/mathHelper'
 import ImsCard from '@/src/partials/index/ImsCard'
-import LoadingPill from '@/src/items/atoms/holders/LoadingPill'
-import FailedRequest from '@/src/items/atoms/holders/FailedRequest'
 import { AppContext } from '@/scripts/contexts/AppContext'
-import { useRouter } from 'next/router'
-import { OFFLINE_UNITS_ARRAY } from '@/scripts/constants/inventory';
 import { InventoryContext, InventoryProvider } from '@/scripts/contexts/InventoryContext'
-import Link from 'next/link';
 import { signIn, useSession } from 'next-auth/react';
 import { parseDecimals } from '@/components/scripts/helpers';
 import { useIsClient, useLocalStorage } from 'usehooks-ts';
 import AmountCards from '@/components/dashboard/AmountCards';
 import { DEFAULT_TOKENS_ARRAY } from '@/components/scripts/constants';
-import { fetchDelete, fetchPost, fetchPut } from '@/scripts/helpers/fetchHelper';
+import { fetchPost, fetchPut } from '@/scripts/helpers/fetchHelper';
 import TradingViewNews from '../partials/index/TradingViewNews';
+import Image from 'next/image';
 
-const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
+const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
     const bigmul = 50
     const mul = 11  
-    const router = useRouter()
-    const inv = useContext(InventoryContext)
     const app = useContext(AppContext)
     const API_PRICE_BASEURL = "https://api.binance.com/api/v3/ticker/price?symbol="
     const isClient = useIsClient()
@@ -52,70 +45,19 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
             if (aconfirm != "yes") return
 
             if (!isClient) return;
-
-            
-                                
-
-                
             try {
-                // const res = await fetchDelete('/api/start',{
-                // });
-                // const res2 = await res.json();
                 localStorage.removeItem("localTokensArrayObj");
                 localStorage.removeItem("uid");
                 window.location.reload()
-                // return res2
             } catch (e) {
                 console.log("err",e)
                 return false
             }
 
         }
-    // const tokensReqObj:any = ( DEFAULT_TOKENS_ARRAY.reduce((acc, aToken) => (
-    //     { ...acc, [aToken]: [`${API_PRICE_BASEURL}${(aToken+baseToken).toUpperCase()}`] }
-    //     ), {}))
-    //     const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
-    //     const [LS_uid, s__LS_uid] = useLocalStorage('uid', "")
-    //     const [uid, s__uid] = useState("")
-    //     const [showAllTokens,s__showAllTokens] = useState<any>(true)
-    //     const [chopAmount,s__chopAmount] = useState<any>(0)
-    //     const [tokensArrayObj,s__tokensArrayObj] = useState<any>({})
-    //     const [klinesArray,s__klinesArray] = useState<any[]>([])
-    //     const [clientIP, s__clientIP] = useState('');
-    //     const DEFAULT_TOKEN_OBJ = {
-    //         mode:0,state:0,buy:0,sell:0, floor:0,ceil:0,
-    //         min:0,max:0,minMaxAvg:0,minMedian:0,maxMedian:0,
-    //     }
-    //     const p__klinesArray = useMemo(()=>{
-    //         let slicedArray = [...klinesArray]
-    //         for (let index = 0; index < chopAmount; index++) { slicedArray.push(klinesArray[499]) }
-            
-    //         return slicedArray.slice(slicedArray.length-500,slicedArray.length)
-    //     },[klinesArray,chopAmount])
-    //     const queryUSDT:any = useQuery({ queryKey: ['usdt'], refetchInterval: 3000,
-    //     queryFn: async () => online ? (await fetchMultipleJsonArray(tokensReqObj)) : DEFAULT_TOKEN,
-    // })
 
     const unitsArray = []
-    const s__unitsArray = ()=>{
-        
-    }
-    const q__unitsArray = ()=>{
-        
-    }
-    // const [q__unitsArray, unitsArray] = useQueryPlus({ queryKey: ['unitData'], refetchOnWindowFocus: false, retry: 1,
-    //     queryFn: async () =>{
-    //         if (!app.online) { return OFFLINE_UNITS_ARRAY }
-    //         let theUrl = API_UNITS+"uids/"
-    //         let theRequest = await fetch(theUrl);
-    //         let theJsonResult = await theRequest.json()
-    //         return theJsonResult
-    //     }
-    // },[])
     const inventoryItems = useMemo(()=>{
-        let rdm = parseInt(`${Math.random()*1000 * unitsArray.length}`).toLocaleString("en-US")
-
-       
         const _inventoryItems = [
             { companyName: "Strategy A", unitsArray, totalValue: parseDecimals(btcPrice) },
             // { companyName: "Company B", unitsArray: [4, 5, 6], totalValue: "20,000" },
@@ -126,72 +68,23 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
         s__uid(LS_uid)
         if (!!LS_uid) {
             s__clientIP(LS_uid.split(":")[0])
-        }
-
-        
-        // if (!!sessiondata && !!sessiondata.user) {
-        //     console.log('there is session')
-        //     if (window && window.localStorage) {
-        //         console.log('LS_uid', LS_uid)
-        //         if(!LS_uid) {
-        //             let thegooglenewuid = sessiondata.user.email.split("@")[0]+":"+sessiondata.user.name
-        //             s__LS_uid(thegooglenewuid)
-        //             s__uid(thegooglenewuid)
-        //             // window.location.reload()
-        //         }
-        //     }
-        // }
-        
-        // inv.s__unitsArray([])
-        // console.log(inv)
-        
+        }        
         app.s__sidebarLinks([])
         console.log("!uid", !uid)
         app.s__sidebarPages([
-            // {id:1,label:"Chart",url:"https://www.tradingview.com/chart/EBa5RTfJ/?symbol=BITSTAMP%3ABTCUSD",icon:"users"},
             {id:2,label:"Web Byte City",url:"https://wbyte.vercel.app/",icon:"bingo"},
             ...(!LS_uid ? [] : [
                 {id:0,label:"History",url:"/trade/history/?pair=BTCUSDT",icon:"agreements"},
                 {id:2,label:"Chart (BTC 4h)",url:"/chart/4h?token=btc",icon:"chart"}
             ]),
-            // {id:2,label:"Bit-Bingo (Trade Cards)",url:"/",icon:"bingo"},
-            // {id:2,label:"Bit To Crop",url:"/demo",icon:"farm"},
-            // {id:2,label:"Bit Token Capital",url:"/demo",icon:"city"},
         ])
     },[])
     const [clientIP, s__clientIP] = useState('');
     const [LS_uid, s__LS_uid] = useLocalStorage('uid', "")
     const [uid, s__uid] = useState("")
 
-    const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
-
-    
-    const askTicket = async () => {
-        console.log("askTicketaskTicketaskTicket")
-        try {
-            const res = await fetchPut('/api/order',{
-            });
-            const ress = await res.json();
-            if (res.status >= 200 && res.status <= 300)
-            {
-                app.alert("success","request saved")
-            } else {
-                app.alert("error","request not completed")
-            }
-            return ress
-        } catch (e) {
-            app.alert("error","request not completed")
-            return false
-        }
-
-    }
-
-
-    
     const getData = async (newuid:any) => {
         try {
-            // let username = !sessiondata ? sessiondata.user.email : "user"
-            // return null
             const res:any = await fetchPost('/api/start',{
                 uid:uid,
                 name: newuid.split(":")[0],
@@ -205,18 +98,8 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
             } else {
                 return alert("ERROR")
             }
-            
-            // const res:any = await fetch('https://geolocation-db.com/json/')
-            // let awaited = await res.json()
-            // s__clientIP(awaited.IPv4)
-
-            // let askTicketRes = await askTicket()
-            // if (!askTicketRes) return
-
-
-            
+                        
             s__clientIP(newuid)
-            // let new_uid = `${awaited.IPv4}:${newuid}`
             let new_uid = newuid
             s__uid(new_uid)
             s__LS_uid(new_uid)
@@ -226,8 +109,6 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
         }
     }
     const register = () => {
-        // if (!sessiondata) return
-
         let username = !sessiondata ? ( "user" ) : sessiondata.user.email
 
         let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
@@ -239,32 +120,43 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
             getData(`${username}:`+numberaccount)
         }
     }
-    // const registerWGoogle = () => {
-    //     let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
-    //     // let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
-    //     let cleanname = sessiondata.user.name.replace(" ")
-    //     if (confirm(`Would you like to create local account -> (user:${randomThousand})? \n\n\n Account Public Name: <user> \n Secret Key Code: ${randomThousand} \n\n\n Remember to save your credentials! `)) {
-    //         getData(sessiondata.user.email+":"+randomThousand)
-    //     }
-    // }
 
     const { data:sessiondata, }:any = useSession();
     return (
     <div className='flex-center w-100 h-min-100vh'>
-        <div className="h-min-100vh w-100  flex-col flex-justify-start flex-align-stretch">
+        <div className="h-min-100vh w-100  flex-col flex-justify-start flex-align-stretch"
+            
+        >
+            <div className='w-100 flex-col pt-100' style={{background:"#46B7FA"}}>
+                <div className='tx-white tx-center py-8 '>
+                    <a href="https://twitter.com/webgame">
+                        <h1 className='tx-bold-2 opaci-50 tx-ls-5 tx-lg pt-4 '
+                            style={{color:"orangered"}}
+                        >
+                            Web Gamed
+                        </h1>
+                    </a>
+                    <h1 className=' tx-bold '
+                        style={{fontSize:"7em !important"}}
+                    >Byte City</h1>
+                </div>
+                <a className='pos-abs top-0  mt-200 py-2 opaci-chov--75 block pb-8 flex-col bg-b-10 px-2 pt-8  bord-r-25'
+                    style={{boxShadow:"0 4px 3px #00000022"}}
+                    href='https://wbyte.vercel.app'
+                >
+                    <Image src="/main2.png" alt="bank" width={244} height={255} className='mt-8' />
+                    <h1 className='tx-xl ' style={{color:"orangered"}}>Play Now!</h1>
+                </a>
+            </div>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#46B7FA" 
+                    fill-opacity="1" d="M0,396L720,0L1440,292L1440,0L720,0L0,0Z"></path>
+                </svg>
+            </div>
             <div className="px-8 Q_xs_px-2 ">
-                <BreadCrumbs pages={[["/", "Web Gamed App"]]} />
+                {/* <BreadCrumbs pages={[["/", "Web Gamed App"]]} /> */}
                 
                 <div className="flex-row Q_xs_flex-col my-4 gap-2">
-                    {/* <h1 className="pt-4 tx-bold-5 flex-1 ">
-                        Dashboard
-                    </h1> */}
-                    {/* {JSON.stringify(tokenx)}: */}
-                    {/* <br /> */}
-                    {/* {JSON.stringify(session)}: */}
-                    {/* <br /> */}
-                    {/* {JSON.stringify(sessiondata)}: */}
-                    {/* |{!!sessiondata && Object.keys(sessiondata)}| */}
                     {!uid && !!sessiondata && <>
                         <button   className={`px-3 py-2 clickble nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
                             style={{background:!sessiondata ? "#F7C127" : "orangered"}}
@@ -273,18 +165,6 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
                             + Create Simulation Account
                         </button>
                     </>}
-                    {/* {!uid && !!sessiondata && <>
-                        <button   className="px-3 py-2 clickble nowrap tx-lg opaci-chov--75 tx-white"
-                            style={{background:"orangered"}}
-                            onClick={()=>{ registerWGoogle() }}
-                        >
-                            + Create Simulation Account <span className='Q_sm_x'>w/Google</span> <div className='Q_xs'>w/Google</div>
-                        </button>
-                    </>} */}
-
-                    {/* {!sessiondata && !uid && <>
-                        <div className='flex-col'>or</div>
-                    </>} */}
                     
                     {!sessiondata &&
                         <div className='flex-col'>
@@ -303,41 +183,24 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
                     <div className='flex-1'></div>
                 </div>
             </div>
-            {/* {q__unitsArray.isLoading &&
-                <div className=' flex-col mt-150'>
-                    <LoadingPill title={"Loading Bitcoin Price..."} />
-                </div> 
-            }
-            {q__unitsArray.isError &&
-                <div className=' flex-col mt-150'>
-                    <FailedRequest preview={LOCAL_URL+"/?offline"} />
-                </div> 
-            } */}
 
             
-
-            {/* |{JSON.stringify(tokens)}| */}
-            {/* {JSON.stringify(tokens)} */}
-            {/*!!sessiondata &&*/
-            
-                <div className='flex-wrap flex-justify-start  flex-align-stretch' >
-                    {unitsArray.length > 0 && inventoryItems.map((item, index) => (
-                        <ImsCard
-                            uid={uid}
-                            key={index}
-                            companyName={item.companyName}
-                            unitsArray={tokens}
-                            totalValue={item.totalValue}
-                            />
-                        ))
-                    }
-                    
-                    {isClient && !!uid && <div className=' pa-3 flex-1 '>
-                        <AmountCards tokens={tokens} {...{mul, bigmul}} />
-                    </div> }
-                </div>
-            }
-            
+            <div className='flex-wrap flex-justify-start  flex-align-stretch' >
+                {unitsArray.length > 0 && inventoryItems.map((item, index) => (
+                    <ImsCard
+                        uid={uid}
+                        key={index}
+                        companyName={item.companyName}
+                        unitsArray={tokens}
+                        totalValue={item.totalValue}
+                        />
+                    ))
+                }
+                
+                {isClient && !!uid && <div className=' pa-3 flex-1 '>
+                    <AmountCards tokens={tokens} {...{mul, bigmul}} />
+                </div> }
+            </div>
 
             <div className='flex-center  flex-1'>
             </div>
@@ -366,17 +229,10 @@ const Page: NextPageWithLayout = ({online,tokens}:PageProps) => {
     )
 }
 
-// const getEdgeConfig  = async () => {
-//     // return null
-//     const tokens = await getAll(["tokens"]);
-//     // const tokens = await get('tokens');
-//     console.log("tokens", tokens)
-//     const tokenstokens:any = tokens.tokens
-//     return tokenstokens.split(",")
-// }
 type PageProps = {
     online: boolean;
     tokens: any;
+    serverSession: any;
 };
 
 Page.getLayout = function getLayout(page: ReactElement) {
@@ -395,14 +251,16 @@ export default Page
 export const getServerSideProps: GetServerSideProps<PageProps, ParsedUrlQuery> = async (context) => {
     const { offline } = context.query;
     const online = typeof offline === 'undefined';
-    // const tokens =  process.env.GITHUB_ID
 
-    // let tokens = await getEdgeConfig()
+    const session = await getToken({ req:context.req, secret: process.env.NEXTAUTH_SECRET })
+    // let jwt = await getToken(context.requet)
+    
     let tokens = DEFAULT_TOKENS_ARRAY
     
     return {
       props: {
         online,tokens,
+        serverSession: session
       },
     };
   };
