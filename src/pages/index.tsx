@@ -74,7 +74,7 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
         app.s__sidebarLinks([])
         console.log("!uid", !uid)
         app.s__sidebarPages([
-            {id:2,label:"Web Byte City",url:"https://wbyte.vercel.app/",icon:"bingo"},
+            {id:2,label:"Web Byte City",url:"https://bytc.vercel.app/",icon:"bingo"},
             ...(!LS_uid ? [] : [
                 {id:0,label:"History",url:"/trade/history/?pair=BTCUSDT",icon:"agreements"},
                 {id:2,label:"Chart (BTC 4h)",url:"/chart/4h?token=btc",icon:"chart"}
@@ -148,7 +148,7 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
                 <Link 
 className='pos-abs top-0  mt-200 py-2 opaci-chov--75 block pb-8 flex-col bg-glass-4 bg-b-10 px-1 pt-8  bord-r-25'
                     style={{boxShadow:"0 4px 3px #00000022"}}
-                    href='https://wbyte.vercel.app'
+                    href='https://bytc.vercel.app'
                 >
                     <Image src="/main2.png" alt="bank" width={244} height={255} className='mt-8' />
                     <h1 className='tx-xl tx-shadow-2' style={{color:"orangered"}}>Play Now!</h1>
