@@ -103,25 +103,28 @@ function LandingInfo({}) {
                 </div>
             </div>
             <Suspense>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/xkXnh04d1vQ" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/xkXnh04d1vQ" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
             </Suspense>
             <div className=" py-100 my-100 flex-col flex-align-end px-2">
                 <div className="w-100 w-max-600px my-100">
-                    <Link href="/" className="flex-col flex-align-end pa-8 opaci-chov-50 opaci-75 box-shadow-2-b bord-r-50">
-                        <h3 className="tx-end tx-lgx">Dive Into Investment Strategies:</h3>
-                        <p className="tx-end w-100 w-max-500px">Understand the concepts behind Dollar Cost Averaging (DCA) and Automated Trading Systems (ATS). Explore how these strategies can benefit your investment journey and enhance your trading approach.</p>
+                    <Link href="/" className="flex-col flex-align-end pa-8 Q_xs_pa-4 opaci-chov-50 opaci-75 box-shadow-2-b bord-r-25">
+                        <h3 className="tx-end pb-2 tx-lgx">Dive Into Investment Strategies:</h3>
+                        <p className="tx-end w-100 w-max-500px">Understand the concepts behind Dollar Cost Averaging (DCA) and Automated Trading Systems (ATS).</p>
+                        <p className="tx-end w-100 w-max-500px Q_sm_x">Explore how these strategies can benefit your investment journey and enhance your trading approach.</p>
                     </Link>
-                    <Link href="/" className="flex-col flex-align-end my-100 pa-8 opaci-chov-50 opaci-75 box-shadow-2-b bord-r-50">
-                        <h3 className="tx-end tx-lgx">Learn About DCA | Learn About ATS</h3>
+                    <Link href="/" className="flex-col flex-align-end my-100 pa-8 Q_xs_pa-4 opaci-chov-50 opaci-75 box-shadow-2-b bord-r-25">
+                        <h3 className="tx-end pb-2 tx-lgx">Learn About DCA | Learn About ATS</h3>
 
                         <p className="tx-end w-100 w-max-500px">Explore the Ecosystem:</p>
-                        <p className="tx-end w-100 w-max-500px">Discover the different market sectors, protocols, and tokens that form the foundation of Byte City. Gain insights into the core, utility, and side-chain tokens that power our platform.</p>
+                        <p className="tx-end w-100 w-max-500px ">Discover the different market sectors, protocols, and tokens that form the foundation of Byte City. </p>
+                        <p className="tx-end w-100 w-max-500px Q_sm_x">Gain insights into the core, utility, and side-chain tokens that power our platform.</p>
                     </Link>
-                    <Link href="/" className="flex-col flex-align-end pa-8 opaci-chov-50 opaci-75 box-shadow-2-b bord-r-50">
-                        <h3 className="tx-end tx-lgx">Browse Ecosystem</h3>
+                    <Link href="/" className="flex-col flex-align-end pa-8 Q_xs_pa-4 opaci-chov-50 opaci-75 box-shadow-2-b bord-r-25">
+                        <h3 className="tx-end pb-2 tx-lgx">Browse Ecosystem</h3>
 
                         <p className="tx-end w-100 w-max-500px">Get Started with Byte City:</p>
-                        <p className="tx-end w-100 w-max-500px">Follow our step-by-step tutorials to navigate the platform effectively. Learn how to play, understand the stages, and amplify your reach. Whether you&apos;re a beginner or an experienced investor, our tutorials will guide you through the process.</p>
+                        <p className="tx-end w-100 w-max-500px ">Follow our step-by-step tutorials to navigate the platform effectively. </p>
+                        <p className="tx-end w-100 w-max-500px Q_sm_x">Learn how to play, understand the stages, and amplify your reach. Whether you&apos;re a beginner or an experienced investor, our tutorials will guide you through the process.</p>
                     </Link>
                 </div>
 
