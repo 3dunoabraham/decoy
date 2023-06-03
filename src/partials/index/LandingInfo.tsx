@@ -18,7 +18,7 @@ function LandingInfo({}) {
 
             <h1 className="tx-link opaci-chov--25 mt-100 tx-center">
                 <Link href="https://bytc.vercel.app">
-                    Play here: bytc.vercel.app
+                    Click here to play: bytc.vercel.app
                 </Link>
             </h1>
             <div className="w-100 flex-col pb-100 pt-8 ">
