@@ -104,7 +104,7 @@ function LandingInfo({}) {
                         <h3>Browse Ecosystem</h3>
 
                         <p className="tx-end w-max-500px">Get Started with Byte City:</p>
-                        <p className="tx-end w-max-500px">Follow our step-by-step tutorials to navigate the platform effectively. Learn how to play, understand the stages, and amplify your reach. Whether you're a beginner or an experienced investor, our tutorials will guide you through the process.</p>
+                        <p className="tx-end w-max-500px">Follow our step-by-step tutorials to navigate the platform effectively. Learn how to play, understand the stages, and amplify your reach. Whether you&apos;re a beginner or an experienced investor, our tutorials will guide you through the process.</p>
                     </div>
                 </div>
 
