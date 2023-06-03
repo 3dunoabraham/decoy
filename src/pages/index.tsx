@@ -139,8 +139,11 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
                         </h1>
                     </Link>
                     <h1 className=' tx-bold '
-                        style={{fontSize:"7em !important"}}
-                    >Byte City</h1>
+                        
+                    >
+                        <span className="tx-xxl Q_xs">Byte City</span>
+                        <span className="tx-xxl Q_sm_x" style={{fontSize:"6.5em !important"}}>Byte City</span>
+                    </h1>
                 </div>
                 <Link className='pos-abs top-0  mt-200 py-2 opaci-chov--75 block pb-8 flex-col bg-b-10 px-2 pt-8  bord-r-25'
                     style={{boxShadow:"0 4px 3px #00000022"}}
@@ -155,7 +158,7 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
                     fill-opacity="1" d="M0,396L720,0L1440,292L1440,0L720,0L0,0Z"></path>
                 </svg>
             </div>
-            <div className="px-8 Q_xs_px-2 ">
+            <div className="px-8 Q_xs_px-2 pt-200 ">
                 {/* <BreadCrumbs pages={[["/", "Web Gamed App"]]} /> */}
                 
                 <div className="flex-row Q_xs_flex-col my-4 gap-2">
