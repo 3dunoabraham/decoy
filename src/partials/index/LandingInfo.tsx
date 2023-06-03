@@ -140,28 +140,28 @@ function LandingInfo({}) {
                     <div className="flex-wrap flex-align-start w-100  gap-8">
                         <div className="flex-col flex-align-start">
                             <div className="opaci-50 underline pb-3">Important Links</div>
-                            <Link href="/" className="tx-link pt tx-lg opaci-chov--50">
+                            <Link href="/" className="tx-link pt-1 tx-lg opaci-chov--50">
                                 Twitter: <b>@bytecty</b>
                             </Link>
-                            <Link href="/" className="tx-link pt tx-lg opaci-chov--50">
+                            <Link href="/" className="tx-link pt-1 tx-lg opaci-chov--50">
                                 Youtube: <b>@webgamed</b>
                             </Link>
-                            <Link href="/" className="tx-link pt tx-lg opaci-chov--50">
+                            <Link href="/" className="tx-link pt-1 tx-lg opaci-chov--50">
                                 Twitter: <b>@webgamed</b>
                             </Link>
-                            <Link href="/" className="tx-link pt tx-lgx opaci-chov--50 py-6">
+                            <Link href="/" className="tx-link  tx-lgx opaci-chov--50 py-6">
                                 Byte City Game URL: <b>bytc.vercel.app</b>
                             </Link>
                         </div>
                         <div className="flex-col flex-align-start">
                             <div className="opaci-50 underline pb-3">Documentation</div>
-                            <Link href="/" className="tx-link pt tx-lg opaci-chov--50">
+                            <Link href="/" className="tx-link pt-1 tx-lg opaci-chov--50">
                                 Getting Started: <b>How to Play?</b>
                             </Link>
-                            <Link href="https://webgamed.gitbook.io/gtabtc/what-is-byte-city/faq" className="tx-link pt tx-lg opaci-chov--50">
+                            <Link href="https://webgamed.gitbook.io/gtabtc/what-is-byte-city/faq" className="tx-link pt-1 tx-lg opaci-chov--50">
                                 FAQ: <b>Frequently Asked Questions</b>
                             </Link>
-                            <Link href="https://webgamed.gitbook.io/gtabtc/about-us/where-to-go-links" className="tx-link pt tx-lg opaci-chov--50">
+                            <Link href="https://webgamed.gitbook.io/gtabtc/about-us/where-to-go-links" className="tx-link pt-1 tx-lg opaci-chov--50">
                                 More: <b>More Links</b>
                             </Link>
                         </div>
