@@ -22,6 +22,7 @@ import { DEFAULT_TOKENS_ARRAY } from '@/components/scripts/constants';
 import { fetchPost, fetchPut } from '@/scripts/helpers/fetchHelper';
 import TradingViewNews from '../partials/index/TradingViewNews';
 import Image from 'next/image';
+import LandingInfo from '../partials/index/LandingInfo';
 
 const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
     const bigmul = 50
@@ -122,7 +123,7 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
     }
 
     const { data:sessiondata, }:any = useSession();
-    return (
+    return (<>
     <div className='flex-center w-100 h-min-100vh'>
         <div className="h-min-100vh w-100  flex-col flex-justify-start flex-align-stretch"
             
@@ -205,7 +206,7 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
             <div className='flex-center  flex-1'>
             </div>
                 
-            {!!uid &&
+            {/* {!!uid &&
                 <div className='flex pa-1'>
                     {(!!sessiondata && !!sessiondata.user) &&
                         <div className='flex-1 mt-100 Q_sm_x'>
@@ -214,7 +215,7 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
                         </div>
                     }
                 </div>
-            }
+            } */}
             {!!uid &&
                 <div className='flex flex-justify-end  pa-1'>
                     <button   className="ims-button-faded clickble nowrap  opaci-25 tx-md"
@@ -225,8 +226,16 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
                 </div>
             }
         </div>
+        
     </div>
-    )
+    <div className='flex-col'>
+        <div className='w-max-1080px w-100  flex-col flex-align-start'>
+            <div className='w-100 py-100'>
+                <LandingInfo />
+            </div>
+        </div>  
+    </div>  
+    </>)
 }
 
 type PageProps = {
