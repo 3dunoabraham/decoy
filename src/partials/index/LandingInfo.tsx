@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { Suspense } from "react"
 
 
 function LandingInfo({}) {
@@ -54,7 +55,7 @@ function LandingInfo({}) {
                             </div>
                             {/* Explore common or complex processes, confront emotional reactions to financial risk, and enjoy a fun and engaging trading experience. */}
                         </div>
-                        <Link href="/" className="tx-link opaci-chov--50">Learn More: What is Gamification?</Link>
+                        <Link href="https://webgamed.gitbook.io/gamification" target="_blank" className="tx-link opaci-chov--50">Learn More: What is Gamification?</Link>
                     </div>
 
                     <div className=" w-100 w-max-300px ">
@@ -64,7 +65,6 @@ function LandingInfo({}) {
                             <br /><br />
                             Interact with simulated investments in a game-like environment, making the trading experience more enjoyable 
                         </div>
-                        <Link href="/" className="tx-link opaci-chov--50">Explore FAQs</Link>
                     </div>
 
                     <div className=" w-100 w-max-300px  ">
@@ -75,7 +75,7 @@ function LandingInfo({}) {
                             Learn how Byte City solves the problem of actively managing portfolios across multiple apps and websites, reduces risks, and maximizes profits, while lowering emotional stress.
                         </div>
 
-                        <Link href="/" className="tx-link opaci-chov--50">Read About Data Protection</Link>
+                        <Link  href="https://webgamed.gitbook.io/gtabtc/what-is-byte-city/faq" target="_blank"  className="tx-link opaci-chov--50">Explore FAQs</Link>
                     </div>
 
                     <div className=" w-100 w-max-500px ">
@@ -85,7 +85,11 @@ function LandingInfo({}) {
                         If you have any questions or need assistance, get in touch with our support team here.
 
                         <br />
-                        <Link href="/" className="tx-lg tx-link opaci-chov--50">Contact Support</Link>
+                        <Link href="https://twitter.com/bytecty" target="_blank" className="tx-lg tx-link opaci-chov--50">Contact on Twitter @bytecty</Link>
+                        <br />
+                        <Link href="https://twitter.com/bytecty" target="_blank" className="tx-lg tx-link opaci-chov--50">or @webgamed</Link>
+                        <br />
+                        <Link href="https://twitter.com/bytecty" target="_blank" className="tx-lg tx-link opaci-chov--50 mt-8 block py-2">Videos on Youtube @webgamed</Link>
                     </div>
 
                     <div className=" w-100 w-max-300px ">
@@ -98,24 +102,27 @@ function LandingInfo({}) {
                     </div>
                 </div>
             </div>
+            <Suspense>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/xkXnh04d1vQ" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </Suspense>
             <div className=" py-100 my-100 flex-col flex-align-end px-2">
                 <div className="w-100 w-max-600px my-100">
-                    <div className="flex-col flex-align-end">
+                    <a href="/" className="flex-col flex-align-end pa-8 opaci-chov-50 opaci-75 box-shadow-2-b bord-r-50">
                         <h3 className="tx-end tx-lgx">Dive Into Investment Strategies:</h3>
                         <p className="tx-end w-100 w-max-500px">Understand the concepts behind Dollar Cost Averaging (DCA) and Automated Trading Systems (ATS). Explore how these strategies can benefit your investment journey and enhance your trading approach.</p>
-                    </div>
-                    <div className="flex-col flex-align-end my-100">
+                    </a>
+                    <a href="/" className="flex-col flex-align-end my-100 pa-8 opaci-chov-50 opaci-75 box-shadow-2-b bord-r-50">
                         <h3 className="tx-end tx-lgx">Learn About DCA | Learn About ATS</h3>
 
                         <p className="tx-end w-100 w-max-500px">Explore the Ecosystem:</p>
                         <p className="tx-end w-100 w-max-500px">Discover the different market sectors, protocols, and tokens that form the foundation of Byte City. Gain insights into the core, utility, and side-chain tokens that power our platform.</p>
-                    </div>
-                    <div className="flex-col flex-align-end">
+                    </a>
+                    <a href="/" className="flex-col flex-align-end pa-8 opaci-chov-50 opaci-75 box-shadow-2-b bord-r-50">
                         <h3 className="tx-end tx-lgx">Browse Ecosystem</h3>
 
                         <p className="tx-end w-100 w-max-500px">Get Started with Byte City:</p>
                         <p className="tx-end w-100 w-max-500px">Follow our step-by-step tutorials to navigate the platform effectively. Learn how to play, understand the stages, and amplify your reach. Whether you&apos;re a beginner or an experienced investor, our tutorials will guide you through the process.</p>
-                    </div>
+                    </a>
                 </div>
 
 
