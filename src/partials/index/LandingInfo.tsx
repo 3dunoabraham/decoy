@@ -1,3 +1,4 @@
+import Link from "next/link"
 
 
 function LandingInfo({}) {
@@ -13,9 +14,9 @@ function LandingInfo({}) {
 
 
             <h1 className="tx-link opaci-chov--25 mt-100 tx-center">
-                <a href="https://wbyte.vercel.app">
+                <Link href="https://wbyte.vercel.app">
                     Play Now: → WByte.vercel.app ←
-                </a>
+                </Link>
             </h1>
             <div className="w-100 flex-col pb-100 pt-8 ">
                 <div className="w-max-500px tx-l">
@@ -31,12 +32,12 @@ function LandingInfo({}) {
 
             <h2 className="mt-8 flex flex-justify-start gap-3">
                 <span className="opaci-20 ">Get Started:</span>
-                <a target="_blank" className="tx-blue hover-4 opaci-chov--50 tx-lx" href="https://3duno.gitbook.io/gtabtc/documentation/getting-started/how-to-play">How to Play?</a>
-                <div className="opaci-chov--50" style={{color:"orangered"}}><a target="_blank" href="https://3duno.gitbook.io/gtabtc/documentation/getting-started/how-to-play">(Stage 1)</a></div>
+                <Link target="_blank" className="tx-blue hover-4 opaci-chov--50 tx-lx" href="https://3duno.gitbook.io/gtabtc/documentation/getting-started/how-to-play">How to Play?</Link>
+                <div className="opaci-chov--50" style={{color:"orangered"}}><Link target="_blank" href="https://3duno.gitbook.io/gtabtc/documentation/getting-started/how-to-play">(Stage 1)</Link></div>
                 <div className="opaci-10">|</div>
-                <div className="opaci-chov--50" style={{color:"orange"}}><a target="_blank" href="https://3duno.gitbook.io/gtabtc/documentation/getting-started/stage-2">(Stage 2)</a></div>
+                <div className="opaci-chov--50" style={{color:"orange"}}><Link target="_blank" href="https://3duno.gitbook.io/gtabtc/documentation/getting-started/stage-2">(Stage 2)</Link></div>
                 <div className="opaci-10">|</div>
-                <div className="opaci-chov--50" style={{color:"gold"}}><a target="_blank" href="https://3duno.gitbook.io/gtabtc/documentation/getting-started/stage-3">(Stage 3)</a></div>
+                <div className="opaci-chov--50" style={{color:"gold"}}><Link target="_blank" href="https://3duno.gitbook.io/gtabtc/documentation/getting-started/stage-3">(Stage 3)</Link></div>
             </h2>
             <div className="mt-200">
                 <div className="flex-wrap flex-justify-center gap-6 ">
@@ -50,7 +51,7 @@ function LandingInfo({}) {
                             </div>
                             {/* Explore common or complex processes, confront emotional reactions to financial risk, and enjoy a fun and engaging trading experience. */}
                         </div>
-                        <a href="/" className="tx-link opaci-chov--50">Learn More: What is Gamification?</a>
+                        <Link href="/" className="tx-link opaci-chov--50">Learn More: What is Gamification?</Link>
                     </div>
 
                     <div className=" w-max-300px">
@@ -59,7 +60,7 @@ function LandingInfo({}) {
                             Byte City offers a unique experience by combining the worlds of finance and gaming through our 3D browser game interface. Interact with simulated investments in a game-like environment, making the trading experience more enjoyable 
                         </div>
                         <br />
-                        <a href="/" className="tx-link opaci-chov--50">Explore FAQs</a>
+                        <Link href="/" className="tx-link opaci-chov--50">Explore FAQs</Link>
                     </div>
 
                     <div className=" w-max-300px ">
@@ -68,7 +69,7 @@ function LandingInfo({}) {
                             Find answers to common queries about Byte City, its features, and benefits. Learn how Byte City solves the problem of actively managing portfolios across multiple apps and websites, reduces risks, and maximizes profits, while lowering emotional stress.
                         </div>
 
-                        <a href="/" className="tx-link opaci-chov--50">Read About Data Protection</a>
+                        <Link href="/" className="tx-link opaci-chov--50">Read About Data Protection</Link>
                     </div>
 
                     <div className=" w-max-500px">
@@ -76,7 +77,7 @@ function LandingInfo({}) {
                         We offer different levels of customer support based on your subscription. If you have any questions or need assistance, get in touch with our support team here.
 
                         <br />
-                        <a href="/" className="tx-lg tx-link opaci-chov--50">Contact Support</a>
+                        <Link href="/" className="tx-lg tx-link opaci-chov--50">Contact Support</Link>
                     </div>
 
                     <div className=" w-max-300px">
