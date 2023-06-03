@@ -103,7 +103,7 @@ function LandingInfo({}) {
                 </div>
             </div>
             <Suspense>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/xkXnh04d1vQ" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/xkXnh04d1vQ" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
             </Suspense>
             <div className=" py-100 my-100 flex-col flex-align-end px-2">
                 <div className="w-100 w-max-600px my-100">
