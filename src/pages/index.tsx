@@ -24,6 +24,7 @@ import TradingViewNews from '../partials/index/TradingViewNews';
 import Image from 'next/image';
 import LandingInfo from '../partials/index/LandingInfo';
 import Link from 'next/link';
+import { FaChartBar, FaEnvelope, FaListAlt, FaPlus, FaStar, FaUser } from 'react-icons/fa';
 
 const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
     const bigmul = 50
@@ -72,12 +73,11 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
             s__clientIP(LS_uid.split(":")[0])
         }        
         app.s__sidebarLinks([])
-        console.log("!uid", !uid)
         app.s__sidebarPages([
             {id:2,label:"Web Byte City",url:"https://bytc.vercel.app/",icon:"bingo"},
             ...(!LS_uid ? [] : [
                 {id:0,label:"History",url:"/trade/history/?pair=BTCUSDT",icon:"agreements"},
-                {id:2,label:"Chart (BTC 4h)",url:"/chart/4h?token=btc",icon:"chart"}
+                {id:2,label:"Dashboard",url:"/chart/4h?token=btc",icon:"chart"}
             ]),
         ])
     },[])
@@ -105,6 +105,7 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
             let new_uid = newuid
             s__uid(new_uid)
             s__LS_uid(new_uid)
+            
             app.alert("success", "Simulation Account Registered succesfully!")
         } catch (e:any) {
             console.log("coudlnt register simulation account")
@@ -125,8 +126,8 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
 
     const { data:sessiondata, }:any = useSession();
     return (<>
-    <div className='flex-center w-100 h-min-100vh'>
-        <div className="h-min-100vh w-100  flex-col flex-justify-start flex-align-stretch"
+    <div className='flex-center w-100  -min-100vh'>
+        <div className="-min-90vh  w-100  flex-col flex-justify-start flex-align-stretch"
             
         >
             <div className='w-100 flex-col pt- pb-100' style={{background:"#46B7FA"}}>
@@ -163,17 +164,58 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
                     fill-opacity="1" d="M0,396L720,100L1440,310L1440,0L720,0L0,0Z"></path>
                 </svg>
             </div>
-            <div className="px-8 Q_xs_px-2 pt-200 ">
-                {/* <BreadCrumbs pages={[["/", "Web Gamed App"]]} /> */}
+            <div className="px-8 Q_xs_px-2  ">
                 
-                <div className="flex-row Q_xs_flex-col my-4 gap-2 mt-100">
+                <div className="flex-row Q_xs_flex-col my-4 gap-2 mt-8">
                     {!uid && !!sessiondata && <>
-                        <button   className={`px-3 py-2 clickble nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
+                        <button   className={`px-3 py-2 clickble nowrap mt-8 tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
                             style={{background:!sessiondata ? "#F7C127" : "orangered"}}
                             onClick={()=>{ register() }}
                         >
                             + Create Simulation Account
                         </button>
+                    </>}
+                    {!!uid && !!sessiondata &&<>
+                        <div className='Q_xs_py-8'></div>
+                        <div className='Q_sm_md py-150'></div>
+                        <div className='Q_lg_x py-100'></div>
+                        <div className='flex-wrap w-100 gap-2'>
+                            <Link href={"/chart/4h?token=btc"}   className={`px-3 py-2 flex-col clickble nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
+                                style={{background:"#001420"}}
+                                
+                            >
+                                <div><FaChartBar /></div>
+                                <div className='tx-shadow-5'>Dashboard</div>
+                            </Link>
+                            <Link href={"/trade/history?pair=BTCUSDT"}   className={`px-3 py-2 flex-col box-shadow-2-b clickble over-3 nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
+                                style={{background:"#5BB0D7"}}
+                                
+                            >
+                                <div><FaListAlt /></div>
+                                <div className='tx-shadow-5'>History</div>
+                            </Link>
+                            <Link href={"/"}   className={`px-3 py-2 flex-col box-shadow-2-b clickble over-2 nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
+                                style={{background:"orangered"}}
+                                
+                            >
+                                <div><FaUser /></div>
+                                <div className='tx-shadow-5'>Profile</div>
+                            </Link>
+                            <Link href={"/"}   className={`px-3 py-2 flex-col box-shadow-2-b over-4 clickble nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
+                                style={{background:"orange"}}
+                                
+                            >
+                                <div><FaStar /></div>
+                                <div className='tx-shadow-5'>Ranking</div>
+                            </Link>
+                            <Link href={"https://twitter.com/webgamed"}   className={`px-3 py-2 flex-col clickble nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
+                                style={{background:"lightgrey"}}
+                                
+                            >
+                                <div><FaEnvelope /></div>
+                                <div className='tx-shadow-5'>Support</div>
+                            </Link>
+                        </div>
                     </>}
                     
                     {!sessiondata &&

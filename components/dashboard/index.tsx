@@ -3,8 +3,6 @@ import { useState, useEffect, useMemo } from "react";
 import { useIsClient, useLocalStorage } from "usehooks-ts";
 import { useQuery } from '@tanstack/react-query'
 import { BsFillGearFill } from "react-icons/bs"
-// import { fetchJsonArray, fetchMultipleJsonArray, getComputedLevels, getStrategyResult, parseDecimals,
-// parseUTCDateString, timeDifference, _parseDecimals } from "@/scripts/helpers";
 import { DEFAULT_TIMEFRAME_ARRAY, DEFAULT_TOKENS_ARRAY } from "@/components/scripts/constants";
 import Chart from "@/components/chart";
 import TokenRow from "@/components/dashboard/TokenRow";
@@ -14,121 +12,13 @@ import { fetchJsonArray, fetchMultipleJsonArray, getComputedLevels, getStrategyR
 import { DownloadButton } from "./DownloadButton";
 import ToolButtons from "./ToolButtons";
 import { useQueryPlus } from "@/scripts/helpers/useHooksHelper";
-import { parseDateTimeString } from "@/scripts/helpers/type/dateHelper";
 import { useSession } from "next-auth/react";
 import LoginBtn from "@/src/items/molecules/auth/LoginBtn";
 import AppClientDesc from "@/src/items/molecules/auth/AppClientDesc";
-import { FaBootstrap, FaGoogle, FaRecycle } from "react-icons/fa";
 import { fetchPut } from "@/scripts/helpers/fetchHelper";
 import { GiCardExchange } from "react-icons/gi";
 
 export function ChartDashboard({query, user}:any) {
-    /********** CREATE **********/
-    const { data: session } = useSession();
-
-    const isClient = useIsClient()
-    const [q__asd, asd] = useQueryPlus({ queryKey: ['asdasd'], 
-        queryFn: async () =>{
-            // const theList = await fetchJsonArray(API_UNITS, "Units")
-            // inv.s__asd(theList)
-
-            const theListRes = await fetch(`/api/account-balance`)
-            let theList = await theListRes.json()
-            console.log("thelist", theList)
-            // theList = theList.map((anItem, index) => {
-            //     return {...anItem,...{
-            //         side: anItem.isBuyer ? "Buy" : "Sell",
-            //         price: parseDecimals(anItem.price),
-            //         qty: "$"+parseDecimals(parseFloat(anItem.price)*parseFloat(anItem.qty)),
-            //         time: parseDateTimeString(new Date(anItem.time/1)),
-            //     }}
-            // }).reverse()
-
-            // const theList = await fetchJsonArray(API_UNITS, "Units")
-
-            return theList
-        }
-    },[])
-
-    
-    const [q__tradeHistory, tradeHistory] = useQueryPlus({ queryKey: ['tradeHistory'], 
-        queryFn: async () =>{
-            // const theList = await fetchJsonArray(API_UNITS, "Units")
-            // inv.s__tradeHistory(theList)
-            if (!query.token) return []
-            const theListRes = await fetch(`/api/trade-history/?symbol=${query.token.toUpperCase()+"USDT"}&limit=99`)
-            let theList = await theListRes.json()
-            console.log("thelist", theList)
-            // theList = theList.map((anItem, index) => {
-            //     return {...anItem,...{
-            //         side: anItem.isBuyer ? "Buy" : "Sell",
-            //         price: parseDecimals(anItem.price),
-            //         qty: "$"+parseDecimals(parseFloat(anItem.price)*parseFloat(anItem.qty)),
-            //         time: parseDateTimeString(new Date(anItem.time/1)),
-            //     }}
-            // }).reverse()
-
-            // const theList = await fetchJsonArray(API_UNITS, "Units")
-
-            return theList
-        }
-    },[])
-
-    
-    const [timeframe,s__timeframe] = useState<any>(query.timeframe)
-    const [counter, s__counter] = useState(0);
-    const [loadings, s__loadings] = useState('all');
-    const getKlineArray = async(t,token) => {
-        s__loadings("klinesArray")
-        let urlBase = `https://api.binance.com/api/v3/klines?interval=${t}&symbol=`
-
-        const theArray = await fetchJsonArray(urlBase+token.toUpperCase()+"USDT")
-        let lastIndex = theArray.length - 1
-        while (lastIndex < 499)
-        {
-            theArray.unshift(theArray[0])
-            lastIndex++
-        }
-        
-        s__klinesArray(theArray)
-        s__loadings("")
-    }
-    const cryptoToken = useMemo(()=>{
-        return query.token && DEFAULT_TOKENS_ARRAY.includes(query.token.toLowerCase()) ? query.token.toLowerCase() : ""
-    },[query]) 
-    const [selectedToken,s__selectedToken] = useState<any>(cryptoToken)
-    useEffect(()=>{
-        if (cryptoToken != selectedToken) { getKlineArray(timeframe,query.token) }
-    },[counter,selectedToken,cryptoToken])
-    useEffect(()=>{
-
-        
-        // if (!!session && !!session.user) {
-        //     if (window && window.localStorage) {
-        //         console.log('LS_uid', LS_uid)
-        //         if(!LS_uid) {
-        //             let thegooglenewuid = session.user.email.split("@")[0]+":"+session.user.name
-        //             s__LS_uid(thegooglenewuid)
-        //             s__uid(thegooglenewuid)
-        //             // window.location.reload()
-        //         }
-        //     }
-        // }
-        
-        s__counter(counter+1)
-        s__tokensArrayObj(JSON.parse(LS_tokensArrayObj))
-        // console.log("LS_tokensArrayObj")
-        // console.log(JSON.parse(LS_tokensArrayObj)) 
-        s__uid(LS_uid)
-        // s__clientIP(LS_uid.split(":")[0])
-        {
-            getKlineArray(timeframe,cryptoToken)
-        }
-    },[])
-    
-    
-    
-    /********** DATA **********/
     const API_PRICE_BASEURL = "https://api.binance.com/api/v3/ticker/price?symbol="
     const baseToken = "usdt"
     const online = true
@@ -148,6 +38,53 @@ export function ChartDashboard({query, user}:any) {
         mode:0,state:0,buy:0,sell:0, floor:0,ceil:0,
         min:0,max:0,minMaxAvg:0,minMedian:0,maxMedian:0,
     }
+    const { data: session } = useSession();
+    const isClient = useIsClient()
+    const [timeframe,s__timeframe] = useState<any>(query.timeframe)
+    const [counter, s__counter] = useState(0);
+    const [loadings, s__loadings] = useState('all');
+
+
+
+    const [q__asd, asd] = useQueryPlus({ queryKey: ['asdasd'], 
+        queryFn: async () =>{
+            const theListRes = await fetch(`/api/account-balance`)
+            let theList = await theListRes.json()
+            return theList
+        }
+    },[])
+    const [q__tradeHistory, tradeHistory] = useQueryPlus({ queryKey: ['tradeHistory'], 
+        queryFn: async () =>{
+            if (!query.token) return []
+            const theListRes = await fetch(
+                `/api/trade-history/?symbol=${query.token.toUpperCase()+"USDT"}&limit=99`
+            )
+            let theList = await theListRes.json()
+            return theList
+        }
+    },[])
+
+    
+
+    const getKlineArray = async(t,token) => {
+        s__loadings("klinesArray")
+        let urlBase = `https://api.binance.com/api/v3/klines?interval=${t}&symbol=`
+
+        const theArray = await fetchJsonArray(urlBase+token.toUpperCase()+"USDT")
+        let lastIndex = theArray.length - 1
+        while (lastIndex < 499)
+        {
+            theArray.unshift(theArray[0])
+            lastIndex++
+        }
+        
+        s__klinesArray(theArray)
+        s__loadings("")
+    }
+    const cryptoToken = useMemo(()=>{
+        return query.token && DEFAULT_TOKENS_ARRAY.includes(query.token.toLowerCase()) ? query.token.toLowerCase() : ""
+    },[query]) 
+    const [selectedToken,s__selectedToken] = useState<any>(cryptoToken)
     const p__klinesArray = useMemo(()=>{
         let slicedArray = [...klinesArray]
         for (let index = 0; index < chopAmount; index++) { slicedArray.push(klinesArray[499]) }
@@ -162,7 +99,6 @@ export function ChartDashboard({query, user}:any) {
         if (p__klinesArray.length == 0) return {}
         let tokenConfirg = tokensArrayObj[cryptoToken][DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe)]
         if (!tokenConfirg) return {}
-        // console.log("tokenConfirg", tokenConfirg, p__klinesArray)
         
         let maxPrice = 0
         let minPrice = p__klinesArray.length ? p__klinesArray[0][3] : 99999999999
@@ -193,12 +129,19 @@ export function ChartDashboard({query, user}:any) {
     
     
     
-    /********** UPDATE **********/
+    useEffect(()=>{
+        if (cryptoToken != selectedToken) { getKlineArray(timeframe,query.token) }
+    },[counter,selectedToken,cryptoToken])
+    useEffect(()=>{
+        s__uid(LS_uid)
+        s__counter(counter+1)
+        s__tokensArrayObj(JSON.parse(LS_tokensArrayObj))
+        getKlineArray(timeframe,cryptoToken)
+    },[])
+
+
+
     const getData = async (new_uid:any) => {
-        // const res:any = await fetch('https://geolocation-db.com/json/')
-        // let awaited = await res.json()
-        // s__clientIP(awaited.IPv4)
-        // let new_uid = `user:${randomThousand}`
         s__uid(new_uid)
         s__LS_uid(new_uid)
     }
@@ -213,17 +156,6 @@ export function ChartDashboard({query, user}:any) {
         if (numberaccount) {
             getData(`${username}:`+numberaccount)
         }
-
-
-        // let username = !session ? ( "user" ) : session.user.email.split
-        // let randomThousand = !session ? (
-        //     parseInt(`${(Math.random()*9000) + 1000}`)
-        // ) : session.user.email.split
-
-        
-        // if (confirm(`Would you like to create simulation account -> (${username}:${randomThousand})? \n\n\n Account Name: <${username}> \n Secret Key Code: ${randomThousand} \n\n\n Remember to save your credentials! `)) {
-        //     getData(`${username}:${randomThousand}`)
-        // }
     }
     const clickImportConfig = () => {
         let backup = prompt("Backup:")
@@ -238,7 +170,6 @@ export function ChartDashboard({query, user}:any) {
     }
     const exportConfig = () => { console.log(JSON.stringify(tokensArrayObj)) }
     const joinToken = (token:string) => {
-        // console.log("queryUSDT queryUSDT", queryUSDT.isLoading, queryUSDT.data)
         let thePrice = parseFloat(queryUSDT.data[DEFAULT_TOKENS_ARRAY.indexOf(`${token}`)].price)
         addToken(token,thePrice)
     }
@@ -294,7 +225,6 @@ export function ChartDashboard({query, user}:any) {
         }
         return
     }
-    
     const updateTokenState = async (token:string, timeframe:any, substate:string, value:number) => {
         if (!token) return
         let timeframeIndex = timeframe
@@ -326,9 +256,6 @@ export function ChartDashboard({query, user}:any) {
         s__tokensArrayObj(new_tokensArrayObj)
         s__LS_tokensArrayObj((prevValue) => JSON.stringify(new_tokensArrayObj))
     }
-    
-    
-    
     const dollarAmount = 11
     async function placeOrder(order: LimitOrderParams): Promise<any> {
         const response = await fetch('/api/place-order', {
@@ -346,8 +273,6 @@ export function ChartDashboard({query, user}:any) {
         
         return response.json();
     }
-    
-    
     const computeOrderParams = (_token, operation, priceAdjustmentFactor) => {
         const theLivePrice = _parseDecimals(queryUSDT.data[DEFAULT_TOKENS_ARRAY.indexOf(_token)].price) * priceAdjustmentFactor;
         const tokenAmount = (dollarAmount * (operation === 'buy' ? 1 : 2)) / theLivePrice;
@@ -359,28 +284,24 @@ export function ChartDashboard({query, user}:any) {
           price: theLivePrice,
         };
       };
-      
       const buy_min = (_token) => {
         const orderParams = computeOrderParams(_token, 'buy', 1.01);
         placeOrder(orderParams);
         updateTokenState(_token, DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe), 'buy', 1);
         q__asd.refetch()
       };
-      
       const sell_all = (_token) => {
         const orderParams = computeOrderParams(_token, 'sell', 0.99);
         placeOrder(orderParams);
         updateTokenState(_token, DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe), 'buy', 0);
         q__asd.refetch()
       };
-      
       const buy_all = (_token) => {
         const orderParams = computeOrderParams(_token, 'buy', 1.01);
         placeOrder(orderParams);
         updateTokenState(_token, DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe), 'buy', 2);
         q__asd.refetch()
       };
-      
       const sell_min = (_token) => {
         const orderParams = computeOrderParams(_token, 'sell', 0.99);
         placeOrder(orderParams);
@@ -405,6 +326,9 @@ export function ChartDashboard({query, user}:any) {
             return false
         }
       }
+
+
+
     /********** HTML **********/
     if (!uid) {
         return (<div className="h-min-400px flex-col flex-justify-start">
@@ -423,14 +347,9 @@ export function ChartDashboard({query, user}:any) {
             
         </div>)
     }
-    // console.log("DEFAULT_TOKENS_ARRAY", DEFAULT_TOKENS_ARRAY, tokensArrayObj)
     return (
     <div className="body h-min-100  pos-rel flex-col flex-justify-start noverflow">
-        
-        {/* {JSON.stringify(asd.balances)} */}
-        {/* <div className="tx-white">BTC: {parseDecimals(asd.balances[3].free)}</div> */}
-
-            <div className="opaci-50 tx-ls-3 tx-lg  tx-white pr-100">Strategy A</div>
+        <div className="opaci-50 tx-ls-3 tx-lg  tx-white pr-100">Strategy A</div>
         <div className={"bg-glass-6   bord-r-10 tx-gray mt-4 py-2 z-999 fade-in w-95 noverflow flex flex-between"}
             style={{border:"1px solid #777",boxShadow:"0 10px 50px -20px #00000077"}}
         >
@@ -447,19 +366,11 @@ export function ChartDashboard({query, user}:any) {
                                 Hide Tokens
                             </div>
                         }
-                        {/* JSON.stringify(tokensArrayObj) */}
                         {DEFAULT_TOKENS_ARRAY.map((aToken,index)=>{
                             let isQ = true
                             if (queryUSDT.isLoading) { isQ = false }
                             if (queryUSDT.error) { isQ = false }
                             let isK = isQ
-                            
-                            // if (tokensArrayObj[aToken]) {
-                            //     return (
-                            //         <div key={index}>asd
-                            //         </div>
-                            //     )
-                            // }
 
                             if (!tokensArrayObj[aToken] || (tokensArrayObj[aToken] && !tokensArrayObj[aToken][0])) { isQ = false }
                             if (!showAllTokens && aToken != cryptoToken) return <div key={index}></div>
@@ -477,14 +388,11 @@ export function ChartDashboard({query, user}:any) {
                                     ${aToken == cryptoToken ? "bg-w-20 " : "bg-b-10 "} 
                                 `}
                             >
-                                {/* {JSON.stringify(aTokenCristayl)} */}
-                                {/* aTokenCristayl != null && */
-                                    <TokenRow {...{
-                                        tokensArrayObj, aToken, cryptoToken, index, queryUSDT, isK, aTokenCristayl, isQ,
-                                        buy_all, buy_min, sell_min, sell_all, crystal, timeframe, uid, updateTokenOrder,
-                                        removeToken, joinToken  
-                                    }}/>
-                                }
+                                <TokenRow {...{
+                                    tokensArrayObj, aToken, cryptoToken, index, queryUSDT, isK, aTokenCristayl, isQ,
+                                    buy_all, buy_min, sell_min, sell_all, crystal, timeframe, uid, updateTokenOrder,
+                                    removeToken, joinToken  
+                                }}/>
                             </div>
                             )
                         })}
@@ -562,9 +470,6 @@ export function ChartDashboard({query, user}:any) {
                             </summary>
                                 
                             <div className="  flex-col flex-justify-end ma-2">
-                                {/* <div className="underline  bord-r-50 px-2 py-1 tx-sm mb-8 ">
-                                    {uid}
-                                </div> */}
                                 
                                 <div className="opaci-50 tx-ls- tx-l mb-2 tx-white nowrap">Hot Wallet</div>
                                 <div className="flex-col gap-2">    
@@ -575,7 +480,6 @@ export function ChartDashboard({query, user}:any) {
                                             <div key={i} className="tx-white pa-1 flex-col">
                                                 <div className="opaci-50">{asd.balances[i].asset}:</div>
                                                 <div>{parseDecimals(asd.balances[i].free)}</div>
-                                                {/* <div>{parseDecimals(queryUSDT.data[i].price)}</div> */}
                                                 <div>${parseDecimals(parseFloat(asd.balances[i].free)*parseFloat(queryUSDT.data[i].price))}</div>
                                             </div>
                                         )
