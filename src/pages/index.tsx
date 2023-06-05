@@ -142,7 +142,7 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
                     <h1 className=' tx-bold '
                         
                     >
-                        <span className=" Q_xs " style={{fontSize:"2.5em !important"}}>Byte City</span>
+                        <span className=" Q_xs " style={{fontSize:"2.1em !important"}}>Byte City</span>
                         <span className=" Q_sm_x" style={{fontSize:"3.5em !important"}}>Byte City</span>
                     </h1>
                 </div>
@@ -165,10 +165,14 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
                 </svg>
             </div>
             <div className="px-8 Q_xs_px-2  ">
+                {!uid && !!sessiondata && <>
+                    <div className='Q_sm_md pt-100 pb-8'></div>
+                </>}
                 
                 <div className="flex-row Q_xs_flex-col my-4 gap-2 mt-8">
                     {!uid && !!sessiondata && <>
-                        <button   className={`px-3 py-2 clickble nowrap mt-8 tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
+                        <div className='Q_xs pt-150'></div>
+                        <button   className={`px-3 py-2 clickble nowrap   tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
                             style={{background:!sessiondata ? "#F7C127" : "orangered"}}
                             onClick={()=>{ register() }}
                         >
@@ -176,7 +180,7 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
                         </button>
                     </>}
                     {!!uid && !!sessiondata &&<>
-                        <div className='Q_xs_py-8'></div>
+                        <div className='Q_xs py-8'></div>
                         <div className='Q_sm_md py-150'></div>
                         <div className='Q_lg_x py-100'></div>
                         <div className='flex-wrap w-100 gap-2'>
@@ -220,8 +224,10 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
                     
                     {!sessiondata &&
                         <div className='flex-col'>
+                            <div className='Q_xs py-100'></div>
+                            <div className='Q_sm_md pt-100 pb-8'></div>
                             {<>
-                                <div className='flex-col tx-sm'>Connect w/Google to create your new Account!</div>
+                                <div className='flex-col tx-center tx-sm'>Connect w/Google to create your new Account!</div>
                             </>}
                             <button   className="px-3 py-2 clickble nowrap tx-lg tx-white opaci-chov--75"
                                 style={{background:"orangered"}}
