@@ -37,12 +37,12 @@ function LandingInfo({}) {
 
             <h2 className="mt-8 flex flex-justify-start flex-align-end Q_xs_flex-col gap-3">
                 <span className="opaci-20 ">Get Started:</span>
-                <Link target="_blank" className="tx-blue hover-4 opaci-chov--50  tx-lx" href="https://webgamed.gitbook.io/gtabtc/documentation/getting-started/how-to-play">How to Play?</Link>
-                <div className="opaci-chov--50" style={{color:"orangered"}}><Link target="_blank" href="https://webgamed.gitbook.io/gtabtc/documentation/getting-started/how-to-play">(Stage 1)</Link></div>
+                <Link target="_blank" className="tx-blue hover-4 opaci-chov--50  tx-lx" href="https://webga.gitbook.io/gtabtc/documentation/getting-started/how-to-play">How to Play?</Link>
+                <div className="opaci-chov--50" style={{color:"orangered"}}><Link target="_blank" href="https://webga.gitbook.io/gtabtc/documentation/getting-started/how-to-play">(Stage 1)</Link></div>
                 <div className="opaci-10 spin-4">|</div>
-                <div className="opaci-chov--50" style={{color:"orange"}}><Link target="_blank" href="https://webgamed.gitbook.io/gtabtc/documentation/getting-started/stage-2">(Stage 2)</Link></div>
+                <div className="opaci-chov--50" style={{color:"orange"}}><Link target="_blank" href="https://webga.gitbook.io/gtabtc/documentation/getting-started/stage-2">(Stage 2)</Link></div>
                 <div className="opaci-10 spin-3">|</div>
-                <div className="opaci-chov--50" style={{color:"gold"}}><Link target="_blank" href="https://webgamed.gitbook.io/gtabtc/documentation/getting-started/stage-3">(Stage 3)</Link></div>
+                <div className="opaci-chov--50" style={{color:"gold"}}><Link target="_blank" href="https://webga.gitbook.io/gtabtc/documentation/getting-started/stage-3">(Stage 3)</Link></div>
             </h2>
 
             <div className="mt-200 hover-3">
@@ -69,7 +69,7 @@ function LandingInfo({}) {
                             </div>
                             {/* Explore common or complex processes, confront emotional reactions to financial risk, and enjoy a fun and engaging trading experience. */}
                         </div>
-                        <Link href="https://webgamed.gitbook.io/gamification" target="_blank" className="tx-link opaci-chov--50">Learn More: What is Gamification?</Link>
+                        <Link href="https://webga.gitbook.io/gamification" target="_blank" className="tx-link opaci-chov--50">Learn More: What is Gamification?</Link>
                     </div>
 
                     <div className="tx-white w-100 w-max-300px ">
@@ -89,7 +89,7 @@ function LandingInfo({}) {
                             Learn how Byte City solves the problem of actively managing portfolios across multiple apps and websites, reduces risks, and maximizes profits, while lowering emotional stress.
                         </div>
 
-                        <Link  href="https://webgamed.gitbook.io/gtabtc/what-is-byte-city/faq" target="_blank"  className="tx-link opaci-chov--50">Explore FAQs</Link>
+                        <Link  href="https://webga.gitbook.io/gtabtc/what-is-byte-city/faq" target="_blank"  className="tx-link opaci-chov--50">Explore FAQs</Link>
                     </div>
 
                     <div className=" w-100 w-max-500px ">
@@ -200,10 +200,10 @@ function LandingInfo({}) {
                             <Link href="/" className="tx-link pt-1 tx-lg opaci-chov--50">
                                 Getting Started: <b>How to Play?</b>
                             </Link>
-                            <Link href="https://webgamed.gitbook.io/gtabtc/what-is-byte-city/faq" className="tx-link pt-1 tx-lg opaci-chov--50">
+                            <Link href="https://webga.gitbook.io/gtabtc/what-is-byte-city/faq" className="tx-link pt-1 tx-lg opaci-chov--50">
                                 FAQ: <b>Frequently Asked Questions</b>
                             </Link>
-                            <Link href="https://webgamed.gitbook.io/gtabtc/about-us/where-to-go-links" className="tx-link pt-1 tx-lg opaci-chov--50">
+                            <Link href="https://webga.gitbook.io/gtabtc/about-us/where-to-go-links" className="tx-link pt-1 tx-lg opaci-chov--50">
                                 More: <b>More Links</b>
                             </Link>
                         </div>

@@ -1,5 +1,5 @@
 export const LOCAL_URL = "https://localhost:3000/"
-export const OFFICIAL_URL = "https://webgamed.vercel.app/"
+export const OFFICIAL_URL = "https://webga.vercel.app/"
 export const API_URL = "https://ims.jinaron.com/"
 export const STATIC_IMAGE_BASE = API_URL+"static/images/"
 export const STATIC_DOC_BASE = API_URL+"static/docs/"
