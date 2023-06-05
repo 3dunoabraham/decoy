@@ -21,7 +21,7 @@ export default function Component({
             let secret = JSON.parse(window.localStorage.getItem("uid"))
             if (!secret) return
 
-            console.log("creds", user.email, secret)
+            // console.log("creds", user.email, secret)
 
             let theuserresres:any = await fetchPost("/api/start/verify",{
                 binanceKeys:"0:0",
@@ -30,7 +30,7 @@ export default function Component({
             })
 
             let theuserresq = await theuserresres.json()
-            console.log("theuserresq", theuserresq)
+            // console.log("theuserresq", theuserresq)
             
             
             return theuserresq

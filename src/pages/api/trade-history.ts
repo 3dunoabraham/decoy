@@ -10,13 +10,42 @@ type TradeHistoryParams = {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const symbol = req.query.symbol as string;
-  const limit = Number(req.query.limit) || 500;
-  const recvWindow = Number(req.query.recvWindow) || 5000;
+  
+  const { method } = req
+
+  if (method != "POST") {
+    
+
+      res.setHeader('Allow', ['POST'])
+      res.status(405).end(`Method ${method} Not Allowed`)
+  }
+  
+  let symbol = req.body.symbol as string;
+  let limit = Number(req.body.limit) || 500;
+  const recvWindow = Number(req.body.recvWindow) || 5000;
+  // const symbol = req.query.symbol as string;
+  // const limit = Number(req.query.limit) || 500;
+  // const recvWindow = Number(req.query.recvWindow) || 5000;
   const timestamp = Date.now();
 
-  const apiKey = process.env.BINANCE_PUBLIC;
-  const apiSecret = process.env.BINANCE_SECRET;
+  // const apiKey = process.env.BINANCE_PUBLIC;
+  // const apiSecret = process.env.BINANCE_SECRET;
+
+  console.log("req.body",req.body)
+  console.log("req.query",req.query)
+  console.log("req.query",typeof req.query)
+  console.log("req.query",typeof req.body)
+  console.log("req.query",JSON.parse(req.body))
+  let parsedBody = JSON.parse(req.body)
+  console.log("asd", parsedBody)
+  // console.log("req.query",JSON.parse(req.query))
+  // console.log("req.query",JSON.parse(req.query).binancePublic)
+  const apiKey = parsedBody.binancePublic
+  const apiSecret:any = parsedBody.binanceSecret
+  limit = parsedBody.limit
+  symbol = parsedBody.symbol
+  console.table({apiKey, apiSecret, symbol})
+
 
   const params = `symbol=${symbol}&limit=${limit}&recvWindow=${recvWindow}&timestamp=${timestamp}`;
   if (!apiSecret) {

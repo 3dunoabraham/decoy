@@ -15,8 +15,9 @@ import { useQueryPlus } from "@/scripts/helpers/useHooksHelper";
 import { useSession } from "next-auth/react";
 import LoginBtn from "@/src/items/molecules/auth/LoginBtn";
 import AppClientDesc from "@/src/items/molecules/auth/AppClientDesc";
-import { fetchPut } from "@/scripts/helpers/fetchHelper";
+import { fetchPost, fetchPut } from "@/scripts/helpers/fetchHelper";
 import { GiCardExchange } from "react-icons/gi";
+import { parseDateTimeString } from "@/scripts/helpers/type/dateHelper";
 
 export function ChartDashboard({query, user}:any) {
     const API_PRICE_BASEURL = "https://api.binance.com/api/v3/ticker/price?symbol="
@@ -56,10 +57,66 @@ export function ChartDashboard({query, user}:any) {
     const [q__tradeHistory, tradeHistory] = useQueryPlus({ queryKey: ['tradeHistory'], 
         queryFn: async () =>{
             if (!query.token) return []
-            const theListRes = await fetch(
-                `/api/trade-history/?symbol=${query.token.toUpperCase()+"USDT"}&limit=99`
-            )
+            if (!window.localStorage) return
+            // console.log("localStorage", window.localStorage.getItem("uid"))
+            let secret = JSON.parse(window.localStorage.getItem("uid"))
+            // console.log("creds", session.email, secret)
+            if (!secret) return
+
+            // console.log("creds", session.email, secret)
+
+            let theuserresres:any = await fetchPost("/api/start/verify",{
+                binanceKeys:"0:0",
+                // name: session.email,
+                email: secret.split(":")[0],
+                name: secret.split(":")[0],
+                secret: secret.split(":")[1]
+            })
+
+            let theuserresq = await theuserresres.json()
+            // console.log("theuserresq", theuserresq)
+            
+            // s__superuser(theuserresq)
+            if (theuserresq.binancekeys < 132) return []
+            let splitted = theuserresq.binancekeys.split(":")
+            if (splitted.length < 2) return []
+            let binancePublic = splitted[0]
+            let binanceSecret = splitted[1]
+
+
+            // console.log("theListRes", `/api/trade-history`,{
+            //     method:"POST",
+            //     body:JSON.stringify({
+            //         symbol: query.token.toUpperCase()+"USDT",
+            //         limit:99,
+            //         binancePublic,
+            //         binanceSecret,
+            //     })
+            // })
+            const theListRes = await fetch(`/api/trade-history/`,{
+                method:"POST",
+                body:JSON.stringify({
+                    symbol: query.token.toUpperCase()+"USDT",
+                    limit:99,
+                    binancePublic,
+                    binanceSecret,
+                })
+            })
+            // console.log("trade history res", theListRes)
             let theList = await theListRes.json()
+            // console.log("thelist", theList)
+            // theList = theList.map((anItem, index) => {
+            //     return {...anItem,...{
+            //         side: anItem.isBuyer ? "Buy" : "Sell",
+            //         price: parseDecimals(anItem.price),
+            //         qty: "$"+parseDecimals(parseFloat(anItem.price)*parseFloat(anItem.qty)),
+            //         time: parseDateTimeString(new Date(anItem.time/1)),
+            //     }}
+            // }).reverse()
+
+            // const theList = await fetchJsonArray(API_UNITS, "Units")
+
+            console.log("trade history theList", theList)
             return theList
         }
     },[])
