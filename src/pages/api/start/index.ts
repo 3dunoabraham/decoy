@@ -27,27 +27,15 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, body } = req
-
-  // const session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
-
   const jwttoken = await getToken({ req, secret, raw: true })
-  // console.log("session", session)
-  // console.log("JSON Web Token", token)
-  // console.log("JSON Web Token", await token.encode())
-
   const ipAddress:any = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-
   let firstValue = body.name
   let secondValue = body.secret
-  
   const hash = crypto.createHash('sha256');
-  console.log("hash values", firstValue, secondValue)
   hash.update(firstValue);
   hash.update(secondValue);
   const hash_digest = hash.digest('hex');
-  console.log("hash_digest", hash_digest)
-
-const new_uid = hash_digest
+  const new_uid = hash_digest
   let asdasd:any = {
     jwt:jwttoken,
     name: body.name,
@@ -56,8 +44,6 @@ const new_uid = hash_digest
     hash: new_uid,
     datenow: Date.now(),
   }
-
-  console.log("method", method)
   switch (method) {
     case 'GET':
       try {
@@ -91,10 +77,7 @@ const new_uid = hash_digest
           if (!existingStart) {
             console.log("not found")
             throw new Error
-            return
           }
-          console.log(" found", existingStart, { hash: new_uid })
-  
   
           if (existingStart) {
             const fieldsToUpdate:any = {
@@ -130,10 +113,7 @@ const new_uid = hash_digest
           if (existingStart) {
             console.log("found")
             throw new Error
-            return
           }
-          console.log("not found", existingStart, { hash: new_uid })
-  
   
           if (!existingStart) {
             const { data: start, error } = await supabase
@@ -168,8 +148,6 @@ const new_uid = hash_digest
               throw new Error
               return
             }
-            console.log("found", existingStart, { hash: new_uid })
-    
     
             if (!!existingStart) {
               const { data: start, error } = await supabase

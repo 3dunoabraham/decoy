@@ -26,43 +26,27 @@ const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-const { method, body } = req
+  const { method, body } = req
+  const jwttoken = await getToken({ req, secret, raw: true })
+  const ipAddress:any = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+  let firstValue = body.name
+  let secondValue = body.secret
+  const hash = crypto.createHash('sha256');
+  hash.update(firstValue);
+  hash.update(secondValue);
+  const hash_digest = hash.digest('hex');
+  const new_uid = hash_digest
+  let asdasd:any = {
+    jwt:jwttoken,
+    name: body.name,
+    ipv4: ipAddress,
+    hash: new_uid,
+    datenow: Date.now(),
+  }
 
-// const session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
-
-const jwttoken = await getToken({ req, secret, raw: true })
-// console.log("session", session)
-// console.log("JSON Web Token", token)
-// console.log("JSON Web Token", await token.encode())
-
-const ipAddress:any = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-
-let firstValue = body.name
-let secondValue = body.secret
-
-const hash = crypto.createHash('sha256');
-console.log("hash values", firstValue, secondValue)
-hash.update(firstValue);
-hash.update(secondValue);
-const hash_digest = hash.digest('hex');
-console.log("hash_digest", hash_digest)
-
-const new_uid = hash_digest
-let asdasd:any = {
-  jwt:jwttoken,
-  name: body.name,
-  ipv4: ipAddress,
-  hash: new_uid,
-  datenow: Date.now(),
-}
-
-console.log("method", method)
-switch (method) {
-    
+  switch (method) {    
     case 'POST':
-      try {
-
-        
+      try {        
         const { data: existingStart, error: selectError } = await supabase
         .from<Start>('start')
         .select('*')
@@ -74,28 +58,19 @@ switch (method) {
           throw new Error
           return
         }
-        console.log("not found", existingStart, { hash: new_uid })
-
 
         if (!!existingStart) {
-        //   const { data: start, error } = await supabase
-        //   .from<Start>('start')
-        //   .insert(asdasd)
-        //   .single()
-        // if (error) {
-        //   throw error
-        // }
-        res.status(201).json(existingStart)
-      }
+          res.status(201).json(existingStart)
+        }
 
-      } catch (error) {
-        console.error(error)
-        res.status(500).json({ message: 'Failed to fetch start' })
-      }
-      break
+        } catch (error) {
+          console.error(error)
+          res.status(500).json({ message: 'Failed to fetch start' })
+        }
+        break
 
-  default:
-    res.setHeader('Allow', ['POST'])
-    res.status(405).end(`Method ${method} Not Allowed`)
-}
+    default:
+      res.setHeader('Allow', ['POST'])
+      res.status(405).end(`Method ${method} Not Allowed`)
+  }
 }
