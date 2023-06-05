@@ -163,6 +163,58 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
                 <svg className='Q_xs' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#46B7FA" 
                     fill-opacity="1" d="M0,396L720,100L1440,310L1440,0L720,0L0,0Z"></path>
                 </svg>
+                
+                {!!uid && !!sessiondata &&<>
+                        <div className=' pt-150'></div>
+                        <div className='Q_xs_lg pt-100'></div>
+                        <div className='Q_xs_md pt-8'></div>
+                        {/* <div className='Q_xs_md pt-8'></div> */}
+
+                        {/* <div className='Q_xs py-150'></div>
+                        <div className='Q_sm pt-200 pb-200 mt-200'></div>
+                        <div className='Q_md py-200'></div>
+                        <div className='Q_lg_x py-150'></div> */}
+                        {/* <div className='pos-rel w-100 h-min-100vh'>
+                        </div> */}
+                        
+                        <div className='flex-wrap w-100 gap-2 '>
+                                <Link href={"/chart/4h?token=btc"}   className={`px-3 py-2 flex-col clickble nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
+                                    style={{background:"#001420"}}
+                                    
+                                >
+                                    <div><FaChartBar /></div>
+                                    <div className='tx-shadow-5'>Dashboard</div>
+                                </Link>
+                                <Link href={"/trade/history?pair=BTCUSDT"}   className={`px-3 py-2 flex-col box-shadow-2-b clickble over-3 nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
+                                    style={{background:"#5BB0D7"}}
+                                    
+                                >
+                                    <div><FaListAlt /></div>
+                                    <div className='tx-shadow-5'>History</div>
+                                </Link>
+                                <Link href={"/"}   className={`px-3 py-2 flex-col box-shadow-2-b clickble over-2 nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
+                                    style={{background:"orangered"}}
+                                    
+                                >
+                                    <div><FaUser /></div>
+                                    <div className='tx-shadow-5'>Profile</div>
+                                </Link>
+                                <Link href={"/"}   className={`px-3 py-2 flex-col box-shadow-2-b over-4 clickble nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
+                                    style={{background:"orange"}}
+                                    
+                                >
+                                    <div><FaStar /></div>
+                                    <div className='tx-shadow-5'>Ranking</div>
+                                </Link>
+                                <Link href={"https://twitter.com/webgamed"}   className={`px-3 py-2 flex-col clickble nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
+                                    style={{background:"lightgrey"}}
+                                    
+                                >
+                                    <div><FaEnvelope /></div>
+                                    <div className='tx-shadow-5'>Support</div>
+                                </Link>
+                            </div>
+                    </>}
             </div>
             <div className="px-8 Q_xs_px-2  ">
                 {!uid && !!sessiondata && <>
@@ -178,48 +230,6 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
                         >
                             + Create Simulation Account
                         </button>
-                    </>}
-                    {!!uid && !!sessiondata &&<>
-                        <div className='Q_xs py-8'></div>
-                        <div className='Q_sm_md py-150'></div>
-                        <div className='Q_lg_x py-100'></div>
-                        <div className='flex-wrap w-100 gap-2'>
-                            <Link href={"/chart/4h?token=btc"}   className={`px-3 py-2 flex-col clickble nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
-                                style={{background:"#001420"}}
-                                
-                            >
-                                <div><FaChartBar /></div>
-                                <div className='tx-shadow-5'>Dashboard</div>
-                            </Link>
-                            <Link href={"/trade/history?pair=BTCUSDT"}   className={`px-3 py-2 flex-col box-shadow-2-b clickble over-3 nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
-                                style={{background:"#5BB0D7"}}
-                                
-                            >
-                                <div><FaListAlt /></div>
-                                <div className='tx-shadow-5'>History</div>
-                            </Link>
-                            <Link href={"/"}   className={`px-3 py-2 flex-col box-shadow-2-b clickble over-2 nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
-                                style={{background:"orangered"}}
-                                
-                            >
-                                <div><FaUser /></div>
-                                <div className='tx-shadow-5'>Profile</div>
-                            </Link>
-                            <Link href={"/"}   className={`px-3 py-2 flex-col box-shadow-2-b over-4 clickble nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
-                                style={{background:"orange"}}
-                                
-                            >
-                                <div><FaStar /></div>
-                                <div className='tx-shadow-5'>Ranking</div>
-                            </Link>
-                            <Link href={"https://twitter.com/webgamed"}   className={`px-3 py-2 flex-col clickble nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
-                                style={{background:"lightgrey"}}
-                                
-                            >
-                                <div><FaEnvelope /></div>
-                                <div className='tx-shadow-5'>Support</div>
-                            </Link>
-                        </div>
                     </>}
                     
                     {!sessiondata &&
