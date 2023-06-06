@@ -5,6 +5,7 @@ import { FaAccessibleIcon, FaAddressBook, FaAdversal, FaMoneyBillAlt, FaStackExc
 
 
 function LandingInfo({}) {
+    if (!process.browser ) return <></>
     return (
         <div className="px-4">
             <div className="flex-col">
