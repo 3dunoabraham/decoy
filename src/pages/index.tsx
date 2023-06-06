@@ -25,6 +25,10 @@ import Image from 'next/image';
 import LandingInfo from '../partials/index/LandingInfo';
 import Link from 'next/link';
 import { FaChartBar, FaEnvelope, FaListAlt, FaPlus, FaStar, FaUser } from 'react-icons/fa';
+import LandingLinks from '../partials/index/LandingLinks';
+import LandingCard from '../partials/index/LandingCard';
+import LandingBackground from '../partials/index/LandingBackground';
+import LandingSession from '../partials/index/LandingSession';
 
 const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
     const bigmul = 50
@@ -181,133 +185,33 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
         <div className="-min-90vh  w-100  flex-col flex-justify-start flex-align-stretch"
             
         >
-            <div className='w-100 flex-col pt- pb-100' style={{background:"#46B7FA"}}>
-                <div className='tx-white tx-center py-8 '>
-                    <Link href="https://twitter.com/webgame">
-                        <h1 className='tx-bold-2 opaci-50 tx-ls-5 tx-lg pt-4 '
-                            style={{color:"orangered"}}
-                        >
-                            Web Gamed
-                        </h1>
-                    </Link>
-                    <h1 className=' tx-bold '
-                        
-                    >
-                        <span className=" Q_xs " style={{fontSize:"2.1em !important"}}>Byte City</span>
-                        <span className=" Q_sm_x" style={{fontSize:"3.5em !important"}}>Byte City</span>
-                    </h1>
-                </div>
-                <div className='py-5 invisible  block Q_xs'>q</div>
-                <Link 
-                    className='pos-abs top-0 mt-250 py-2 opaci-chov--75 block pb-8 flex-col bg-glass-4 bg-b-10 px-1 pt-2  bord-r-25'
-                    style={{boxShadow:"0 4px 3px #00000022"}}
-                    href='https://bytc.vercel.app'
-                >
-                    <Image src="/main2.png" alt="bank" width={244} height={255} className='mt-8' />
-                    <h1 className='tx-xl tx-shadow-2' style={{color:"orangered"}}>Play Now!</h1>
-                </Link>
-            </div>
+            <LandingCard />
             <div>
-                <svg className='Q_sm_x' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#46B7FA" 
-                    fill-opacity="1" d="M0,396L720,30L1440,310L1440,0L720,0L0,0Z"></path>
-                </svg>
-                <svg className='Q_xs' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#46B7FA" 
-                    fill-opacity="1" d="M0,396L720,100L1440,310L1440,0L720,0L0,0Z"></path>
-                </svg>
+                <LandingBackground />
                 
                 {!!uid && !!sessiondata &&<>
                         <div className=' pt-150'></div>
                         <div className='Q_xs_lg pt-100'></div>
                         <div className='Q_xs_md pt-8'></div>
-                        {/* <div className='Q_xs_md pt-8'></div> */}
 
-                        {/* <div className='Q_xs py-150'></div>
-                        <div className='Q_sm pt-200 pb-200 mt-200'></div>
-                        <div className='Q_md py-200'></div>
-                        <div className='Q_lg_x py-150'></div> */}
-                        {/* <div className='pos-rel w-100 h-min-100vh'>
-                        </div> */}
-                        
-                        <div className='flex-wrap w-100 gap-2 '>
-                                <Link href={"/chart/4h?token=btc"}   className={`px-3 py-2 flex-col clickble nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
-                                    style={{background:"#001420"}}
-                                    
-                                >
-                                    <div><FaChartBar /></div>
-                                    <div className='tx-shadow-5'>Dashboard</div>
-                                </Link>
-                                <Link href={"/trade/history?pair=BTCUSDT"}   className={`px-3 py-2 flex-col box-shadow-2-b clickble over-3 nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
-                                    style={{background:"#5BB0D7"}}
-                                    
-                                >
-                                    <div><FaListAlt /></div>
-                                    <div className='tx-shadow-5'>History</div>
-                                </Link>
-                                <Link href={"/"}   className={`px-3 py-2 flex-col box-shadow-2-b clickble over-2 nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
-                                    style={{background:"orangered"}}
-                                    
-                                >
-                                    <div><FaUser /></div>
-                                    <div className='tx-shadow-5'>Profile</div>
-                                </Link>
-                                <Link href={"/"}   className={`px-3 py-2 flex-col box-shadow-2-b over-4 clickble nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
-                                    style={{background:"orange"}}
-                                    
-                                >
-                                    <div><FaStar /></div>
-                                    <div className='tx-shadow-5'>Ranking</div>
-                                </Link>
-                                <Link href={"https://twitter.com/webgamed"}   className={`px-3 py-2 flex-col clickble nowrap tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
-                                    style={{background:"lightgrey"}}
-                                    
-                                >
-                                    <div><FaEnvelope /></div>
-                                    <div className='tx-shadow-5'>Support</div>
-                                </Link>
-                            </div>
+                        <LandingLinks sessiondata={sessiondata} />                        
                     </>}
             </div>
             <div className="px-8 Q_xs_px-2  ">
+
+                <LandingSession {...{
+                    uid, sessiondata,
+                    calls: {
+                        registerWithRandom,
+                        loginToAccount,
+                        signInGoogle,
+                    }
+                }} />
                 {!uid && !!sessiondata && <>
                     <div className='Q_sm_md pt-100 pb-8'></div>
                 </>}
                 
-                <div className="flex-row Q_xs_flex-col my-4 gap-2 mt-8">
-                    {!uid && !!sessiondata && <div className='flex-col gap-2'>
-                        <div className='Q_xs pt-150'></div>
-                        <button   className={`px-3 py-2 clickble nowrap   tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
-                            style={{background:!sessiondata ? "#F7C127" : "orangered"}}
-                            onClick={()=>{ registerWithRandom() }}
-                        >
-                            + Create Simulation Account
-                        </button>
-                        <div className='Q_xs pt-150'></div>
-                        <button   className={`px-3 py-2 clickble nowrap   tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
-                            style={{background:"orange"}}
-                            onClick={()=>{ loginToAccount() }}
-                        >
-                            ↑ Connect Account
-                        </button>
-                    </div>}
-                    
-                    {!sessiondata &&
-                        <div className='flex-col'>
-                            <div className='Q_xs py-100'></div>
-                            <div className='Q_sm_md pt-100 pb-8'></div>
-                            {<>
-                                <div className='flex-col tx-center tx-sm'>Connect w/Google to create your new Account!</div>
-                            </>}
-                            <button   className="px-3 py-2 clickble nowrap tx-lg tx-white opaci-chov--75"
-                                style={{background:"orangered"}}
-                                onClick={()=>{ signInGoogle() }}
-                            >
-                                Connect w/Google
-                            </button>
-                        </div>
-                    }
-                    
-                    <div className='flex-1'></div>
-                </div>
+                
             </div>
 
             
@@ -331,16 +235,6 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
             <div className='flex-center  flex-1'>
             </div>
                 
-            {/* {!!uid &&
-                <div className='flex pa-1'>
-                    {(!!sessiondata && !!sessiondata.user) &&
-                        <div className='flex-1 mt-100 Q_sm_x'>
-
-                            <TradingViewNews />
-                        </div>
-                    }
-                </div>
-            } */}
             {!!uid &&
                 <div className='flex flex-justify-end  pa-1'>
                     <button   className="ims-button-faded clickble nowrap  opaci-25 tx-md"
@@ -398,3 +292,15 @@ export const getServerSideProps: GetServerSideProps<PageProps, ParsedUrlQuery> =
       },
     };
   };
+
+
+{/* {!!uid &&
+    <div className='flex pa-1'>
+        {(!!sessiondata && !!sessiondata.user) &&
+            <div className='flex-1 mt-100 Q_sm_x'>
+
+                <TradingViewNews />
+            </div>
+        }
+    </div>
+} */}
