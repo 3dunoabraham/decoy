@@ -26,11 +26,11 @@ const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { method, body } = req
+  const { method, body, query } = req
   const jwttoken = await getToken({ req, secret, raw: true })
   const ipAddress:any = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-  let firstValue = body.name
-  let secondValue = body.secret
+  let firstValue = body.name || query.name
+  let secondValue = body.secret || query.secret
   const hash = crypto.createHash('sha256');
   hash.update(firstValue);
   hash.update(secondValue);

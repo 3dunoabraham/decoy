@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image"
 import Link from "next/link"
 import { Suspense } from "react"
@@ -5,7 +6,6 @@ import { FaAccessibleIcon, FaAddressBook, FaAdversal, FaMoneyBillAlt, FaStackExc
 
 
 function LandingInfo({}) {
-    if (!process.browser ) return <></>
     return (
         <div className="px-4">
             <div className="flex-col">

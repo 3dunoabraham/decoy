@@ -43,21 +43,21 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
         
         signIn("google")
     }
-        const leaveAll = async ()=> {
-            let aconfirm = prompt("Delete Simulation Account Data? (yes/no)","ye")
-            if (aconfirm != "yes") return
+    const leaveAll = async ()=> {
+        let aconfirm = prompt("Delete Simulation Account Data? (yes/no)","ye")
+        if (aconfirm != "yes") return
 
-            if (!isClient) return;
-            try {
-                localStorage.removeItem("localTokensArrayObj");
-                localStorage.removeItem("uid");
-                window.location.reload()
-            } catch (e) {
-                console.log("err",e)
-                return false
-            }
-
+        if (!isClient) return;
+        try {
+            localStorage.removeItem("localTokensArrayObj");
+            localStorage.removeItem("uid");
+            window.location.reload()
+        } catch (e) {
+            console.log("err",e)
+            return false
         }
+
+    }
 
     const unitsArray = []
     const inventoryItems = useMemo(()=>{
@@ -111,7 +111,31 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
             console.log("coudlnt register simulation account")
         }
     }
-    const register = () => {
+    const loginData = async (newuid:any) => {
+        try {
+            const res:any = await fetch(
+                `/api/start?name=${newuid.split(":")[0]}&secret=${newuid.split(":")[1]}`
+            )
+
+            if (res.status <= 400 && res.status >= 200) {
+                console.log("res", res)
+                console.log("await res.json()",await res.json())
+            } else {
+                return alert("ERROR")
+            }
+                        
+            s__clientIP(newuid)
+            let new_uid = newuid
+            s__uid(new_uid)
+            s__LS_uid(new_uid)
+            
+            app.alert("success", "Simulation Account logged in succesfully!")
+        } catch (e:any) {
+            console.log("coudlnt log into simulation account")
+        }
+    }
+    
+    const registerWithRandom = () => {
         let username = !sessiondata ? ( "user" ) : sessiondata.user.email
 
         let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
@@ -119,8 +143,35 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
             `Would you like to create a simulation account -> (${username}:${randomThousand})? \n\n\n Account Name: <${username}> \n Secret Key Code: ${randomThousand} \n\n\n Remember to save your credentials \n You can use the *Secret Key Code* to recover your account! `,
             `${randomThousand}`
         )
+        if (!numberaccount) {
+            return
+        }
+        if (parseInt(numberaccount) < 10000) {
+            return
+        }
+
         if (numberaccount) {
             getData(`${username}:`+numberaccount)
+        }
+    }
+    const loginToAccount = () => {
+        let username = !sessiondata ? ( "user" ) : sessiondata.user.email
+
+        
+        let numberaccount = prompt(
+            `Would you like to create a simulation account -> (${username}:????})? \n\n\n Account Name: 
+            <${username}> \n Secret Key Code: ???? \n\n\n Remember to save your credentials \n You can use the *Secret Key Code* to recover your account! `,
+            ``
+        )
+        if (!numberaccount) {
+            return
+        }
+        if (parseInt(numberaccount) >= 10000) {
+            return
+        }
+
+        if (numberaccount) {
+            loginData(`${username}:`+numberaccount)
         }
     }
 
@@ -222,15 +273,22 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
                 </>}
                 
                 <div className="flex-row Q_xs_flex-col my-4 gap-2 mt-8">
-                    {!uid && !!sessiondata && <>
+                    {!uid && !!sessiondata && <div className='flex-col gap-2'>
                         <div className='Q_xs pt-150'></div>
                         <button   className={`px-3 py-2 clickble nowrap   tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
                             style={{background:!sessiondata ? "#F7C127" : "orangered"}}
-                            onClick={()=>{ register() }}
+                            onClick={()=>{ registerWithRandom() }}
                         >
                             + Create Simulation Account
                         </button>
-                    </>}
+                        <div className='Q_xs pt-150'></div>
+                        <button   className={`px-3 py-2 clickble nowrap   tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
+                            style={{background:"orange"}}
+                            onClick={()=>{ loginToAccount() }}
+                        >
+                            ↑ Login to Account
+                        </button>
+                    </div>}
                     
                     {!sessiondata &&
                         <div className='flex-col'>
