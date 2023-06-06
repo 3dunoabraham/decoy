@@ -286,7 +286,7 @@ const Page: NextPageWithLayout = ({online,tokens, serverSession}:PageProps) => {
                             style={{background:"orange"}}
                             onClick={()=>{ loginToAccount() }}
                         >
-                            ↑ Login to Account
+                            ↑ Connect Account
                         </button>
                     </div>}
                     
