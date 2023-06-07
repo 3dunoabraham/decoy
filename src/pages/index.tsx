@@ -14,7 +14,6 @@ import { useQueryPlus } from '@/scripts/helpers/useHooksHelper'
 import { _parseDecimals } from '@/scripts/helpers/mathHelper'
 import { AppContext } from '@/scripts/contexts/AppContext'
 import { InventoryProvider } from '@/scripts/contexts/InventoryContext'
-import { parseDecimals } from '@/components/scripts/helpers';
 import AmountCards from '@/components/dashboard/AmountCards';
 import { DEFAULT_TOKENS_ARRAY } from '@/components/scripts/constants';
 import { fetchPost } from '@/scripts/helpers/fetchHelper';
@@ -30,7 +29,6 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
     const mul = 11  
     const app = useContext(AppContext)
     const API_PRICE_BASEURL = "https://api.binance.com/api/v3/ticker/price?symbol="
-    const isClient = useIsClient()
     const [LS_rpi, s__LS_rpi] = useLocalStorage('rpi', "")
     const [rpi, s__rpi] = useState("")
     
@@ -44,12 +42,6 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
             return price.price
         }
     },[])
-    const inventoryItems = useMemo(()=>{
-        const _inventoryItems = [
-            { companyName: "Strategy A", unitsArray:[], totalValue: parseDecimals(btcPrice) },
-        ];
-        return _inventoryItems
-    },[q__btcPrice])
     useEffect(()=>{
         s__rpi(LS_rpi)
         app.s__sidebarLinks([])

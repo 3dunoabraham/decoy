@@ -1,8 +1,8 @@
 "use client";
-import Image from "next/image"
 import Link from "next/link"
-import { Suspense } from "react"
-import { FaAccessibleIcon, FaAddressBook, FaAdversal, FaMoneyBillAlt, FaStackExchange } from "react-icons/fa"
+import {  FaAddressBook, FaMoneyBillAlt, FaStackExchange } from "react-icons/fa"
+
+
 import LandingSectionOne from "./LandingSectionOne";
 import LandingSectionTwo from "./LandingSectionTwo";
 
@@ -38,7 +38,7 @@ function LandingInfo({}) {
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#30ADFC" fillOpacity="1" d="M0,256L720,64L1440,160L1440,0L720,0L0,0Z"></path></svg>
             </div>
 
-            <div className=" py-100 my-100 flex-col flex-align-end px-2">
+            <div className="mt-150 py-100 my-100 flex-col flex-align-end px-2">
                 <div className="w-100 w-max-600px my-100">
                     <Link href="/" className="flex-col flex-align-end px-8 Q_xs_px-4 pt-8 pb-6 opaci-chov-50 opaci-75 box-shadow-2-b bord-r-25 pos-rel">
                         <div className="tx-xxxl pos-abs opaci-10 left-0 pa-4  top-0 tx-start"><FaStackExchange /></div>

@@ -2,11 +2,10 @@ import Image from "next/image"
 import Link from "next/link"
 import { Suspense } from "react"
 
+
 export function LandingSectionTwo({}) {
     return (
         <>
-            
-
             <div className=" " >
                 <div className="flex-wrap flex-justify-center gap-6 ">
                     <div className=" w-100 w-max-250px ">
@@ -70,16 +69,13 @@ export function LandingSectionTwo({}) {
             
             <Suspense>
                 <div className="pb-8 pos-rel" >
-                    <details>
+                    {/* <details>
                         <summary className="flex-col opaci-chov--50 pos-rel ">
                             <button className="pos-abs flex-col tx-shadow-5 noclick">
                                 <div className="tx-lgx tx-bold-8 " style={{color:"#ff9D0C"}}>Click me to</div>
                                 <div className="tx-lgx tx-bold-8 " style={{color:"#ff9D0C"}}>Open Tutorial</div>
                                 <div className="tx-lgx pt-4 hover-4 mt-8 tx-bold-8 " style={{color:"#ff9D0C"}}>↓↓↓</div>
                             </button>
-                            {/* <div className="pos-abs tx-roman">
-                                <div className="tx-xl tx-bold-8 tx-shadow-5" style={{color:"#ff9d0C"}}>Watch Tutorial</div>
-                            </div> */}
                             <div className="box-shadow-2-b bord-r-100p mt-8">
                                 <Image  src="/city1.png" alt="bank" width={300} height={300} className=' bord-r-100p box-shadow-i-2-b  noverflow' />
                             </div>
@@ -89,8 +85,8 @@ export function LandingSectionTwo({}) {
                             <iframe width="100%" height="420" src="https://www.youtube.com/embed/EQk-6z9mK-I" title="YouTube video player"  
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
                         </div>
-                    </details>
-                    <div className="pos-abs bottom-0  flex-col  w-100 translate-y-100">
+                    </details> */}
+                    <div className="pos-abs bottom-0  flex-col  w-100 mb-8 translate-y-100">
                         <Link 
                             className='pos-abs top-0  z-600 py-2 opaci-chov--75 block pb-8 flex-col bg-glass-4 bg-b-10 px-1 pt-2  bord-r-25 '
                             style={{boxShadow:"0 4px 3px #00000022"}}
