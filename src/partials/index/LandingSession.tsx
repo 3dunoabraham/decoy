@@ -1,27 +1,26 @@
 "use client";
-import Image from "next/image"
-import Link from "next/link"
-import { Suspense } from "react"
-import { FaAccessibleIcon, FaAddressBook, FaAdversal, FaChartBar, FaEnvelope, FaListAlt, FaMoneyBillAlt, FaStackExchange, FaStar, FaUser } from "react-icons/fa"
 
 
-function LandingInfo({uid, sessiondata, calls}:any) {
+function LandingSession({uid, sessiondata, calls}:any) {
     return (
         <div className="flex-row Q_xs_flex-col my-4 gap-2 mt-8">
             {!uid && !!sessiondata && <div className='flex-col gap-2'>
                 <div className='Q_xs pt-150'></div>
-                <button   className={`px-3 py-2 clickble nowrap   tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
-                    style={{background:!sessiondata ? "#F7C127" : "orangered"}}
-                    onClick={()=>{ calls.registerWithRandom() }}
+                <button style={{background:!sessiondata ? "#F7C127" : "orangered"}}
+                    onClick={()=>{ calls.createPlayer() }}
+                    className={`px-3 py-2 clickble nowrap   tx-lg opaci-chov--75 
+                        ${!sessiondata ? "" : "tx-white"}
+                    `}                                        
                 >
-                    + Create Simulation Account
+                    + Create Simulated Player
                 </button>
                 <div className='Q_xs pt-150'></div>
-                <button   className={`px-3 py-2 clickble nowrap   tx-lg opaci-chov--75 ${!sessiondata ? "" : "tx-white"}`}
-                    style={{background:"orange"}}
-                    onClick={()=>{ calls.loginToAccount() }}
+                <button  style={{background:"orange"}} onClick={()=>{ calls.trigger_connectPlayer() }}
+                    className={` ${!sessiondata ? "" : "tx-white"}
+                        px-3 py-2 clickble nowrap   tx-lg opaci-chov--75 
+                    `}
                 >
-                    ↑ Connect Account
+                    ↑ Connect
                 </button>
             </div>}
             
@@ -29,12 +28,11 @@ function LandingInfo({uid, sessiondata, calls}:any) {
                 <div className='flex-col'>
                     <div className='Q_xs py-100'></div>
                     <div className='Q_sm_md pt-100 pb-8'></div>
-                    {<>
-                        <div className='flex-col tx-center tx-sm'>Connect w/Google to create your new Account!</div>
-                    </>}
+                    <div className='flex-col tx-center tx-sm'>
+                        Connect w/Google to create your new Account!
+                    </div>
                     <button   className="px-3 py-2 clickble nowrap tx-lg tx-white opaci-chov--75"
-                        style={{background:"orangered"}}
-                        onClick={()=>{ calls.signInGoogle() }}
+                        style={{background:"orangered"}} onClick={()=>{ calls.signInGoogle() }}
                     >
                         Connect w/Google
                     </button>
@@ -46,5 +44,4 @@ function LandingInfo({uid, sessiondata, calls}:any) {
     )
 }
 
-
-export default LandingInfo
+export default LandingSession

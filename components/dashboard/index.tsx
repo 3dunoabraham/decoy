@@ -207,7 +207,7 @@ export function ChartDashboard({query, user}:any) {
 
         let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
         let numberaccount = prompt(
-            `Would you like to create a simulation account -> (${username}:${randomThousand})? \n\n\n Account Name: <${username}> \n Secret Key Code: ${randomThousand} \n\n\n Remember to save your credentials \n You can use the *Secret Key Code* to recover your account! `,
+            `Would you like to create a Simulated Player -> (${username}:${randomThousand})? \n\n\n Account Name: <${username}> \n Secret Key Code: ${randomThousand} \n\n\n Remember to save your credentials \n You can use the *Secret Key Code* to recover your account! `,
             `${randomThousand}`
         )
         if (numberaccount) {
@@ -392,7 +392,7 @@ export function ChartDashboard({query, user}:any) {
             <button className="ma-2 tx-lg   py-4 px-8 bord-r-5 bg-w-5 border-lgrey tx-contrast"
                 onClick={()=>{register()}}
             >
-                + Create Simulation Account
+                + Create Simulated Player
             </button>
             {!session && <>
                 <div className="py-2 tx-white">or</div>
@@ -555,7 +555,7 @@ export function ChartDashboard({query, user}:any) {
         <div className="tx-white mb-100">
             
             {!session && <>
-                <div className="opaci-50 mt-8">Simulation account detected</div>
+                <div className="opaci-50 mt-8">Simulated Player detected</div>
                 <div className="opaci-50 mb-3">but, Google connection not found</div>
                 <div className="" style={{background:"orangered"}}>
                     <LoginBtn><AppClientDesc /></LoginBtn>

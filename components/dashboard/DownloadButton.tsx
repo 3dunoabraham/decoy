@@ -30,7 +30,7 @@ export const DownloadButton = ({ data, filename }) => {
         className="noborder bg-b-20 tx-white tx-lg px-3 py-2 bord-r-5 mt-8 opaci-chov--50"
       >
         <div className='opaci-25 tx-lx'><b>Download</b></div>
-        <div className=''>Simulation Account Data</div>
+        <div className=''>Simulated Player Data</div>
         <div className='tx-italic tx-ls-2 tx-link'>{filename}.json</div>
       </button>
     }
