@@ -1,31 +1,36 @@
 import { BsArrowDown, BsSearch } from 'react-icons/bs'
-import { useContext, useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 
 
 import ItemsTableRest from '@/src/items/molecules/table/ItemsTableRest';
-import { AppContext } from '@/scripts/contexts/AppContext';
 
 export default function Component({
     theArray, s__selectedId=(arg)=>{}, selectedId=null, displayConfigObj, updateSelectedArray=(id)=>{},
     boolConfig=[],urlBase="", headerStyle=null, tableStyle=null, actionCard=null,
 }) {
     const _boolConfig = useMemo(() =>(boolConfig.join(",")),[boolConfig])
-    const app = useContext(AppContext)
     const $divObj = useRef<HTMLDivElement>()
     const [isMenu, s__isMenu] = useState<number>(-1);
 
 
 
     return(<>
-    <div className={` flex ord-r-t-8 ${!!headerStyle?"":"ims-border-faded ims-bg-lightest"} `} style={headerStyle}>
+    <div className={` flex ord-r-t-8 ${!!headerStyle?"":"ims-border-faded ims-bg-lightest"} `} 
+        style={headerStyle}
+    >
         {!displayConfigObj.key.isInvisible && <div className={`w-20 flex  py-3 px-4 tx-sm`}>
             <div className="opaci-50 "> {displayConfigObj.key.title} </div>
             <div className=" opaci-50 px-1"> <BsArrowDown /> </div>
         </div>}
-        <div className={`flex-1 flex-center flex-justify-start tx-sm Q_md_x ${displayConfigObj.key.isInvisible?"px-3":""}`}>
+        <div className={` ${displayConfigObj.key.isInvisible?"px-3":""}
+                flex-1 flex-center flex-justify-start tx-sm Q_md_x 
+            `}
+        >
             {Object.keys(displayConfigObj.rest).map((aKey, index)=>(
-                <div className={`opaci-50  py-3 flex-1 `} key={aKey}> {displayConfigObj.rest[aKey].title} </div>
+                <div className={`opaci-50  py-3 flex-1 `} key={aKey}>
+                    {displayConfigObj.rest[aKey].title}
+                </div>
             ))}
         </div>        
         { _boolConfig.includes("isActionable") &&
@@ -41,7 +46,10 @@ export default function Component({
                 {_boolConfig.includes("isSelectable") && 
                     <div className=' pos-abs  w-100 h-100 clickble  bg-b-10 paci-75   flex'>
                         <div className=' z-400 clickble  g-b-10 paci-75 opaci-chov--50  flex-1'>
-                            <div className=' h-100 flex-center' onClick={()=>{ updateSelectedArray(item[displayConfigObj.key.name]) }}></div>
+                            <div className=' h-100 flex-center'
+                                onClick={()=>{ updateSelectedArray(item[displayConfigObj.key.name]) }}
+                            >
+                            </div>
                         </div>                   
                         { _boolConfig.includes("isActionable") &&
                             <div className="flex-center px-3 pt-1 pb-3 ma-1 pos-rel noclick invisible">
@@ -50,17 +58,17 @@ export default function Component({
                         }
                     </div>
                 }
-                <div
-                    className={
-                        `bloc pos-rel flex  flex-justify-start flex-align-center ${displayConfigObj.key.isInvisible?"px-3":""} `+
-                        `${index == 0 || "ims-border-t-faded"}`
-                    }
+                <div className={`${displayConfigObj.key.isInvisible?"px-3":""} ${index == 0 || "ims-border-t-faded"}
+                        bloc pos-rel flex  flex-justify-start flex-align-center  
+                    `}
                 >
                     <div  className="w-100 pos-rel " key={item[displayConfigObj.key.name]}>
                         <div className={`  opaci-cahov--50  Q_xs_sm_flex-col flex    pos-rel `}>
                             {!displayConfigObj.key.isInvisible && 
                                 <Link href={`${urlBase}${item[displayConfigObj.key.name]}`}
-                                    className={`flex-justify-start w-20 py-${_boolConfig.includes("isCompact")?1:3} opaci-cbhov--50 `}
+                                    className={`flex-justify-start w-20
+                                        py-${_boolConfig.includes("isCompact")?1:3} opaci-cbhov--50 
+                                    `}
                                 >
                                     <div className=" " onClick={() => {s__selectedId(index)}}>
                                         <div className="px-3 flex">

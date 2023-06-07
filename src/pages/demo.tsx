@@ -2,6 +2,13 @@ import { ReactElement, Suspense, useContext, useMemo, useRef } from 'react'
 import Head from 'next/head'
 import { ParsedUrlQuery } from 'querystring';
 import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router'
+import Link from 'next/link';
+import { useIsClient } from 'usehooks-ts';
+import dynamic from 'next/dynamic'
+import { BsGear, BsGithub, BsMenuButton, BsSafe, BsTwitter } from 'react-icons/bs';
+import { HiCubeTransparent } from 'react-icons/hi2';
+import { ImBook } from 'react-icons/im';
 
 
 import type { NextPageWithLayout } from '@/src/pages/_app'
@@ -9,19 +16,12 @@ import { useQueryPlus } from '@/scripts/helpers/useHooksHelper'
 import { LOCAL_URL } from '@/scripts/constants/api'
 import { _parseDecimals } from '@/scripts/helpers/mathHelper'
 import { AppContext } from '@/scripts/contexts/AppContext'
-import { useRouter } from 'next/router'
 import { OFFLINE_UNITS_ARRAY } from '@/scripts/constants/inventory';
-import Link from 'next/link';
-import { BsGear, BsGithub, BsMenuButton, BsSafe, BsTwitter } from 'react-icons/bs';
-import { HiCubeTransparent } from 'react-icons/hi2';
-import { ImBook } from 'react-icons/im';
 import Layout from '@/src/items/templates/Layout';
 import LoadingPill from '@/src/items/atoms/holders/LoadingPill';
 import DarkImsCard from '@/src/partials/index/DarkImsCard';
 import FailedRequest from '@/src/items/atoms/holders/FailedRequest';
-import { useIsClient } from 'usehooks-ts';
-import dynamic from 'next/dynamic'
-import { FaExternalLinkAlt } from 'react-icons/fa';
+
 const DemoLevel = dynamic(import ("@/src/items/3d/levels/DemoLevel"), { ssr: false })
 const Scene = dynamic(import ("@/src/items/3d/core/Scene"), { ssr: false })
 const delay = ms => new Promise(res => setTimeout(res, ms));
@@ -29,6 +29,12 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
     const router = useRouter()
     const app = useContext(AppContext)
     const $boxContainer:any = useRef()
+    const isClient = useIsClient()
+    const wiplookup = {
+        art: {txColor:"#ffffff",color:"#33A9FE",title:"Art"},
+        code: {txColor:"#ffffff",color:"#35DF91",title:"Code"},
+        game: {txColor:"#ffffff",color:"#EC4F30",title:"Games"},
+    }
     const [q__unitsArray, unitsArray] = useQueryPlus({ queryKey: ['unitData'], refetchOnWindowFocus: false, retry: 1,
         queryFn: async () =>{
 
@@ -61,12 +67,9 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
             return a.length[0] - b.length[0];
         }).reverse();
     }
-    const wiplookup = {
-        art: {txColor:"#ffffff",color:"#33A9FE",title:"Art"},
-        code: {txColor:"#ffffff",color:"#35DF91",title:"Code"},
-        game: {txColor:"#ffffff",color:"#EC4F30",title:"Games"},
-    }
-    const isClient = useIsClient()
+
+    {/******************************************************************************************************/}
+
     return (
     <div className='flex-col w-100 h-min-100vh pos-rel ' style={{background:"linear-gradient(-90deg,#f4efdf,#94D8E9)"}} >
         <div className="h-min-100vh w-100   flex-col flex-justify-start flex-align-stretch" style={{}} >
