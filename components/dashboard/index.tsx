@@ -12,12 +12,13 @@ import { fetchJsonArray, fetchMultipleJsonArray, getComputedLevels, getStrategyR
 import { DownloadButton } from "./DownloadButton";
 import ToolButtons from "./ToolButtons";
 import { useQueryPlus } from "@/scripts/helpers/useHooksHelper";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import LoginBtn from "@/src/items/molecules/auth/LoginBtn";
 import AppClientDesc from "@/src/items/molecules/auth/AppClientDesc";
 import { fetchPost, fetchPut } from "@/scripts/helpers/fetchHelper";
 import { GiCardExchange } from "react-icons/gi";
 import { parseDateTimeString } from "@/scripts/helpers/type/dateHelper";
+import LandingSession from "@/src/partials/index/LandingSession";
 
 export function ChartDashboard({query, user}:any) {
     const API_PRICE_BASEURL = "https://api.binance.com/api/v3/ticker/price?symbol="
@@ -39,7 +40,7 @@ export function ChartDashboard({query, user}:any) {
         mode:0,state:0,buy:0,sell:0, floor:0,ceil:0,
         min:0,max:0,minMaxAvg:0,minMedian:0,maxMedian:0,
     }
-    const { data: session } = useSession();
+    const { data: session,  } = useSession();
     const isClient = useIsClient()
     const [timeframe,s__timeframe] = useState<any>(query.timeframe)
     const [counter, s__counter] = useState(0);
@@ -122,7 +123,38 @@ export function ChartDashboard({query, user}:any) {
     },[])
 
     
+    const setIdByObject = (playerCredentials) => {
+        let mergedString = `${playerCredentials.name}:${playerCredentials.secret}`
+        s__rpi(mergedString)
+        s__LS_rpi(mergedString)
+    }
+    const connectPlayer = async (playerCredentials:any) => {
+        try {
+            const reqUrl = `/api/start?name=${playerCredentials.name}&secret=${playerCredentials.secret}`
+            const res:any = await fetch(reqUrl)
+            if (res.status >= 400) { return alert("ERROR") }
 
+            setIdByObject(playerCredentials)
+        } catch (e:any) {
+            console.log("coudlnt log into Simulated Player")
+        }
+    }    
+    const trigger_connectPlayer = () => {
+        let username = !session ? ( "user" ) : session.user.email
+        
+        let numberaccount = prompt(
+            `Would you like to create a Simulated Player -> (${username}:????})? \n\n\n Account Name: 
+            <${username}> \n Secret Key Code: ???? \n\n\n Remember to save your credentials \n You can use the *Secret Key Code* to recover your account! `,
+            ``
+        )
+        if (!numberaccount) { return }
+        if (parseInt(numberaccount) >= 10000) { return}
+
+        connectPlayer({name:username,secret:numberaccount})
+    }
+    const signInGoogle = () => {
+        signIn("google")
+    }
     const getKlineArray = async(t,token) => {
         s__loadings("klinesArray")
         let urlBase = `https://api.binance.com/api/v3/klines?interval=${t}&symbol=`
@@ -198,9 +230,9 @@ export function ChartDashboard({query, user}:any) {
 
 
 
-    const getData = async (new_uid:any) => {
-        s__rpi(new_uid)
-        s__LS_rpi(new_uid)
+    const getData = async (therpi:any) => {
+        s__rpi(therpi)
+        s__LS_rpi(therpi)
     }
     const register = () => {
         let username = !session ? ( "user" ) : session.user.email
@@ -389,7 +421,13 @@ export function ChartDashboard({query, user}:any) {
     /********** HTML **********/
     if (!rpi) {
         return (<div className="h-min-400px flex-col flex-justify-start">
-            <button className="ma-2 tx-lg   py-4 px-8 bord-r-5 bg-w-5 border-lgrey tx-contrast"
+            
+            <LandingSession {...{ rpi, sessiondata:session,
+                    // calls: { createPlayer, trigger_connectPlayer, signInGoogle, }
+                    calls: { trigger_connectPlayer, createPlayer:register, signInGoogle, }
+                }} />
+
+            {/* <button className="ma-2 tx-lg   py-4 px-8 bord-r-5 bg-w-5 border-lgrey tx-contrast"
                 onClick={()=>{register()}}
             >
                 + Create Simulated Player
@@ -400,7 +438,7 @@ export function ChartDashboard({query, user}:any) {
                     <LoginBtn><AppClientDesc /></LoginBtn>
                 </div>
                 </>
-            }
+            } */}
             
         </div>)
     }

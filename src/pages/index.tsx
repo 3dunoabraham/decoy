@@ -62,6 +62,19 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
         s__rpi(mergedString)
         s__LS_rpi(mergedString)
     }
+    const createPlayer = () => {
+        let username = !sessiondata ? ( "user" ) : sessiondata.user.email
+
+        let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
+        let numberaccount = prompt(
+            `Would you like to create a Simulated Player -> (${username}:${randomThousand})? \n\n\n Account Name: <${username}> \n Secret Key Code: ${randomThousand} \n\n\n Remember to save your credentials \n You can use the *Secret Key Code* to recover your account! `,
+            `${randomThousand}`
+        )
+        if (!numberaccount) { return }
+        if (parseInt(numberaccount) >= 10000) { return}
+
+        registerPlayer({name:username,secret:numberaccount})
+    }
     const registerPlayer = async (playerCredentials:any) => {
         console.log("registerPlayer", registerPlayer)
         try {
@@ -86,19 +99,6 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
             console.log("coudlnt log into Simulated Player")
         }
     }    
-    const createPlayer = () => {
-        let username = !sessiondata ? ( "user" ) : sessiondata.user.email
-
-        let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
-        let numberaccount = prompt(
-            `Would you like to create a Simulated Player -> (${username}:${randomThousand})? \n\n\n Account Name: <${username}> \n Secret Key Code: ${randomThousand} \n\n\n Remember to save your credentials \n You can use the *Secret Key Code* to recover your account! `,
-            `${randomThousand}`
-        )
-        if (!numberaccount) { return }
-        if (parseInt(numberaccount) >= 10000) { return}
-
-        registerPlayer({name:username,secret:numberaccount})
-    }
     const trigger_connectPlayer = () => {
         let username = !sessiondata ? ( "user" ) : sessiondata.user.email
         
