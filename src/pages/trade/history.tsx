@@ -39,7 +39,7 @@ Page.getLayout = function getLayout(page: ReactElement) {
     <Layout>
         <Head><title>History | WebGamed</title></Head>
         <InventoryProvider>
-            <SidebarContainer sidebar={/* <FilterSidebar online={true}/>*/<></>}>
+            <SidebarContainer sidebar={<></>}>
                 {page}
             </SidebarContainer>
         </InventoryProvider>

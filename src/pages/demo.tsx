@@ -17,7 +17,6 @@ import { _parseDecimals } from '@/scripts/helpers/mathHelper'
 import { AppContext } from '@/scripts/contexts/AppContext'
 import { OFFLINE_UNITS_ARRAY } from '@/scripts/constants/inventory';
 import Layout from '@/src/items/templates/Layout';
-import DarkImsCard from '@/src/partials/index/DarkImsCard';
 
 const DemoLevel = dynamic(import ("@/src/items/3d/levels/DemoLevel"), { ssr: false })
 const Scene = dynamic(import ("@/src/items/3d/core/Scene"), { ssr: false })
