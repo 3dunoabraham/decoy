@@ -135,17 +135,6 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
                 </div>
             </div>
         </div>
-        {q__unitsArray.isLoading &&
-            <div className=' flex-col  z-999' style={{filter: "hue-rotate(180deg) brightness(250%)"}}>
-                <LoadingPill title={"Fetching units..."} />
-            </div> 
-        }
-        {q__unitsArray.isError &&
-            <div className=' flex-col mt-150'>
-                <FailedRequest preview={LOCAL_URL+"/?offline"} />
-            </div> 
-        }
-
 
         {false && <>
             <div className="h-min-100vh w-100  flex-col " style={{background:"#0a0a0a"}}>
