@@ -6,21 +6,18 @@ import { useRouter } from 'next/router'
 import Link from 'next/link';
 import { useIsClient } from 'usehooks-ts';
 import dynamic from 'next/dynamic'
-import { BsGear, BsGithub, BsMenuButton, BsSafe, BsTwitter } from 'react-icons/bs';
+import { BsGithub,BsTwitter } from 'react-icons/bs';
 import { HiCubeTransparent } from 'react-icons/hi2';
 import { ImBook } from 'react-icons/im';
 
 
 import type { NextPageWithLayout } from '@/src/pages/_app'
 import { useQueryPlus } from '@/scripts/helpers/useHooksHelper'
-import { LOCAL_URL } from '@/scripts/constants/api'
 import { _parseDecimals } from '@/scripts/helpers/mathHelper'
 import { AppContext } from '@/scripts/contexts/AppContext'
 import { OFFLINE_UNITS_ARRAY } from '@/scripts/constants/inventory';
 import Layout from '@/src/items/templates/Layout';
-import LoadingPill from '@/src/items/atoms/holders/LoadingPill';
 import DarkImsCard from '@/src/partials/index/DarkImsCard';
-import FailedRequest from '@/src/items/atoms/holders/FailedRequest';
 
 const DemoLevel = dynamic(import ("@/src/items/3d/levels/DemoLevel"), { ssr: false })
 const Scene = dynamic(import ("@/src/items/3d/core/Scene"), { ssr: false })
