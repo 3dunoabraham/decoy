@@ -1,7 +1,7 @@
 import { forwardRef, useContext, useEffect, useImperativeHandle, useMemo, useState,  } from 'react'
 import { Cylinder } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { FaBtc, FaDiceD6, FaEthereum, FaExternalLinkAlt, FaRandom } from "react-icons/fa";
+import { FaBtc, FaEthereum, FaExternalLinkAlt, FaRandom } from "react-icons/fa";
 import { SiChainlink, SiFantom } from "react-icons/si";
 import * as THREE from "three";
 import React from 'react';
@@ -26,8 +26,6 @@ import { DEFAULT_TIMEFRAME_ARRAY } from '@/components/scripts/constants';
 import { AppContext } from '@/scripts/contexts/AppContext';
 import { fetchPost, fetchPut } from '@/scripts/helpers/fetchHelper';
 import Link from 'next/link';
-import { BiQuestionMark } from 'react-icons/bi';
-import DynaText from '../DynaText';
 import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
 import { BsInfoCircleFill } from 'react-icons/bs';
 import { MdClose } from 'react-icons/md';
