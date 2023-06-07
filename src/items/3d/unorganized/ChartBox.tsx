@@ -9,9 +9,10 @@ import * as THREE from "three";
 import DynaText from "./DynaText";
 import { AppContext } from "@/scripts/contexts/AppContext";
 import { useContext,  } from 'react'
-import { tokenColors } from "./core/Scene";
+// import { tokenColors } from "./core/Scene";
 import { parseDecimals } from "@/components/scripts/helpers";
-import SmoothCandleInstances from "./npc/SmoothCandleInstances";
+import SmoothCandleInstances from "../npc/SmoothCandleInstances";
+// import SmoothCandleInstances from "./npc/SmoothCandleInstances";
 
 type BoxProps = {
   position: [number, number, number];
@@ -214,7 +215,7 @@ const Component = forwardRef(({
           onPointerOver={() => setHovered2(true)}
           onPointerOut={() => setHovered2(false)}
       >
-          <meshStandardMaterial color={!hovered2 ? "#888888" : tokenColors[theToken.toLowerCase()] } />
+          <meshStandardMaterial color={"#888888" } />
       </Box>
       
       <Box onClick={()=>{_askAI()}} args={[0.2,0.3,0.15]} 
@@ -223,7 +224,7 @@ const Component = forwardRef(({
             onPointerOver={() => setHovered3(true)}
             onPointerOut={() => setHovered3(false)}
         >
-            <meshStandardMaterial color={!hovered3 ? "#888888" : tokenColors[theToken.toLowerCase()] } />
+            <meshStandardMaterial color={ "#888888" } />
         </Box>
         <group position={[0.15,0,0.12]}>
             <CandleInstances

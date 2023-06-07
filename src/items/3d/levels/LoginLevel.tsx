@@ -11,13 +11,14 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
 import myFont from '@/scripts/Roboto Medium_Regular.json'
 import { useLoader } from '@react-three/fiber'
 import { Suspense, useContext, useMemo, useRef, useState } from "react";
-import DynaText from "../DynaText";
+
 import crypto from 'crypto';
 import { useLocalStorage } from "usehooks-ts";
 import { fetchPost } from "@/scripts/helpers/fetchHelper";
 import { AppContext } from "@/scripts/contexts/AppContext";
 import adjectives from '@/scripts/adjectives.json'
 import nouns from '@/scripts/nouns.json'
+import DynaText from "../unorganized/DynaText";
 
 extend({ TextGeometry })
 

@@ -5,7 +5,7 @@ import { Group, Vector3 } from 'three';
 import Angel from './Angel';
 import Storefront from './Storefront';
 import Observatory from './Observatory';
-import ChartBox from '../ChartBox';
+import ChartBox from '../unorganized/ChartBox';
 
 export default function Component ({position, optsToggler, form, ...props}) {
     const { scene } = useGLTF('/angel.glb')
