@@ -1,5 +1,3 @@
-import { SalesStatusBadgePlus } from '@/src/partials/unit/SalesStatusBadgePlus';
-// ReactFunctionComponent
 export default function Component ({
     item, displayConfigObj, _boolConfig
 }) {
@@ -25,10 +23,9 @@ export default function Component ({
                         Number(item[displayConfigObj.rest[aKey].fieldName])
                     }
                     {(theWidget) == "badge" && displayConfigObj.rest[aKey].fieldName && 
-                        <SalesStatusBadgePlus
-                            value={item[displayConfigObj.rest[aKey].fieldName]}
-                            reference={[""]}
-                        />
+                        <div>
+                            {item[displayConfigObj.rest[aKey].fieldName]}
+                        </div>
                     }
                     {(theWidget) == "keys" && displayConfigObj.rest[aKey].fieldName && 
                         <>
