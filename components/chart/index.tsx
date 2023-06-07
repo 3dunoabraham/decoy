@@ -18,26 +18,15 @@ export default function Component({
         queryFn: async () => {
 
             if (!window.localStorage) return
-            let secret = JSON.parse(window.localStorage.getItem("rpi"))
-            if (!secret) return
-
-            // console.log("creds", user.email, secret)
-
-            let theuserresres:any = await fetchPost("/api/start/verify",{
-                binanceKeys:"0:0",
-                name: user.email,
-                secret: secret.split(":")[1]
+            let rpi = JSON.parse(window.localStorage.getItem("rpi"))
+            if (!rpi) return
+            let theuserresres:any = await fetchPost("/api/player/verify",{
+                referral: rpi.split(":")[0],
+                pin: rpi.split(":")[1],
             })
 
             let theuserresq = await theuserresres.json()
-            // console.log("theuserresq", theuserresq)
-            
-            
             return theuserresq
-            let theuserres:any = await fetch("/api/start",)
-            let theuserinfo = await theuserres.json()
-            console.log("theuserstart", theuserinfo)
-            return theuserinfo
         }
     })
     const lastUpdate = useMemo(()=>{

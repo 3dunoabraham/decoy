@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useMap } from "usehooks-ts";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
@@ -10,7 +10,6 @@ import { AppContext } from "@/scripts/contexts/AppContext";
 import Providers from "@/scripts/contexts/Providers";
 import AlertContainer from "@/src/items/atoms/common/AlertContainer";
 import { useRouter } from "next/router";
-import { useSession } from "next-auth/react";
 
 export default function Layout({ children }) {
     const router = useRouter()

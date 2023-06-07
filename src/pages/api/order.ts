@@ -4,7 +4,7 @@
   import type { NextApiRequest, NextApiResponse } from 'next'
 import { createClient } from '@supabase/supabase-js'
 import crypto from 'crypto';
-import { Start } from './start';
+import { Start } from './player';
 
 export interface Order {
   id?: number

@@ -32,39 +32,9 @@ export default function Component({
     });
     const signup = async () => {
         return
-        // let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
-        // s__loadings({join:true})
-        // let res:any = await startHash()
-        // if (!res) return
-        // app.alert("success","Signed in")
-        // s__loadings({join:false})
-        // s__rpi(res)
-        // s__LS_rpi(res)
-        // theuserstart.refetch()
     }
-    const startHash = async () => {
-        let username = form.username
-        if (!username) {
-            app.alert("neutral","Enter username")
-            document.getElementById("username").focus()
-            return
-        }
-
-        try {
-            return null
-            const res = await fetchPost('/api/start',{
-                name: username,
-            });
-            const { IPv4, hash } = await res.json();
-            return hash
-        } catch (e) {
-            return false
-        }
-    };
 
     
-
-  // create the TextGeometry and add it to the scene
   const UsernameText = useMemo(() => {
     if (!form.username) return
     return (<>

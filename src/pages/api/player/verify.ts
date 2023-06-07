@@ -19,7 +19,7 @@ goodAttempts?: number
 }
 
 
-const secret = process.env.NEXTAUTH_SECRET
+const nextSecret = process.env.NEXTAUTH_SECRET
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY
@@ -27,10 +27,10 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, body } = req
-  const jwttoken = await getToken({ req, secret, raw: true })
+  const jwttoken = await getToken({ req, secret: nextSecret, raw: true })
   const ipAddress:any = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-  let firstValue = body.name
-  let secondValue = body.secret
+  let firstValue = body.referral
+  let secondValue = body.pin
   const hash = crypto.createHash('sha256');
   hash.update(firstValue);
   hash.update(secondValue);

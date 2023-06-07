@@ -40,13 +40,11 @@ export function ChartDashboard({query, user}:any) {
         mode:0,state:0,buy:0,sell:0, floor:0,ceil:0,
         min:0,max:0,minMaxAvg:0,minMedian:0,maxMedian:0,
     }
-    const { data: session,  } = useSession();
+    const { data: session,  }:any = useSession();
     const isClient = useIsClient()
     const [timeframe,s__timeframe] = useState<any>(query.timeframe)
     const [counter, s__counter] = useState(0);
     const [loadings, s__loadings] = useState('all');
-
-
 
     const [q__asd, asd] = useQueryPlus({ queryKey: ['asdasd'], 
         queryFn: async () =>{
@@ -59,41 +57,22 @@ export function ChartDashboard({query, user}:any) {
         queryFn: async () =>{
             if (!query.token) return []
             if (!window.localStorage) return
-            // console.log("localStorage", window.localStorage.getItem("rpi"))
-            let secret = JSON.parse(window.localStorage.getItem("rpi"))
-            // console.log("creds", session.email, secret)
-            if (!secret) return
+            let pin = JSON.parse(window.localStorage.getItem("rpi"))
+            if (!pin) return
 
-            // console.log("creds", session.email, secret)
-
-            let theuserresres:any = await fetchPost("/api/start/verify",{
-                binanceKeys:"0:0",
-                // name: session.email,
-                email: secret.split(":")[0],
-                name: secret.split(":")[0],
-                secret: secret.split(":")[1]
+            let theuserresres:any = await fetchPost("/api/player/verify",{
+                referral: pin.split(":")[0],
+                pin: pin.split(":")[1]
             })
 
             let theuserresq = await theuserresres.json()
-            // console.log("theuserresq", theuserresq)
             
-            // s__superuser(theuserresq)
             if (theuserresq.binancekeys < 132) return []
             let splitted = theuserresq.binancekeys.split(":")
             if (splitted.length < 2) return []
             let binancePublic = splitted[0]
             let binanceSecret = splitted[1]
 
-
-            // console.log("theListRes", `/api/trade-history`,{
-            //     method:"POST",
-            //     body:JSON.stringify({
-            //         symbol: query.token.toUpperCase()+"USDT",
-            //         limit:99,
-            //         binancePublic,
-            //         binanceSecret,
-            //     })
-            // })
             const theListRes = await fetch(`/api/trade-history/`,{
                 method:"POST",
                 body:JSON.stringify({
@@ -103,34 +82,23 @@ export function ChartDashboard({query, user}:any) {
                     binanceSecret,
                 })
             })
-            // console.log("trade history res", theListRes)
             let theList = await theListRes.json()
-            // console.log("thelist", theList)
-            // theList = theList.map((anItem, index) => {
-            //     return {...anItem,...{
-            //         side: anItem.isBuyer ? "Buy" : "Sell",
-            //         price: parseDecimals(anItem.price),
-            //         qty: "$"+parseDecimals(parseFloat(anItem.price)*parseFloat(anItem.qty)),
-            //         time: parseDateTimeString(new Date(anItem.time/1)),
-            //     }}
-            // }).reverse()
-
-            // const theList = await fetchJsonArray(API_UNITS, "Units")
-
-            console.log("trade history theList", theList)
             return theList
         }
     },[])
 
     
+    const getLocalReferral = () => {
+        return !session ? ( "user" ) : session.user.email
+    }
     const setIdByObject = (playerCredentials) => {
-        let mergedString = `${playerCredentials.name}:${playerCredentials.secret}`
+        let mergedString = `${playerCredentials.referral}:${playerCredentials.pin}`
         s__rpi(mergedString)
         s__LS_rpi(mergedString)
     }
     const connectPlayer = async (playerCredentials:any) => {
         try {
-            const reqUrl = `/api/start?name=${playerCredentials.name}&secret=${playerCredentials.secret}`
+            const reqUrl = `/api/player?referral=${playerCredentials.referral}&pin=${playerCredentials.pin}`
             const res:any = await fetch(reqUrl)
             if (res.status >= 400) { return alert("ERROR") }
 
@@ -140,7 +108,7 @@ export function ChartDashboard({query, user}:any) {
         }
     }    
     const trigger_connectPlayer = () => {
-        let username = !session ? ( "user" ) : session.user.email
+        let username = getLocalReferral()
         
         let numberaccount = prompt(
             `Would you like to create a Simulated Player -> (${username}:????})? \n\n\n Account Name: 
@@ -150,7 +118,7 @@ export function ChartDashboard({query, user}:any) {
         if (!numberaccount) { return }
         if (parseInt(numberaccount) >= 10000) { return}
 
-        connectPlayer({name:username,secret:numberaccount})
+        connectPlayer({referral:username,pin:numberaccount})
     }
     const signInGoogle = () => {
         signIn("google")
@@ -235,7 +203,7 @@ export function ChartDashboard({query, user}:any) {
         s__LS_rpi(therpi)
     }
     const register = () => {
-        let username = !session ? ( "user" ) : session.user.email
+        let username = getLocalReferral()
 
         let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
         let numberaccount = prompt(
@@ -403,11 +371,11 @@ export function ChartDashboard({query, user}:any) {
         try {
             let datapack = {
                 binancekeys: binancekeys,
-                name:rpi.split(":")[0],
-                secret:rpi.split(":")[1],
+                referral:rpi.split(":")[0],
+                pin:rpi.split(":")[1],
             }
             console.log(datapack)
-            const res = await fetchPut('/api/start',datapack);
+            const res = await fetchPut('/api/player',datapack);
             const result = await res.json();
             console.log("success????", result)
             return result
@@ -420,26 +388,10 @@ export function ChartDashboard({query, user}:any) {
 
     /********** HTML **********/
     if (!rpi) {
-        return (<div className="h-min-400px flex-col flex-justify-start">
-            
+        return (<div className="h-min-400px flex-col flex-justify-start">            
             <LandingSession {...{ rpi, sessiondata:session,
-                    // calls: { createPlayer, trigger_connectPlayer, signInGoogle, }
-                    calls: { trigger_connectPlayer, createPlayer:register, signInGoogle, }
-                }} />
-
-            {/* <button className="ma-2 tx-lg   py-4 px-8 bord-r-5 bg-w-5 border-lgrey tx-contrast"
-                onClick={()=>{register()}}
-            >
-                + Create Simulated Player
-            </button>
-            {!session && <>
-                <div className="py-2 tx-white">or</div>
-                <div className="flex-col   tx-white" style={{background:"orangered"}}>
-                    <LoginBtn><AppClientDesc /></LoginBtn>
-                </div>
-                </>
-            } */}
-            
+                calls: { trigger_connectPlayer, createPlayer:register, signInGoogle, }
+            }} />            
         </div>)
     }
     return (

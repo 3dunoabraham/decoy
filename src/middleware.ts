@@ -49,6 +49,7 @@ export const config = {
         '/api/place-order',
         '/api/settings',
         '/api/start',
+        '/api/player',
         '/api/strat',
         '/api/trade-history',
         '/api/users',

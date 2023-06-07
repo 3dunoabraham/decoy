@@ -50,7 +50,7 @@ export default function Component({}) {
             }
             console.log(datapack)
             // return null
-            const res = await fetchPut('/api/start',datapack);
+            const res = await fetchPut('/api/player',datapack);
             const result = await res.json();
             console.log("success????", result)
             return result

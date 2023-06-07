@@ -58,27 +58,32 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
         window.location.reload()
     }
     const setIdByObject = (playerCredentials) => {
-        let mergedString = `${playerCredentials.name}:${playerCredentials.secret}`
+        let mergedString = `${playerCredentials.referral}:${playerCredentials.pin}`
         s__rpi(mergedString)
         s__LS_rpi(mergedString)
     }
-    const createPlayer = () => {
-        let username = !sessiondata ? ( "user" ) : sessiondata.user.email
+    const getLocalReferral = () => {
+        return !sessiondata ? ( "user" ) : sessiondata.user.email
+    }
+    const trigger_createPlayer = () => {
+        createPlayer(getLocalReferral())
+    }
+    const createPlayer = (username:string) => {
 
         let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
         let numberaccount = prompt(
-            `Would you like to create a Simulated Player -> (${username}:${randomThousand})? \n\n\n Account Name: <${username}> \n Secret Key Code: ${randomThousand} \n\n\n Remember to save your credentials \n You can use the *Secret Key Code* to recover your account! `,
+            `Would you like to create a Simulated Player -> (${username}:${randomThousand})? \n\n\n Account Name: <${username}> \n pin Key Code: ${randomThousand} \n\n\n Remember to save your credentials \n You can use the *pin Key Code* to recover your account! `,
             `${randomThousand}`
         )
         if (!numberaccount) { return }
         if (parseInt(numberaccount) >= 10000) { return}
 
-        registerPlayer({name:username,secret:numberaccount})
+        registerPlayer({referral:username,pin:numberaccount})
     }
     const registerPlayer = async (playerCredentials:any) => {
         console.log("registerPlayer", registerPlayer)
         try {
-            const res:any = await fetchPost('/api/start',playerCredentials)
+            const res:any = await fetchPost('/api/player',playerCredentials)
             if (res.status >= 400) { return alert("ERROR") }
 
             setIdByObject(playerCredentials)            
@@ -89,7 +94,7 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
     }
     const connectPlayer = async (playerCredentials:any) => {
         try {
-            const reqUrl = `/api/start?name=${playerCredentials.name}&secret=${playerCredentials.secret}`
+            const reqUrl = `/api/player?referral=${playerCredentials.referral}&pin=${playerCredentials.pin}`
             const res:any = await fetch(reqUrl)
             if (res.status >= 400) { return alert("ERROR") }
 
@@ -100,17 +105,19 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
         }
     }    
     const trigger_connectPlayer = () => {
-        let username = !sessiondata ? ( "user" ) : sessiondata.user.email
+
+        let username = getLocalReferral()
+        console.table(username)
         
         let numberaccount = prompt(
             `Would you like to create a Simulated Player -> (${username}:????})? \n\n\n Account Name: 
-            <${username}> \n Secret Key Code: ???? \n\n\n Remember to save your credentials \n You can use the *Secret Key Code* to recover your account! `,
+            <${username}> \n pin Key Code: ???? \n\n\n Remember to save your credentials \n You can use the *pin Key Code* to recover your account! `,
             ``
         )
         if (!numberaccount) { return }
         if (parseInt(numberaccount) >= 10000) { return}
 
-        connectPlayer({name:username,secret:numberaccount})
+        connectPlayer({referral:username,pin:numberaccount})
     }
 
     {/******************************************************************************************************/}
@@ -134,7 +141,7 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
             <div className="px-8 Q_xs_px-2  ">
 
                 <LandingSession {...{ rpi, sessiondata,
-                    calls: { createPlayer, trigger_connectPlayer, signInGoogle, }
+                    calls: { createPlayer:trigger_createPlayer, trigger_connectPlayer, signInGoogle, }
                 }} />
                 {!rpi && !!sessiondata && <>
                     <div className='Q_sm_md pt-100 pb-8'></div>

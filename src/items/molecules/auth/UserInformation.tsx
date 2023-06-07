@@ -6,7 +6,7 @@ export default function Page({ data }) {
         <div><img className="ord-r-100" width="40" src={data.image} alt="" /></div>
         <div className="flex-col flex-align-start Q_xl_x">
             <div className="">{data.name}</div>
-            <div className="opaci-50 tx-sm">{data.email}</div>
+            <div className="opaci-50 tx-sm">{data.referral || "-"}</div>
         </div>
     </div>
     )

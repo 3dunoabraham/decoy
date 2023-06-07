@@ -22,13 +22,12 @@ export function TradeHistory({tradeHistory=[], session, pair}:any) {
     const theuserstart:any = useQuery({ queryKey: ['theuserstart'], 
         queryFn: async () => {
             if (!window.localStorage) return
-            let secret = JSON.parse(window.localStorage.getItem("rpi"))
-            if (!secret) return
+            let rpi = JSON.parse(window.localStorage.getItem("rpi"))
+            if (!rpi) return
 
-            let theuserresres:any = await fetchPost("/api/start/verify",{
-                binanceKeys:"0:0",
-                name: session.email,
-                secret: secret.split(":")[1]
+            let theuserresres:any = await fetchPost("/api/player/verify",{
+                referral: rpi.split(":")[0],
+                pin: rpi.split(":")[1]
             })
 
             let theuserresq = await theuserresres.json()
