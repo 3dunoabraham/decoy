@@ -1,10 +1,10 @@
 "use client";
 
 
-function LandingSession({uid, sessiondata, calls}:any) {
+function LandingSession({rpi, sessiondata, calls}:any) {
     return (
         <div className="flex-row Q_xs_flex-col my-4 gap-2 mt-8">
-            {!uid && !!sessiondata && <div className='flex-col gap-2'>
+            {!rpi && !!sessiondata && <div className='flex-col gap-2'>
                 <div className='Q_xs pt-150'></div>
                 <button style={{background:!sessiondata ? "#F7C127" : "orangered"}}
                     onClick={()=>{ calls.createPlayer() }}

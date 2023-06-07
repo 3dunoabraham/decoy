@@ -22,14 +22,13 @@ import nouns from '@/scripts/nouns.json'
 extend({ TextGeometry })
 
 export default function Component({
-    power, form, onTextClick, onTimeframeClick, toggleTrade, xOut, yOut, zOut, optsToggler, s__uid, uid, theuserstart, askTicket
+    power, form, onTextClick, onTimeframeClick, toggleTrade, xOut, yOut, zOut, optsToggler, s__rpi, rpi, theuserstart, askTicket
 }) {
     const app = useContext(AppContext)
     const font = new FontLoader().parse(myFont);
     const $signin:any = useRef()
     const [loadings, s__loadings]:any = useState({join:false})
-    const [LS_uid, s__LS_uid] = useLocalStorage('uid', "")
-    // const [uid, s__uid] = useState("")
+    const [LS_rpi, s__LS_rpi] = useLocalStorage('rpi', "")
     
 
     useFrame((state) => {
@@ -44,8 +43,8 @@ export default function Component({
         if (!res) return
         app.alert("success","Signed in")
         s__loadings({join:false})
-        s__uid(res)
-        s__LS_uid(res)
+        s__rpi(res)
+        s__LS_rpi(res)
         theuserstart.refetch()
     }
     const startHash = async () => {

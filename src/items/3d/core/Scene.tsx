@@ -156,8 +156,8 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
         if (!res) return
         app.alert("success","Signed in")
         // s__loadings({join:false})
-        s__uid(res)
-        s__LS_uid(res)
+        s__rpi(res)
+        s__LS_rpi(res)
         theuserstart.refetch()
     }
     const startHash = async () => {
@@ -257,8 +257,8 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
         setToken(token)
     }
     const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
-    const [LS_uid, s__LS_uid] = useLocalStorage('uid', "")
-    const [uid, s__uid] = useState("")
+    const [LS_rpi, s__LS_rpi] = useLocalStorage('rpi', "")
+    const [rpi, s__rpi] = useState("")
     const [tokensArrayObj,s__tokensArrayObj] = useState<any>({})
     useEffect(()=>{
         // let randomname = adjectives[rdm(adjectives.length)]+" "+nouns[rdm(nouns.length)]
@@ -268,8 +268,8 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
         
         app.s__userstart(theuserstart)
         s__tokensArrayObj(JSON.parse(LS_tokensArrayObj))
-        s__uid(LS_uid)
-        if (!!LS_uid) {  app.alert("success","Logged in!")}
+        s__rpi(LS_rpi)
+        if (!!LS_rpi) {  app.alert("success","Logged in!")}
     },[])
     const askTicket = async () => {
         return
@@ -429,7 +429,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
             </div>
         }
         
-        {isClient && !!uid && !!theuserstart && !!theuserstart.data && <>
+        {isClient && !!rpi && !!theuserstart && !!theuserstart.data && <>
             <div className='tx-white   pa-3 pos-abs dg left-0 bottom-0 -y-100  z-999 tx-ls-1'>
                 <div className='pb-3 flex flex-align-end gap-2'>
                     <div className='opaci-75 tx-lg'>Tickets:</div>
@@ -488,7 +488,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
             </div>
         </>}
         
-        {!uid && 
+        {!rpi && 
             <div className='pos-abs mt-200 ml-8 z-1001 box-shadow-i-bl-8 flex-row Q_xs_sm_flex-col' >
                 <div onClick={setRandomName} className='pa-1 tx-white bg-b-50 flex-col px-3 tx-lx opaci-chov--50'>
                     <GiPerspectiveDiceSixFacesRandom />
@@ -508,7 +508,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                 </div>
             </div>
         }
-        {!!uid && !optsToggler.tutorial.bool &&
+        {!!rpi && !optsToggler.tutorial.bool &&
             <div className="flex pos-abs top-0 left-0  bord-r- pa-2 ma-2">
                 <div className="flex-col flex-align-start z-700 gap-1  mt-100 ">
 
@@ -563,7 +563,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
 
 
 
-        {!!uid && (live) && !!theuserstart &&
+        {!!rpi && (live) && !!theuserstart &&
             <div className="flex pos-abs top-0 right-0  bord-r- pa-2 ma-2">
                 {theuserstart.data && !(theuserstart.data.totalAttempts == 0 && optsToggler.tutorial.bool) &&
                 <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray mt-100 ">
@@ -581,7 +581,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
         }
 
 
-        {!!uid && (!live) &&
+        {!!rpi && (!live) &&
             <div className="flex pos-abs top-0 right-0  bord-r- pa-2 ma-2">
                 <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray mt-100 ">
 
@@ -597,7 +597,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
             </div>
         }
 
-        {/* {!!uid && theuserstart.data && !(theuserstart.data.totalAttempts == 0 && optsToggler.tutorial.bool) && 
+        {/* {!!rpi && theuserstart.data && !(theuserstart.data.totalAttempts == 0 && optsToggler.tutorial.bool) && 
             <div className="flex-col pos-abs bottom-0 right-0  bord-r- pa-2 ma-2 b w-100">
                 <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray ">
                     <div className="flex-center gap-1 tx-bold-8 tx-ls-5 px-5 py-2 bg-b-20 ma-2 tx-shadow-b-3">
@@ -614,15 +614,15 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
         >
             {/* {children} */}
             
-            {!uid && <>
+            {!rpi && <>
                 <LoginLevel {...{
-                    s__uid, uid, askTicket,
+                    s__rpi, rpi, askTicket,
                     power, form, onTextClick, onTimeframeClick, toggleTrade, 
                     xOut, yOut, zOut, optsToggler, tokensArrayObj,theuserstart, s__tokensArrayObj
                 }} />
             </>}
 
-            {!!uid && <>
+            {!!rpi && <>
                 {childrenWithProps}
             </>}
             {

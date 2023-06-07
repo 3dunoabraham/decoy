@@ -24,8 +24,8 @@ const Page: NextPageWithLayout = ({}) => {
     const app = useContext(AppContext)
     const $boxContainer:any = useRef()
     
-    const [LS_uid, s__LS_uid] = useLocalStorage('uid', "")
-    const [uid, s__uid] = useState(LS_uid)
+    const [LS_rpi, s__LS_rpi] = useLocalStorage('rpi', "")
+    const [rpi, s__rpi] = useState(LS_rpi)
     const isClient = useIsClient()
 
     const theuserstart:any = useQuery({ queryKey: ['theuserstart'], 
@@ -66,7 +66,7 @@ const Page: NextPageWithLayout = ({}) => {
             </div>
             <div className='flex flex-justify-center  gap-4 pos-fix w-100 z-800  ' >
                 <BitBingoLogo />
-                {isClient && !!uid &&
+                {isClient && !!rpi &&
                     <div>
                         <ReloadCube />
                     </div>
@@ -75,7 +75,7 @@ const Page: NextPageWithLayout = ({}) => {
             <div className='flex-center z-500'>
                 {isClient &&
                     <div className="flex-center pos-abs bg-b-50 bg-glass-5 " style={{border:"1px solid #FED034"}}>
-                        {/* {!uid &&
+                        {/* {!rpi &&
                             <Link target="_blank" href="/dashboard"
                                 className="tx-blue px-6 gap-2 tx-lgx flex-center opaci-chov--50 w-100 tx-bold-2 pt-100 pb-3 Q_sm_x"
                                 style={{filter: "hue-rotate(-189deg) brightness(666%)"}}
@@ -83,7 +83,7 @@ const Page: NextPageWithLayout = ({}) => {
                                 <FaExternalLinkAlt /> Dashboard 
                             </Link>
                         } */}
-                        {!uid && <>
+                        {!rpi && <>
                             <Link target="_blank" href="/demo" className="tx-blue px-6 gap-2 tx-lgx flex-center opaci-chov--50 w-100 tx-bold-2 pt-100 pb-3"
                                 style={{filter: "hue-rotate(-189deg) brightness(666%)"}}
                             >

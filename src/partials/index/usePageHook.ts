@@ -22,13 +22,12 @@ const usePageLogic = ({ online, tokens, serverSession }) => {
   }, []);
 
   const [clientIP, s__clientIP] = useState('');
-  const [LS_uid, s__LS_uid] = useLocalStorage('uid', "");
-  const [uid, s__uid] = useState("");
+  const [LS_rpi, s__LS_rpi] = useLocalStorage('rpi', "");
+  const [rpi, s__rpi] = useState("");
 
   const getData = async (newuid) => {
     try {
       const res = await fetchPost('/api/start', {
-        uid: uid,
         name: newuid.split(":")[0],
         secret: newuid.split(":")[1],
         ...sessiondata
@@ -43,8 +42,8 @@ const usePageLogic = ({ online, tokens, serverSession }) => {
 
       s__clientIP(newuid);
       let new_uid = newuid;
-      s__uid(new_uid);
-      s__LS_uid(new_uid);
+      s__rpi(new_uid);
+      s__LS_rpi(new_uid);
 
       app.alert("success", "Simulated Player Registered succesfully!");
     } catch (e) {
@@ -67,8 +66,8 @@ const usePageLogic = ({ online, tokens, serverSession }) => {
 
       s__clientIP(newuid);
       let new_uid = newuid;
-      s__uid(new_uid);
-      s__LS_uid(new_uid);
+      s__rpi(new_uid);
+      s__LS_rpi(new_uid);
 
       app.alert("success", "Simulated Player logged in succesfully!");
     } catch (e) {
@@ -119,14 +118,14 @@ const usePageLogic = ({ online, tokens, serverSession }) => {
   const { data: sessiondata } = useSession();
 
   useEffect(() => {
-    s__uid(LS_uid);
-    if (!!LS_uid) {
-      s__clientIP(LS_uid.split(":")[0]);
+    s__rpi(LS_rpi);
+    if (!!LS_rpi) {
+      s__clientIP(LS_rpi.split(":")[0]);
     }
     app.s__sidebarLinks([]);
     app.s__sidebarPages([
       { id: 2, label: "Web Byte City", url: "https://bytc.vercel.app/", icon: "bingo" },
-      ...(!LS_uid ? [] : [
+      ...(!LS_rpi ? [] : [
         { id: 0, label: "History", url: "/trade/history/?pair=BTCUSDT", icon: "agreements" },
         { id: 2, label: "Dashboard", url: "/chart/4h?token=btc", icon: "chart" }
       ]),
@@ -143,8 +142,8 @@ const usePageLogic = ({ online, tokens, serverSession }) => {
       return _inventoryItems;
     }, [q__btcPrice]),
     clientIP,
-    LS_uid,
-    uid,
+    LS_rpi,
+    rpi,
     registerWithRandom,
     loginToAccount,
     sessiondata,

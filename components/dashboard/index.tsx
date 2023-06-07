@@ -28,8 +28,8 @@ export function ChartDashboard({query, user}:any) {
         { ...acc, [aToken]: [`${API_PRICE_BASEURL}${(aToken+baseToken).toUpperCase()}`] }
     ), {}))
     const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
-    const [LS_uid, s__LS_uid] = useLocalStorage('uid', "")
-    const [uid, s__uid] = useState("")
+    const [LS_rpi, s__LS_rpi] = useLocalStorage('rpi', "")
+    const [rpi, s__rpi] = useState("")
     const [showAllTokens,s__showAllTokens] = useState<any>(true)
     const [chopAmount,s__chopAmount] = useState<any>(0)
     const [tokensArrayObj,s__tokensArrayObj] = useState<any>({})
@@ -58,8 +58,8 @@ export function ChartDashboard({query, user}:any) {
         queryFn: async () =>{
             if (!query.token) return []
             if (!window.localStorage) return
-            // console.log("localStorage", window.localStorage.getItem("uid"))
-            let secret = JSON.parse(window.localStorage.getItem("uid"))
+            // console.log("localStorage", window.localStorage.getItem("rpi"))
+            let secret = JSON.parse(window.localStorage.getItem("rpi"))
             // console.log("creds", session.email, secret)
             if (!secret) return
 
@@ -190,7 +190,7 @@ export function ChartDashboard({query, user}:any) {
         if (cryptoToken != selectedToken) { getKlineArray(timeframe,query.token) }
     },[counter,selectedToken,cryptoToken])
     useEffect(()=>{
-        s__uid(LS_uid)
+        s__rpi(LS_rpi)
         s__counter(counter+1)
         s__tokensArrayObj(JSON.parse(LS_tokensArrayObj))
         getKlineArray(timeframe,cryptoToken)
@@ -199,8 +199,8 @@ export function ChartDashboard({query, user}:any) {
 
 
     const getData = async (new_uid:any) => {
-        s__uid(new_uid)
-        s__LS_uid(new_uid)
+        s__rpi(new_uid)
+        s__LS_rpi(new_uid)
     }
     const register = () => {
         let username = !session ? ( "user" ) : session.user.email
@@ -371,8 +371,8 @@ export function ChartDashboard({query, user}:any) {
         try {
             let datapack = {
                 binancekeys: binancekeys,
-                name:uid.split(":")[0],
-                secret:uid.split(":")[1],
+                name:rpi.split(":")[0],
+                secret:rpi.split(":")[1],
             }
             console.log(datapack)
             const res = await fetchPut('/api/start',datapack);
@@ -387,7 +387,7 @@ export function ChartDashboard({query, user}:any) {
 
 
     /********** HTML **********/
-    if (!uid) {
+    if (!rpi) {
         return (<div className="h-min-400px flex-col flex-justify-start">
             <button className="ma-2 tx-lg   py-4 px-8 bord-r-5 bg-w-5 border-lgrey tx-contrast"
                 onClick={()=>{register()}}
@@ -447,7 +447,7 @@ export function ChartDashboard({query, user}:any) {
                             >
                                 <TokenRow {...{
                                     tokensArrayObj, aToken, cryptoToken, index, queryUSDT, isK, aTokenCristayl, isQ,
-                                    buy_all, buy_min, sell_min, sell_all, crystal, timeframe, uid, updateTokenOrder,
+                                    buy_all, buy_min, sell_min, sell_all, crystal, timeframe, rpi, updateTokenOrder,
                                     removeToken, joinToken  
                                 }}/>
                             </div>
@@ -518,7 +518,7 @@ export function ChartDashboard({query, user}:any) {
 
                 <div className="flex-1 px-2 w-100 mt-3 opaci-10"><hr/></div>
                 <div className="flex-1 w-100    ">
-                    {!!uid && 
+                    {!!rpi && 
                         <details className="tx-gray flex flex-align-end ">
                             <summary className="flex    flex-justify-end">
                                 <div className="tx-lg opaci-chov--50  py-2 mx-2 bord-r-8 px-2 bg-w-hov-20">

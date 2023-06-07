@@ -4,7 +4,7 @@ import { TokenConfigStateButtons } from "../chart/tokenConfig"
 
 export default function Component({
     tokensArrayObj, aToken, cryptoToken, index, queryUSDT, isK, aTokenCristayl, isQ,
-    buy_all, buy_min, sell_min, sell_all, crystal, timeframe, uid, updateTokenOrder,
+    buy_all, buy_min, sell_min, sell_all, crystal, timeframe, rpi, updateTokenOrder,
     removeToken, joinToken    
 }) {
     // console.log("tokensArrayObj", tokensArrayObj)
@@ -98,7 +98,7 @@ export default function Component({
             {aToken == cryptoToken &&
                 <div className="flex-center w-100">
                     
-                    {!(aToken in tokensArrayObj) && !!uid &&
+                    {!(aToken in tokensArrayObj) && !!rpi &&
                         <div className="flex-1 w-100  ">
 
                         </div>
@@ -140,13 +140,13 @@ export default function Component({
                 </div>
             }
             
-            {!(aToken in tokensArrayObj) && !!uid &&
-                <div className={`tx-bold flex-center mt-1   ${!uid && "opaci-50"}`}
+            {!(aToken in tokensArrayObj) && !!rpi &&
+                <div className={`tx-bold flex-center mt-1   ${!rpi && "opaci-50"}`}
                     
                 >
                     <button className="box-shadow-5 bg-b-10 clickble tx-ls-5 opaci-50 tx-gray opaci-chov-50  hov-bord-1-w py-2 px-4 bord-r-50 tx-lg"
                         style={{color:aToken == cryptoToken ? "orange" : "grey"}}
-                        onClick={()=>{!!uid && joinToken(aToken)}} 
+                        onClick={()=>{!!rpi && joinToken(aToken)}} 
                         // style={{boxShadow:"0px 0px 25px #CF589433"}}
                     >
                         Add {aToken.toUpperCase()}

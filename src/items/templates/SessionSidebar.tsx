@@ -19,7 +19,7 @@ import { useLocalStorage } from "usehooks-ts";
 import { fetchPut } from "@/scripts/helpers/fetchHelper";
 
 export default function Component({}) {
-    const [LS_uid, s__LS_uid] = useLocalStorage('uid', "")
+    const [LS_rpi, s__LS_rpi] = useLocalStorage('rpi', "")
     const { data: session } = useSession();
 
     const router = useRouter();
@@ -45,8 +45,8 @@ export default function Component({}) {
         try {
             let datapack = {
                 binancekeys: binancekeys,
-                name:LS_uid.split(":")[0],
-                secret:LS_uid.split(":")[1],
+                name:LS_rpi.split(":")[0],
+                secret:LS_rpi.split(":")[1],
             }
             console.log(datapack)
             // return null
@@ -130,7 +130,7 @@ export default function Component({}) {
             </div>
             <div className='flex-1'>
 
-                {(!!session && !!session.user && !!LS_uid)  && <>
+                {(!!session && !!session.user && !!LS_rpi)  && <>
                     <div className="box-shadow-2 pa-4 bord-r-8 bg-b-50 tx-center opaci-chov--75"
                              onClick={()=>{syncBinance()}}
                         >
