@@ -1,25 +1,27 @@
 import { useRouter } from "next/router"
 import { useMemo } from "react"
-import { ChartDashboard } from "@/components/dashboard/index"
-import Layout from "@/src/items/templates/Layout"
 import Link from "next/link"
 import Head from "next/head"
 import { useIsClient } from "usehooks-ts"
-import AmountCards from "@/components/dashboard/AmountCards"
-import { GetServerSideProps } from "next"
-import { DEFAULT_TOKENS_ARRAY } from "@/components/scripts/constants"
 import { getToken } from "next-auth/jwt"
+import { GetServerSideProps } from "next"
+
+
+import { ChartDashboard } from "@/components/dashboard/index"
+import Layout from "@/src/items/templates/Layout"
+import AmountCards from "@/components/dashboard/AmountCards"
+import { DEFAULT_TOKENS_ARRAY } from "@/components/scripts/constants"
 
 export default function Page({tokens, session}) {
     const isClient = useIsClient()
-
     const router = useRouter()
     let zzz = useMemo(() => {
         return !(router.query && router.query.token && router.query.timeframe)
     }, [router.query])
 
+    {/******************************************************************************************************/}
     
-    if (zzz) return
+    if (zzz) return <></>
     return (
         <Layout>
             <Head><title>Chart | WebGamed</title></Head>
@@ -28,16 +30,18 @@ export default function Page({tokens, session}) {
                     Home
                 </Link>
             </div>
+            <div className=" h-100 pb-100 pt-8 g-b-20 box-shadow-8" style={{background:"#2D313E"}}>
+                <ChartDashboard query={router.query} user={session}/>
+            </div>
             <div className=" h-100 py-8 g-b-20 px-100 Q_xs_sm_px-2 ">
                 <div className="opaci-50 tx-ls-3 tx-lg my-2">Goal Balance</div>
                 {isClient && <AmountCards tokens={tokens} mul={11} bigmul={50}  /> }
             </div>
-            <div className=" h-100 pb-100 pt-8 g-b-20 box-shadow-8" style={{background:"#2D313E"}}>
-                <ChartDashboard query={router.query} user={session}/>
-            </div>
         </Layout>
     )
 }
+
+{/**********************************************************************************************************/}
 
 export const getServerSideProps: GetServerSideProps = async (context:any) => {
     let tokens = DEFAULT_TOKENS_ARRAY

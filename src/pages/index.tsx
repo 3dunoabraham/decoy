@@ -1,16 +1,15 @@
-import { ReactElement, useContext, useEffect, useMemo, useState } from 'react'
+import { ReactElement, useContext, useEffect, useState } from 'react'
 import Head from 'next/head'
 import { ParsedUrlQuery } from 'querystring';
 import { GetServerSideProps } from 'next';
 import { signIn, useSession } from 'next-auth/react';
-import { useIsClient, useLocalStorage } from 'usehooks-ts';
+import { useLocalStorage } from 'usehooks-ts';
 
 
 import type { NextPageWithLayout } from '@/src/pages/_app'
 import Layout from '@/src/items/templates/Layout'
 import SidebarContainer from '@/src/items/templates/SidebarContainer'
 import SessionSidebar from "@/src/items/templates/SessionSidebar";
-import { useQueryPlus } from '@/scripts/helpers/useHooksHelper'
 import { _parseDecimals } from '@/scripts/helpers/mathHelper'
 import { AppContext } from '@/scripts/contexts/AppContext'
 import { InventoryProvider } from '@/scripts/contexts/InventoryContext'
@@ -28,20 +27,11 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
     const bigmul = 50
     const mul = 11  
     const app = useContext(AppContext)
-    const API_PRICE_BASEURL = "https://api.binance.com/api/v3/ticker/price?symbol="
     const [LS_rpi, s__LS_rpi] = useLocalStorage('rpi', "")
     const [rpi, s__rpi] = useState("")
     
     {/******************************************************************************************************/}
 
-    const [q__btcPrice, btcPrice] = useQueryPlus({ queryKey: ['btcData'],
-        refetchOnWindowFocus: false, retry: 1,
-        queryFn: async () =>{
-            const priceRes = await fetch(API_PRICE_BASEURL+"BTCUSDT")
-            const price = await priceRes.json()
-            return price.price
-        }
-    },[])
     useEffect(()=>{
         s__rpi(LS_rpi)
         app.s__sidebarLinks([])
@@ -197,6 +187,8 @@ Page.getLayout = function getLayout(page: ReactElement) {
 }
 
 export default Page
+
+{/**********************************************************************************************************/}
 
 export const getServerSideProps: GetServerSideProps<PageProps, ParsedUrlQuery> = async (context) => {
     let tokens = DEFAULT_TOKENS_ARRAY

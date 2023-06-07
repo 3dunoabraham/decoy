@@ -12,12 +12,12 @@ type TradeHistoryParams = {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   
   const { method } = req
-
+  
   if (method != "POST") {
-    
+  
 
-      res.setHeader('Allow', ['POST'])
-      res.status(405).end(`Method ${method} Not Allowed`)
+    res.setHeader('Allow', ['POST'])
+    res.status(405).end(`Method ${method} Not Allowed`)
   }
   
   let symbol = req.body.symbol as string;

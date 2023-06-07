@@ -52,7 +52,7 @@ export type IUnit = {
 }
 
 export const DEFAULT_UNIT = {
-    "uid":"0000-0000","type":"","sales_status":"1","sales_date":"",
+    "rpi":"0000-0000","type":"","sales_status":"1","sales_date":"",
     "vin":"","year":"","workorder":"","model_style":"",
     "brand":"", "dealer":"","distributor":"", "manufacturer":"","owner":"", 
     "size":{width:{feet:"",inches:""},height:{feet:"",inches:""},length:{feet:"",inches:""}}, 
@@ -107,7 +107,7 @@ export const DEFAULT_UNIT_OPTS = {
 export const DEFAULT_DOC_CATEGORIES = ["Registration", "Title", "MSO", "Insurance"]
 
 // export const FAKE_UNIT = {
-//     "uid":"8889-8818",
+//     "rpi":"8889-8818",
 //     "vin":"123ABCV63261356",
 //     "year":"",
 //     "brand":"Stor-Mor",

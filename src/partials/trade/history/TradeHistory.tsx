@@ -29,8 +29,8 @@ export function TradeHistory({tradeHistory=[], session, pair}:any) {
     const theuserstart:any = useQuery({ queryKey: ['theuserstart'], 
         queryFn: async () => {
             if (!window.localStorage) return
-            console.log("localStorage", window.localStorage.getItem("uid"))
-            let secret = JSON.parse(window.localStorage.getItem("uid"))
+            console.log("localStorage", window.localStorage.getItem("rpi"))
+            let secret = JSON.parse(window.localStorage.getItem("rpi"))
             console.log("creds", session.email, secret)
             if (!secret) return
 

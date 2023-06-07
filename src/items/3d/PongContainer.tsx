@@ -161,7 +161,7 @@ const Component = forwardRef(({}:any, ref)=>{
                     <div>x</div>
                     <div className="flex bg-b- bord-r- opaci-chov--50">{parseInt(zOut*2+"")}</div>
                 </div>
-                <div className="flex-col flex-align-stretch gap-2 rot-180">
+                <div className="flex-col flex-align-stretch gap-2 ">
                     {/* <div className="flex tx-center  bord-r-8">
                         <button onClick={()=>{toggleOption("roof")}}
                             style={{filter: "hue-rotate(-189deg) brightness(666%)", }}

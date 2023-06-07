@@ -154,7 +154,7 @@ const Component = forwardRef(({}:any, ref)=>{
                 })
 
                 } */}
-                <div className="flex-col flex-align-stretch gap-2 rot-180">
+                <div className="flex-col flex-align-stretch gap-2 ">
                     <div className="flex tx-center  bord-r-8">
                         <button onClick={()=>{toggleOption("roof")}}
                             className={` tx-center w-100 px-1 bord-r-8 px-2 opaci-chov--50  tx-lx pt-2

@@ -18,7 +18,7 @@ export default function Component({
         queryFn: async () => {
 
             if (!window.localStorage) return
-            let secret = JSON.parse(window.localStorage.getItem("uid"))
+            let secret = JSON.parse(window.localStorage.getItem("rpi"))
             if (!secret) return
 
             // console.log("creds", user.email, secret)

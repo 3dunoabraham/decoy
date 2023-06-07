@@ -5,7 +5,7 @@ export default function Component ({
     toggleOption, optsToggler,
 }) {
     return (
-        <div className="flex-col flex-align-stretch gap-2 rot-180">
+        <div className="flex-col flex-align-stretch gap-2 ">
             <div className="flex-center ">
                 <button onClick={()=>{toggleOption("floor")}}
                     style={{filter: "hue-rotate(-189deg) brightness(666%)", }}
