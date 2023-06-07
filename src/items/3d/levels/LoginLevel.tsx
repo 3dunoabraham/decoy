@@ -1,23 +1,16 @@
 import { Cylinder, } from "@react-three/drei";
 import { Vector3 } from "three";
-import TradingBox from "../npc/TradingBox";
 import SimpleOrbit from "../core/camera/SimpleOrbit";
 import HumanForReference from "../core/HumanForReference";
-import Text3D from "../core/Text3D";
-import * as THREE from 'three';
 import { extend, useFrame } from '@react-three/fiber'
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
 import myFont from '@/scripts/Roboto Medium_Regular.json'
-import { useLoader } from '@react-three/fiber'
-import { Suspense, useContext, useMemo, useRef, useState } from "react";
+import { useContext, useMemo, useRef, useState } from "react";
 
-import crypto from 'crypto';
 import { useLocalStorage } from "usehooks-ts";
 import { fetchPost } from "@/scripts/helpers/fetchHelper";
 import { AppContext } from "@/scripts/contexts/AppContext";
-import adjectives from '@/scripts/adjectives.json'
-import nouns from '@/scripts/nouns.json'
 import DynaText from "../unorganized/DynaText";
 
 extend({ TextGeometry })
@@ -38,15 +31,16 @@ export default function Component({
         }
     });
     const signup = async () => {
-        let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
-        s__loadings({join:true})
-        let res:any = await startHash()
-        if (!res) return
-        app.alert("success","Signed in")
-        s__loadings({join:false})
-        s__rpi(res)
-        s__LS_rpi(res)
-        theuserstart.refetch()
+        return
+        // let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
+        // s__loadings({join:true})
+        // let res:any = await startHash()
+        // if (!res) return
+        // app.alert("success","Signed in")
+        // s__loadings({join:false})
+        // s__rpi(res)
+        // s__LS_rpi(res)
+        // theuserstart.refetch()
     }
     const startHash = async () => {
         let username = form.username

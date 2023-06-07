@@ -148,15 +148,16 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
 
 
     const signup = async () => {
-        let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
-        // s__loadings({join:true})
-        let res:any = await startHash()
-        if (!res) return
-        app.alert("success","Signed in")
-        // s__loadings({join:false})
-        s__rpi(res)
-        s__LS_rpi(res)
-        theuserstart.refetch()
+        return
+        // let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
+        // // s__loadings({join:true})
+        // let res:any = await startHash()
+        // if (!res) return
+        // app.alert("success","Signed in")
+        // // s__loadings({join:false})
+        // s__rpi(res)
+        // s__LS_rpi(res)
+        // theuserstart.refetch()
     }
     const startHash = async () => {
         let username = form.username
