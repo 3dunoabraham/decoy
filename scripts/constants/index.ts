@@ -25,3 +25,17 @@ export const FAKE_UNIT_FOREIGNS = {
     orgsArray: [],
     dealers: [],
 }
+
+
+export interface Player {
+    id?: number
+    name: string
+    href?: string
+    src?: string
+    ipv4?: string
+    datenow?: string
+    hash?: string
+    attempts?: number
+    totalAttempts?: number
+    goodAttempts?: number
+  }

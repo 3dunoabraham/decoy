@@ -69,7 +69,6 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
         createPlayer(getLocalReferral())
     }
     const createPlayer = (username:string) => {
-
         let randomThousand = parseInt(`${(Math.random()*9000) + 1000}`)
         let numberaccount = prompt(
             `Would you like to create a Simulated Player -> (${username}:${randomThousand})? \n\n\n Account Name: <${username}> \n pin Key Code: ${randomThousand} \n\n\n Remember to save your credentials \n You can use the *pin Key Code* to recover your account! `,
@@ -81,7 +80,6 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
         registerPlayer({referral:username,pin:numberaccount})
     }
     const registerPlayer = async (playerCredentials:any) => {
-        console.log("registerPlayer", registerPlayer)
         try {
             const res:any = await fetchPost('/api/player',playerCredentials)
             if (res.status >= 400) { return alert("ERROR") }
@@ -89,7 +87,7 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
             setIdByObject(playerCredentials)            
             app.alert("success", "Simulated Player Registered succesfully!")
         } catch (e:any) {
-            console.log("coudlnt register Simulated Player")
+            app.alert("error", "Couldn't log into player!")
         }
     }
     const connectPlayer = async (playerCredentials:any) => {
@@ -101,7 +99,7 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
             setIdByObject(playerCredentials)
             app.alert("success", "Simulated Player logged in succesfully!")
         } catch (e:any) {
-            console.log("coudlnt log into Simulated Player")
+            app.alert("error", "Couldn't log into player!")
         }
     }    
     const trigger_connectPlayer = () => {

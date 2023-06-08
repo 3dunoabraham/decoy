@@ -1,22 +1,10 @@
-
-  
 import { getToken } from "next-auth/jwt"
-  import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from 'next'
 import { createClient } from '@supabase/supabase-js'
 import crypto from 'crypto';
+import { fetchPlayer } from "@/scripts/state/repository/player";
+import { Player } from "@/scripts/constants";
 
-export interface Start {
-  id?: number
-  name: string
-  href?: string
-  src?: string
-  ipv4?: string
-  datenow?: string
-  hash?: string
-  attempts?: number
-  totalAttempts?: number
-  goodAttempts?: number
-}
 
 
 const nextSecret = process.env.NEXTAUTH_SECRET
@@ -35,79 +23,59 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   hash.update(firstValue);
   hash.update(secondValue);
   const hash_digest = hash.digest('hex');
-  const new_uid = hash_digest
+  const playerHash = hash_digest
   let asdasd:any = {
     jwt:jwttoken,
     name: body.name,
     attempts: 32,
     ipv4: ipAddress,
-    hash: new_uid,
+    hash: playerHash,
     datenow: Date.now(),
   }
   switch (method) {
     case 'GET':
       try {
-        const { data: existingStart, error } = await supabase
-          .from<Start>('player')
-          .select('*')
-          .match({ hash: new_uid })
-          .single()
-    
-        if (error) {
-          throw error
-        }
+        const existingStart = await fetchPlayer(supabase, playerHash)
+        if (!existingStart) { throw new Error("Player not found") }
     
         res.status(200).json(existingStart)
       } catch (error) {
-        console.error(error)
-        res.status(500).json({ message: 'Failed to fetch start' })
+        res.status(500).json({ message: 'Player not found' })
       }
       break
-    
-      case 'PUT':
-        try {
-  
-          
-          const { data: existingStart, error: selectError } = await supabase
-          .from<Start>('player')
-          .select('*')
-          .match({ hash: new_uid })
-          .single()
-  
-          if (!existingStart) {
-            console.log("not found")
-            throw new Error
+    case 'PUT':
+      try {
+        const existingStart = await fetchPlayer(supabase, playerHash)
+        if (!existingStart) { throw new Error("Player not found") }
+        if (existingStart) {
+          const fieldsToUpdate:any = {
+            binancekeys: body.binancekeys
           }
-  
-          if (existingStart) {
-            const fieldsToUpdate:any = {
-              binancekeys: body.binancekeys
-            }
-            const { data: start, error } = await supabase
-            .from<Start>('player')
-            .update(fieldsToUpdate)
-            .match({ hash: new_uid })
-            .single()
-          if (error) {
-            throw error
+          const start = await fetchPlayer(supabase, playerHash)
+          // const { data: start, error } = await supabase
+          //   .from<Player>('player')
+          //   .update(fieldsToUpdate)
+          //   .match({ hash: playerHash })
+          //   .single()
+          if (!start) {
+            throw new Error()
           }
           res.status(201).json(start)
         }
-  
-        } catch (error) {
-          console.error(error)
-          res.status(500).json({ message: 'Failed to put start' })
-        }
-        break
+
+      } catch (error) {
+        res.status(500).json({ message: 'Failed to update player' })
+      }
+      break
       
       case 'POST':
         try {
   
           
           const { data: existingStart, error: selectError } = await supabase
-          .from<Start>('player')
+          .from<Player>('player')
           .select('*')
-          .match({ hash: new_uid })
+          .match({ hash: playerHash })
           .single()
   
           if (existingStart) {
@@ -117,7 +85,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   
           if (!existingStart) {
             const { data: start, error } = await supabase
-            .from<Start>('player')
+            .from<Player>('player')
             .insert(asdasd)
             .single()
           if (error) {
@@ -138,9 +106,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     
             
             const { data: existingStart, error: selectError } = await supabase
-            .from<Start>('player')
+            .from<Player>('player')
             .select('*')
-            .match({ hash: new_uid })
+            .match({ hash: playerHash })
             .single()
     
             if (!existingStart) {
@@ -151,10 +119,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     
             if (!!existingStart) {
               const { data: start, error } = await supabase
-              .from<Start>('player')
+              .from<Player>('player')
             
             .delete()
-            .match({ hash: new_uid })
+            .match({ hash: playerHash })
 
               .single()
             if (error) {
