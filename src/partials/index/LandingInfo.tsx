@@ -85,10 +85,10 @@ function LandingInfo({}) {
                     <Link href="/" className="tx-link pt-1 tx-lg opaci-chov--50">
                         Getting Started: <b>How to Play?</b>
                     </Link>
-                    <Link href="https://webga.gitbook.io/gtabtc/what-is-byte-city/faq" className="tx-link pt-1 tx-lg opaci-chov--50">
+                    <Link href="https://webpov.gitbook.io/gtabtc/what-is-byte-city/faq" className="tx-link pt-1 tx-lg opaci-chov--50">
                         FAQ: <b>Frequently Asked Questions</b>
                     </Link>
-                    <Link href="https://webga.gitbook.io/gtabtc/about-us/where-to-go-links" className="tx-link pt-1 tx-lg opaci-chov--50">
+                    <Link href="https://webpov.gitbook.io/gtabtc/about-us/where-to-go-links" className="tx-link pt-1 tx-lg opaci-chov--50">
                         More: <b>More Links</b>
                     </Link>
                 </div>

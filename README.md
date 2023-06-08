@@ -2,7 +2,7 @@
 Portfolio cue prompter about a retail investor that low-risk trades at a market, it analyzes and balances short- and long-term trades and interacts with both centralized and decentralized exchanges.
 
 Docs: https://tresd1.gitbook.io/dcoy
-Demo: https://webga.vercel.app/
+Demo: https://webpov.vercel.app/
 
 ### Tech-Stack
 * NextJs
@@ -49,7 +49,7 @@ npm run test
 
 ---
 
-Docs: https://webga.vercel.app/
+Docs: https://webpov.vercel.app/
 
 ---
 

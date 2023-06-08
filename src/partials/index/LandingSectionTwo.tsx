@@ -19,7 +19,7 @@ export function LandingSectionTwo({}) {
                             </div>
                             {/* Explore common or complex processes, confront emotional reactions to financial risk, and enjoy a fun and engaging trading experience. */}
                         </div>
-                        <Link href="https://webga.gitbook.io/gamification" target="_blank" className="tx-link opaci-chov--50">Learn More: What is Gamification?</Link>
+                        <Link href="https://webpov.gitbook.io/gamification" target="_blank" className="tx-link opaci-chov--50">Learn More: What is Gamification?</Link>
                     </div>
 
                     <div className="tx-white w-100 w-max-300px ">
@@ -39,7 +39,7 @@ export function LandingSectionTwo({}) {
                             Learn how Byte City solves the problem of actively managing portfolios across multiple apps and websites, reduces risks, and maximizes profits, while lowering emotional stress.
                         </div>
 
-                        <Link  href="https://webga.gitbook.io/gtabtc/what-is-byte-city/faq" target="_blank"  className="tx-link opaci-chov--50">Explore FAQs</Link>
+                        <Link  href="https://webpov.gitbook.io/gtabtc/what-is-byte-city/faq" target="_blank"  className="tx-link opaci-chov--50">Explore FAQs</Link>
                     </div>
 
                     <div className=" w-100 w-max-500px ">

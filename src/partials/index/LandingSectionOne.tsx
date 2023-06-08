@@ -18,12 +18,12 @@ export function LandingSectionOne({}) {
 
             <h2 className="mt-8 flex flex-justify-start flex-align-end Q_xs_flex-col ">
                 <span className="opaci-20 ">Get Started:</span>
-                <Link target="_blank" className="pa-2 tx-blue hover-4 opaci-chov--50  tx-lx" href="https://webga.gitbook.io/gtabtc/documentation/getting-started/how-to-play">How to Play?</Link>
-                <div className="pa-2 opaci-chov--50" style={{color:"orangered"}}><Link target="_blank" href="https://webga.gitbook.io/gtabtc/documentation/getting-started/how-to-play">(Stage 1)</Link></div>
+                <Link target="_blank" className="pa-2 tx-blue hover-4 opaci-chov--50  tx-lx" href="https://webpov.gitbook.io/gtabtc/documentation/getting-started/how-to-play">How to Play?</Link>
+                <div className="pa-2 opaci-chov--50" style={{color:"orangered"}}><Link target="_blank" href="https://webpov.gitbook.io/gtabtc/documentation/getting-started/how-to-play">(Stage 1)</Link></div>
                 <div className="pa-2 opaci-10 ">|</div>
-                <div className="pa-2 opaci-chov--50" style={{color:"orange"}}><Link target="_blank" href="https://webga.gitbook.io/gtabtc/documentation/getting-started/stage-2">(Stage 2)</Link></div>
+                <div className="pa-2 opaci-chov--50" style={{color:"orange"}}><Link target="_blank" href="https://webpov.gitbook.io/gtabtc/documentation/getting-started/stage-2">(Stage 2)</Link></div>
                 <div className="pa-2 opaci-10 ">|</div>
-                <div className="pa-2 opaci-chov--50" style={{color:"gold"}}><Link target="_blank" href="https://webga.gitbook.io/gtabtc/documentation/getting-started/stage-3">(Stage 3)</Link></div>
+                <div className="pa-2 opaci-chov--50" style={{color:"gold"}}><Link target="_blank" href="https://webpov.gitbook.io/gtabtc/documentation/getting-started/stage-3">(Stage 3)</Link></div>
             </h2>
         </>
     )
