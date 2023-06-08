@@ -48,7 +48,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     case 'GET':
       try {
         const { data: existingStart, error } = await supabase
-          .from<Start>('start')
+          .from<Start>('player')
           .select('*')
           .match({ hash: new_uid })
           .single()
@@ -69,7 +69,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   
           
           const { data: existingStart, error: selectError } = await supabase
-          .from<Start>('start')
+          .from<Start>('player')
           .select('*')
           .match({ hash: new_uid })
           .single()
@@ -84,7 +84,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               binancekeys: body.binancekeys
             }
             const { data: start, error } = await supabase
-            .from<Start>('start')
+            .from<Start>('player')
             .update(fieldsToUpdate)
             .match({ hash: new_uid })
             .single()
@@ -105,7 +105,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   
           
           const { data: existingStart, error: selectError } = await supabase
-          .from<Start>('start')
+          .from<Start>('player')
           .select('*')
           .match({ hash: new_uid })
           .single()
@@ -117,7 +117,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   
           if (!existingStart) {
             const { data: start, error } = await supabase
-            .from<Start>('start')
+            .from<Start>('player')
             .insert(asdasd)
             .single()
           if (error) {
@@ -138,7 +138,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     
             
             const { data: existingStart, error: selectError } = await supabase
-            .from<Start>('start')
+            .from<Start>('player')
             .select('*')
             .match({ hash: new_uid })
             .single()
@@ -151,7 +151,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     
             if (!!existingStart) {
               const { data: start, error } = await supabase
-              .from<Start>('start')
+              .from<Start>('player')
             
             .delete()
             .match({ hash: new_uid })

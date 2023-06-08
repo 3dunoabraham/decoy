@@ -48,7 +48,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     case 'POST':
       try {        
         const { data: existingStart, error: selectError } = await supabase
-        .from<Start>('start')
+        .from<Start>('player')
         .select('*')
         .match({ hash: new_uid })
         .single()

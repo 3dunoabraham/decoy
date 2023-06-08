@@ -56,7 +56,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         
         const { data: existingStart, error: selectError } = await supabase
-        .from<Start>('start')
+        .from<Start>('player')
         .select('*')
         .match({ hash: new_uid })
         .single()
@@ -79,7 +79,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
             attempts += ATTEMPTS_PER_CYCLE
             const { data: start, error } = await supabase
-            .from<Start>('start')
+            .from<Start>('player')
             .update({
               attempts: attempts,
               datenow: `${Date.now()}`,
@@ -111,7 +111,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   
           
           const { data: existingStart, error: selectError } = await supabase
-          .from<Start>('start')
+          .from<Start>('player')
           .select('*')
           .match({ hash: new_uid })
           .single()
@@ -134,7 +134,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   
               attempts += ATTEMPTS_PER_CYCLE
               const { data: start, error } = await supabase
-              .from<Start>('start')
+              .from<Start>('player')
               .update({
                 attempts: attempts,
                 datenow: `${Date.now()}`,
@@ -164,7 +164,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   
           
           const { data: start, error: error2 } = await supabase
-          .from<Start>('start')
+          .from<Start>('player')
           .update({
             attempts: attempts-1,
             totalAttempts: existingStart.totalAttempts+1,
