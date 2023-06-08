@@ -49,49 +49,61 @@ export const tokenIcons
     "link": <SiChainlink />,
     "ftm": <SiFantom />,
 }
+
+const DEFAULT_CARPORT_OTPS = {
+    frontwall: {bool:false},
+    backwall: {bool:false},
+    rightwall: {bool:false},
+    leftwall: {bool:false},
+    ceil: {bool:false},
+    floor: {bool:false},
+    services: {bool:false},
+    tutorial: {bool:true},
+
+    
+    house_frontwall: {bool:false},
+    house_backwall: {bool:false},
+    house_rightwall: {bool:false},
+    house_leftwall: {bool:false},
+    house_ceil: {bool:false},
+    house_floor: {bool:false},
+
+    safe: {bool:false},
+    angel: {bool:false},
+    storefront: {bool:false},
+    observatory: {bool:false},
+}
+
 const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, ref)=>{
-    const DEFAULT_CARPORT_OTPS = {
-        frontwall: {bool:false},
-        backwall: {bool:false},
-        rightwall: {bool:false},
-        leftwall: {bool:false},
-        ceil: {bool:false},
-        floor: {bool:false},
-        services: {bool:false},
-        tutorial: {bool:true},
-
-        
-        house_frontwall: {bool:false},
-        house_backwall: {bool:false},
-        house_rightwall: {bool:false},
-        house_leftwall: {bool:false},
-        house_ceil: {bool:false},
-        house_floor: {bool:false},
-
-        safe: {bool:false},
-        angel: {bool:false},
-        storefront: {bool:false},
-        observatory: {bool:false},
-    }
+    const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
+    const [LS_rpi, s__LS_rpi] = useLocalStorage('rpi', "")
+    const [rpi, s__rpi] = useState("")
+    const [tokensArrayObj,s__tokensArrayObj] = useState<any>({})
+    const askTicket = async () => {}
     const app = useContext(AppContext)
-    const tokensArray = ["btc", "eth", "link", "ftm"]
     const timeframesArray = ["3m", "15m", "4h", "1d"]
-    // const roofWidth = 0.3
-    // const wallWidth = 0.5
-    const roofWidth = 0.2
-    const wallWidth = 0.1
     const wideFeet = 4
     const lengthFeet = 5
     const heightFeet = 3
-    const [farmPosition,s__farmPosition]:any = useState([-3,-0.45,-4]);
-    const [buildingPosition,s__buildingPosition]:any = useState([0,-0.25,-4]);
     const rdm = function(opts,min=0) {return Math.floor(Math.random()*opts+min)}
     const [form, s__form] = useState({
         id: "BTCUSDT3M",
         username:"",
         password:"",
     })
-    const ccc = THREE.Camera
+    const [lastpower, s__lastpower] = useState(0)
+    const [power, s__power] = useState(0)
+    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+    const [mouseDown, setMouseDown] = useState(false);
+    const [optsToggler, s__optsToggler] = useState(DEFAULT_CARPORT_OTPS)
+    const [farmOptsToggler, s__farmOptsToggler] = useState(DEFAULT_CARPORT_OTPS)
+    function handleMouseUp(e) { setMouseDown(false); }
+    function handleMouseMove(e) { if (mouseDown) { setMousePos({ x: e.clientX, y: e.clientY }); } }
+    const [sizeForm, s__sizeForm] = useState({x:wideFeet,z:lengthFeet,y:heightFeet})
+    const isClient = useIsClient()
+    
+    {/******************************************************************************************************/}
+
     const setRandomName = ()=>{
         s__form({...form,...{username:
             adjectives[rdm(adjectives.length)]+" "+nouns[rdm(nouns.length)]
@@ -109,19 +121,6 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
             s__sizeForm(oldNewSize)
         },
     }));
-    const [lastpower, s__lastpower] = useState(0)
-    const [power, s__power] = useState(0)
-    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-    const [mouseDown, setMouseDown] = useState(false);
-    const [optsToggler, s__optsToggler] = useState(DEFAULT_CARPORT_OTPS)
-    const [farmOptsToggler, s__farmOptsToggler] = useState(DEFAULT_CARPORT_OTPS)
-    function handleMouseDown(e) {
-        setMouseDown(true);
-        setMousePos({ x: e.clientX, y: e.clientY });
-    }
-    function handleMouseUp(e) { setMouseDown(false); }
-    function handleMouseMove(e) { if (mouseDown) { setMousePos({ x: e.clientX, y: e.clientY }); } }
-    const [sizeForm, s__sizeForm] = useState({x:wideFeet,z:lengthFeet,y:heightFeet})
     const roofHeight = useMemo(()=>{
         return parseInt(`${heightFeet/3.281}`)
     }
@@ -145,22 +144,19 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
     const fffooovvv = useMemo(()=>{
         return yOut * 60
     },[])
-
-
     const signup = async () => {
         return
     }
-
-    /****** UPDATE ******/
-    
+    function handleMouseDown(e) {
+        setMouseDown(true);
+        setMousePos({ x: e.clientX, y: e.clientY });
+    }
     const toggleTrade = (token, {value, price}) => {
         alert()
         s__lastpower(value)
         { 
             setToken(token)
             if (value > 0) {
-                // console.log(`Buy ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`, "new", power+value)
-                
                 let trigger = prompt(`Enter trigger price (${parseDecimals(price)})`,``)//`${parseFloat(price)*0.99}`)
                 if (!!trigger) 
                 {
@@ -170,18 +166,14 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                 }
             }
             else {
-        alert()
-        // console.log(`Sell ${token.toUpperCase()}USDT${form.id.split("USDT")[1]}`,"new", (power-lastpower))
+                alert()
                 s__power(parseFloat(""+parseDecimals(power-0.05)))
             }
         }
 
     }
-    const isClient = useIsClient()
-    
     const startOrder = async (token, price, trigger) => {
         alert()
-        
 
         try {
             const res = await fetchPost('/api/order',{
@@ -221,13 +213,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
     const onTextClick = (token) => {
         setToken(token)
     }
-    const [LS_tokensArrayObj, s__LS_tokensArrayObj] = useLocalStorage('localTokensArrayObj', "{}")
-    const [LS_rpi, s__LS_rpi] = useLocalStorage('rpi', "")
-    const [rpi, s__rpi] = useState("")
-    const [tokensArrayObj,s__tokensArrayObj] = useState<any>({})
     useEffect(()=>{
-        // let randomname = adjectives[rdm(adjectives.length)]+" "+nouns[rdm(nouns.length)]
-        // console.log("theuserstart", theuserstart, randomname)
         console.log("max adjectives", Math.max.apply(Math, adjectives.map(x=>x.length)))
         console.log("max nouns", Math.max.apply(Math, nouns.map(x=>x.length)))
         
@@ -236,26 +222,6 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
         s__rpi(LS_rpi)
         if (!!LS_rpi) {  app.alert("success","Logged in!")}
     },[])
-    const askTicket = async () => {
-        return
-        console.log("askTicketaskTicketaskTicket")
-        try {
-            const res = await fetchPut('/api/order',{
-            });
-            const ress = await res.json();
-            if (res.status >= 200 && res.status <= 300)
-            {
-                app.alert("success","request saved")
-            } else {
-                app.alert("error","request not completed")
-            }
-            return ress
-        } catch (e) {
-            app.alert("error","request not completed")
-            return false
-        }
-
-    }
     const childrenWithProps = React.Children.map(children, (child) => {
         if (React.isValidElement<any>(child)) {
           return React.cloneElement(child, {
@@ -264,24 +230,26 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
             });
         }
         return child;
-      });
-      const selectedToken = useMemo(()=>{
+    });
+    const selectedToken = useMemo(()=>{
         return form.id.split("USDT")[0].toLowerCase()
-      },[form.id])
-      const selectedTimeframe = useMemo(()=>{
+    },[form.id])
+    const selectedTimeframe = useMemo(()=>{
         return form.id.split("USDT")[1].toLowerCase()
-      },[form.id])
-      const selectedTimeframeIndex = useMemo(()=>{
+    },[form.id])
+    const selectedTimeframeIndex = useMemo(()=>{
         return DEFAULT_TIMEFRAME_ARRAY.indexOf(selectedTimeframe)
-      },[selectedTimeframe])
+    },[selectedTimeframe])
 
-      const lastUpdate = useMemo(()=>{
+    const lastUpdate = useMemo(()=>{
         if (!theuserstart) return ""
         if (!theuserstart.data) return ""
         return parseUTCString(new Date(theuserstart.data.datenow)).replace("T","===")
     }, [theuserstart])
 
-    /****** HTML ******/
+
+
+
     return (
     <div className='h-min-500px w-100 flex-col g-b-20 bord-r- flex-align-stretch flex-justify-stretch pos-rel'>
         
@@ -512,39 +480,28 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                             <div className="flex-center gap-1 tx-shadow-b-1 ">
                                 <div className="tx-  tx-white tx-shadow-b-1">Power: {power}</div>
                             </div>
-                            {/* <hr className='bg-white w-100 mt-2'  />
-                            <div className="flex-col  flex-align-start gap-1 tx-shadow-b-1 ">
-                                <Link href="/dashboard" target='_blank'
-                                    className="tx- opaci-chov--50  tx-white tx-shadow-b-1 tx-lg"
-                                >
-                                    <FaExternalLinkAlt /> <i>Dashboard</i>
-                                </Link>
-                            </div> */}
                         </div>
                     </details>
                 </div>
             </div>
         }
 
-
-
         {!!rpi && (live) && !!theuserstart &&
             <div className="flex pos-abs top-0 right-0  bord-r- pa-2 ma-2">
                 {theuserstart.data && !(theuserstart.data.totalAttempts == 0 && optsToggler.tutorial.bool) &&
-                <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray mt-100 ">
+                    <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray mt-100 ">
 
-                    <div className="flex-center gap-1 tx-shadow-b-1 ">
-                        <div className="tx-  tx-gray tx-shadow-b-1">Size (m)</div>
-                        <div className="flex bg-b- bord-r- opaci-chov--50">{parseInt(xOut*2+"")}</div>
-                        <div>x</div>
-                        <div className="flex bg-b- bord-r- opaci-chov--50">{parseInt(zOut*2+"")}</div>
+                        <div className="flex-center gap-1 tx-shadow-b-1 ">
+                            <div className="tx-  tx-gray tx-shadow-b-1">Size (m)</div>
+                            <div className="flex bg-b- bord-r- opaci-chov--50">{parseInt(xOut*2+"")}</div>
+                            <div>x</div>
+                            <div className="flex bg-b- bord-r- opaci-chov--50">{parseInt(zOut*2+"")}</div>
+                        </div>
+                        <LiteIconsList {...{toggleOption, optsToggler,}} />
                     </div>
-                    <LiteIconsList {...{toggleOption, optsToggler,}} />
-                </div>
-            }
-        </div>
+                }
+            </div>
         }
-
 
         {!!rpi && (!live) &&
             <div className="flex pos-abs top-0 right-0  bord-r- pa-2 ma-2">
@@ -562,23 +519,9 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
             </div>
         }
 
-        {/* {!!rpi && theuserstart.data && !(theuserstart.data.totalAttempts == 0 && optsToggler.tutorial.bool) && 
-            <div className="flex-col pos-abs bottom-0 right-0  bord-r- pa-2 ma-2 b w-100">
-                <div className="flex-col flex-align-stretch z-700 gap-1 tx-gray ">
-                    <div className="flex-center gap-1 tx-bold-8 tx-ls-5 px-5 py-2 bg-b-20 ma-2 tx-shadow-b-3">
-                        Score: {score.maxScore} | Speed: {parseDecimals(score.velocityX)}
-                    </div>
-
-                </div>
-            </div>
-        } */}
-
-
         <Canvas shadows  onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onMouseMove={handleMouseMove}
             camera={{ fov: fffooovvv, position: [xOut,1,zOut*2] }} 
         >
-            {/* {children} */}
-            
             {!rpi && <>
                 <LoginLevel {...{
                     s__rpi, rpi, askTicket,
@@ -597,7 +540,6 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                 />
             }
             
-            {/* {live && <fog attach="fog" args={['#2C2D32', 5, 10]} /> } */}
             {!live && <fog attach="fog" args={['#C5E4E4', 5, 20]} /> }
             {!live && <Environment /> }
             
