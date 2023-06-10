@@ -74,7 +74,7 @@ export function ChartDashboard({query, user}:any) {
 
             console.log("tradeHistory 6")
             let theuserresq = await theuserresres.json()
-            
+            // s__superuser(theuserresq)
             console.log("tradeHistory 7")
             if (theuserresq.binancekeys < 132) return []
             console.log("tradeHistory 8")

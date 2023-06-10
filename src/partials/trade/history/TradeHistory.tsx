@@ -7,8 +7,11 @@ import { parseDecimals } from "@/components/scripts/helpers";
 import { fetchPost } from "@/scripts/helpers/fetchHelper"
 import { parseDateTimeString } from "@/scripts/helpers/type/dateHelper";
 import ItemsTable from "@/src/items/molecules/table/ItemsTable"
+import { useSession } from "next-auth/react";
 
 export function TradeHistory({tradeHistory=[], session, pair}:any) {
+    const { data: sessiondata,  }:any = useSession();
+
     const [superuser, s__superuser] = useState(null)
     const tradesTableConfig = {
         key: {title:"ID",name:"id",isInvisible:true},
@@ -72,6 +75,13 @@ export function TradeHistory({tradeHistory=[], session, pair}:any) {
     </>
     return (
         <div className='px-8 Q_xs_sm_px-2 w-100'>
+            {JSON.stringify(sessiondata)}
+            <br />
+            ||
+            <br />
+            <br />
+            ||
+            <br />
             <ItemsTable displayConfigObj={tradesTableConfig} theArray={theuserstart.data}
                 boolConfig={["isSelectable"]}
             />
