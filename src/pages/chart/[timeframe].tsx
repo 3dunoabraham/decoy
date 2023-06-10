@@ -11,6 +11,8 @@ import { ChartDashboard } from "@/components/dashboard/index"
 import Layout from "@/src/items/templates/Layout"
 import AmountCards from "@/components/dashboard/AmountCards"
 import { DEFAULT_TOKENS_ARRAY } from "@/components/scripts/constants"
+import SidebarContainer from "@/src/items/templates/SidebarContainer"
+import SessionSidebar from "@/src/items/templates/SessionSidebar"
 
 export default function Page({tokens, session}) {
     const isClient = useIsClient()
@@ -24,12 +26,16 @@ export default function Page({tokens, session}) {
     if (zzz) return <></>
     return (
         <Layout>
+            
             <Head><title>Chart | WebGamed</title></Head>
             <div className="pos-fix flex z-1001">
                 <Link className=" bg-white box-shadow-2 px-3 py-2 ord-r-1 ma-1 ord-r-5 z-1001" href="/">
                     Home
                 </Link>
             </div>
+            
+            <SessionSidebar/>
+
             <div className=" h-100 pb-100 pt-8 g-b-20 box-shadow-8" style={{background:"#2D313E"}}>
                 <ChartDashboard query={router.query} user={session}/>
             </div>
