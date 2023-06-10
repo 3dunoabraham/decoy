@@ -573,6 +573,17 @@ export function ChartDashboard({query, user}:any) {
             </div>
         </div>
         <div className=" pt-200"></div>
+        
+        sessiondata:{JSON.stringify(session)}
+            <br />
+            ||
+            <br />
+            referralData: {JSON.stringify(referralData)}
+            <br />
+            ||
+            <br />
+
+        <div className=" pt-200"></div>
         <div className="tx-white mb-100">
             {!!referralData ? JSON.stringify(referralData.user) : "no session referralData"}
             <br />
