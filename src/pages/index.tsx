@@ -21,6 +21,8 @@ import LandingLinks from '@/src/partials/index/LandingLinks';
 import LandingCard from '@/src/partials/index/LandingCard';
 import LandingBackground from '@/src/partials/index/LandingBackground';
 import LandingSession from '@/src/partials/index/LandingSession';
+import { ChartDashboard } from '@/components/dashboard';
+import { useRouter } from 'next/router';
 
 const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
     const { data:sessiondata, }:any = useSession();
@@ -31,6 +33,7 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
     const [rpi, s__rpi] = useState("")
     
     {/******************************************************************************************************/}
+    const router = useRouter()
 
     useEffect(()=>{
         s__rpi(LS_rpi)
@@ -173,6 +176,18 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
             <div className='w-100 py-100'> <LandingInfo /> </div>
         </div>  
     </div>  
+
+    
+
+<div className=" h-100 pb-100 pt-8 g-b-20 box-shadow-8" style={{background:"#2D313E"}}>
+    <ChartDashboard query={router.query} user={sessiondata}/>
+</div>
+<div className=" h-100 py-8 g-b-20 px-100 Q_xs_sm_px-2 ">
+    <div className="opaci-50 tx-ls-3 tx-lg my-2">Goal Balance</div>
+    <AmountCards tokens={tokens} mul={11} bigmul={50}  />
+</div>
+
+
     </>)
 }
 
