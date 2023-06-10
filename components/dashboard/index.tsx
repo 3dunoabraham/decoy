@@ -19,6 +19,8 @@ import { fetchPost, fetchPut } from "@/scripts/helpers/fetchHelper";
 import { GiCardExchange } from "react-icons/gi";
 import { parseDateTimeString } from "@/scripts/helpers/type/dateHelper";
 import LandingSession from "@/src/partials/index/LandingSession";
+import Link from "next/link";
+import { FaChartBar } from "react-icons/fa";
 
 export function ChartDashboard({query, user}:any) {
     const API_PRICE_BASEURL = "https://api.binance.com/api/v3/ticker/price?symbol="
@@ -410,6 +412,7 @@ export function ChartDashboard({query, user}:any) {
     }
     return (
     <div className="body h-min-100  pos-rel flex-col flex-justify-start noverflow">
+        
         <div className="opaci-50 tx-ls-3 tx-lg  tx-white pr-100">Strategy A</div>
         <div className={"bg-glass-6   bord-r-10 tx-gray mt-4 py-2 z-999 fade-in w-95 noverflow flex flex-between"}
             style={{border:"1px solid #777",boxShadow:"0 10px 50px -20px #00000077"}}
@@ -417,6 +420,16 @@ export function ChartDashboard({query, user}:any) {
             <div className={` flex-row Q_xs_md_flex-col w-100 flex-align-start `}>
                 <div className="flex-wrap flex-align-start w-100  my-">
                     <div className="flex-col flex-1 pa-4 ">
+                        
+                        <Link href={"/chart/4h?token=btc"}   
+                            className={`px-3 py-2 flex-col clickble nowrap tx-lg opaci-chov--75 my-2 w-100
+                                ${!session ? "" : "tx-white"}
+                            `}
+                            style={{background:"#001420"}}                
+                        >
+                            <div><FaChartBar /></div>
+                            <div className='tx-shadow-5'>Dashboard</div>
+                        </Link>
                         {!showAllTokens &&
                             <div className={`pa-2 bord-r-8 bg-b-50 tx-white opaci-chov--50`}onClick={()=>{s__showAllTokens(true)}}>
                                 Show All Tokens
