@@ -1,6 +1,7 @@
 import { DEFAULT_TIMEFRAME_ARRAY, DEFAULT_TOKENS_ARRAY } from "@/components/scripts/constants"
 import { parseDecimals } from "@/components/scripts/helpers"
 import { TokenConfigStateButtons } from "../chart/tokenConfig"
+import Link from "next/link"
 
 export default function Component({
     tokensArrayObj, aToken, cryptoToken, index, queryUSDT, isK, aTokenCristayl, isQ,
@@ -16,11 +17,11 @@ export default function Component({
                     {!!tokensArrayObj[aToken] && (
                         <div className="flex-center  flex-justify-between w-100">
                             <div className="tx-lgx flex flex-align-start  " >
-                                <a className={`opaci-chov--50 tx-gray ${aToken == cryptoToken?"":"nodeco"} `}
+                                <Link className={`opaci-chov--50 tx-gray ${aToken == cryptoToken?"":"nodeco"} `}
                                     href={`/chart/${timeframe}?token=${aToken}`}>
                                     <span className="px-1">{aToken.toUpperCase()}:</span>
                                     <span className="tx-ls-2">{isK && parseDecimals(queryUSDT.data[index].price)}</span>
-                                </a>
+                                </Link>
                             </div>
                             {(!aTokenCristayl || (!!aTokenCristayl && !aTokenCristayl.state)) && <div className="opaci- tx-red-75">Inactive</div>}
                             
