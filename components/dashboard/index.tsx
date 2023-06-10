@@ -194,6 +194,7 @@ export function ChartDashboard({query, user}:any) {
         s__counter(counter+1)
         s__tokensArrayObj(JSON.parse(LS_tokensArrayObj))
         getKlineArray(timeframe,cryptoToken)
+        q__tradeHistory.refetch()
     },[])
 
 
