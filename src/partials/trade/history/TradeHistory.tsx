@@ -1,6 +1,6 @@
 "use client";
 import { useQuery } from "@tanstack/react-query"
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 
 import { parseDecimals } from "@/components/scripts/helpers";
@@ -12,6 +12,11 @@ import { useSession } from "next-auth/react";
 export function TradeHistory({tradeHistory=[], session, pair}:any) {
     const { data: sessiondata,  }:any = useSession();
 
+    const referralData = useMemo(()=>{
+        if (!sessiondata) return null
+        if (sessiondata && !sessiondata.user) return {user:sessiondata}
+        return sessiondata
+    },[sessiondata])
     const [superuser, s__superuser] = useState(null)
     const tradesTableConfig = {
         key: {title:"ID",name:"id",isInvisible:true},
@@ -75,10 +80,11 @@ export function TradeHistory({tradeHistory=[], session, pair}:any) {
     </>
     return (
         <div className='px-8 Q_xs_sm_px-2 w-100'>
-            {JSON.stringify(sessiondata)}
+            sessiondata:{JSON.stringify(sessiondata)}
             <br />
             ||
             <br />
+            referralData: {JSON.stringify(referralData)}
             <br />
             ||
             <br />
