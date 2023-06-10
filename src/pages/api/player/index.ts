@@ -26,7 +26,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const playerHash = hash_digest
   let asdasd:any = {
     jwt:jwttoken,
-    name: body.name,
+    referral: body.referral,
+    name: body.referral,
     attempts: 32,
     ipv4: ipAddress,
     hash: playerHash,
