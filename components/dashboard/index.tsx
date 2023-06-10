@@ -47,7 +47,11 @@ export function ChartDashboard({query, user}:any) {
     const [timeframe,s__timeframe] = useState<any>(query.timeframe)
     const [counter, s__counter] = useState(0);
     const [loadings, s__loadings] = useState('all');
-
+    const referralData = useMemo(()=>{
+        if (!session) return null
+        if (session && !session.user) return {user:session}
+        return session
+    },[session])
     const [q__asd, asd] = useQueryPlus({ queryKey: ['asdasd'], 
         queryFn: async () =>{
             const theListRes = await fetch(`/api/account-balance`)
@@ -102,7 +106,7 @@ export function ChartDashboard({query, user}:any) {
 
     
     const getLocalReferral = () => {
-        return !session ? ( "user" ) : session.user.email
+        return !referralData ? ( "user" ) : referralData.user.email
     }
     const setIdByObject = (playerCredentials) => {
         let mergedString = `${playerCredentials.referral}:${playerCredentials.pin}`
@@ -405,7 +409,7 @@ export function ChartDashboard({query, user}:any) {
     /********** HTML **********/
     if (!rpi) {
         return (<div className="h-min-400px flex-col flex-justify-start">            
-            <LandingSession {...{ rpi, sessiondata:session,
+            <LandingSession {...{ rpi, sessiondata:referralData,
                 calls: { trigger_connectPlayer, createPlayer:register, signInGoogle, }
             }} />            
         </div>)
@@ -423,7 +427,7 @@ export function ChartDashboard({query, user}:any) {
                         
                         <Link href={"/chart/4h?token=btc"}   
                             className={`px-3 py-2 flex-col clickble nowrap tx-lg opaci-chov--75 my-2 w-100
-                                ${!session ? "" : "tx-white"}
+                                ${!referralData ? "" : "tx-white"}
                             `}
                             style={{background:"#001420"}}                
                         >
@@ -570,19 +574,19 @@ export function ChartDashboard({query, user}:any) {
         </div>
         <div className=" pt-200"></div>
         <div className="tx-white mb-100">
-            {!!session ? JSON.stringify(session.user) : "no session"}
+            {!!referralData ? JSON.stringify(referralData.user) : "no session referralData"}
             <br />
             <br />
             <br />
-            {!session && <>
+            {!referralData && <>
                 <div className="opaci-50 mt-8">Simulated Player detected</div>
                 <div className="opaci-50 mb-3">but, Google connection not found</div>
                 <div className="" style={{background:"orangered"}}>
                     <LoginBtn><AppClientDesc /></LoginBtn>
                 </div>
             </>}
-            {!!session && <>
-                {!!session.user && <>
+            {!!referralData && <>
+                {!!referralData.user && <>
                     
 
                     {<>
@@ -599,10 +603,10 @@ export function ChartDashboard({query, user}:any) {
                 </>}
             </>}
         </div>
-        {!session && <>
+        {!referralData && <>
             <div className='tx-center tx-white'>Connect w/Google to <br /> export your simulation data!</div>
         </>}
-        {!!session && <>
+        {!!referralData && <>
             <DownloadButton filename="database" data={tokensArrayObj} />
         </>}
     </div>
