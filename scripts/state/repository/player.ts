@@ -17,7 +17,7 @@ export async function fetchPostPlayer(supabase:any, playerObj:any) {
 export async function fetchPlayer(supabase:any, playerHash:any) {
     const { data: existingStart, error: selectError } = await supabase
         .from('player')
-        .select('*')
+        .select('name, attempts, totalAttempts, goodAttempts, trades, mode, jwt, binancekeys, subscription, referral')
         .match({ hash: playerHash })
         .single()
     return existingStart
