@@ -374,10 +374,10 @@ export function ChartDashboard({query, user}:any) {
                 referral:rpi.split(":")[0],
                 pin:rpi.split(":")[1],
             }
-            console.log(datapack)
+            // console.log("datapack",datapack)
             const res = await fetchPut('/api/player',datapack);
             const result = await res.json();
-            console.log("success????", result)
+            // console.log("success????", result)
             return result
         } catch (e) {
             return false

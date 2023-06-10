@@ -45,14 +45,14 @@ export default function Component({}) {
         try {
             let datapack = {
                 binancekeys: binancekeys,
-                name:LS_rpi.split(":")[0],
-                secret:LS_rpi.split(":")[1],
+                referral:LS_rpi.split(":")[0],
+                pin:LS_rpi.split(":")[1],
             }
-            console.log(datapack)
+            // console.log(datapack)
             // return null
             const res = await fetchPut('/api/player',datapack);
             const result = await res.json();
-            console.log("success????", result)
+            // console.log("success????", result)
             return result
         } catch (e) {
             return false

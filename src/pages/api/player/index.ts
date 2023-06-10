@@ -19,6 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const ipAddress:any = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
   let firstValue = body.referral || query.referral
   let secondValue = body.pin || query.pin
+  // console.table({firstValue,secondValue})
   const hash = crypto.createHash('sha256');
   hash.update(firstValue);
   hash.update(secondValue);
@@ -26,8 +27,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const playerHash = hash_digest
   let asdasd:any = {
     jwt:jwttoken,
-    referral: body.referral,
-    name: body.referral,
+    referral: firstValue,
+    name: firstValue,
     attempts: 32,
     ipv4: ipAddress,
     hash: playerHash,
@@ -52,16 +53,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           const fieldsToUpdate:any = {
             binancekeys: body.binancekeys
           }
-          const start = await fetchPlayer(supabase, playerHash)
-          // const { data: start, error } = await supabase
-          //   .from<Player>('player')
-          //   .update(fieldsToUpdate)
-          //   .match({ hash: playerHash })
-          //   .single()
-          if (!start) {
+          // const start = await fetchPlayer(supabase, playerHash)
+          // console.log("qweqweqwe",fieldsToUpdate)
+          const { data: theplayer, error } = await supabase
+            .from<Player>('player')
+            .update(fieldsToUpdate)
+            .match({ hash: playerHash })
+            .single()
+          if (!theplayer) {
             throw new Error()
           }
-          res.status(201).json(start)
+          res.status(201).json(theplayer)
         }
 
       } catch (error) {
@@ -80,7 +82,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           .single()
   
           if (existingStart) {
-            console.log("found")
+            // console.log("found")
             throw new Error
           }
   
@@ -113,7 +115,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             .single()
     
             if (!existingStart) {
-              console.log("not found")
+              // console.log("not found")
               throw new Error
               return
             }
