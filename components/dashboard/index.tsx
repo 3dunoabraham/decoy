@@ -557,7 +557,10 @@ export function ChartDashboard({query, user}:any) {
         </div>
         <div className=" pt-200"></div>
         <div className="tx-white mb-100">
-            
+            {!!session ? JSON.stringify(session.user) : "no session"}
+            <br />
+            <br />
+            <br />
             {!session && <>
                 <div className="opaci-50 mt-8">Simulated Player detected</div>
                 <div className="opaci-50 mb-3">but, Google connection not found</div>
