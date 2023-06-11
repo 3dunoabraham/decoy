@@ -111,16 +111,16 @@ function LandingInfo({}) {
                     </Link>
                 </div>
             </div>
-            <div className="flex-wrap flex-align-start w-100  gap-8">
+            <div className="flex-wrap flex-align-start w-100  bg-w-50 bord-r-50 px-4 py-8 pos-rel" style={{zIndex:2500}}>
                 <div className="flex-col flex-align-start">
                     <div className="opaci-50 underline pb-3">Important Links</div>
-                    <Link href="/" className="tx-link pt-1 tx-lg opaci-chov--50">
+                    <Link href="/" className="tx-link ma-0 py-1 tx-lg opaci-chov--50">
                         Twitter: <b>@bytecty</b>
                     </Link>
-                    <Link href="/" className="tx-link pt-1 tx-lg opaci-chov--50">
+                    <Link href="/" className="tx-link ma-0 py-1 tx-lg opaci-chov--50">
                         Youtube: <b>@webpov</b>
                     </Link>
-                    <Link href="/" className="tx-link pt-1 tx-lg opaci-chov--50">
+                    <Link href="/" className="tx-link ma-0 py-1 tx-lg opaci-chov--50">
                         Twitter: <b>@webpov</b>
                     </Link>
                     <Link href="/" className="tx-link  tx-lgx opaci-chov--50 py-6">

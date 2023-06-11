@@ -144,7 +144,7 @@ type PageProps = {
 Page.getLayout = function getLayout(page: ReactElement) {
     return (
     <Layout>
-        <Head><title>WebPOV</title></Head>
+        <Head><title>Profile | WebPOV</title></Head>
         {page}
     </Layout>
     )
