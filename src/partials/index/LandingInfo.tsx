@@ -6,21 +6,24 @@ import {  FaAddressBook, FaMoneyBillAlt, FaStackExchange } from "react-icons/fa"
 import LandingSectionOne from "./LandingSectionOne";
 import LandingSectionTwo from "./LandingSectionTwo";
 import { useLocalStorage } from "usehooks-ts";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function LandingInfo({}) {
     const [LS_showInfo, s__LS_showInfo] = useLocalStorage("showWelcomeInfo","yes")
-    const [showInfo, s__showInfo] = useState(LS_showInfo)
+    const [showInfo, s__showInfo] = useState("yes")
     const toggleToggle = ()=>{
         let newVal = showInfo == "yes" ? "" : "yes"
 
         s__LS_showInfo(newVal)
         s__showInfo(newVal)
     }
+    useEffect(()=>{
+        s__showInfo(LS_showInfo)
+    })
     return (
         <>
                 {!!showInfo && <>
-        <div className="px-4 pt-8 " style={{background:"linear-gradient(0, #00000000, #099DFF22)", borderRadius:"75px 75px 0 0"}}>
+        <div className="px-4 " style={{background:"linear-gradient(0, #00000000, #099DFF22)", borderRadius:"75px 75px 0 0"}}>
             <div className="flex-col">
                 {/* <h1 className="tx-primary tx-xl tx-center Q_xs ">
                     <small className="tx-bold-2 tx-faded tx-roman">Welcome to</small>
@@ -86,7 +89,7 @@ function LandingInfo({}) {
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#b3E8Fb" fill-opacity="1" d="M0,192L360,192L720,100L1080,192L1440,64L1440,0L1080,0L720,0L360,0L0,0Z"></path></svg>
             </div>
 
-            <div className="mt-150 py-100 my-100 flex-col flex-align-end px-2">
+            <div className="mt-100  py-8  flex-col flex-align-end px-2">
                 <div className="w-100 w-max-600px my-100">
                     <Link href="/" className="flex-col flex-align-end px-8 Q_xs_px-4 pt-8 pb-6 opaci-chov-50 opaci-75 box-shadow-2-b bord-r-25 pos-rel">
                         <div className="tx-xxxl pos-abs opaci-10 left-0 pa-4  top-0 tx-start"><FaStackExchange /></div>
@@ -124,6 +127,19 @@ function LandingInfo({}) {
                     </Link>
                 </div>
             </div>
+            </div>
+            
+        </>}
+        
+        <div className="flex-col flex-align-end opaci-chov--50 pos-rel"
+            onClick={()=>toggleToggle()}
+            style={{zIndex:3000}}
+        >
+            <div>Click here to</div>
+            {showInfo && <div>Hide Welcome Info ↑</div> }
+            {!showInfo && <div>Show Welcome Info!</div> }
+        </div>
+        <div className="px-4 py-8 noverflow " style={{background:"linear-gradient(180deg, #00000000, #099DFF22)", borderRadius:"0 0 75px 75px"}}>
             <div className="flex-wrap flex-align-start w-100  bg-w-50 bord-r-50 px-4 py-8 pos-rel" style={{zIndex:2500}}>
                 <div className="flex-col flex-align-start">
                     <div className="opaci-50 underline pb-3">Important Links</div>
@@ -154,16 +170,6 @@ function LandingInfo({}) {
                 </div>
                 <div className="flex-1"></div>
             </div>
-        </div>
-        </>}
-        
-        <div className="flex-col flex-align-end opaci-chov--50 pos-rel"
-            onClick={()=>toggleToggle()}
-            style={{zIndex:3000}}
-        >
-            <div>Click here to</div>
-            {showInfo && <div>Hide Welcome Info ↑</div> }
-            {!showInfo && <div>Show Welcome Info!</div> }
         </div>
     </>)
 }

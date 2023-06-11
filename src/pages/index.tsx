@@ -150,7 +150,7 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
                 </>}
             </div>
             
-            <div className='' >
+            {/* <div className='' >
                 {!!rpi &&
                     <div className=' pa-3 flex-1 '>
                         <AmountCards tokens={tokens} {...{mul, bigmul}} />
@@ -168,7 +168,7 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
                         - Disconnect Simulated Player
                     </button>
                 </div>
-            }
+            } */}
         </div>
         
     </div>
