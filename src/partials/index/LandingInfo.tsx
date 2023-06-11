@@ -8,7 +8,7 @@ import LandingSectionTwo from "./LandingSectionTwo";
 
 function LandingInfo({}) {
     return (
-        <div className="px-4 pt-8 " style={{background:"linear-gradient(0, #00000000, #099DFF22", borderRadius:"75px 75px 0 0 "}}>
+        <div className="px-4 pt-8 " style={{background:"linear-gradient(0, #00000000, #099DFF22)", borderRadius:"75px 75px 0 0"}}>
             <div className="flex-col">
                 {/* <h1 className="tx-primary tx-xl tx-center Q_xs ">
                     <small className="tx-bold-2 tx-faded tx-roman">Welcome to</small>
