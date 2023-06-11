@@ -520,7 +520,7 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
         }
 
         <Canvas shadows  onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onMouseMove={handleMouseMove}
-            camera={{ fov: fffooovvv, position: [xOut,1,zOut*2] }} 
+            camera={{ fov: fffooovvv, position: new Vector3(...[xOut,1,zOut*2]) }} 
         >
             {!rpi && <>
                 <LoginLevel {...{

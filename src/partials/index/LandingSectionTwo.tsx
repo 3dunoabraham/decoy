@@ -10,7 +10,7 @@ export function LandingSectionTwo({}) {
                 <div className="flex-wrap flex-justify-center flex-align-center gap-6 ">
                     <div className=" w-100 w-max-300px box-shadow-2-b pb-8 pa-4 bord-r-50 bg-b-10 ">
                         <div className=" tx-white"> 
-                            <h3 className="tx-lx"><span style={{borderBottom:"2px solid orangered"}}>Gamify</span> Your Investments:</h3>
+                            <h3 className="tx-lx"><span style={{borderBottom:"3px solid orangered"}}>Gamify</span> Your Investments:</h3>
                             <div className="py-3">
                                 Step into the realm of gamification, where the excitement of play and competition meets the world of trading.
                                 {/* By incorporating elements of challenge, achievement, and reward, */}
@@ -30,7 +30,7 @@ export function LandingSectionTwo({}) {
                         <h3 className="flex-col flex-align-start flex-justify-start tx-lg px-2" >
                             <div className="tx-bold-2">Experience the fusion of</div>
                             <div className="flex-wrap flex-align-end flex-justify-start gap-2 " >
-                                <div style={{borderBottom:"2px solid orange"}} className="tx-comic tx-lx">Finance</div>
+                                <div style={{borderBottom:"2px solid orange"}} className="tx-altfont-5 tx-lx flex flex-align-end">F<small>inance</small></div>
                                 <div >+</div>
                                 <div style={{borderBottom:"2px solid orange"}} className="tx-roman tx-lx">Gaming</div>
                             </div>
@@ -81,7 +81,8 @@ export function LandingSectionTwo({}) {
                                     <Link href="https://twitter.com/bytecty" target="_blank"
                                         className="tx-lg tx-link opaci-chov--50 block py-2 tx-bold-8"
                                     >
-                                        {/* <Image src="/youtube.png" alt="bank" width={150} height={100} className='mt-8 z-1001 pos-rel' /> */}
+                                        <Image src="/youtube.jpg" alt="bank" width={222} height={128} className='mt-8 z-1001 pos-rel bord-r-10' />
+                                        <br />
                                         Videos on Youtube <br /> <h2> @webpov</h2>
                                     </Link>
                                     </li>

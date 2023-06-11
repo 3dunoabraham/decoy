@@ -44,22 +44,20 @@ function LandingInfo({}) {
                         <div className="tx- "> City </div>
                     </span>
                 </h1>
-                <div  className="flex-col tx-lg tx-center">
-                    <div style={{color:"#F379F1"}}><b>Invest</b> and</div>
-                    <div className="flex-wrap gap-1" style={{color:"#099DFF"}}>
-                        <b>Learn</b>
-                        <div className="tx-lgx" style={{color:"orangered"}}>with <b>Gamification</b>!</div>
+                <div  className="flex-col tx-lg tx-center gap-1">
+                    <div  className="flex-center gap-1">
+                        <div className="tx-faded">Intuitive</div>
+                        <div><b style={{color:"#F379F1"}}> Learning </b></div>
+                        <div><span className="tx-faded"> &</span></div>
+                    </div>
+                    <div  className="flex-center gap-1">
+                        <div className="" style={{color:"orangered"}}>Gamified</div>
+                        <div><b style={{color:"#099DFF"}}>Investing!</b></div>                        
                     </div>
                     
                 </div>
             </div>
 
-            <h1 className="tx-link opaci-chov--25 mt-100 tx-center flex-wrap ">
-                <Link href="https://bytc.vercel.app">
-                    <span className="block tx-bold-2 nowrap">Click here to play:</span>
-                    <b className="block tx-bold-8">bytc.vercel.app</b>
-                </Link>
-            </h1>
 
             <LandingSectionOne />
 
@@ -92,7 +90,7 @@ function LandingInfo({}) {
                         <h3 className="tx-end pb-4 tx-lgx"
                             style={{color:"#099DFF"}}
                         >
-                            Learn About DCA | Learn About ATS
+                            Learn About DCA:
                         </h3>
 
                         <p className="tx-end w-100 w-max-500px">Explore the Ecosystem:</p>
@@ -104,7 +102,7 @@ function LandingInfo({}) {
                         <h3 className="tx-end pb-4 tx-lgx"
                             style={{color:"#099DFF"}}
                         >
-                            Browse Ecosystem
+                            Browse Ecosystem:
                         </h3>
 
                         <p className="tx-end w-100 w-max-500px">Get Started with Byte City:</p>
