@@ -63,27 +63,48 @@ export default function Component({}) {
         return <></>
       }
     return (<>
-
-        <div className="h-min-100vh flex-col flex-align-end pos-fix  top-0  right-0  " style={{}}>
+        
+    <div className=" flex-col flex-align-end pos-fix  bottom-0  right-0  " style={{}}>
+        {<div className="flex-col gap-1 pr-2">
+                <div className='pt-1 px-2 bord-r-25 box-shadow-2 ' style={{background:"orangered"}}>
+                    <LoginBtn><AppClientDesc /></LoginBtn>
+                </div>
+                {/* <hr className="w-90 opaci-50  my-3" style={{borderColor: "white"}} /> */}
+                <div className='mb-100'>
+                    {/* <Link href="/#" className="flex-center py-2 clickble  px-2 bg-w-hov-10  ">
+                        <div className=" pr-3  Q_xl_x"></div>
+                        <div className="px-1 tx-center tx-lg opaci-hov--50"><BsInfoCircle /></div>
+                        <div className="flex-1 pl-1 Q_xl_x w-min-220p">Support</div>
+                    </Link> */}
+                    <Link href="https://webpov.gitbook.io/bytecity" 
+                        target="_blank" className="flex-center box-shadow-2 py-2 clickble  px-2 ims-bg-primary bord-r-100"
+                    >
+                        <div className="   Q_xl_x"></div>
+                        <div className="px-1 pt-1 tx-center tx-lg opaci-hov--50"><FaQuestion /></div>
+                        <div className="flex-1  Q_xl_x ">FAQ</div>
+                    </Link>
+                </div>
+            </div>}
+        </div>
+        <div className=" flex-col flex-align-end pos-fix  top-0  right-0  " style={{}}>
             <details className="flex-1 w-100">
                 <summary className="flex pa-1 opaci-chov--50 mb-2" >
                     <div className="flex-1"></div>
-                    <button className="noclick tx-white pa-2 px-4 bord-r-50 tx-lg flex-center gap-2 tx-lgx" style={{background:"#099DFF"}}>
+                    <button className="noclick tx-white pa-2 px-1 bord-r-50 tx-lg flex-center gap-2 tx-lgx px-2" style={{background:"linear-gradient(0, #13A1FE, #059BFF)"}}>
                         <FaBars />
                         <div className="Q_sm_x ">Menu</div>
                     </button>
                 </summary>
                 <div className='flex-1 pr-2 '>
-
                     {(!!session && !!session.user && !!LS_rpi)  && <>
-                        <div className="box-shadow-5-b pa-4 bord-r-25 bg-b-40 tx-center opaci-chov--50 bg-glass-20 tx-shadow-5"
+                        <div className="box-shadow-5-b pa-4 pb-0 bord-r-25 bg-b-40 tx-center opaci-chov--50 bg-glass-20 tx-shadow-5"
                                 onClick={()=>{syncBinance()}}
                             >
                                 <div className="tx-center tx-lx ">
                                     <GiCardExchange/>
                                 </div>
                                 <div className="Q_xl_x">Sync </div>
-                                <div className="Q_xl_x"  style={{color:""}}> API Keys!</div>
+                                <div className="Q_xl_x pb-2"  style={{color:""}}> API Keys!</div>
                             </div>
                     </>}
 
@@ -95,7 +116,8 @@ export default function Component({}) {
                                 >
                                     {aLink.icon ? ICONS[aLink.icon]: <BsPerson /> }
                                 </div>
-                                <div className="flex-1 px-1 Q_xl_x w-min-220p tx-shadow-5">{aLink.label}</div>
+                                <div className="flex-1 px-1 Q_md_x w-min-220p tx-shadow-5">{aLink.label}</div>
+                                <div className="flex-1 px-1 Q_sm w-min-220p tx-shadow-5 tx-sm w-max-50px ellipsis nowrap noverflow">{aLink.label}</div>
                             </Link>
                         )
                     }) }
@@ -117,26 +139,6 @@ export default function Component({}) {
                     })}
                 </div>
             </details>
-            {<div className="flex-col gap-1 pr-2">
-                <div className='pt-1 px-2 bord-r-25 box-shadow-2 ' style={{background:"orangered"}}>
-                    <LoginBtn><AppClientDesc /></LoginBtn>
-                </div>
-                {/* <hr className="w-90 opaci-50  my-3" style={{borderColor: "white"}} /> */}
-                <div className='mb-100'>
-                    {/* <Link href="/#" className="flex-center py-2 clickble  px-2 bg-w-hov-10  ">
-                        <div className=" pr-3  Q_xl_x"></div>
-                        <div className="px-1 tx-center tx-lg opaci-hov--50"><BsInfoCircle /></div>
-                        <div className="flex-1 pl-1 Q_xl_x w-min-220p">Support</div>
-                    </Link> */}
-                    <Link href="https://webpov.gitbook.io/bytecity" 
-                        target="_blank" className="flex-center box-shadow-2 py-2 clickble  px-2 ims-bg-primary bord-r-100"
-                    >
-                        <div className="   Q_xl_x"></div>
-                        <div className="px-1 pt-1 tx-center tx-lg opaci-hov--50"><FaQuestion /></div>
-                        <div className="flex-1  Q_xl_x ">FAQ</div>
-                    </Link>
-                </div>
-            </div>}
         </div>
 
 

@@ -10,7 +10,7 @@ function LandingInfo({}:any) {
         <div className='w-100 flex-col pt- pb-100' style={{background:"linear-gradient(0, #46B7FA, #049BFF)"}}>
             <div className='tx-white tx-center py-8 '>
                 <Link href="/">
-                    <h1 className='tx-bold-2 opaci-50 tx-ls-5 tx-lg pt-4 '
+                    <h1 className='tx-bold-8 opaci-50 tx-ls-5 tx-lgx pt-4 translate-y-50'
                         style={{color:"orangered"}}
                     >
                         Web POV
@@ -19,8 +19,8 @@ function LandingInfo({}:any) {
                 <h1 className=' tx-bold '
                     
                 >
-                    <span className=" Q_xs " style={{fontSize:"2.1em !important"}}>Byte City</span>
-                    <span className=" Q_sm_x" style={{fontSize:"3.5em !important"}}>Byte City</span>
+                    <span className="block Q_xs " style={{fontSize:"2.1em !important"}}>Byte City</span>
+                    <span className="block tx-altfont-5 Q_sm_x" style={{fontSize:"3.5em !important"}}>Byte City</span>
                 </h1>
             </div>
             <div className='py-5 invisible  block Q_xs'>q</div>
