@@ -37,7 +37,7 @@ function LandingInfo({}) {
                         <span className="tx-"> City: </span>
                     </span>
                 </h1> */}
-                    <div className="tx-bold-2 tx-faded tx-lg tx-ls-3 ">Welcome to:</div>
+                    <div className="tx-bold-2 tx-faded tx-lg tx-ls-3 pt-8 ">Welcome to:</div>
                 
                 <h1 className="tx-primary tx-xxxl tx-center  ">
                     <span className="tx-altfont-3 " style={{
