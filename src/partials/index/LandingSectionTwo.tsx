@@ -54,7 +54,7 @@ export function LandingSectionTwo({}) {
                     </div> */}
 
                     <div className=" w-100 w-max-500px mt-100">
-                        <h3 className="px-2">Customer Support:</h3>
+                        <h3 className="px-2 tx-white tx-shadow-5 tx-lgx">Customer Support:</h3>
                         {/* We offer different levels of customer support based on your subscription. */}
                             {/* <br /><br /> */}
                         <div className="px-2">
@@ -81,7 +81,8 @@ export function LandingSectionTwo({}) {
                                     <Link href="https://twitter.com/bytecty" target="_blank"
                                         className="tx-lg tx-link opaci-chov--50 block py-2 tx-bold-8"
                                     >
-                                        Videos on Youtube @webpov
+                                        {/* <Image src="/youtube.png" alt="bank" width={150} height={100} className='mt-8 z-1001 pos-rel' /> */}
+                                        Videos on Youtube <br /> <h2> @webpov</h2>
                                     </Link>
                                     </li>
                                 </ul>
@@ -89,8 +90,8 @@ export function LandingSectionTwo({}) {
                         </ul>
                     </div>
 
-                    <div className=" w-100 w-max-300px ">
-                        <h3 className="px-2">Integration Made Easy:</h3>
+                    <div className=" w-100 w-max-300px my-8 ">
+                        <h3 className="px-2 tx-white tx-shadow-5 tx-lx">Integration Made Easy:</h3>
                         {/* Byte City seamlessly integrates with other tools and systems. */}
                         {/* <br /> */}
                         <div className="tx-bold-5 tx-lg px-2">

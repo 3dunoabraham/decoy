@@ -45,9 +45,9 @@ function LandingInfo({}) {
                     </span>
                 </h1>
                 <div  className="flex-col tx-lg tx-center">
-                    <div style={{color:"#F379F1"}}>Simplifying <b>Investing</b> and</div>
+                    <div style={{color:"#F379F1"}}><b>Invest</b> and</div>
                     <div className="flex-wrap gap-1" style={{color:"#099DFF"}}>
-                        <b>Learning</b>
+                        <b>Learn</b>
                         <div className="tx-lgx" style={{color:"orangered"}}>with <b>Gamification</b>!</div>
                     </div>
                     
@@ -79,13 +79,21 @@ function LandingInfo({}) {
                 <div className="w-100 w-max-600px my-100">
                     <Link href="/" className="flex-col flex-align-end px-8 Q_xs_px-4 pt-8 pb-6 opaci-chov-50 opaci-75 box-shadow-2-b bord-r-25 pos-rel">
                         <div className="tx-xxxl pos-abs opaci-10 left-0 pa-4  top-0 tx-start"><FaStackExchange /></div>
-                        <h3 className="tx-end pb-2 tx-lgx">Dive Into Investment Strategies:</h3>
+                        <h3 className="tx-end pb-4 tx-lgx"
+                            style={{color:"#099DFF"}}
+                        >
+                            Dive Into Investment Strategies:
+                        </h3>
                         <p className="tx-end w-100 w-max-500px">Understand the concepts behind Dollar Cost Averaging (DCA) and Automated Trading Systems (ATS).</p>
                         <p className="tx-end w-100 w-max-500px Q_sm_x">Explore how these strategies can benefit your investment journey and enhance your trading approach.</p>
                     </Link>
                     <Link href="/" className="flex-col flex-align-end my-100 px-8 Q_xs_px-4 pt-8 pb-6 opaci-chov-50 opaci-75 box-shadow-2-b bord-r-25 pos-rel">
                         <div className="tx-xxxl pos-abs opaci-25 left-0 pa-4 tx-green top-0 tx-start"><FaMoneyBillAlt /></div>
-                        <h3 className="tx-end pb-2 tx-lgx">Learn About DCA | Learn About ATS</h3>
+                        <h3 className="tx-end pb-4 tx-lgx"
+                            style={{color:"#099DFF"}}
+                        >
+                            Learn About DCA | Learn About ATS
+                        </h3>
 
                         <p className="tx-end w-100 w-max-500px">Explore the Ecosystem:</p>
                         <p className="tx-end w-100 w-max-500px ">Discover the different market sectors, protocols, and tokens that form the foundation of Byte City. </p>
@@ -93,7 +101,11 @@ function LandingInfo({}) {
                     </Link>
                     <Link href="/" className="flex-col flex-align-end px-8 Q_xs_px-4 pt-8 pb-6 opaci-chov-50 opaci-75 box-shadow-2-b bord-r-25 pos-rel">
                         <div className="tx-xxxl pos-abs opaci-25 left-0 pa-4 tx-link top-0 tx-start"><FaAddressBook /></div>
-                        <h3 className="tx-end pb-2 tx-lgx">Browse Ecosystem</h3>
+                        <h3 className="tx-end pb-4 tx-lgx"
+                            style={{color:"#099DFF"}}
+                        >
+                            Browse Ecosystem
+                        </h3>
 
                         <p className="tx-end w-100 w-max-500px">Get Started with Byte City:</p>
                         <p className="tx-end w-100 w-max-500px ">Follow our step-by-step tutorials to navigate the platform effectively. </p>
