@@ -68,7 +68,7 @@ export default function Component({}) {
             <details className="flex-1 w-100">
                 <summary className="flex pa-1 opaci-chov--50 mb-2" >
                     <div className="flex-1"></div>
-                    <button className="noclick tx-white pa-2 px-4 bord-r-50 tx-lg flex-center gap-2 tx-lgx" style={{background:"#46B7FA"}}>
+                    <button className="noclick tx-white pa-2 px-4 bord-r-50 tx-lg flex-center gap-2 tx-lgx" style={{background:"#099DFF"}}>
                         <FaBars />
                         <div className="Q_sm_x ">Menu</div>
                     </button>
@@ -76,7 +76,7 @@ export default function Component({}) {
                 <div className='flex-1 pr-2 '>
 
                     {(!!session && !!session.user && !!LS_rpi)  && <>
-                        <div className="box-shadow-5-b pa-4 bord-r-8 bg-b-40 tx-center opaci-chov--75 bg-glass-20 tx-shadow-5"
+                        <div className="box-shadow-5-b pa-4 bord-r-25 bg-b-40 tx-center opaci-chov--50 bg-glass-20 tx-shadow-5"
                                 onClick={()=>{syncBinance()}}
                             >
                                 <div className="tx-center tx-lx ">
@@ -89,8 +89,12 @@ export default function Component({}) {
 
                     {!!app && !!app.sidebarPages && app.sidebarPages.map((aLink, index)=>{
                         return (
-                            <Link href={aLink.url || "#"} className="flex-center pb-2 py-3 clickble  px-2 bg-b-50 bord-r-5 my-2 bg-glass-20 box-shadow-i-2-t  " key={index}>
-                                <div className="px-1 tx-center tx-lg opaci-hov--50">{aLink.icon ? ICONS[aLink.icon]: <BsPerson /> }</div>
+                            <Link href={aLink.url || "#"} className="flex-center pb-2 py-3 clickble  px-2 bg-b-50 bord-r-50 opaci-chov--75 my-2 bg-glass-20 box-shadow-i-2-t  " key={index}>
+                                <div style={{}}
+                                    className="px-1 tx-center tx-lg opaci-hov--50 "
+                                >
+                                    {aLink.icon ? ICONS[aLink.icon]: <BsPerson /> }
+                                </div>
                                 <div className="flex-1 px-1 Q_xl_x w-min-220p tx-shadow-5">{aLink.label}</div>
                             </Link>
                         )
@@ -100,7 +104,7 @@ export default function Component({}) {
                     {!!app && !!app.sidebarLinks && app.sidebarLinks.map((anUnit, index)=>{
                         if (router.query.key == anUnit.label) { return (
                             <div key={index} className="flex-center py-1 clickble  px-2 bg-w-50   " >
-                                <div className="px-1 tx-center tx-lg opaci-hov--50"><BsFillArchiveFill /></div>
+                                <div className="px-1 tx-center tx-lg opaci-hov--50 "><BsFillArchiveFill /></div>
                                 <div className="flex-1 px-1 Q_xl_x w-min-220p">{anUnit.label.replace("_"," ").toUpperCase()}</div>
                             </div>
                         )}

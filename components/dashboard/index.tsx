@@ -425,7 +425,7 @@ export function ChartDashboard({query, user}:any) {
                 <div className="flex-wrap flex-align-start w-100  my-">
                     <div className="flex-col flex-1 pa-4 ">
                         
-                        <Link href={"/chart/4h?token=btc"}   
+                        {/* <Link href={"/chart/4h?token=btc"}   
                             className={`px-3 py-2 flex-col clickble nowrap tx-lg opaci-chov--75 my-2 w-100
                                 ${!referralData ? "" : "tx-white"}
                             `}
@@ -433,7 +433,7 @@ export function ChartDashboard({query, user}:any) {
                         >
                             <div><FaChartBar /></div>
                             <div className='tx-shadow-5'>Dashboard</div>
-                        </Link>
+                        </Link> */}
                         {!showAllTokens &&
                             <div className={`pa-2 bord-r-8 bg-b-50 tx-white opaci-chov--50`}onClick={()=>{s__showAllTokens(true)}}>
                                 Show All Tokens
@@ -532,6 +532,40 @@ export function ChartDashboard({query, user}:any) {
                             </div>
                         </div>}
 
+
+        <div className="tx-white flex-col mt-8">
+            {!referralData && <>
+                <div className="opaci-50 mt-8">Simulated Player detected</div>
+                <div className="opaci-50 mb-3">but, Google connection not found</div>
+                <div className="" style={{background:"orangered"}}>
+                    <LoginBtn><AppClientDesc /></LoginBtn>
+                </div>
+            </>}
+            {!!referralData && <>
+                {!!referralData.user && <>
+                    
+
+                    {<>
+                        <div className="box-shadow-2 pa-4 bord-r-8 bg-b-50 tx-center opaci-chov--75"
+                             onClick={()=>{syncBinance()}}
+                        >
+                            <div className="tx-center tx-lx">
+                                <div><GiCardExchange/></div>
+                            </div>
+                            <div className="Q_xl_x">Sync API Keys!</div>
+                        </div>
+                    </>}
+                </>}
+            </>}
+        </div>
+        {!referralData && <>
+            <div className='tx-center tx-white'>Connect w/Google to <br /> export your simulation data!</div>
+        </>}
+        {!!referralData && <>
+            <DownloadButton filename="database" data={tokensArrayObj} />
+        </>}
+        <div className=" pt-100"></div>
+
                     </div>
                 }   
 
@@ -573,53 +607,7 @@ export function ChartDashboard({query, user}:any) {
             </div>
         </div>
         <div className=" pt-200"></div>
-        
-        sessiondata:{JSON.stringify(session)}
-            <br />
-            ||
-            <br />
-            referralData: {JSON.stringify(referralData)}
-            <br />
-            ||
-            <br />
 
-        <div className=" pt-200"></div>
-        <div className="tx-white mb-100">
-            {!!referralData ? JSON.stringify(referralData.user) : "no session referralData"}
-            <br />
-            <br />
-            <br />
-            {!referralData && <>
-                <div className="opaci-50 mt-8">Simulated Player detected</div>
-                <div className="opaci-50 mb-3">but, Google connection not found</div>
-                <div className="" style={{background:"orangered"}}>
-                    <LoginBtn><AppClientDesc /></LoginBtn>
-                </div>
-            </>}
-            {!!referralData && <>
-                {!!referralData.user && <>
-                    
-
-                    {<>
-                        <div className="box-shadow-2 pa-4 bord-r-8 bg-b-50 tx-center opaci-chov--75"
-                             onClick={()=>{syncBinance()}}
-                        >
-                            <div className="tx-center tx-lx">
-                                <div><GiCardExchange/></div>
-                            </div>
-                            <div className="Q_xl_x">Sync </div>
-                            <div className="Q_xl_x"  style={{color:""}}> Wallet!</div>
-                        </div>
-                    </>}
-                </>}
-            </>}
-        </div>
-        {!referralData && <>
-            <div className='tx-center tx-white'>Connect w/Google to <br /> export your simulation data!</div>
-        </>}
-        {!!referralData && <>
-            <DownloadButton filename="database" data={tokensArrayObj} />
-        </>}
     </div>
     )
 }

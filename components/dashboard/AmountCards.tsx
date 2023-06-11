@@ -40,7 +40,7 @@ export default function Component ({ tokens, mul, bigmul, prices= null }) {
     
     if (!queryUSDT.data) return 
     return (<>
-        <div className='flex-wrap flex-align-start flex-justify-start  gap-4'>
+        <div className='flex-wrap flex-align-start flex-justify-center  gap-4'>
             {tokens.map((aToken,index)=>{
                 if (!JSON.parse(LS_tokensArrayObj)[aToken]) return 
                 let aSelectedTimeframe = JSON.parse(LS_tokensArrayObj)[aToken]

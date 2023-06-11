@@ -217,6 +217,7 @@
 /* ------------------------------------------ TEXT ------------------------------------------ */
 /* FAMILY */
 .tx-sans {font-family: 'Open Sans', sans-serif}.tx-roman {font-family: 'Times New Roman', Times, serif}
+.tx-comic {font-family: "Comic Sans MS", "Comic Sans", cursive;}
 /* SIZE */
 .tx-xxs {font-size: 0.35rem}.tx-xs {font-size: 0.55rem}.tx-xsm {font-size: 0.725rem}.tx-sm {font-size: 0.845rem}
 .tx-smd {font-size: 0.92rem}.tx-md {font-size: 1.07rem}.tx-mdl {font-size: 1.13rem}.tx-lg {font-size: 1.4rem}

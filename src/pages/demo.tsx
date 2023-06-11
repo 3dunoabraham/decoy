@@ -89,7 +89,7 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
                         <div className="a tx-l tx-bold-8">← Go Back</div>
                     </div>
                     <div className="a tx-lg flex z-400 px-4 ">
-                        <div className="a tx-l tx-bold-6">to WebPov</div>
+                        <div className="a tx-l tx-bold-6">to WebPOV</div>
                     </div>
                 </Link>
                 <div className=' tx-blue  tx-xl pa-8 opaci-chov--50 z-800 pos-abs right-0  spin-120'
@@ -144,7 +144,7 @@ type PageProps = {
 Page.getLayout = function getLayout(page: ReactElement) {
     return (
     <Layout>
-        <Head><title>WebPov</title></Head>
+        <Head><title>WebPOV</title></Head>
         {page}
     </Layout>
     )

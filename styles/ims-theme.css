@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Zeyada&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gajraj+One&display=swap');
 :root {
     --secondary: #7C3AED;
     --tertiary: #ED7C3A;
@@ -19,6 +22,9 @@
     --border-faded: #D0D5DD;
   }
 
+  .tx-altfont-1 { font-family: 'Zeyada', cursive; }
+  .tx-altfont-2 { font-family: 'Rubik Dirt', cursive; }
+  .tx-altfont-3 { font-family: 'Gajraj One', cursive; }
   
   
   /* body {font-family: "Inter";} */

@@ -7,31 +7,42 @@ export function LandingSectionTwo({}) {
     return (
         <>
             <div className=" " >
-                <div className="flex-wrap flex-justify-center gap-6 ">
-                    <div className=" w-100 w-max-250px ">
+                <div className="flex-wrap flex-justify-center flex-align-center gap-6 ">
+                    <div className=" w-100 w-max-300px box-shadow-2-b pb-8 pa-4 bord-r-50 bg-b-10 ">
                         <div className=" tx-white"> 
-                            <h3 className="">Gamify Your Investments:</h3>
+                            <h3 className="tx-lx"><span style={{borderBottom:"2px solid orangered"}}>Gamify</span> Your Investments:</h3>
                             <div className="py-3">
                                 Step into the realm of gamification, where the excitement of play and competition meets the world of trading.
-                                By incorporating elements of challenge, achievement, and reward,
-                            <br /><br />
-                                Byte City creates a symbolic arena for investors to engage with the trading process.
+                                {/* By incorporating elements of challenge, achievement, and reward, */}
+                                <br /><br />
+                                <div className="">
+                                    <div className="">
+                                        Byte City creates a symbolic arena for investors to engage with the trading process.
+                                    </div>
+                                </div>
                             </div>
                             {/* Explore common or complex processes, confront emotional reactions to financial risk, and enjoy a fun and engaging trading experience. */}
                         </div>
-                        <Link href="https://webpov.gitbook.io/gamification" target="_blank" className="tx-link opaci-chov--50">Learn More: What is Gamification?</Link>
+                        <Link href="https://webpov.gitbook.io/gamification" target="_blank" className="tx-link opaci-chov--50">Learn More: What is <b>Gamification</b>?</Link>
                     </div>
 
-                    <div className="tx-white w-100 w-max-300px ">
-                        <h3 className="mt-8">Experience the Fusion of Finance and Gaming:</h3>
-                        <div className="py-3">
-                            Byte City offers a unique experience by combining the worlds of finance and gaming through our 3D browser game interface.
-                            <br /><br />
-                            Interact with simulated investments in a game-like environment, making the trading experience more enjoyable 
+                    <div className="tx-white w-100 w-max-400px ">
+                        <h3 className="flex-col flex-align-start flex-justify-start tx-lg px-2" >
+                            <div className="tx-bold-2">Experience the fusion of</div>
+                            <div className="flex-wrap flex-align-end flex-justify-start gap-2 " >
+                                <div style={{borderBottom:"2px solid orange"}} className="tx-comic tx-lx">Finance</div>
+                                <div >+</div>
+                                <div style={{borderBottom:"2px solid orange"}} className="tx-roman tx-lx">Gaming</div>
+                            </div>
+                        </h3>
+                        <div className="py-8 px-2">
+                            <div className="tx-lg">Byte City offers a unique experience by combining the worlds of finance and gaming through our 3D browser game interface.</div>
+                            {/* <br /><br /> */}
+                            {/* Interact with simulated investments in a game-like environment, making the trading experience more enjoyable  */}
                         </div>
                     </div>
 
-                    <div className="tx-white w-100 w-max-300px  ">
+                    {/* <div className="tx-white w-100 w-max-300px  ">
                         <h3>Frequently Asked Questions:</h3>
                         <div className="py-3">
                             Find answers to common queries about Byte City, its features, and benefits.
@@ -40,29 +51,55 @@ export function LandingSectionTwo({}) {
                         </div>
 
                         <Link  href="https://webpov.gitbook.io/gtabtc/what-is-byte-city/faq" target="_blank"  className="tx-link opaci-chov--50">Explore FAQs</Link>
-                    </div>
+                    </div> */}
 
-                    <div className=" w-100 w-max-500px ">
-                        <h3>Customer Support:</h3>
-                        We offer different levels of customer support based on your subscription.
-                            <br /><br />
-                        If you have any questions or need assistance, get in touch with our support team here.
-
-                        <br />
-                        <Link href="https://twitter.com/bytecty" target="_blank" className="tx-lg tx-link opaci-chov--50">Contact on Twitter @bytecty</Link>
-                        <br />
-                        <Link href="https://twitter.com/bytecty" target="_blank" className="tx-lg tx-link opaci-chov--50">or @webpov</Link>
-                        <br />
-                        <Link href="https://twitter.com/bytecty" target="_blank" className="tx-lg tx-link opaci-chov--50 mt-8 block py-2">Videos on Youtube @webpov</Link>
+                    <div className=" w-100 w-max-500px mt-100">
+                        <h3 className="px-2">Customer Support:</h3>
+                        {/* We offer different levels of customer support based on your subscription. */}
+                            {/* <br /><br /> */}
+                        <div className="px-2">
+                            If you have any questions or need assistance, get in touch with our support team here.
+                        </div>
+                        <ul>
+                            <li>
+                                <Link href="https://twitter.com/bytecty" target="_blank"
+                                    className="tx-lg tx-link opaci-chov--50"
+                                >
+                                    Support on Twitter @ByteCTY
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="https://twitter.com/bytecty" target="_blank"
+                                    className="tx-lg tx-link opaci-chov--50"
+                                >
+                                    Contact on Twitter @WebPOV
+                                </Link>
+                            </li>
+                            <li>Gameplay & Tutorials 👇:
+                                <ul>
+                                    <li>
+                                    <Link href="https://twitter.com/bytecty" target="_blank"
+                                        className="tx-lg tx-link opaci-chov--50 block py-2 tx-bold-8"
+                                    >
+                                        Videos on Youtube @webpov
+                                    </Link>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
 
                     <div className=" w-100 w-max-300px ">
-                        <h3>Integration Made Easy:</h3>
-                        Byte City seamlessly integrates with other tools and systems.
-                        <br />
-                        Discover how easy it is to connect Byte City with your preferred tools and enhance your investment experience.
+                        <h3 className="px-2">Integration Made Easy:</h3>
+                        {/* Byte City seamlessly integrates with other tools and systems. */}
+                        {/* <br /> */}
+                        <div className="tx-bold-5 tx-lg px-2">
+                            Discover how easy it is to connect Byte City with your preferred tools and enhance your investment experience.
+                        </div>
 
-                        Learn About Integration
+                        {/* <div>
+                            Learn About Integration
+                        </div> */}
                     </div>
                 </div>
             </div>
@@ -92,8 +129,8 @@ export function LandingSectionTwo({}) {
                             style={{boxShadow:"0 4px 3px #00000022"}}
                             href='https://bytc.vercel.app'
                         >
-                            <Image src="/main2.png" alt="bank" width={244} height={255} className='mt-8' />
-                            <h1 className='tx-xl tx-shadow-2' style={{color:"orangered"}}>Play Now!</h1>
+                            <Image src="/main2.png" alt="bank" width={122} height={128} className='mt-8 z-1001 pos-rel' />
+                            <h1 className='tx-lx px-2 tx-shadow-2' style={{color:"#099DFF"}}>Play Now!</h1>
                         </Link>
                     </div>
                 </div>

@@ -80,14 +80,14 @@ export function TradeHistory({tradeHistory=[], session, pair}:any) {
     </>
     return (
         <div className='px-8 Q_xs_sm_px-2 w-100'>
-            sessiondata:{JSON.stringify(sessiondata)}
+            {/* sessiondata:{JSON.stringify(sessiondata)}
             <br />
             ||
             <br />
             referralData: {JSON.stringify(referralData)}
             <br />
             ||
-            <br />
+            <br /> */}
             <ItemsTable displayConfigObj={tradesTableConfig} theArray={theuserstart.data}
                 boolConfig={["isSelectable"]}
             />

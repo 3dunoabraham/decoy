@@ -149,7 +149,7 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
                 </>}
             </div>
             
-            <div className='flex-wrap flex-justify-start  flex-align-stretch' >
+            <div className='' >
                 {!!rpi &&
                     <div className=' pa-3 flex-1 '>
                         <AmountCards tokens={tokens} {...{mul, bigmul}} />
@@ -178,11 +178,22 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
     </div>  
 
     
-
-<div className="pos-rel pb-100 pt-8 g-b-20 box-shadow-8"  style={{ background:"#111111", zIndex:"2000", }}>
+<div className="pos-rel "  style={{ zIndex:"2000", }}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className='pos-abs bottom-0'
+        style={{transform:"translateY(1px)"}}
+    >
+        <path fill="#111111" fill-opacity="1" d="M0,270L1100,230L1440,320L1440,320L720,320L0,320Z"></path>
+    </svg>
+</div>
+<div className="pos-rel   g-b-20 "  style={{ background:"#111111", zIndex:"2000", }}>
     <ChartDashboard query={{token:"btc",timeframe:"4h"}} user={sessiondata}/>
 </div>
-<div className=" py-8 g-b-20 px-100 Q_xs_sm_px-2 ">
+<div className='pos-rel noclick' style={{ zIndex:"2000",  }}>
+{/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#111111" fill-opacity="1" d="M0,192L60,165.3C120,139,240,85,360,69.3C480,53,600,75,720,90.7C840,107,960,117,1080,106.7C1200,96,1320,64,1380,48L1440,32L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path></svg> */}
+
+</div>
+
+<div className=" py-8 g-b-20 px-100 Q_xs_sm_px-2 h-min-100vh ">
     <div className="opaci-50 tx-ls-3 tx-lg my-2">Goal Balance</div>
     <AmountCards tokens={tokens} mul={11} bigmul={50}  />
 </div>
@@ -198,7 +209,7 @@ type PageProps = {
 Page.getLayout = function getLayout(page: ReactElement) {
     return (
     <Layout>
-        <Head><title>WebPov</title></Head>
+        <Head><title>WebPOV</title></Head>
         <InventoryProvider>
             <SidebarContainer sidebar={<SessionSidebar/>}>{page}</SidebarContainer>
         </InventoryProvider>
