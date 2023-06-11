@@ -50,12 +50,12 @@ export default function Component ({ tokens, mul, bigmul, prices= null }) {
                 let localBigMul = index < 2 ? bigmul*2 : bigmul
                 
                 return (
-                    <div className='box-shadow-1-b  bord-r-5 ord-r-8' key={index}>
+                    <div className='box-shadow-1-b bg-white bord-r-5 ord-r-8' key={index}>
                         
                         {(!!aCrystal0 || !!aCrystal1) && <>
                             
                                 
-                                <div className='flex-center gap-1 my-2 pos-rel'>
+                                <div className='flex-center gap-1 my-2 pos-rel '>
                                     <div className='tx-bold-6 flex  flex-align-end gap-1 w-min-150px'>
                                         <small className='Q_sm_x opaci-50 tx-ls-1 pl-2'>Alert:</small>
                                         <div className='Q_xs pr-4  px-1 flex-1 block pos-abs top-0 left-0 translate-y--100 bg-white box-shadow-1-b'>
@@ -63,7 +63,7 @@ export default function Component ({ tokens, mul, bigmul, prices= null }) {
                                         </div>
                                         {!!aCrystal0 &&
                                             
-                                            <Link href={"/chart/4h?token="+aToken} className='opaci-chov--50 box-shadow-1-r'>
+                                            <Link href={"/?timeframe4h&token="+aToken} className='opaci-chov--50 box-shadow-1-r'>
                                                 <div
                                                     className={`tx-lg px-1 ${aCrystal0 > 0 ? "tx-green" : "tx-red"}`}
                                                 >
@@ -73,7 +73,7 @@ export default function Component ({ tokens, mul, bigmul, prices= null }) {
                                         }
                                         {!!aCrystal1 &&
                                             
-                                            <Link href={"/chart/1d?token="+aToken} className='opaci-chov--50 box-shadow-1-l'>
+                                            <Link href={"/?timeframe1d&token="+aToken} className='opaci-chov--50 box-shadow-1-l'>
                                                 <div
                                                     className={`tx-lg px-1 ${aCrystal1 > 0 ? "tx-green" : "tx-red"}`}
                                                 >

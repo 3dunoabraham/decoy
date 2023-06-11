@@ -424,16 +424,6 @@ export function ChartDashboard({query, user}:any) {
             <div className={` flex-row Q_xs_md_flex-col w-100 flex-align-start `}>
                 <div className="flex-wrap flex-align-start w-100  my-">
                     <div className="flex-col flex-1 pa-4 ">
-                        
-                        {/* <Link href={"/chart/4h?token=btc"}   
-                            className={`px-3 py-2 flex-col clickble nowrap tx-lg opaci-chov--75 my-2 w-100
-                                ${!referralData ? "" : "tx-white"}
-                            `}
-                            style={{background:"#001420"}}                
-                        >
-                            <div><FaChartBar /></div>
-                            <div className='tx-shadow-5'>Dashboard</div>
-                        </Link> */}
                         {!showAllTokens &&
                             <div className={`pa-2 bord-r-8 bg-b-50 tx-white opaci-chov--50`}onClick={()=>{s__showAllTokens(true)}}>
                                 Show All Tokens
@@ -606,7 +596,6 @@ export function ChartDashboard({query, user}:any) {
 
             </div>
         </div>
-        <div className=" pt-200"></div>
 
     </div>
     )

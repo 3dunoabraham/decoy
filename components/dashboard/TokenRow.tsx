@@ -18,7 +18,7 @@ export default function Component({
                         <div className="flex-center  flex-justify-between w-100">
                             <div className="tx-lgx flex flex-align-start  " >
                                 <Link className={`opaci-chov--50 tx-gray ${aToken == cryptoToken?"":"nodeco"} `}
-                                    href={`/chart/${timeframe}?token=${aToken}`}>
+                                    href={`/?timeframe=${timeframe}&token=${aToken}`}>
                                     <span className="px-1">{aToken.toUpperCase()}:</span>
                                     <span className="tx-ls-2">{isK && parseDecimals(queryUSDT.data[index].price)}</span>
                                 </Link>

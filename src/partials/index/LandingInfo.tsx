@@ -5,9 +5,21 @@ import {  FaAddressBook, FaMoneyBillAlt, FaStackExchange } from "react-icons/fa"
 
 import LandingSectionOne from "./LandingSectionOne";
 import LandingSectionTwo from "./LandingSectionTwo";
+import { useLocalStorage } from "usehooks-ts";
+import { useState } from "react";
 
 function LandingInfo({}) {
+    const [LS_showInfo, s__LS_showInfo] = useLocalStorage("showWelcomeInfo","yes")
+    const [showInfo, s__showInfo] = useState(LS_showInfo)
+    const toggleToggle = ()=>{
+        let newVal = showInfo == "yes" ? "" : "yes"
+
+        s__LS_showInfo(newVal)
+        s__showInfo(newVal)
+    }
     return (
+        <>
+                {!!showInfo && <>
         <div className="px-4 pt-8 " style={{background:"linear-gradient(0, #00000000, #099DFF22)", borderRadius:"75px 75px 0 0"}}>
             <div className="flex-col">
                 {/* <h1 className="tx-primary tx-xl tx-center Q_xs ">
@@ -22,7 +34,8 @@ function LandingInfo({}) {
                         <span className="tx-"> City: </span>
                     </span>
                 </h1> */}
-                <div className="tx-bold-2 tx-faded tx-lg tx-ls-3 ">Welcome to:</div>
+                    <div className="tx-bold-2 tx-faded tx-lg tx-ls-3 ">Welcome to:</div>
+                
                 <h1 className="tx-primary tx-xxxl tx-center  ">
                     <span className="tx-altfont-3 " style={{
                         fontSize: "1.3em",
@@ -70,7 +83,7 @@ function LandingInfo({}) {
             </div>
             <div className="z--1 pos-rel" style={{transform:"translateY(-1px)"}}>
                 {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#AEE3F6" fillOpacity="1" d="M0,256L720,64L1440,160L1440,0L720,0L0,0Z"></path></svg> */}
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#AEE3F6" fill-opacity="1" d="M0,192L360,192L720,100L1080,192L1440,64L1440,0L1080,0L720,0L360,0L0,0Z"></path></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#b3E8Fb" fill-opacity="1" d="M0,192L360,192L720,100L1080,192L1440,64L1440,0L1080,0L720,0L360,0L0,0Z"></path></svg>
             </div>
 
             <div className="mt-150 py-100 my-100 flex-col flex-align-end px-2">
@@ -142,7 +155,17 @@ function LandingInfo({}) {
                 <div className="flex-1"></div>
             </div>
         </div>
-    )
+        </>}
+        
+        <div className="flex-col flex-align-end opaci-chov--50 pos-rel"
+            onClick={()=>toggleToggle()}
+            style={{zIndex:3000}}
+        >
+            <div>Click here to</div>
+            {showInfo && <div>Hide Welcome Info ↑</div> }
+            {!showInfo && <div>Show Welcome Info!</div> }
+        </div>
+    </>)
 }
 
 export default LandingInfo
