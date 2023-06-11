@@ -6,7 +6,7 @@ export const SidebarFilterButton = ({
         <div className="flex w-100 Q_xs_lg  pos-rel "
             onClick={()=>{handleClick(theOption.id, theOption[filter.optField],filter.optName) }}
         >
-            <div className="tx-mdl nowrap   ims-bg-primary w-min-200px ">
+            <div className="tx-mdl nowrap    w-min-200px ">
                 <div className="flex-1  pl-4 py-2 opaci-hov--50">{theOption[filter.optField]}</div>
             </div>
         </div>

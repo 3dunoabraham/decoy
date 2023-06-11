@@ -179,10 +179,10 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
 
     
 
-<div className=" h-100 pb-100 pt-8 g-b-20 box-shadow-8" style={{background:"#2D313E"}}>
+<div className="pos-rel pb-100 pt-8 g-b-20 box-shadow-8"  style={{ background:"#111111", zIndex:"2000", }}>
     <ChartDashboard query={{token:"btc",timeframe:"4h"}} user={sessiondata}/>
 </div>
-<div className=" h-100 py-8 g-b-20 px-100 Q_xs_sm_px-2 ">
+<div className=" py-8 g-b-20 px-100 Q_xs_sm_px-2 ">
     <div className="opaci-50 tx-ls-3 tx-lg my-2">Goal Balance</div>
     <AmountCards tokens={tokens} mul={11} bigmul={50}  />
 </div>
@@ -198,7 +198,7 @@ type PageProps = {
 Page.getLayout = function getLayout(page: ReactElement) {
     return (
     <Layout>
-        <Head><title>WebGamed</title></Head>
+        <Head><title>WebPov</title></Head>
         <InventoryProvider>
             <SidebarContainer sidebar={<SessionSidebar/>}>{page}</SidebarContainer>
         </InventoryProvider>

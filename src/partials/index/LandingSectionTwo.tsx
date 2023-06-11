@@ -51,9 +51,9 @@ export function LandingSectionTwo({}) {
                         <br />
                         <Link href="https://twitter.com/bytecty" target="_blank" className="tx-lg tx-link opaci-chov--50">Contact on Twitter @bytecty</Link>
                         <br />
-                        <Link href="https://twitter.com/bytecty" target="_blank" className="tx-lg tx-link opaci-chov--50">or @webgamed</Link>
+                        <Link href="https://twitter.com/bytecty" target="_blank" className="tx-lg tx-link opaci-chov--50">or @webpov</Link>
                         <br />
-                        <Link href="https://twitter.com/bytecty" target="_blank" className="tx-lg tx-link opaci-chov--50 mt-8 block py-2">Videos on Youtube @webgamed</Link>
+                        <Link href="https://twitter.com/bytecty" target="_blank" className="tx-lg tx-link opaci-chov--50 mt-8 block py-2">Videos on Youtube @webpov</Link>
                     </div>
 
                     <div className=" w-100 w-max-300px ">

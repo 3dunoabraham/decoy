@@ -89,7 +89,7 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
                         <div className="a tx-l tx-bold-8">← Go Back</div>
                     </div>
                     <div className="a tx-lg flex z-400 px-4 ">
-                        <div className="a tx-l tx-bold-6">to WebGamed</div>
+                        <div className="a tx-l tx-bold-6">to WebPov</div>
                     </div>
                 </Link>
                 <div className=' tx-blue  tx-xl pa-8 opaci-chov--50 z-800 pos-abs right-0  spin-120'
@@ -116,13 +116,13 @@ const Page: NextPageWithLayout = ({online,asd}:PageProps) => {
                             <BsGithub />
                         </div>
                     </Link>
-                    <Link href="https://twitter.com/webgamed" target="_blank" 
+                    <Link href="https://twitter.com/webpov" target="_blank" 
                         className="bg-w-10 pa-3 opaci-chov--50">
                         <div className="flex bg-white bord-r-100p tx-lg pa-1">
                             <BsTwitter />
                         </div>
                     </Link>
-                    <Link href="https://webgamed.gitbook.io/bytecity" target="_blank" 
+                    <Link href="https://webpov.gitbook.io/bytecity" target="_blank" 
                         className="bg-w-10 pa-3 opaci-chov--50">
                         <div className="flex bg-white bord-r-100p tx-lg pa-1">
                             <ImBook />
@@ -144,7 +144,7 @@ type PageProps = {
 Page.getLayout = function getLayout(page: ReactElement) {
     return (
     <Layout>
-        <Head><title>WebGamed</title></Head>
+        <Head><title>WebPov</title></Head>
         {page}
     </Layout>
     )

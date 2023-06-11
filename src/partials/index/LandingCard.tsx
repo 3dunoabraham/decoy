@@ -9,11 +9,11 @@ function LandingInfo({}:any) {
     return (
         <div className='w-100 flex-col pt- pb-100' style={{background:"#46B7FA"}}>
             <div className='tx-white tx-center py-8 '>
-                <Link href="https://twitter.com/webgame">
+                <Link href="/">
                     <h1 className='tx-bold-2 opaci-50 tx-ls-5 tx-lg pt-4 '
                         style={{color:"orangered"}}
                     >
-                        Web Gamed
+                        Web POV
                     </h1>
                 </Link>
                 <h1 className=' tx-bold '

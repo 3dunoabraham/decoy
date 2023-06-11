@@ -27,7 +27,7 @@ export default function Page({tokens, session}) {
     return (
         <Layout>
             
-            <Head><title>Chart | WebGamed</title></Head>
+            <Head><title>Chart | WebPov</title></Head>
             <div className="pos-fix flex z-1001">
                 <Link className=" bg-white box-shadow-2 px-3 py-2 ord-r-1 ma-1 ord-r-5 z-1001" href="/">
                     Home

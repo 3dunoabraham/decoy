@@ -37,7 +37,7 @@ const Page: NextPageWithLayout = ({pair, session}:any) => {
 Page.getLayout = function getLayout(page: ReactElement) {
     return (
     <Layout>
-        <Head><title>History | WebGamed</title></Head>
+        <Head><title>History | WebPov</title></Head>
         <InventoryProvider>
             <SidebarContainer sidebar={<></>}>
                 {page}

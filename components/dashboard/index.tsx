@@ -415,7 +415,7 @@ export function ChartDashboard({query, user}:any) {
         </div>)
     }
     return (
-    <div className="body h-min-100  pos-rel flex-col flex-justify-start noverflow">
+    <div className="body  pos-rel flex-col flex-justify-start noverflow">
         
         <div className="opaci-50 tx-ls-3 tx-lg  tx-white pr-100">Strategy A</div>
         <div className={"bg-glass-6   bord-r-10 tx-gray mt-4 py-2 z-999 fade-in w-95 noverflow flex flex-between"}
@@ -512,7 +512,7 @@ export function ChartDashboard({query, user}:any) {
                         
                             {loadings == "" &&  tokensArrayObj[cryptoToken] && queryUSDT.data && isClient &&
                              !!tradeHistory &&
-                                <div className=" w-100 h-100">
+                                <div className=" w-100 ">
                                     <Chart
                                         {...{
                                             user,

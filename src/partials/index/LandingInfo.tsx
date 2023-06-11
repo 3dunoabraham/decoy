@@ -71,10 +71,10 @@ function LandingInfo({}) {
                         Twitter: <b>@bytecty</b>
                     </Link>
                     <Link href="/" className="tx-link pt-1 tx-lg opaci-chov--50">
-                        Youtube: <b>@webgamed</b>
+                        Youtube: <b>@webpov</b>
                     </Link>
                     <Link href="/" className="tx-link pt-1 tx-lg opaci-chov--50">
-                        Twitter: <b>@webgamed</b>
+                        Twitter: <b>@webpov</b>
                     </Link>
                     <Link href="/" className="tx-link  tx-lgx opaci-chov--50 py-6">
                         Byte City Game URL: <b className="underline">bytc.vercel.app</b>

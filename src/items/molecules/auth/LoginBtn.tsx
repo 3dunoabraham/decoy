@@ -15,11 +15,11 @@ export default function Component({ children }) {
 
     if (session) {
         return (
-            <div className="flex Q_xs_md_flex-col">
+            <div className="flex Q_xs_md_flex-col gap-1 ">
                 <div className="flex-1">
                     {children}
                 </div>
-                <button className="pa-1 pt-2 tx-lgx tx-white  opaci-chov--50" onClick={() => signOut()}>
+                <button className="pa-1  tx-lgx tx-white  opaci-chov--50" onClick={() => signOut()}>
                     <BsBoxArrowRight />
                 </button>
             </div>

@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link"
-import { FaChartBar, FaEnvelope, FaListAlt, FaStar, FaUser } from "react-icons/fa"
+import { FaBookOpen, FaChartBar, FaEnvelope, FaListAlt, FaStar, FaUser } from "react-icons/fa"
 
 
 function LandingLinks({sessiondata}:any) {
@@ -41,13 +41,13 @@ function LandingLinks({sessiondata}:any) {
                 <div><FaStar /></div>
                 <div className='tx-shadow-5'>Ranking</div>
             </Link>
-            <Link href={"https://twitter.com/webgamed"}    style={{background:"lightgrey"}}
+            <Link href={"https://webpov.gitbook.io/bytecity"}    style={{background:"lightgrey"}}
                 className={`px-3 py-2 flex-col clickble nowrap tx-lg opaci-chov--75 
                     ${!sessiondata ? "" : "tx-white"}
                 `}
             >
-                <div><FaEnvelope /></div>
-                <div className='tx-shadow-5'>Support</div>
+                <div><FaBookOpen /></div>
+                <div className='tx-shadow-5'>Docs</div>
             </Link>
         </div>
     )
