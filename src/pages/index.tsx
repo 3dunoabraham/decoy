@@ -192,7 +192,7 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
     <ChartDashboard query={{token:"btc",timeframe:"4h"}} user={sessiondata}/>
 </div>
 
-<div className='pos-rel noclick pb-200' style={{background:"linear-gradient(0,#DEF2FF, #7DCBFF)", zIndex:"2000",  }}>
+<div className='pos-rel noclick pb-200' style={{background:"linear-gradient(0,#DEF2FF, #7DCBFF)", zIndex:"",  }}>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 200" className='pos-abs top-0'>
         <path fill="#111111" fill-opacity="1" d="M0,192L60,165.3C120,139,240,85,360,69.3C480,53,600,75,720,90.7C840,107,960,117,1080,106.7C1200,96,1320,64,1380,48L1440,32L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
     </svg>
