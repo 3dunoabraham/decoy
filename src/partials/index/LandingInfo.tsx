@@ -131,7 +131,7 @@ function LandingInfo({}) {
             
         </>}
         
-        <div className="flex-col flex-align-end opaci-chov--50 pos-rel"
+        <div className="flex-col flex-align-end opaci-chov--50 pos-rel pr-8"
             onClick={()=>toggleToggle()}
             style={{zIndex:3000}}
         >

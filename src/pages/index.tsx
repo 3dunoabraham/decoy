@@ -157,7 +157,7 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
                     </div>
                 }
             </div>
-
+            */}
             <div className='flex-center  flex-1'></div>
                 
             {!!rpi &&
@@ -168,7 +168,7 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
                         - Disconnect Simulated Player
                     </button>
                 </div>
-            } */}
+            } 
         </div>
         
     </div>

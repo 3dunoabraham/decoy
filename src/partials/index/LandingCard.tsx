@@ -10,8 +10,8 @@ function LandingInfo({}:any) {
         <div className='w-100 flex-col pt- pb-100' style={{background:"linear-gradient(0, #46B7FA, #049BFF)"}}>
             <div className='tx-white tx-center py-8 '>
                 <Link href="/">
-                    <h1 className='tx-bold-8 opaci-50 tx-ls-5 tx-lgx pt-4 translate-y-50'
-                        style={{color:"orangered"}}
+                    <h1 className='tx-bold-8 opaci-50 tx-ls-5 tx-lgx pt-4 '
+                        style={{color:"orangered", transform: "translateY(20%)"}}
                     >
                         Web POV
                     </h1>
