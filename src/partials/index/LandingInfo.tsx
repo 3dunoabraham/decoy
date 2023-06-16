@@ -22,7 +22,7 @@ function LandingInfo({}) {
     })
     return (
         <>
-                {!!showInfo && <>
+                {/*!!showInfo && */<>
         <div className="px-4 " style={{background:"linear-gradient(0, #00000000, #099DFF22)", borderRadius:"75px 75px 0 0"}}>
             <div className="flex-col">
                 {/* <h1 className="tx-primary tx-xl tx-center Q_xs ">
@@ -51,7 +51,6 @@ function LandingInfo({}) {
                     </span>
                     <span className="tx-bold tx-altfont-1 block tx-white tx-italic pt-4 flex-center gap-4 "
                         style={{
-                            color:"",
                             transform:"rotate(-5deg)", 
                             textShadow: "1px 1px 0 #F379F1, -1px -1px 0 #F379F1, 2px 2px 0 #000000"
                         }}
@@ -86,7 +85,7 @@ function LandingInfo({}) {
             </div>
             <div className="z--1 pos-rel" style={{transform:"translateY(-1px)"}}>
                 {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#AEE3F6" fillOpacity="1" d="M0,256L720,64L1440,160L1440,0L720,0L0,0Z"></path></svg> */}
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#b3E8Fb" fill-opacity="1" d="M0,192L360,192L720,100L1080,192L1440,64L1440,0L1080,0L720,0L360,0L0,0Z"></path></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#b3E8Fb" fillOpacity="1" d="M0,192L360,192L720,100L1080,192L1440,64L1440,0L1080,0L720,0L360,0L0,0Z"></path></svg>
             </div>
 
             <div className="mt-100  py-8  flex-col flex-align-end px-2">
