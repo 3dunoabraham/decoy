@@ -2,6 +2,7 @@ import { SessionProvider } from "next-auth/react"
 import type { ReactElement, ReactNode } from 'react'
 import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
+import { Analytics } from '@vercel/analytics/react';
 // import 'csscss'
 import '@/styles/reset.css'
 import '@/styles/ims-theme.css'
@@ -22,6 +23,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     return getLayout(
         <SessionProvider session={pageProps.session}>
             <Component {...pageProps} />
+            <Analytics />
         </SessionProvider>
     )
 }
