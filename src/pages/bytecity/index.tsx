@@ -24,8 +24,6 @@ import LandingBackground from '@/src/partials/index/LandingBackground';
 import LandingSession from '@/src/partials/index/LandingSession';
 import { ChartDashboard } from '@/components/dashboard';
 import { useRouter } from 'next/router';
-import WebPOVLandingCard from '../partials/webpov/WebPOVLandingCard';
-import WebPOVLandingBackground from '../partials/webpov/WebPOVLandingBackground';
 
 const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
     const { data:sessiondata, }:any = useSession();
@@ -128,11 +126,11 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
 
     return (<>
     <div className='flex-center w-100  -min-100vh'>
-        <div className="-min-90vh  w-100  flex-col flex-justify-start flex-align-stretch" style={{background:"#0c0c0c"}}>
+        <div className="-min-90vh  w-100  flex-col flex-justify-start flex-align-stretch">
 
-            <WebPOVLandingCard />
+            <LandingCard />
             <div>
-                <WebPOVLandingBackground />
+                <LandingBackground />
                 
                 {!!rpi && !!sessiondata &&<>
                     <div className=' pt-150'></div>
@@ -142,7 +140,7 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
                     <LandingLinks sessiondata={sessiondata} />                        
                 </>}
             </div>
-            {/* <div className="px-8 Q_xs_px-2 tx-white ">
+            <div className="px-8 Q_xs_px-2  ">
 
                 <LandingSession {...{ rpi, sessiondata,
                     calls: { createPlayer:trigger_createPlayer, trigger_connectPlayer, signInGoogle, }
@@ -150,7 +148,7 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
                 {!rpi && !!sessiondata && <>
                     <div className='Q_sm_md pt-100 pb-8'></div>
                 </>}
-            </div> */}
+            </div>
             
             {/* <div className='' >
                 {!!rpi &&
@@ -174,29 +172,29 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
         </div>
         
     </div>
-    {/* <div className='Q_xs my-100'></div> */}
-    <div className='flex-col' style={{background:"#0c0c0c"}}>
+    <div className='Q_xs my-100'></div>
+    <div className='flex-col'>
         <div className='w-max-1080px w-100  flex-col flex-align-start'>
-            <div className='my-200'></div>
-            {/* <div className='w-100 py-100'> <LandingInfo /> </div> */}
+            <div className='w-100 py-100'> <LandingInfo /> </div>
         </div>  
     </div>  
+{/* 
     
-{/* <div className="pos-rel mt-200 py-200 "  style={{ zIndex:"2000", }}>
+<div className="pos-rel "  style={{ zIndex:"2000", }}>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className='pos-abs bottom-0'
         style={{transform:"translateY(1px)"}}
     >
         <path fill="#111111" fillOpacity="1" d="M0,270L1100,230L1440,320L1440,320L720,320L0,320Z"></path>
     </svg>
-</div> */}
+</div>
 
-<div className="pos-rel tx-white  g-b-20 "  style={{ background:"#0c0c0c", zIndex:"2000", }}>
+<div className="pos-rel   g-b-20 "  style={{ background:"#111111", zIndex:"2000", }}>
     <ChartDashboard query={{token:"btc",timeframe:"4h"}} user={sessiondata}/>
 </div>
 
 <div className='pos-rel noclick pb-200' style={{background:"linear-gradient(0,#DEF2FF, #ffffff)"}}>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 200" className='pos-abs top-0'>
-        <path fill="#0c0c0c" fillOpacity="1" d="M0,192L60,165.3C120,139,240,85,360,69.3C480,53,600,75,720,90.7C840,107,960,117,1080,106.7C1200,96,1320,64,1380,48L1440,32L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
+        <path fill="#111111" fillOpacity="1" d="M0,192L60,165.3C120,139,240,85,360,69.3C480,53,600,75,720,90.7C840,107,960,117,1080,106.7C1200,96,1320,64,1380,48L1440,32L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
     </svg>
 
 </div>
@@ -218,7 +216,7 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
         }}>
         </div>
     </div>
-</div>
+</div> */}
 
 
     </>)
@@ -231,7 +229,7 @@ type PageProps = {
 Page.getLayout = function getLayout(page: ReactElement) {
     return (
     <Layout>
-        <Head><title>WebPOV</title></Head>
+        <Head><title>Byte City | WebPOV</title></Head>
         <InventoryProvider>
             <SidebarContainer sidebar={<SessionSidebar/>}>{page}</SidebarContainer>
         </InventoryProvider>

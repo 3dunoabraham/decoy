@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Gajraj+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Marko+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ysabeau+SC:wght@1;100;200;300;400;500;600;700;800;900;1000&display=swap');
 :root {
     --secondary: #7C3AED;
     --tertiary: #ED7C3A;
@@ -29,6 +30,7 @@
   .tx-altfont-3 { font-family: 'Gajraj One', cursive; }
   .tx-altfont-4 {     font-family: 'Marko One', serif; }
   .tx-altfont-5 {     font-family: 'Lobster', serif; }
+  .tx-altfont-6 {         font-family: 'Ysabeau SC', sans-serif; }
   
   
   /* body {font-family: "Inter";} */
