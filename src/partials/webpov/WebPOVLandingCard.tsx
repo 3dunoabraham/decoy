@@ -13,7 +13,7 @@ function LandingInfo({}:any) {
                     >
                         <span className="tx-bold-2 Q_md_x">Web</span><span className="tx-bold-6 Q_md_x">POV</span>
                         <div className="tx-bold-6 Q_xs_md flex-col">
-                          <span className="tx-bold-2 h-max-100px">Web</span>
+                          <span className="tx-bold-2 h-max-100px translate-y--25">Web</span>
                           <span className="tx-bold-6 h-max-100px">POV</span>
                         </div>
                     </h1>
