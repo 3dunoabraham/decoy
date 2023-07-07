@@ -8,7 +8,7 @@ import { FaAccessibleIcon, FaAddressBook, FaAdversal, FaChartBar, FaEnvelope, Fa
 function LandingInfo({}:any) {
     return (
         <div className='w-100 flex-col pt- pb-100' style={{background:"linear-gradient(0deg, #000000, #111111)"}}>
-          <h1 className='tx-bold- tx-ls-5  mt-0 pt-0 z-1001 pos-abs top-0 tx-altfont-6 flex Q_xs_flex-col'
+          <h1 className='tx-bold- tx-ls-5  mt-0 pt-0 z-100   pos-abs top-0 tx-altfont-6 flex Q_xs_flex-col'
                         style={{color:"white", fontSize:"10em"}}
                     >
                         <span className="tx-bold-2 Q_md_x">Web</span><span className="tx-bold-6 Q_md_x">POV</span>

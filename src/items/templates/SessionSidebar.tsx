@@ -86,7 +86,7 @@ export default function Component({}) {
                 </div>
             </div>}
         </div>
-        <div className=" flex-col flex-align-end pos-fix  top-0  right-0  " style={{}}>
+        <div className=" flex-col flex-align-end pos-fix  top-0  right-0 z-200 " style={{}}>
             <details className="flex-1 w-100">
                 <summary className="flex pa-1 opaci-chov--50 mb-2" >
                     <div className="flex-1"></div>
