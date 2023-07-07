@@ -175,7 +175,7 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
         
     </div>
     {/* <div className='Q_xs my-100'></div> */}
-    <div className='flex-col' style={{background:"#0f0f0f"}}>
+    <div className='flex-col pb-200' style={{background:"#0f0f0f"}}>
         <div className='w-max-1080px w-100  flex-col flex-align-start'>
             <div className='my-200'></div>
             {/* <div className='w-100 py-100'> <LandingInfo /> </div> */}
