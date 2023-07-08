@@ -1,6 +1,6 @@
 {
-    "name": "create-tnt-app",
-    "version": "1.0.1",
+    "name": "webpov",
+    "version": "0.0.1",
     "description": "",
     "main": "index.js",
     "scripts": {

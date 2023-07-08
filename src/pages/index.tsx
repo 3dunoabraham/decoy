@@ -138,19 +138,19 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
             <div>
                 <WebPOVLandingBackground />
                 
-                {//!!rpi && !!sessiondata &&
+                {!!rpi && !!sessiondata &&
                 <div className='tx-white pt-100'>
                     <div className='Q_sm_x pt-200'></div>
                     {/* <div className='Q_xs_lg pt-100'></div> */}
-                    <div className='Q_xs_lg pt-8'></div>
+                    <div className='Q_xs_lg pt-200'></div>
 
                     <div className='mt-100'>
                         <LandingLinks sessiondata={sessiondata} />                        
                     </div>
                 </div>}
             </div>
-            <div className="px-8 Q_xs_px-2 tx-white ">
-                <div className='Q_sm_x pt-150'></div>
+            <div className="px-8 Q_xs_px-2 tx-white appear-delay-6">
+                <div className='Q_sm_x pt-100'></div>
 
                 <LandingSession {...{ rpi, sessiondata,
                     calls: { createPlayer:trigger_createPlayer, trigger_connectPlayer, signInGoogle, }
@@ -189,7 +189,7 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
             {/* <div className='w-100 py-100'> <LandingInfo /> </div> */}
         </div>  
     </div>  
-    <div className='pt-200 flex-col tx-white h-100vh pb-150' style={{background:"linear-gradient(0deg, #090909, #171717)"}}>
+    <div className='pt-200 flex-col tx-white h-100vh pb-200' style={{background:"linear-gradient(0deg, #090909, #171717)"}}>
         <div className='w-max-1080px px-4'>
             <h2 className='tx-xxl tx-bold-8 flex-col flex-justify-start gap-4 '>
                 <div className='tx-altfont-6' > <span style={{textShadow:"-2px 0px 50px #9966ff"}}> Intuitive </span> Learning &</div>

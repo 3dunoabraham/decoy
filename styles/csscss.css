@@ -904,6 +904,13 @@
 .appear-once-4{animation: fadeinout 4s}
 .appear-delay-1{animation: appeardelay 0.5s}
 .appear-delay-2{animation: appeardelay 2s}
+.appear-delay-3{animation: appeardelay 3s}
+.appear-delay-4{animation: appeardelay 4s}
+.appear-delay-5{animation: appeardelay 5s}
+.appear-delay-6{animation: appeardelay 6s}
+.appear-delay-7{animation: appeardelay 7s}
+.appear-delay-8{animation: appeardelay 8s}
+.appear-delay-9{animation: appeardelay 9s}
 .appear-hiding{opacity: 0}
 .appear-hiding-1{opacity: 0; transition: all 0.1s ease-in-out}
 .appear-hiding-2{opacity: 0; transition: all 0.2s ease-in-out}
