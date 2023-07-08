@@ -19,7 +19,7 @@ export async function middleware(req: NextRequest) {
 
 export const config = {
     matcher: [
-        '/',
+        // '/',
         '/trade/history',
         '/trade/history',
         '/api/account-balance',
