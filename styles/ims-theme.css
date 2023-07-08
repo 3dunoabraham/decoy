@@ -32,6 +32,10 @@
   .tx-altfont-5 {     font-family: 'Lobster', serif; }
   .tx-altfont-6 {         font-family: 'Ysabeau SC', sans-serif; }
   
+  .bg-hov-r:hover { background: red}
+  .bg-hov-g:hover { background: green}
+  .bg-hov-b:hover { background: blue}
+  .bg-hov-o:hover { background: orange}
   
   /* body {font-family: "Inter";} */
   body {font-family: 'Tajawal', sans-serif;}

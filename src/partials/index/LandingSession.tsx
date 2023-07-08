@@ -28,9 +28,9 @@ function LandingSession({rpi, sessiondata, calls}:any) {
                 <div className='flex-col'>
                     <div className='Q_xs py-100'></div>
                     <div className='Q_sm_md pt-100 pb-8'></div>
-                    <div className='flex-col tx-center tx-sm'>
-                        Connect w/Google to create your new Account!
-                    </div>
+                    {/* <div className='flex-col tx-center tx-md pb-2'>
+                        Connect w/Google and <br /> create your new Account!
+                    </div> */}
                     <button   className="px-3 py-2 clickble nowrap tx-lg tx-white opaci-chov--75"
                         style={{background:"orangered"}} onClick={()=>{ calls.signInGoogle() }}
                     >
