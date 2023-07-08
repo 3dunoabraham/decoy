@@ -49,11 +49,11 @@ function LandingInfo({}:any) {
                   <div className="flex-col gap-1    h-min-300px w-min-300px w-100 bord-r-100p  pos-rel" style={{background:"#090909"}}>
                       
                       <div className="flex  gap-1 ">
-                        <div className=" bg-white box-shadow-i-5-b bg-hov-r pa- pointer" style={{clipPath: "polygon(100% 0, 0 0, 100% 100%)",paddingLeft:"40px"}}></div>
-                        <div className="bg-white box-shadow-i-5-b pa-8  bord-r-100p bg-hov-"></div>
-                        <div className=" bg-white box-shadow-i-5-b bg-hov-b pa- pointer" style={{clipPath: "polygon(100% 0, 0 0, 0% 100%)",paddingLeft:"40px"}}></div>
+                        <div className=" bg-white box-shadow-i-5-b bg-ho-r pa- " style={{clipPath: "polygon(100% 0, 0 0, 100% 100%)",paddingLeft:"40px"}}></div>
+                        <div className="bg-white box-shadow-i-5-b pa-8  bord-r-100p bg-ho-"></div>
+                        <div className=" bg-white box-shadow-i-5-b bg-ho-b pa- " style={{clipPath: "polygon(100% 0, 0 0, 0% 100%)",paddingLeft:"40px"}}></div>
                       </div>
-                      <div className=" bg-white pa-8 box-shadow-i-5-b bg-hov-g pointer" style={{clipPath: "polygon(100% 0, 0 0, 50% 100%)"}}></div>
+                      <div className=" bg-white pa-8 box-shadow-i-5-b bg-ho-g " style={{clipPath: "polygon(100% 0, 0 0, 50% 100%)"}}></div>
                       {/* <div className="pos-abs top-0 z-999">
                         <div className="spin-6 px-2 tx-xl">.
                           <div className="spin-5 px-2 tx-xl">.
@@ -72,11 +72,11 @@ function LandingInfo({}:any) {
                     <div className="flex-col gap-1 scale-90   h-min-500px w-min-500px w-100 bord-r-100p  pos-rel" style={{background:"#090909"}}>
                       
                       <div className="flex  gap-1 ">
-                        <div className=" bg-white box-shadow-i-5-b bg-hov-r pa- pointer" style={{clipPath: "polygon(100% 0, 0 0, 100% 100%)",paddingLeft:"150px"}}></div>
-                        <div className="bg-white box-shadow-i-5-b pa-150  bord-r-100p bg-hov-"></div>
-                        <div className=" bg-white box-shadow-i-5-b bg-hov-b pa- pointer" style={{clipPath: "polygon(100% 0, 0 0, 0% 100%)",paddingLeft:"150px"}}></div>
+                        <div className=" bg-white box-shadow-i-5-b bg-ho-r pa- " style={{clipPath: "polygon(100% 0, 0 0, 100% 100%)",paddingLeft:"150px"}}></div>
+                        <div className="bg-white box-shadow-i-5-b pa-150  bord-r-100p bg-ho-"></div>
+                        <div className=" bg-white box-shadow-i-5-b bg-ho-b pa- " style={{clipPath: "polygon(100% 0, 0 0, 0% 100%)",paddingLeft:"150px"}}></div>
                       </div>
-                      <div className=" bg-white pa-150 box-shadow-i-5-b bg-hov-g pointer" style={{clipPath: "polygon(100% 0, 0 0, 50% 100%)"}}></div>
+                      <div className=" bg-white pa-150 box-shadow-i-5-b bg-ho-g " style={{clipPath: "polygon(100% 0, 0 0, 50% 100%)"}}></div>
                       {/* <div className="spin-8 pos-abs top-0 z-999">
                         <div className="spin-6 pr-5 tx-lx">.
                           <div className="spin-4 pl-8 tx-lg">.

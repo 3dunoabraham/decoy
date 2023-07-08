@@ -10,18 +10,18 @@ import { useLocalStorage } from 'usehooks-ts';
 import type { NextPageWithLayout } from '@/src/pages/_app'
 import Layout from '@/src/items/templates/Layout'
 import SidebarContainer from '@/src/items/templates/SidebarContainer'
-import SessionSidebar from "@/src/items/templates/SessionSidebar";
+import WebPOVSidebar from "@/src/partials/index/WebPOVSidebar";
 import { _parseDecimals } from '@/scripts/helpers/mathHelper'
 import { AppContext } from '@/scripts/contexts/AppContext'
 import { InventoryProvider } from '@/scripts/contexts/InventoryContext'
 import AmountCards from '@/components/dashboard/AmountCards';
 import { DEFAULT_TOKENS_ARRAY } from '@/components/scripts/constants';
 import { fetchPost } from '@/scripts/helpers/fetchHelper';
-import LandingInfo from '@/src/partials/index/LandingInfo';
-import LandingLinks from '@/src/partials/index/LandingLinks';
-import LandingCard from '@/src/partials/index/LandingCard';
-import LandingBackground from '@/src/partials/index/LandingBackground';
-import LandingSession from '@/src/partials/index/LandingSession';
+import LandingInfo from '@/src/partials/bytecity/LandingInfo';
+import LandingLinks from '@/src/partials/bytecity/LandingLinks';
+import LandingCard from '@/src/partials/bytecity/LandingCard';
+import LandingBackground from '@/src/partials/bytecity/LandingBackground';
+import LandingSession from '@/src/partials/bytecity/LandingSession';
 import { ChartDashboard } from '@/components/dashboard';
 import { useRouter } from 'next/router';
 import WebPOVLandingCard from '../partials/webpov/WebPOVLandingCard';
@@ -287,7 +287,7 @@ Page.getLayout = function getLayout(page: ReactElement) {
     <Layout>
         <Head><title>WebPOV</title></Head>
         <InventoryProvider>
-            <SidebarContainer sidebar={<SessionSidebar/>}>{page}</SidebarContainer>
+            <SidebarContainer sidebar={<WebPOVSidebar/>}>{page}</SidebarContainer>
         </InventoryProvider>
     </Layout>
     )

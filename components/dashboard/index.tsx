@@ -18,7 +18,7 @@ import AppClientDesc from "@/src/items/molecules/auth/AppClientDesc";
 import { fetchPost, fetchPut } from "@/scripts/helpers/fetchHelper";
 import { GiCardExchange } from "react-icons/gi";
 import { parseDateTimeString } from "@/scripts/helpers/type/dateHelper";
-import LandingSession from "@/src/partials/index/LandingSession";
+import LandingSession from "@/src/partials/bytecity/LandingSession";
 import Link from "next/link";
 import { FaChartBar } from "react-icons/fa";
 
