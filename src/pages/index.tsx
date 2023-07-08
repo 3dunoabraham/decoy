@@ -69,6 +69,7 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
         let mergedString = `${playerCredentials.referral}:${playerCredentials.pin}`
         s__rpi(mergedString)
         s__LS_rpi(mergedString)
+        window.location.reload()
     }
     const getLocalReferral = () => {
         return !sessiondata ? ( "user" ) : sessiondata.user.email
@@ -106,6 +107,7 @@ const Page: NextPageWithLayout = ({ tokens }:PageProps) => {
 
             setIdByObject(playerCredentials)
             app.alert("success", "Simulated Player logged in succesfully!")
+            window.location.reload()
         } catch (e:any) {
             app.alert("error", "Couldn't log into player!")
         }

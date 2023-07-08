@@ -112,6 +112,7 @@ export function ChartDashboard({query, user}:any) {
         let mergedString = `${playerCredentials.referral}:${playerCredentials.pin}`
         s__rpi(mergedString)
         s__LS_rpi(mergedString)
+        window.location.reload()
     }
     const connectPlayer = async (playerCredentials:any) => {
         try {
@@ -221,6 +222,7 @@ export function ChartDashboard({query, user}:any) {
     const getData = async (therpi:any) => {
         s__rpi(therpi)
         s__LS_rpi(therpi)
+        window.location.reload()
     }
     const register = () => {
         let username = getLocalReferral()
