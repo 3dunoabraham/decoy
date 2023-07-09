@@ -29,6 +29,8 @@ import WebPOVLandingBackground from '../partials/webpov/WebPOVLandingBackground'
 import Link from 'next/link';
 import { FaGithub, FaMedium, FaTwitter } from 'react-icons/fa';
 import LatestPosts from '../partials/index/LatestPosts';
+import WebPovGames from '../partials/webpov/WebPovgames';
+import WebPovMobileDescription, { WebPovDesktopDescription } from '../partials/webpov/WebPovMobileDescription';
 
 const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
   const { data: sessiondata, }: any = useSession();
@@ -144,7 +146,6 @@ const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
           {!!rpi && !!sessiondata &&
             <div className='tx-white pt-100'>
               <div className='Q_sm_x pt-200'></div>
-              {/* <div className='Q_xs_lg pt-100'></div> */}
               <div className='Q_xs_lg pt-200'></div>
 
               <div className='mt-100'>
@@ -153,6 +154,7 @@ const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
             </div>}
         </div>
         <div className="px-8 Q_xs_px-2 tx-white appear-delay-6">
+          <div className='Q_xs pt-100'></div>
           <div className='Q_sm_x pt-100'></div>
 
           <LandingSession {...{
@@ -163,15 +165,6 @@ const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
             <div className='Q_sm_md pt-100 pb-8'></div>
           </>}
         </div>
-
-        {/* <div className='' >
-                {!!rpi &&
-                    <div className=' pa-3 flex-1 '>
-                        <AmountCards tokens={tokens} {...{mul, bigmul}} />
-                    </div>
-                }
-            </div>
-            */}
         <div className='flex-center  flex-1'></div>
 
         {!!rpi &&
@@ -184,35 +177,21 @@ const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
           </div>
         }
       </div>
-
     </div>
-    {/* <div className='Q_xs my-100'></div> */}
     <div className='flex-col pb-200 ' style={{ background: "linear-gradient(180deg, #0d0d0d, #171717)" }}>
       <div className='w-max-1080px  w-100  flex-col flex-align-start'>
         <div className='my-100'></div>
-        {/* <div className='w-100 py-100'> <LandingInfo /> </div> */}
       </div>
     </div>
     <div className='pt-200 flex-col tx-white h-100vh pb-200' style={{ background: "linear-gradient(0deg, #090909, #171717)" }}>
       <div className='w-max-1080px px-4'>
-        <h2 className='tx-xxl tx-bold-8 flex-col flex-justify-start gap-4 '>
-          <div className='tx-altfont-6' > <span style={{ textShadow: "-2px 0px 50px #9966ff" }}> Intuitive </span> Learning &</div>
-          <div className='tx-altfont-4 opaci-chov--100 opaci-25' > Gamified <span style={{ textShadow: "-2px 0px 50px #ff9966" }}> Investing </span></div>
-        </h2>
-        <hr className='my-2' />
-        <p className='tx-lgx tx-bold-2 w-max-700px'>
-          3D Web-Based Game Framework that optimizes learning and simplifies energy-investing through
-          automated processes and immersive browser experiences.
-        </p>
+
+        <div className='Q_sm_x'><WebPovDesktopDescription /></div>
+        <div className='Q_xs mb-8'><WebPovMobileDescription /></div>
+
         <div className='w-100 flex-col gap-2  '>
-
           <Link href={"/whitepaperwebpov.pdf"} target='_blank' className=' pa-1 hover-  opaci-chov--75 py-3 my-3 bg-w-hov-10'>
-            {/* <div className='bg-b-50  bord-r-100p box-shadow-5-b noverflow'>
-                        <Image src="/pfp.png" alt="bank" width={64} height={64} className='block' />
-                    </div> */}
-
             <i className='pos- nowrap  tx-ls-1 underline flex-col-r pt-1 px-8'> WhitepaperWebPOV.pdf</i>
-
           </Link>
           <div className='flex gap-4'>
 
@@ -230,50 +209,16 @@ const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
               <div className='pos-abs nowrap flex-col-r pt-1 bottom-0 translate-y-100'> <FaTwitter /> tresduno</div>
             </Link>
           </div>
-
         </div>
-
       </div>
       <div className='mt-100 Q_xs'></div>
-
     </div>
-
-
-
-    {/* <div className='py-100 Q_xs_md' style={{ background: "#090909" }}>
-            <div className='py-150'></div>
-        </div> */}
     <div className=' flex-col flex-justify-start pos-rel tx-white  h-min-100vh' style={{ background: "linear-gradient(0deg, #090909, #171b20, #090909) " }}>
       <div className='mt-100 Q_xs'></div>
-      <h1 className='tx-altfont-6'>WebPOV Games</h1>
-      <hr className='w-50 mb-8' />
-      <div className=' mb-200 flex-row Q_xs_flex-col gap-4'>
-        <div className=' '>
-          <Link
-            className='pa-2 opaci-chov--75 block pb-8 flex-col bg-glass-4 bg-w-10   bord-r-50'
-            style={{ boxShadow: "0 4px 3px #00000022" }}
-            href='https://bytc.vercel.app/w'
-          >
-            <Image src="/town2.png" alt="bank" width={136} height={114} className='mt-8' />
-            <h2 className='tx-lgx tx-shadow-5 translate-y-25' style={{ color: "orange" }}><i className='tx-md tx-altfont-4 tx-green tx-bold-2'>Play:</i> Town</h2>
-            {/* <h1 className='tx-lx tx-shadow-2 tx-altfont-4' style={{ color: "cyan" }}>Byte Town</h1> */}
-          </Link>
-        </div>
-        <div >
-          <Link
-            className='pa-2 opaci-chov--75 block pb-8 flex-col bg-glass-4 bg-w-10  px-4 bord-r-50'
-            style={{ boxShadow: "0 4px 3px #00000022" }}
-            href='https://bytc.vercel.app'
-          >
-            <Image src="/main2.png" alt="bank" width={114} height={114} className='mt-8' />
-            <h2 className='tx-lgx tx-shadow-5 translate-y-25' style={{ color: "orangered" }}><i className='tx-md tx-altfont-4 tx-green tx-bold-2'>Play:</i> City</h2>
-            {/* <h1 className='tx-lx tx-shadow-2' style={{ color: "orangered" }}>Byte City</h1> */}
-          </Link>
-        </div>
-      </div>
-
+      <WebPovGames />
+      <div className='mt-200'></div>
       <h2 className='tx-altfont-6 mt-100'>Latest News</h2>
-      <div className='bg-w-10  bg-glass-10 w-max-600px w-100 pa-8 bord-r-50 py-8  flex-col gap-4'>
+      <div className='bg-w-10  bg-glass-10 w-max-600px w-100 pa-8 bord-r-50 Q_xs_px-2  flex-col gap-4'>
         <LatestPosts />
         <div className='spin-6 bord-r-100p noverflow'>
           <Image src="/logo.jpg" alt="bank" width={64} height={64} className='block' />
@@ -295,11 +240,6 @@ const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
         </div>
       </div>
     </div>
-
-
-
-
-
     <div className="pos-rel  py-200  " style={{ zIndex: "2000", background: "#090909" }}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className='pos-abs bottom-0'
         style={{ transform: "translateY(1px)" }}
@@ -307,25 +247,19 @@ const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
           <path fill="#111111" fill-opacity="1" d="M0,160L48,186.7C96,213,192,267,288,245.3C384,224,480,128,576,80C672,32,768,32,864,48C960,64,1056,96,1152,138.7C1248,181,1344,235,1392,261.3L1440,288L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
       </svg>
     </div>
-
     <div className="pos-rel tx-white  g-b-20 " style={{ background: "#111111", zIndex: "2000", }}>
       <ChartDashboard query={{ token: "btc", timeframe: "4h" }} user={sessiondata} />
     </div>
-
     <div className='pos-rel noclick pb-200' style={{ background: "linear-gradient(0,#DEF2FF, #ffffff)" }}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 200" className='pos-abs top-0'>
         <path fill="#111111" fillOpacity="1" d="M0,192L60,165.3C120,139,240,85,360,69.3C480,53,600,75,720,90.7C840,107,960,117,1080,106.7C1200,96,1320,64,1380,48L1440,32L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
       </svg>
-
     </div>
     <div className=" pt-1 g-b-20 px-100 Q_xs_sm_px-2 h-min-100vh pos-rel  "
       style={{ background: "linear-gradient(180deg,#DEF2FF, #7DCBFF)", }}
     >
-
-
       <div className="opaci-50 tx-ls-3 tx-lg my-2">Goal Balance</div>
       <AmountCards tokens={tokens} mul={11} bigmul={50} />
-
     </div>
     <div className='pos-rel  w-100  flex-col-stretch'>
       <div className='pos-abs bottom-0  w-100 noverflow opaci-30'>
@@ -339,8 +273,6 @@ const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
         </div>
       </div>
     </div>
-
-
   </>)
 }
 
