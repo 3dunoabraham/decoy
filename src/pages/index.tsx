@@ -32,6 +32,7 @@ import LatestPosts from '../partials/index/LatestPosts';
 import WebPovGames from '../partials/webpov/WebPovgames';
 import WebPovMobileDescription, { WebPovDesktopDescription } from '../partials/webpov/WebPovMobileDescription';
 import WebPovLandingLinks from '../partials/webpov/WebPovLandingLinks';
+import WebPovTiers from '../partials/webpov/WebPovTiers';
 
 const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
   const { data: sessiondata, }: any = useSession();
@@ -49,10 +50,10 @@ const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
     app.s__sidebarLinks([])
     app.s__sidebarPages([
       { id: 2, label: "City Game", url: "https://bytc.vercel.app/", icon: "city" },
-      { id: 3, label: "Town Game", url: "https://bytc.vercel.app/", icon: "town" },
+      { id: 3, label: "Town Game", url: "https://bytc.vercel.app/w", icon: "town" },
       ...(!LS_rpi ? [] : [
         { id: 0, label: "Logs", url: "/trade/history/?pair=BTCUSDT", icon: "agreements" },
-        { id: 2, label: "Tests", url: "/?timeframe4h&token=btc", icon: "farm" }
+        { id: 2, label: "Tests", url: "/test/village", icon: "farm" }
       ]),
     ])
   }, [])
@@ -227,6 +228,7 @@ const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
     <div className=' flex-col flex-justify-start pos-rel tx-white  h-min-100vh' style={{ background: "linear-gradient(0deg, #090909, #171b20, #090909) " }}>
       <div className='mt-100 Q_xs'></div>
       <WebPovGames />
+      <WebPovTiers />
       <div className='mt-200'></div>
       <details >
         <summary className='opaci-chov--50 flex w-100 tx-center'>
