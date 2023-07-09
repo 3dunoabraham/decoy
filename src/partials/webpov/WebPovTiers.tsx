@@ -4,7 +4,7 @@ import Image from "next/image"
 export function WebPovTiers ({}) {
   return (<>
   
-  <h1 className='mt-8 tx-altfont-6'>Subscriptions & Donations</h1>
+  <h1 className='mt-8 tx-altfont-6'>Subscriptions <br /> & Donations</h1>
       <hr className='w-25 mb-8' />
       <div className='  flex-row gap-2'>
         <div className=' '>
