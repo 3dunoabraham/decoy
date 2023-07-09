@@ -202,9 +202,9 @@ const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
         <div className='Q_xs mb-8'><WebPovMobileDescription /></div>
 
         <div className='w-100 flex-col gap-2  '>
-          <Link href={"/whitepaperwebpov.pdf"} target='_blank' className=' pa-1 hover-  opaci-chov--75 py-3 my-3 bg-w-hov-10'>
+          {/* <Link href={"/whitepaperwebpov.pdf"} target='_blank' className=' pa-1 hover-  opaci-chov--75 py-3 my-3 bg-w-hov-10'>
             <i className='pos- nowrap  tx-ls-1 underline flex-col-r pt-1 px-8'> WhitepaperWebPOV.pdf</i>
-          </Link>
+          </Link> */}
           <div className='flex gap-4'>
 
             <Link target='_blank' href="https://twitter.com/tresduno" className='bg-w-50 pa-1 hover-6 bord-r-100p flex-col opaci-chov--25'>
