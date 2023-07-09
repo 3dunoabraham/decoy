@@ -234,6 +234,8 @@ const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
         </div>
 
       </div>
+      <div className='mt-100 Q_xs'></div>
+
     </div>
 
 
@@ -242,10 +244,10 @@ const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
             <div className='py-150'></div>
         </div> */}
     <div className=' flex-col flex-justify-start pos-rel tx-white  h-min-100vh' style={{ background: "linear-gradient(0deg, #090909, #171b20, #090909) " }}>
-      {/* <div className='mt-100 Q_xs_md'></div> */}
+      <div className='mt-100 Q_xs'></div>
       <h1 className='tx-altfont-6'>WebPOV Games</h1>
       <hr className='w-50 mb-8' />
-      <div className=' mb-200 flex-wrap gap-4'>
+      <div className=' mb-200 flex-row Q_xs_flex-col gap-4'>
         <div className=' '>
           <Link
             className='pa-2 opaci-chov--75 block pb-8 flex-col bg-glass-4 bg-w-10   bord-r-50'
@@ -277,7 +279,7 @@ const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
           <Image src="/logo.jpg" alt="bank" width={64} height={64} className='block' />
         </div>
         <hr className='w-80 mt-' />
-        <div className='flex flex-justify-around w-100'>
+        <div className='flex flex-justify-around Q_xs_flex-col w-100'>
           <Link href="https://webpov.vercel.app/news" className="opaci-chov--50 flex gap-2 pa-2">
             <FaGithub />
             Github
