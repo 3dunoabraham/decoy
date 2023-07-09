@@ -48,10 +48,11 @@ const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
     s__rpi(LS_rpi)
     app.s__sidebarLinks([])
     app.s__sidebarPages([
-      { id: 2, label: "Web Byte City", url: "https://bytc.vercel.app/", icon: "bingo" },
+      { id: 2, label: "City Game", url: "https://bytc.vercel.app/", icon: "city" },
+      { id: 3, label: "Town Game", url: "https://bytc.vercel.app/", icon: "town" },
       ...(!LS_rpi ? [] : [
-        { id: 0, label: "History", url: "/trade/history/?pair=BTCUSDT", icon: "agreements" },
-        { id: 2, label: "Dashboard", url: "/?timeframe4h&token=btc", icon: "chart" }
+        { id: 0, label: "Logs", url: "/trade/history/?pair=BTCUSDT", icon: "agreements" },
+        { id: 2, label: "Tests", url: "/?timeframe4h&token=btc", icon: "farm" }
       ]),
     ])
   }, [])

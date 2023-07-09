@@ -5,7 +5,7 @@ import Image from "next/image";
 import { BsBox, BsChat, BsFillArchiveFill, BsFillBarChartFill, BsGear, BsInfoCircle, BsPerson, BsStack } from "react-icons/bs";
 import {  FaBars, FaChartLine, FaCity, FaGoogle, FaKey, FaQuestion, FaSync, FaUncharted } from "react-icons/fa";
 import { RxDashboard } from "react-icons/rx";
-import { GiCardExchange } from "react-icons/gi";
+import { GiCardExchange, GiVillage } from "react-icons/gi";
 import { MdOutlineHistory } from "react-icons/md";
 import { useRouter } from "next/router";
 import { InventoryContext } from "@/scripts/contexts/InventoryContext";
@@ -33,6 +33,7 @@ export default function Component({}) {
         users: <BsFillBarChartFill />,
         builder3d: <FaUncharted />,
         farm: <GiWheat />,
+        town: <GiVillage />,
         bingo: <GiEightBall />,
         inventory: <MdOutlineInventory2 />,
         city: <FaCity />,
