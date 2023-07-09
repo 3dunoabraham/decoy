@@ -70,7 +70,7 @@ export default function Component({}) {
                     <LoginBtn><AppClientDesc /></LoginBtn>
                 </div>
                 {/* <hr className="w-90 opaci-50  my-3" style={{borderColor: "white"}} /> */}
-                <div className='mb-100'>
+                <div className='mb-8'>
                     {/* <Link href="/#" className="flex-center py-2 clickble  px-2 bg-w-hov-10  ">
                         <div className=" pr-3  Q_xl_x"></div>
                         <div className="px-1 tx-center tx-lg opaci-hov--50"><BsInfoCircle /></div>
@@ -98,20 +98,20 @@ export default function Component({}) {
                 </summary>
                 <div className='flex-1 pr-2 '>
                     {(!!session && !!session.user && !!LS_rpi)  && <>
-                        <div className="box-shadow-5-b pa-4 pb-0 bord-r-25 bg-b-40 tx-center opaci-chov--50 bg-glass-20 tx-shadow-5"
+                        <div className="box-shadow-5-b pa-4 pb-0 bord-r-25 bg-b-40 tx-center opaci-chov--50 bg-glass-20 tx-shadow-5 border-white"
                                 onClick={()=>{syncBinance()}}
                             >
                                 <div className="tx-center tx-lx ">
                                     <GiCardExchange/>
                                 </div>
-                                <div className="Q_xl_x">Sync </div>
+                                <div className="pb-1">Sync </div>
                                 <div className="Q_xl_x pb-2"  style={{color:""}}> API Keys!</div>
                             </div>
                     </>}
 
                     {!!app && !!app.sidebarPages && app.sidebarPages.map((aLink, index)=>{
                         return (
-                            <Link href={aLink.url || "#"} className="flex-center pb-2 py-3 clickble  px-2 bg-b-50 bord-r-50 opaci-chov--75 my-2 bg-glass-20 box-shadow-i-2-t  " key={index}>
+                            <Link href={aLink.url || "#"} className="flex-center Q_xs_flex-col pb-2 py-3 clickble border-white px-2 bg-b-50 bord-r-50 opaci-chov--75 my-2 bg-glass-20 box-shadow-i-2-t  " key={index}>
                                 <div style={{}}
                                     className="px-1 tx-center tx-lg opaci-hov--50 "
                                 >
@@ -119,10 +119,11 @@ export default function Component({}) {
                                 </div>
                                 <div className="flex-1 px-1 Q_md_x w-min-220p tx-shadow-5">{aLink.label}</div>
                                 <div className="flex-1 px-1 Q_sm w-min-220p tx-shadow-5 tx-sm w-max-50px ellipsis nowrap noverflow">{aLink.label}</div>
+                                <div className="flex-1 px-1 Q_xs tx-shadow-5 tx-sm w-max-50px ellipsis nowrap noverflow">{aLink.label}</div>
                             </Link>
                         )
                     }) }
-                    <hr className="w-100 opaci-10 my-3" style={{borderColor: "white"}} />
+                    {/* <hr className="w-100 opaci-10 my-3" style={{borderColor: "white"}} /> */}
                     
                     {!!app && !!app.sidebarLinks && app.sidebarLinks.map((anUnit, index)=>{
                         if (router.query.key == anUnit.label) { return (

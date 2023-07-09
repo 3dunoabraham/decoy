@@ -27,10 +27,11 @@ import { useRouter } from 'next/router';
 import WebPOVLandingCard from '../partials/webpov/WebPOVLandingCard';
 import WebPOVLandingBackground from '../partials/webpov/WebPOVLandingBackground';
 import Link from 'next/link';
-import { FaGithub, FaMedium, FaTwitter } from 'react-icons/fa';
+import { FaCaretDown, FaGithub, FaMedium, FaTwitter } from 'react-icons/fa';
 import LatestPosts from '../partials/index/LatestPosts';
 import WebPovGames from '../partials/webpov/WebPovgames';
 import WebPovMobileDescription, { WebPovDesktopDescription } from '../partials/webpov/WebPovMobileDescription';
+import WebPovLandingLinks from '../partials/webpov/WebPovLandingLinks';
 
 const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
   const { data: sessiondata, }: any = useSession();
@@ -149,7 +150,7 @@ const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
               <div className='Q_xs_lg pt-200'></div>
 
               <div className='mt-100'>
-                <LandingLinks sessiondata={sessiondata} />
+                <WebPovLandingLinks sessiondata={sessiondata} />
               </div>
             </div>}
         </div>
@@ -165,6 +166,15 @@ const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
             <div className='Q_sm_md pt-100 pb-8'></div>
           </>}
         </div>
+        
+            <div className='' >
+                {!!rpi &&
+                    <div className=' pa-3 flex-1 '>
+                        <AmountCards tokens={tokens} {...{mul, bigmul}} />
+                    </div>
+                }
+            </div>
+           
         <div className='flex-center  flex-1'></div>
 
         {!!rpi &&
@@ -217,28 +227,32 @@ const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
       <div className='mt-100 Q_xs'></div>
       <WebPovGames />
       <div className='mt-200'></div>
-      <h2 className='tx-altfont-6 mt-100'>Latest News</h2>
-      <div className='bg-w-10  bg-glass-10 w-max-600px w-100 pa-8 bord-r-50 Q_xs_px-2  flex-col gap-4'>
-        <LatestPosts />
-        <div className='spin-6 bord-r-100p noverflow'>
-          <Image src="/logo.jpg" alt="bank" width={64} height={64} className='block' />
+      <details >
+        <summary className='opaci-chov--50 flex w-100 tx-center'>
+          <h2 className='tx-altfont-6 mt-100 tx-center w-100 underline'><FaCaretDown /> Latest News</h2>
+        </summary>
+        <div className='bg-w-10  bg-glass-10 w-max-600px w-100 pa-8 bord-r-50 Q_xs_px-2  flex-col gap-4'>
+          <LatestPosts />
+          <div className='spin-6 bord-r-100p noverflow'>
+            <Image src="/logo.jpg" alt="bank" width={64} height={64} className='block' />
+          </div>
+          <hr className='w-80 mt-' />
+          <div className='flex flex-justify-around Q_xs_flex-col w-100'>
+            <Link href="https://webpov.vercel.app/news" className="opaci-chov--50 flex gap-2 pa-2">
+              <FaGithub />
+              Github
+            </Link>
+            <Link href="https://webpov.vercel.app/news" className="opaci-chov--50 flex gap-2 pa-2">
+              <FaTwitter />
+              Twitter
+            </Link>
+            <Link href="https://webpov.vercel.app/news" className="opaci-chov--50 flex gap-2 pa-2">
+              <FaMedium />
+              Medium
+            </Link>
+          </div>
         </div>
-        <hr className='w-80 mt-' />
-        <div className='flex flex-justify-around Q_xs_flex-col w-100'>
-          <Link href="https://webpov.vercel.app/news" className="opaci-chov--50 flex gap-2 pa-2">
-            <FaGithub />
-            Github
-          </Link>
-          <Link href="https://webpov.vercel.app/news" className="opaci-chov--50 flex gap-2 pa-2">
-            <FaTwitter />
-            Twitter
-          </Link>
-          <Link href="https://webpov.vercel.app/news" className="opaci-chov--50 flex gap-2 pa-2">
-            <FaMedium />
-            Medium
-          </Link>
-        </div>
-      </div>
+      </details>
     </div>
     <div className="pos-rel  py-200  " style={{ zIndex: "2000", background: "#090909" }}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className='pos-abs bottom-0'
