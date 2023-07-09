@@ -17,7 +17,7 @@ function LandingInfo({}:any) {
                     >
                         <span className="opaci-50 opaci-chov--75 tx-bold-2 Q_md_x ">Web</span>
                         <span className="tx-bold-6 opaci-chov--75 blurrotate-3 Q_md_x">POV</span>
-                        <div className="tx-bold-6 Q_sm flex-col translate-y--25">
+                        <div className="tx-bold-6 Q_sm flex-col translate-y--10">
                           <span className="opaci-50 tx-bold-2 h-max-100px opaci-chov--75 translate-y--25">Web</span>
                           <span className="tx-bold-6 h-max-100px opaci-chov--75 blurrotate-3 opaci-50 ">POV</span>
                         </div>
