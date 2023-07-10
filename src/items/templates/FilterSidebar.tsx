@@ -19,7 +19,6 @@ export default function Component({ online=true }) {
     const { query } = useRouter()
     const inv = useContext(InventoryContext)
     const app = useContext(AppContext)
-    // console.log("online", app.online)
     const INVENTORY_FILTERS_OBJ = {
         sales_status:{
             filter: {title: "Sales Status",optField: "label", optName:"sales_status", fieldName:"label"},
@@ -37,29 +36,6 @@ export default function Component({ online=true }) {
         q_foreigns.error || !q_foreigns.data || q_foreigns.isLoading) ? DEFAULT_UNIT_FOREIGNS : q_foreigns.data
     ,[q_foreigns])
 
-
-    // const filtersObj = useMemo(()=>{
-    //     // return INVENTORY_FILTERS_OBJ
-    //     // if (inv.unitsArray.length == 0) return INVENTORY_FILTERS_OBJ
-    //     let filtersObj = {...INVENTORY_FILTERS_OBJ}
-    //     filtersObj["sales_status"].optsArray = q__foreigns.sales_statuses
-    //     if (inv.unitsArray.length > 0) {
-    //         // console.log("inv.unitsArray.length", inv.unitsArray.length)
-    //         filtersObj["sales_status"].optsArray = filtersObj["sales_status"].optsArray.map((anItem,index)=>{
-    //             let theCount = inv.unitsArray.filter((theUnit,i)=> theUnit.sales_status == anItem.id  )
-    //             return {...anItem, ...{ _COUNT: theCount.length }}
-    //         })
-    //     }
-    //     filtersObj["dealer"].optsArray = q__foreigns.dealers
-    //     if (inv.unitsArray.length > 0) {
-    //         filtersObj["dealer"].optsArray = filtersObj["dealer"].optsArray.map((anItem,index)=>{
-    //             let theCount = inv.unitsArray.filter((theUnit,i)=> theUnit.dealer == anItem.name  )
-    //             return {...anItem, ...{ _COUNT: theCount.length }}
-    //         })
-    //     }
-    //     return filtersObj
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // },[q__foreigns, inv.unitsArray])
 
 
     const filtersObj = useMemo(() => {
@@ -99,12 +75,10 @@ export default function Component({ online=true }) {
     useEffect(()=>{
         let freshFilters = {}
         let sales_status = app.query.stts
-        // console.log("q__foreigns", q__foreigns)
         if (sales_status && q__foreigns.sales_statuses) {
             let theLabel = q__foreigns.sales_statuses.filter((anItem,index)=>{
                 return anItem.id == sales_status
             })
-            // console.log(theLabel)
             if (theLabel.length > 0)
             {
                 freshFilters["sales_status"] = {
@@ -116,7 +90,6 @@ export default function Component({ online=true }) {
     },[q__foreigns])
 
     const handleFilterClick = (data)=> {
-        // console.log("handleFilterClick", data)
         let newFiltersObj = {...app.filters,...{
             [data.optName]: { on: true, id: data.id, label: data.label, title: data.title}
         }}
@@ -137,19 +110,6 @@ export default function Component({ online=true }) {
     <div className="pos-fix top-0  flex-col Q_lg_x">
         <SidebarHeader />
         <div className='flex-1 w-100'>
-            {/* {inv.unitsArray.length} */}
-            {/* {!q_foreigns.data && 
-                <div className="pl-8 pt-6 opaci-50 w-300px Q_lg_x">Loading Filters...</div>
-            }
-            {!!q_foreigns.data && Object.keys(filtersObj).map((aFilterSection, index)=>{
-                return (
-                    <div key={index}> 
-                        <SidebarFilterSection filterSection={filtersObj[aFilterSection]} theIcon={<BsCircle />}
-                            handleClick={handleFilterClick}
-                        />
-                    </div>
-                )
-            })} */}
             
             {<>
                 <div className='w-100 bord-r-t-5 box-shadow-2 ' style={{background:"orangered"}}>
@@ -158,11 +118,7 @@ export default function Component({ online=true }) {
                 <hr className="w-90 opaci-50  my-3" style={{borderColor: "white"}} />
             </>}
             <div className=''>
-                {/* <Link href="/#" className="flex-center py-2 clickble  px-2 bg-w-hov-10  ">
-                    <div className=" pr-3  Q_xl_x"></div>
-                    <div className="px-1 tx-center tx-lg opaci-hov--50"><BsInfoCircle /></div>
-                    <div className="flex-1 pl-1 Q_xl_x w-min-220px">Support</div>
-                </Link> */}
+                
                 <Link href="https://twitter.com/webpov" target="_blank"
                     className="flex-center box-shadow-2 py-2 clickble  px-2 ims-bg-primary bord-r-b-5"
                 >

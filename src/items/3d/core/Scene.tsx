@@ -214,9 +214,6 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
         setToken(token)
     }
     useEffect(()=>{
-        console.log("max adjectives", Math.max.apply(Math, adjectives.map(x=>x.length)))
-        console.log("max nouns", Math.max.apply(Math, nouns.map(x=>x.length)))
-        
         app.s__userstart(theuserstart)
         s__tokensArrayObj(JSON.parse(LS_tokensArrayObj))
         s__rpi(LS_rpi)
@@ -429,12 +426,12 @@ const Component = forwardRef(({live=false,children=null,theuserstart=null}:any, 
                 <input type="text" value={form.username} id="username" name="username" maxLength={30}
                     onSubmit={signup}
                     placeholder='Username' className='tx-lgx w-max-220px z-1001 px-3 py-2 tx-ls-1 box-shadow-5 '
-                     onChange={(e)=>{s__form({...form,...{username:e.target.value}});console.log("qqq", e.target.value)}} 
+                     onChange={(e)=>{s__form({...form,...{username:e.target.value}})}} 
                 />
                 <input type="text" value={form.password} id="password" name="password" maxLength={30}
                     onSubmit={signup}
                     placeholder='Password' className='tx-lgx w-max-220px z-1001 px-3 py-2 tx-ls-1 box-shadow-5 '
-                     onChange={(e)=>{s__form({...form,...{password:e.target.value}});console.log("qqq", e.target.value)}} 
+                     onChange={(e)=>{s__form({...form,...{password:e.target.value}})}} 
                 />
                 <div onClick={signup} className='pa-1 tx-white bg-b-50 flex-col px-3 tx-lx opaci-chov--50'>
                     Register

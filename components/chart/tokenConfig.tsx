@@ -19,21 +19,14 @@ export const TokenConfigStateButtons = ({
     theToken:any,
     updateTokenOrder:any,
 })=>{
-    // if(queryUSDT.loading) return
-    // if(queryUSDT.error) return
-    // if(!queryUSDT.data) return
-    // if(!queryUSDT.data[index]) return
 
     let theStrategyResult = useMemo(()=>{
-        // console.log("tokenConfig",theToken)
-        
         let minMaxAvg = parseFloat(`${parseDecimals((parseFloat(theToken.ceil)+parseFloat(theToken.floor))/2)}`)
         let minMedian = (parseFloat(theToken.floor)+parseFloat(`${minMaxAvg}`))/2
         let maxMedian = (parseFloat(theToken.ceil)+parseFloat(`${minMaxAvg}`))/2
         let stats = {
             minMaxAvg,minMedian,maxMedian
         }
-        // console.log(stats)
         return (
         queryUSDT.data && queryUSDT.data[index] &&
             (aToken in tokensArrayObj)
@@ -44,15 +37,7 @@ export const TokenConfigStateButtons = ({
     return (
     <div className="flex-col  w-100 ">
         <div className="flex-wrap  w-100">
-            {/* <div className="flex-center  tx-xs">
-                {JSON.stringify(theToken)}
-            </div> */}
             <div className="flex-center  ">
-                {/* <div onClick={()=>{updateTokenOrder(aToken,DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe) ,"state")}}
-                    className="opaci-chov--50 bg-w-90  tx-black px-3 py-1 bord-r-15 mx-1 mt-1"
-                >
-                    State: {theToken && theToken.state}
-                </div> */}
                 {!theToken.state &&
                     <button onClick={()=>{updateTokenOrder(aToken,DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe) ,"state", "1")}}
                         className="opaci-chov--50 bg-w-90 tx-green  tx-bold-8 tx-ls-1 tx-black px-3 py-1 bord-r-15 ma-2"

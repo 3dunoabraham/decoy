@@ -61,33 +61,24 @@ export function ChartDashboard({query, user}:any) {
     },[])
     const [q__tradeHistory, tradeHistory] = useQueryPlus({ queryKey: ['tradeHistory'], 
         queryFn: async () =>{
-            // console.log("tradeHistory 1")
             if (!query.token) return []
-            // console.log("tradeHistory 2")
             if (!window.localStorage) return
-            // console.log("tradeHistory 3")
             let pin = JSON.parse(window.localStorage.getItem("rpi"))
-            // console.log("tradeHistory 4")
             if (!pin) return []
 
-            // console.log("tradeHistory 5")
             let theuserresres:any = await fetchPost("/api/player/verify",{
                 referral: pin.split(":")[0],
                 pin: pin.split(":")[1]
             })
 
-            // console.log("tradeHistory 6")
             let theuserresq = await theuserresres.json()
             // s__superuser(theuserresq)
-            // console.log("tradeHistory 7")
             if (theuserresq.binancekeys < 132) return []
-            // console.log("tradeHistory 8")
             let splitted = theuserresq.binancekeys.split(":")
             if (splitted.length < 2) return []
             let binancePublic = splitted[0]
             let binanceSecret = splitted[1]
 
-            // console.log("tradeHistory 9")
             const theListRes = await fetch(`/api/trade-history/`,{
                 method:"POST",
                 body:JSON.stringify({
@@ -97,9 +88,7 @@ export function ChartDashboard({query, user}:any) {
                     binanceSecret,
                 })
             })
-            // console.log("tradeHistory 10")
             let theList = await theListRes.json()
-            // console.log("tradeHistory 11")
             return theList
         }
     },[])
@@ -122,7 +111,7 @@ export function ChartDashboard({query, user}:any) {
 
             setIdByObject(playerCredentials)
         } catch (e:any) {
-            console.log("coudlnt log into Simulated Player")
+            console.error("coudlnt log into Simulated Player")
         }
     }    
     const trigger_connectPlayer = () => {
@@ -300,7 +289,7 @@ export function ChartDashboard({query, user}:any) {
             body: JSON.stringify(updates),
         })
         if (!response.ok) {
-            console.log("response no ok", response)
+            console.error("response no ok", response)
         }
         return
     }
@@ -396,10 +385,8 @@ export function ChartDashboard({query, user}:any) {
                 referral:rpi.split(":")[0],
                 pin:rpi.split(":")[1],
             }
-            // console.log("datapack",datapack)
             const res = await fetchPut('/api/player',datapack);
             const result = await res.json();
-            // console.log("success????", result)
             return result
         } catch (e) {
             return false

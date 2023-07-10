@@ -57,26 +57,12 @@ export const smallboxes = [
 
 
            if (!bigref.current) return
-        //    console.log(mouse.y)
            bigref.current.rotation.set(mouse.y * 1,0,mouse.x * 1);
            bigapi.rotation.set(mouse.y * 1,0,mouse.x * 1);
            //    bigref.current.rotation.set(-mouse.y * 0.01, mouse.x * 0.8,0);
         //    bigref.current.rotation.set(0,0,0);
        });
   
-      // useFrame((state) => {
-      // 	// console.log("asd")
-      // 	// console.log("asd", camera)
-      // 	setCount(mycounter+1)
-      // 	ref.current.rotation.y = mycounter / 100
-      // 	if (controls.current)
-      // 		controls.current.update()
-  
-      // 	// ref.current.rotation.y = Math.sin(mycounter * 0.002 ) * 2
-      // 	// console.log(mycounter)
-      // 	// ref.rotation.y = Math.sin(mycounter * 0.002 ) * 2
-          
-      // });
   
       return (<>
           {/* <mesh position={[0, -2, -4    ]} ref={redframe}>

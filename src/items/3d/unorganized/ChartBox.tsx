@@ -85,7 +85,6 @@ const Component = forwardRef(({
           let lastUnix:any =  parseInt(theList[0][0])
           s__liveUnix(firstUnix - 2)
           s__diffUnix(lastUnix - firstUnix)
-          console.log("thelist[0]: ", theList[499][0])
           
       const closingPrices = theList.map((item: any) => parseFloat(item[4]));
       setPrices(closingPrices);
@@ -113,7 +112,6 @@ const Component = forwardRef(({
       meshRef.current.position.y += velocityY;
       let parsedElapsed = parseInt((5*delta) + elapsed)
         if (parsedElapsed > liveId) {
-          console.log("asqweqwed", parsedElapsed, (5*delta) + elapsed, initUnix, liveUnix)
           meshRef.current.position.x += wallWidth * 2 / 10
           s__liveId(liveId+1)
 

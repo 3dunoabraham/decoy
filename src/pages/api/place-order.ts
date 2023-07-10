@@ -39,8 +39,6 @@ function makeLimitOrder({ side, symbol, quantity, price, recvWindow = 5000, time
     }
   };
   let _price = price.toFixed(getCryptoPriceDecimals(symbol))
-  console.log(price,"->",_price)
-  console.log("quantity",quantity)
   const params = `symbol=${symbol}&side=${side}&type=LIMIT&timeInForce=GTC&quantity=${quantity}&price=${_price}&recvWindow=${recvWindow}&timestamp=${timestamp}`;
   const signature = crypto.createHmac('sha256', apiSecret).update(params).digest('hex');
   const data = `${params}&signature=${signature}`;
@@ -58,7 +56,6 @@ function makeLimitOrder({ side, symbol, quantity, price, recvWindow = 5000, time
   });
 
   req.on('error', (err) => {
-    console.log("error place order",err)
     callback(err);
   });
 
@@ -79,10 +76,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
   // Retrieve the parameters from the request body
   const { side, symbol, quantity:_quantity, price:_price } = req.body;
-  console.log("req body", { side, symbol, quantity:_quantity, price:_price })
   const { quantity, price } = adjustOrderParams(req.body);
   // Call the makeLimitOrder function with the retrieved parameters
-  console.log("makelimitorder", { side, symbol, quantity, price })
   makeLimitOrder(
     { side, symbol, quantity, price },
     apiKey,
@@ -115,7 +110,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
   
 export function parseQuantity(symbol: string, quantity: number): number {
-    console.log("parseQuantity", symbol, quantity)
     const lookupTable: { [key: string]: number } = {
       'BTCUSDT': 5,
       'ETHUSDT': 4,

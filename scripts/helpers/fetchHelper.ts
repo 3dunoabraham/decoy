@@ -9,7 +9,6 @@ import { isStrInteger, jstr2FullName } from '@/scripts/helpers/type/stringHelper
 //     // return null
 //     const tokens = await getAll(["tokens"]);
 //     // const tokens = await get('tokens');
-//     console.log("tokens", tokens)
 //     const tokenstokens:any = tokens.tokens
 //     return tokenstokens.split(",")
 // }
@@ -139,7 +138,6 @@ export const fetchPostImage = async (url,file,config:any)=>{
     })
 }
 export function returnError(_a,err,theUrl,returnNull = false) {
-    console.log("error fetching: "+theUrl,err)
     return returnNull ? null : _a
 }
 export async function fetchJsonArray(theUrl, propName = "", returnNull = false) {
@@ -154,7 +152,6 @@ export async function fetchJsonArray(theUrl, propName = "", returnNull = false) 
         if (propName != "" && !(propName in theJsonResult)) { return returnError([],{},theUrl,returnNull) }
         return theParsedResult
     } catch (err) {
-        console.log("returnNull?????????")
         return returnNull ? null : returnError([],err,theUrl,returnNull)
     }
 }

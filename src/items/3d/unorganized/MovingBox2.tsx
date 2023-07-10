@@ -57,7 +57,6 @@ export default function Component({
         const playerX = playerCenter.x;
         const meshX = meshRef.current.position.x;
         const diffX = meshX - playerX;
-        // console.log(`Difference in X position: ${diffX}`);
         s__score({maxScore: score.score,score: score.score+1, velocityX: velocityX > score.velocityX ? velocityX : score.velocityX})
         setVelocityX(diffX/10 + velocityX);
         return setVelocityY(-velocityY);

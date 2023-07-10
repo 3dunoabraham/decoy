@@ -49,11 +49,8 @@ export default function Component({}) {
                 referral:LS_rpi.split(":")[0],
                 pin:LS_rpi.split(":")[1],
             }
-            // console.log(datapack)
-            // return null
             const res = await fetchPut('/api/player',datapack);
             const result = await res.json();
-            // console.log("success????", result)
             return result
         } catch (e) {
             return false

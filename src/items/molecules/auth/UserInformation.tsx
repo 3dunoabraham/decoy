@@ -1,5 +1,4 @@
 export default function Page({ data }) {
-    // console.log("user data rendered");
     return (
     <div className="flex gap-2 bord-r-100p">
         {/* eslint-disable @next/next/no-img-element */}

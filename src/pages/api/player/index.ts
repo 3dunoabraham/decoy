@@ -53,8 +53,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           const fieldsToUpdate:any = {
             binancekeys: body.binancekeys
           }
-          // const start = await fetchPlayer(supabase, playerHash)
-          // console.log("qweqweqwe",fieldsToUpdate)
           const { data: theplayer, error } = await supabase
             .from<Player>('player')
             .update(fieldsToUpdate)
@@ -82,7 +80,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           .single()
   
           if (existingStart) {
-            // console.log("found")
             throw new Error
           }
   
@@ -115,7 +112,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             .single()
     
             if (!existingStart) {
-              // console.log("not found")
               throw new Error
               return
             }

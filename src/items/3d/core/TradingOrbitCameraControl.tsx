@@ -21,7 +21,6 @@ export default function Component ({ /* height, width, length */ zPos }) {
     //         // camera.position.z = length
     //         // camera.position.y = height
         // if (!controls.current) return
-        // console.log("controls.current.update", controls.current.update)
         // controls.current.update()
     });
       

@@ -8,7 +8,6 @@ export default function Component({
     buy_all, buy_min, sell_min, sell_all, crystal, timeframe, rpi, updateTokenOrder,
     removeToken, joinToken    
 }) {
-    // console.log("tokensArrayObj", tokensArrayObj)
     let theTokenConfig = tokensArrayObj[aToken] ? tokensArrayObj[aToken][DEFAULT_TIMEFRAME_ARRAY.indexOf(timeframe)] : null
     return (
         <div className="      flex-col w-100 " >

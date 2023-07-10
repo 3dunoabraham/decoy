@@ -57,11 +57,6 @@ export default function Layout({ children }) {
 	},[alertMap, filters, query,sidebarLinks, sidebarPages, ])
     
 
-    // useEffect(()=>{
-    //     // let sales_status = app.query.stts
-    //     console.log("query layout",  router, query)
-    //     // app.s__filters({})
-    // },[query])
     
     return (
     <Providers>

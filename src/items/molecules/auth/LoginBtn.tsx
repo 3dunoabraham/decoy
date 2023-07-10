@@ -9,8 +9,6 @@ export default function Component({ children }) {
 
     const connectWGoogle = async () => {
         await signIn("google")
-        // console.log("session.token_id")
-        // console.log(session.id_)
     }
 
     if (session) {
