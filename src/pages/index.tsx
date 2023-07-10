@@ -170,6 +170,7 @@ const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
         </div>
         
             <div className='' >
+              <div className='Q_md_x pt-150'></div>
                 {!!rpi &&
                     <div className=' pa-3 flex-1 '>
                         <AmountCards tokens={tokens} {...{mul, bigmul}} />
