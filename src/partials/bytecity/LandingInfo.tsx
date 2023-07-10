@@ -130,14 +130,14 @@ function LandingInfo({}) {
             
         </>}
         
-        <div className="flex-col flex-align-end opaci-chov--50 pos-rel pr-8"
+        {/* <div className="flex-col flex-align-end opaci-chov--50 pos-rel pr-8"
             onClick={()=>toggleToggle()}
             style={{zIndex:3000}}
         >
             <div>Click here to</div>
             {showInfo && <div>Hide Welcome Info ↑</div> }
             {!showInfo && <div>Show Welcome Info!</div> }
-        </div>
+        </div> */}
         <div className="px-4 py-8 noverflow " style={{background:"linear-gradient(180deg, #00000000, #099DFF22)", borderRadius:"0 0 75px 75px"}}>
             <div className="flex-wrap flex-align-start w-100  bg-w-50 bord-r-50 px-4 py-8 pos-rel" style={{zIndex:2500}}>
                 <div className="flex-col flex-align-start">
