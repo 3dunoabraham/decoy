@@ -205,7 +205,7 @@ const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
           {/* <Link href={"/whitepaperwebpov.pdf"} target='_blank' className=' pa-1 hover-  opaci-chov--75 py-3 my-3 bg-w-hov-10'>
             <i className='pos- nowrap  tx-ls-1 underline flex-col-r pt-1 px-8'> WhitepaperWebPOV.pdf</i>
           </Link> */}
-          <div className='flex gap-4'>
+          <div className='flex gap-4 mt-4'>
 
             <Link target='_blank' href="https://twitter.com/tresduno" className='bg-w-50 pa-1 hover-6 bord-r-100p flex-col opaci-chov--25'>
               <div className='bg-b-50  bord-r-100p box-shadow-5-b noverflow'>
@@ -229,10 +229,10 @@ const Page: NextPageWithLayout = ({ tokens }: PageProps) => {
       <div className='mt-100 Q_xs'></div>
       <WebPovGames />
       <WebPovTiers />
-      <div className='mt-200'></div>
-      <details >
-        <summary className='opaci-chov--50 flex w-100 tx-center'>
-          <h2 className='tx-altfont-6 mt-100 tx-center w-100 underline'><FaCaretDown /> Latest News</h2>
+      {/* <div className='mt-200'></div> */}
+      <details className='mt-8 mb-100'>
+        <summary className='opaci-chov--50 flex w-100 tx-center py-4'>
+          <h2 className='tx-altfont-6 mt- tx-center w-100 underline'><FaCaretDown /> Latest News</h2>
         </summary>
         <div className='bg-w-10  bg-glass-10 w-max-600px w-100 pa-8 bord-r-50 Q_xs_px-2  flex-col gap-4'>
           <LatestPosts />
